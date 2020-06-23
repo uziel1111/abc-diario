@@ -86,14 +86,16 @@ class Info_escuela extends CI_Controller {
    	if(isset($_POST['idcfg'])){	
       $idcfg = $this->input->post('idcfg');
       $info_escuela = $this->Generico_model->info_escuela_post($idcfg);
+      $info_escuela[0]['idcentrocfg']=$idcfg;
     }else{
    		$cct = $this->input->get('cct');
    		$turno = $this->input->get('turno');
       $info_escuela = $this->Generico_model->info_escuela_get($cct,$turno);
     }        
       // $planea_info = $this->planea_escuela($info_escuela);
+    // echo "<pre>";print_r($info_escuela); die();
       $planea_logro = $this->planea_nivel_logro($info_escuela[0]['idcentrocfg']);
-      consola($planea_logro);
+      // consola($planea_logro);
    		$data = $this->busqueda_especifica($info_escuela[0]['cct']);
    		$data['info'] = $info_escuela;
    		
