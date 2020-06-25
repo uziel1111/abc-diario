@@ -6,18 +6,29 @@
         </center>
     </div>
     <div class="row">
-        <label for="cct">Escriba clave de CT (escuela)</label>
-        <input type="" id="cct">
-        <label for="ciclo_escolar">Ciclo escolar</label>
-        <select id="ciclo_escolar">
-            <option value="0" disabled selected>Seleccione un ciclo escolar</option>
-            <?php foreach ($ciclos as $key => $c) { ?>
-            <option value="<?=$c['idciclo']?>"><?=$c['ciclo']?></option>
-            <?php } ?>
-        </select>
-        <button id="limpiar_filtros">Limpiar</button>
-        <button id="buscar_filtros">Buscar</button>
+        <div class="col-3">
+            <div class="form-group">
+                <label for="cct">Escriba clave de CT (escuela)</label>
+                <input type="text" class="form-control" id="cct" required>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label for="ciclo_escolar">Ciclo escolar</label>
+                <select id="ciclo_escolar" class="form-control">
+                    <option value="0" disabled selected>Seleccione un ciclo escolar</option>
+                    <?php foreach ($ciclos as $key => $c) { ?>
+                    <option value="<?=$c['idciclo']?>"><?=$c['ciclo']?></option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        <div class="col-4">
+            <button type="button" id="limpiar_filtros" class="btn btn-danger btn-sm">Limpiar</button>
+            <button type="button" id="buscar_filtros" class="btn btn-primary btn-sm">Buscar</button>
+        </div>
     </div>
+    
     <!-- Buscador fin-->
 
     <!-- datos de la escuela inicio-->

@@ -1,16 +1,13 @@
 let Mensaje = {
 
 	cargando: (seccion) => {
-
 		msj = Swal.fire({
-			//title: seccion,
 			titleText: seccion,
 			imageUrl: base_url + 'assets/img/loading-1.gif',
 			showConfirmButton: false,
 			allowOutsideClick: false,
 			allowEscapeKey: false,
 		});
-
 	},//msj
 
 	alerta: (icono, titulo, mensaje) => {
@@ -18,8 +15,7 @@ let Mensaje = {
 			title: titulo,
 			text: mensaje,
 			icon: icono,
-			showConfirmButton: false,
-			timer: 1000,
+			showConfirmButton: true
 		});
 	},//alerta
 

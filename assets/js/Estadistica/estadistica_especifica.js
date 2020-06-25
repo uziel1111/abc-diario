@@ -13,41 +13,50 @@ $("#limpiar_filtros").click(function (e) {
 
 $("#buscar_filtros").click(function (e) {
     e.preventDefault();
-    ciclo = $("#ciclo_escolar option:selected").text();
-    cct = $("#cct").val();
-    ruta = base_url + 'Estadistica/busqueda_especifica';
-
-    $.ajax({
-        url: ruta,
-        type: 'POST',
-        dataType: 'json',
-        data: { ciclo: ciclo, cct: cct },
-        beforeSend: function (xhr) {
-            Mensaje.cargando('Cargando datos para la cct: ' + cct + ' del ciclo: ' + ciclo);
-        },
-        success: function (data) {
-            Mensaje.cerrar();
-            $("#dv_info_graf_alumn").empty();
-            $("#dv_info_graf_grupos").empty();
-            $("#dv_info_graf_docen").empty();
-            $("#containerRPB03ete").empty();
-            Estadistica_especifica.grafica_grados(data.datos.grados);
-            Estadistica_especifica.grafica_grupos(data.datos.grupos);
-            Estadistica_especifica.grafica_docentes(data.datos.docentes);
-            Estadistica_especifica.grafica_eficiencia_terminal(data.datos.eficiencia_terminal);
-            Estadistica_especifica.grafica_retencion(data.datos.retencion);
-            $("#datos_escuela").empty();
-            $("#datos_escuela").append(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            Mensaje.cerrar();
-            Mensaje.error_ajax(jqXHR, textStatus, errorThrown);
+    var ciclo = $("#ciclo_escolar option:selected").text();
+    var cct = $("#cct").val();
+    if(cct != ''){
+        if(ciclo != 'Seleccione un ciclo escolar'){
+            Estadistica_especifica.get_datos(cct, ciclo);
+        }else{
+            Mensaje.alerta("warning","Especifique un ciclo","");
         }
-    });
-
+    }else{
+        Mensaje.alerta("warning","Especifique una cct","");
+    }
 });
 
 let Estadistica_especifica = {
+
+    get_datos: (cct, ciclo) => {
+        $.ajax({
+            url: base_url + 'Estadistica/busqueda_especifica',
+            type: 'POST',
+            dataType: 'json',
+            data: { ciclo: ciclo, cct: cct },
+            beforeSend: function (xhr) {
+                Mensaje.cargando('Cargando datos para la cct: ' + cct + ' del ciclo: ' + ciclo);
+            },
+            success: function (data) {
+                Mensaje.cerrar();
+                $("#dv_info_graf_alumn").empty();
+                $("#dv_info_graf_grupos").empty();
+                $("#dv_info_graf_docen").empty();
+                $("#containerRPB03ete").empty();
+                Estadistica_especifica.grafica_grados(data.datos.grados);
+                Estadistica_especifica.grafica_grupos(data.datos.grupos);
+                Estadistica_especifica.grafica_docentes(data.datos.docentes);
+                Estadistica_especifica.grafica_eficiencia_terminal(data.datos.eficiencia_terminal);
+                Estadistica_especifica.grafica_retencion(data.datos.retencion);
+                $("#datos_escuela").empty();
+                $("#datos_escuela").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Mensaje.cerrar();
+                Mensaje.error_ajax(jqXHR, textStatus, errorThrown);
+            }
+        });
+    },
     grafica_grados: (grados) => {
         arreglo_alumnos = [];
         for (let i = 0; i < ((grados.length) - 1); i++) {
