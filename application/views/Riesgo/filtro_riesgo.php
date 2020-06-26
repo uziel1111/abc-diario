@@ -4,7 +4,7 @@
 			<div class="card-header">
 				<h5 align="center">Riesgo de Abandono Municipal/Estatal</h5>
 			</div>
-			<div class="card-body">				
+			<div class="card-body">
 				<br>
 				<div  id="filtros_riesgo_municipio_estado">
 					<div class="row">
@@ -22,7 +22,10 @@
 							<select name="filtro_nivel_riesgo" id="filtro_nivel_riesgo" class="form-control">
 								<option value="0">Seleccione</option>
 								<?php foreach ($nivel as $key => $value) { ?>
-			 							<option value="<?= $value['idnivel'] ?>"> <?= $value['nombre'] ?></option>
+									<?php if ($value['idnivel']==2 || $value['idnivel'] ==3): ?>
+										<option value="<?= $value['idnivel'] ?>"> <?= $value['nombre'] ?></option>
+									<?php endif; ?>
+
 			 					<?php } ?>
 							</select>
 						</div>
@@ -36,7 +39,7 @@
 						</div>
 						<div class="col-md-2">
 							<label>Periodo:</label>
-							<select name="filtro_periodo_riesgo" id="filtro_periodo_riesgo" class="form-control">	
+							<select name="filtro_periodo_riesgo" id="filtro_periodo_riesgo" class="form-control">
 			 					<option value="1">1</option>
 			 					<option value="2">2</option>
 			 					<option value="3">3</option>
