@@ -41,9 +41,6 @@
       <span class="navbar-text">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="<?= base_url(); ?>">Inicio</a>
-            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="DropEstadisticas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Estadísticas</a>
               <div class="dropdown-menu" aria-labelledby="DropEstadisticas">
@@ -60,14 +57,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Localiza tu escuela</a>
                 <a class="dropdown-item" href="<?= base_url('mapa'); ?>">Tu escuela en el mapa</a>
-                <a class="dropdown-item" href="#">¿Sabía usted que?</a>
               </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Servicios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Otros</a>
             </li>
           </ul>
         </div>
