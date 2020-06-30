@@ -1,8 +1,8 @@
 <main role="main">
 	<div class="container">
-		<div class="card ">
-			<div class="card-header">
-				<h5 align="center">Localiza tu escuela</h5>
+		<div class="card shadow">
+			<div class="card-header bg-secondary text-light">
+			<i class="fas fa-search"></i> Localiza tu escuela
 			</div>
 			<div class="card-body">
 				<div class="row">
@@ -53,10 +53,10 @@
 					<div class="row">
 						<div class="col-md-10"></div>
 						<div class="col-md-1">
-							<button class="btn btn-danger" type="button" id="btn_limpiar_busqueda_general">Limpiar</button>
+							<button class="btn btn-success" type="button" id="btn_limpiar_busqueda_general">Limpiar</button>
 						</div>
 						<div class="col-md-1">
-							<button class="btn btn-info" type="button" id="btn_buscar_escuelas_xmunicipioxnivelxsostenimiento">Buscar</button>
+							<button class="btn btn-info text-light" type="button" id="btn_buscar_escuelas_xmunicipioxnivelxsostenimiento">Buscar</button>
 						</div>
 					</div>
 				</div>

@@ -1,0 +1,41 @@
+/* Theme Colors */
+
+$theme-colors: ( "primary": #0088e5, "secondary": #35b3a2, "success": #038C65, "danger": #e43b3b, "warning": #ff6131, "info": #9b9b9b);
+
+/* Buttons */
+
+$btn-border-radius: 0.7rem;
+$btn-border-radius-lg: 0.7rem;
+$btn-border-radius-sm: 0.7rem;
+$btn-padding-x-sm: 0.9rem;
+
+/* Inputs */
+
+$input-border-width: 0.2rem;
+$input-border-radius: 0.5rem;
+$input-border-radius-lg: 0.5rem;
+$input-border-radius-sm: 0.5rem;
+$custom-file-border-radius: 0rem 0.5rem 0.5rem 0rem;
+
+/* Select */
+
+$custom-select-border-radius: 0.5rem;
+
+/* Alerts */
+
+$alert-border-radius: 0.5rem;
+
+/* Badges */
+
+$badge-font-size: 0.85rem;
+$badge-padding-y: 0.5rem;
+$badge-padding-x: 0.9rem;
+
+/* Cards */
+
+$card-border-width: 0;
+$card-border-radius: 0.5rem;
+
+/* Bootstrap include */
+
+@import "../node_modules/bootstrap/scss/bootstrap";
