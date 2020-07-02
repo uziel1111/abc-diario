@@ -52,7 +52,6 @@
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="DropEstadisticas">
 
                     <a class="dropdown-item" href="<?= base_url('estadistica/estadistica_general'); ?>">General</a>
-                    <a class="dropdown-item" href="<?= base_url('Estadistica/estadistica_especifica'); ?>">Especifica</a>
                     <a class="dropdown-item" href="<?= base_url('Riesgo_Abandono/vista_principal_riesgo'); ?>">Riesgo de abandono</a>
                     <a class="dropdown-item" href="<?= base_url('planea'); ?>">Resultados de PLANEA</a>
                   </div>
@@ -66,6 +65,7 @@
                     <p>Escuela</p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<?= base_url('Estadistica/estadistica_especifica'); ?>">Datos de la escuela</a>
                     <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Localiza tu escuela</a>
                     <a class="dropdown-item" href="<?= base_url('mapa'); ?>">Tu escuela en el mapa</a>
                   </div>
