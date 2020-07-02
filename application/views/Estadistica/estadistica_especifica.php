@@ -14,6 +14,17 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
+                            <label for="ciclo_escolar">Turno</label>
+                            <select id="turno_est_esp" class="form-control">
+                                <option value="0" disabled selected>Seleccione un turno</option>
+                                <?php foreach ($turnos as $key => $c) { ?>
+                                <option value="<?=$c['idturno']?>"><?=$c['turno']?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
                             <label for="ciclo_escolar">Ciclo escolar</label>
                             <select id="ciclo_escolar" class="form-control">
                                 <option value="0" disabled selected>Seleccione un ciclo escolar</option>
@@ -32,14 +43,23 @@
                 <div id="datos_escuela"></div>
                 <!-- datos de la escuela fin-->
                 <!-- grafica escuela inicio -->
-                <div id="dv_info_graf_alumn"></div>
-                <div id="dv_info_graf_grupos"></div>
-                <div id="dv_info_graf_docen"></div>
-                <div class="col-sm-12">
-                    <div class='col-sm-4'>
+                <div class="row">
+                    <div class='col-4'>
+                      <div id="dv_info_graf_alumn"></div>
+                    </div>
+                    <div class='col-4'>
+                      <div id="dv_info_graf_grupos"></div>
+                    </div>
+                    <div class='col-4'>
+                      <div id="dv_info_graf_docen"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-4'>
                     <div id='containerRPB03ete'></div>
                     </div>
-                    <div class='col-sm-4'>
+                    <div class='col-4'></div>
+                    <div class='col-4'>
                     <div id='dv_info_graf_Retencion'></div>
                     </div>
                 </div>
@@ -51,7 +71,7 @@
 <!-- <div class="container">
 
 
-    
+
 
 </div> -->
 <script src="<?= base_url('assets/js/utilerias/progressbar.min.js');?>"></script>

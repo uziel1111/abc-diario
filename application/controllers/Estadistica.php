@@ -136,49 +136,36 @@ class Estadistica extends CI_Controller {
 
     public function estadistica_especifica() {
 
-            $ciclo = $this->Generico_model->ciclo_escolar();
-
-            $data['ciclos'] = $ciclo;
+            // $ciclo = $this->Generico_model->ciclo_escolar();
+						$ciclo = $this->Estadistica_model->ciclo_escolar_estadist_xesc();
+						$turnos = $this->Estadistica_model->turno_escolar_estadist_xesc();
+						$data['turnos'] = $turnos;
+						$data['ciclos'] = $ciclo;
             carga_pagina_basica($this,$data,'Estadistica/estadistica_especifica');
 
     }//estadistica_especifica
 
     public function busqueda_especifica() {
         $cct = $this->input->post('cct');
-        $ciclo = $this->input->post('ciclo');
-
-        $datos_alumnos = $this->Estadistica_model->datos_escuela_alumnos($cct,$ciclo);
-        $datos_grupo = $this->Estadistica_model->datos_escuela_grupos($cct,$ciclo);
-		$datos_docentes = $this->Estadistica_model->datos_escuela_docentes($cct,$ciclo);
-		$eficiencia_terminal_retencion = $this->Estadistica_model->datos_escuela_ef_ret($cct,$ciclo);
-
-		$total_alumnos = 0;
-		$total_grupos = 0;
-		$total_docentes = 0;
-
-		for ($i=0; $i < count($datos_alumnos); $i++) {
-			$total_alumnos += $datos_alumnos[$i]['total'];
-		}
-		array_push($datos_alumnos,$total_alumnos);
-
-        for ($i=0; $i < count($datos_grupo); $i++) {
-			$total_grupos += $datos_grupo[$i]['total'];
-		}
-		array_push($datos_grupo,$total_grupos);
-
-		for ($i=0; $i < count($datos_docentes); $i++) {
-			$total_docentes += $datos_docentes[$i]['total'];
-		}
-        array_push($datos_docentes,$total_docentes);
-
-        $data['grados']  = $datos_alumnos;
-        $data['grupos']  = $datos_grupo;
-		$data['docentes']  = $datos_docentes;
-		$data['eficiencia_terminal']  = $eficiencia_terminal_retencion[0]['eficiencia_terminal'];
-		$data['retencion']  = $eficiencia_terminal_retencion[0]['retencion'];
-
-        $respuesta = array('datos'=>$data);
-        envia_datos_json($this, $respuesta);
+				$idturno = $this->input->post('idturno');
+        $idciclo = $this->input->post('idciclo');
+				$datos_alumnos = $this->Estadistica_model->datos_estadistica_alumnosxgrado_xescuela($cct,$idturno,$idciclo);
+				$datos_grupos = $this->Estadistica_model->datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo);
+				$datos_docentes = $this->Estadistica_model->datos_estadistica_docentes_xescuela($cct,$idturno,$idciclo);
+				$idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
+				$datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
+				if (count($datos_alumnos)==0) {
+					$data['vacio']  = 'true';
+				}
+				else {
+					$data['vacio']  = 'false';
+				}
+				$data['alumnos']  = $datos_alumnos[0];
+				$data['grupos']  = $datos_grupos[0];
+				$data['docentes']  = $datos_docentes;
+				$data['indicadores']  = $datos_indicadores[0];
+				// echo "<pre>";print_r($data);die();
+        envia_datos_json($this, $data);
         exit();
     }//busqueda_especifica
 

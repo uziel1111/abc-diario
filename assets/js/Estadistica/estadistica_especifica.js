@@ -8,19 +8,27 @@ function Graficasm() {
 $("#limpiar_filtros").click(function (e) {
     e.preventDefault();
     $("#ciclo_escolar").val(0);
+    $("#turno_est_esp").val(0);
     $("#cct").val('');
 });
 
 $("#buscar_filtros").click(function (e) {
     e.preventDefault();
-    var ciclo = $("#ciclo_escolar option:selected").text();
+    var idciclo = $("#ciclo_escolar").val();
     var cct = $("#cct").val();
+    var idturno = $("#turno_est_esp").val();
     if(cct != ''){
-        if(ciclo != 'Seleccione un ciclo escolar'){
-            Estadistica_especifica.get_datos(cct, ciclo);
-        }else{
-            Mensaje.alerta("warning","Especifique un ciclo","");
-        }
+          if (idturno != null) {
+              if(idciclo != null){
+                Estadistica_especifica.get_datos(cct, idciclo,idturno);
+              }
+              else {
+                Mensaje.alerta("warning","Especifique un ciclo escolar","");
+              }
+            }
+          else {
+            Mensaje.alerta("warning","Especifique un turno","");
+          }
     }else{
         Mensaje.alerta("warning","Especifique una cct","");
     }
@@ -28,28 +36,33 @@ $("#buscar_filtros").click(function (e) {
 
 let Estadistica_especifica = {
 
-    get_datos: (cct, ciclo) => {
+    get_datos: (cct, idciclo, idturno) => {
         $.ajax({
             url: base_url + 'Estadistica/busqueda_especifica',
             type: 'POST',
             dataType: 'json',
-            data: { ciclo: ciclo, cct: cct },
+            data: { idciclo: idciclo, cct: cct,idturno:idturno  },
             beforeSend: function (xhr) {
-                Mensaje.cargando('Cargando datos para la cct: ' + cct + ' del ciclo: ' + ciclo);
+                Mensaje.cargando('Cargando datos para la cct: ' + cct + ' del ciclo: ' + idciclo);
             },
             success: function (data) {
                 Mensaje.cerrar();
-                $("#dv_info_graf_alumn").empty();
-                $("#dv_info_graf_grupos").empty();
-                $("#dv_info_graf_docen").empty();
-                $("#containerRPB03ete").empty();
-                Estadistica_especifica.grafica_grados(data.datos.grados);
-                Estadistica_especifica.grafica_grupos(data.datos.grupos);
-                Estadistica_especifica.grafica_docentes(data.datos.docentes);
-                Estadistica_especifica.grafica_eficiencia_terminal(data.datos.eficiencia_terminal);
-                Estadistica_especifica.grafica_retencion(data.datos.retencion);
-                $("#datos_escuela").empty();
-                $("#datos_escuela").append(data);
+                if (data.vacio == 'true') {
+                  Mensaje.alerta("warning","La consulta no regreso resultados","");
+                }
+                else {
+                  $("#dv_info_graf_alumn").empty();
+                  $("#dv_info_graf_grupos").empty();
+                  $("#dv_info_graf_docen").empty();
+                  $("#containerRPB03ete").empty();
+                  Estadistica_especifica.grafica_grados(data.alumnos);
+                  Estadistica_especifica.grafica_grupos(data.grupos);
+                  Estadistica_especifica.grafica_docentes(data.docentes);
+                  Estadistica_especifica.grafica_eficiencia_terminal(data.indicadores['eficiencia_terminal']);
+                  Estadistica_especifica.grafica_retencion(data.indicadores['retencion']);
+                  // $("#datos_escuela").empty();
+                  // $("#datos_escuela").append(data);
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 Mensaje.cerrar();
@@ -58,6 +71,7 @@ let Estadistica_especifica = {
         });
     },
     grafica_grados: (grados) => {
+      console.log(grados);
         arreglo_alumnos = [];
         for (let i = 0; i < ((grados.length) - 1); i++) {
             arr_par = [grados[i].grado, parseInt(grados[i].total)]
@@ -529,4 +543,3 @@ let Estadistica_especifica = {
 
 
 }
-

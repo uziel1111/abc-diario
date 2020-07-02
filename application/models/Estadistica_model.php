@@ -8,7 +8,7 @@ class Estadistica_model extends CI_Model
  			$where.=" AND est.idmunicipio={$id_municipio}";
  			$tabla = "estadistica_x_muni";
  		}
- 		$query1="(SELECT est.idnivel, n.descr AS nivel, '0' AS idsostenimiento, 'total' AS sostenimiento, 
+ 		$query1="(SELECT est.idnivel, n.descr AS nivel, '0' AS idsostenimiento, 'total' AS sostenimiento,
 			'0' AS idmodalidad,
 			'total' AS modalidad,
 			SUM(IF(ISNULL(est.t_alumnos_m),0 , t_alumnos_m)) AS alumn_m_t,
@@ -25,7 +25,7 @@ class Estadistica_model extends CI_Model
 			{$where}
 			GROUP BY est.idnivel)
 			UNION
-			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento, 
+			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento,
 			'0' AS idmodalidad,
 			'total' AS modalidad,
 			SUM(IF(ISNULL(est.t_alumnos_m),0 , t_alumnos_m)) AS alumn_m_t,
@@ -43,7 +43,7 @@ class Estadistica_model extends CI_Model
 			{$where}
 			GROUP BY est.idnivel,s.idsostenimiento)
 			UNION
-			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento, 
+			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento,
 			est.idmodalidad,
 			m.descr AS modalidad,
 			SUM(IF(ISNULL(est.t_alumnos_m),0 , t_alumnos_m)) AS alumn_m_t,
@@ -63,7 +63,7 @@ class Estadistica_model extends CI_Model
 			GROUP BY est.idnivel,s.idsostenimiento, m.idmodalidad
 			ORDER BY  est.idnivel,s.idsostenimiento,m.idmodalidad)
 			";
-				
+
   		return $this->db->query($query1)->result_array();
   	}
 
@@ -87,7 +87,7 @@ class Estadistica_model extends CI_Model
 				est.t_direc_congrupo AS directivo_t_congrup,
 				'' AS directivo_m_singrup,
 				'' AS directivo_h_singrup,
-				est.t_direc_singrupo AS directivo_t_singrup 
+				est.t_direc_singrupo AS directivo_t_singrup
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				{$where}
@@ -104,7 +104,7 @@ class Estadistica_model extends CI_Model
 				est.t_direc_congrupo AS directivo_t_congrup,
 				'' AS directivo_m_singrup,
 				'' AS directivo_h_singrup,
-				est.t_direc_singrupo AS directivo_t_singrup 
+				est.t_direc_singrupo AS directivo_t_singrup
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
@@ -123,7 +123,7 @@ class Estadistica_model extends CI_Model
 				est.t_direc_congrupo AS directivo_t_congrup,
 				'' AS directivo_m_singrup,
 				'' AS directivo_h_singrup,
-				est.t_direc_singrupo AS directivo_t_singrup 
+				est.t_direc_singrupo AS directivo_t_singrup
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
@@ -525,5 +525,74 @@ class Estadistica_model extends CI_Model
                 GROUP BY c.idciclo";
           return  $this->db->query($query)->result_array();
 			}//trae_ciclos_est_muni
+
+      public function ciclo_escolar_estadist_xesc() {
+        $query="SELECT
+                	c.idciclo,c.descr as ciclo
+                	FROM estadistica_x_idcentrocfg est
+                	INNER JOIN ciclo c ON est.idciclo = c.idciclo
+                	GROUP BY c.idciclo";
+          return  $this->db->query($query)->result_array();
+			}//ciclo_escolar_estadist_xesc
+
+      public function turno_escolar_estadist_xesc() {
+        $query="SELECT
+              		t.idturno,t.descripcion as turno
+              		FROM estadistica_x_idcentrocfg est
+              		INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
+              		INNER JOIN turno t ON cfg.turno = t.idturno
+              		GROUP BY t.idturno";
+          return  $this->db->query($query)->result_array();
+			}//turno_escolar_estadist_xesc
+
+      public function datos_estadistica_alumnosxgrado_xescuela($cct,$idturno,$idciclo) {
+        $query="SELECT
+            		est.alumnos1,est.alumnos2,est.alumnos3,est.alumnos4,est.alumnos5,est.alumnos6,est.t_alumnos
+            		FROM estadistica_x_idcentrocfg est
+            		INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
+            		INNER JOIN turno t ON cfg.turno = t.idturno
+            		INNER JOIN cct ct ON cfg.idct = ct.idct
+            		WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' AND est.idciclo = {$idciclo}";
+          return  $this->db->query($query)->result_array();
+			}//datos_estadistica_alumnosxgrado_xescuela
+      public function datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo) {
+        $query="SELECT
+            		est.grupos1,est.grupos2,est.grupos3,est.grupos4,est.grupos5,est.grupos6,est.gruposmulti, est.t_grupos
+            		FROM estadistica_x_idcentrocfg est
+            		INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
+            		INNER JOIN turno t ON cfg.turno = t.idturno
+            		INNER JOIN cct ct ON cfg.idct = ct.idct
+            		WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' AND est.idciclo = {$idciclo}";
+          return  $this->db->query($query)->result_array();
+			}//datos_estadistica_gruposxgrado_xescuela
+      public function datos_estadistica_docentes_xescuela($cct,$idturno,$idciclo) {
+        $query="SELECT
+            		est.t_docentes
+            		FROM estadistica_x_idcentrocfg est
+            		INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
+            		INNER JOIN turno t ON cfg.turno = t.idturno
+            		INNER JOIN cct ct ON cfg.idct = ct.idct
+            		WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' AND est.idciclo = {$idciclo}";
+          return  $this->db->query($query)->row('t_docentes');
+			}//datos_estadistica_docentes_xescuela
+
+      public function ciclo_ant_indicadores_xescuela($idciclo) {
+        $query="SELECT idciclo FROM ciclo WHERE descr =
+                (SELECT
+                CONCAT((SUBSTRING(descr, 1, 4)-1),'-',(SUBSTRING(descr, 6, 4)-1)) AS ciloc_ant
+                FROM ciclo WHERE idciclo = {$idciclo})";
+          return  $this->db->query($query)->row('idciclo');
+			}//ciclo_ant_indicadores_xescuela
+
+      public function datos_indicadores_xescuela($cct,$idturno,$idciclo) {
+        $query="SELECT
+            		est.eficiencia_terminal, est.retencion
+            		FROM indicadores_x_idcentrocfg est
+            		INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
+            		INNER JOIN turno t ON cfg.turno = t.idturno
+            		INNER JOIN cct ct ON cfg.idct = ct.idct
+            		WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' AND est.idciclo = {$idciclo}";
+          return  $this->db->query($query)->result_array();
+			}//datos_indicadores_xescuela
 
 }//
