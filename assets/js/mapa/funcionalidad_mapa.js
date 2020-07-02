@@ -24,6 +24,8 @@ obtener_Niveles: () => {
         Mensaje.cerrar();
 				$("#slt_nivel_mapa").empty();
 				$("#slt_nivel_mapa").append(dato.options);
+				$("#slt_sostenimiento_mapa").empty();
+				$("#slt_sostenimiento_mapa").append(dato.options1);
       },
       error: function (jqXHR, textStatus, errorThrown) {
 				Mensaje.cerrar();
