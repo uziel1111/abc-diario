@@ -55,6 +55,7 @@ let Estadistica_especifica = {
                   $("#dv_info_graf_grupos").empty();
                   $("#dv_info_graf_docen").empty();
                   $("#containerRPB03ete").empty();
+                  $("#dv_info_graf_Retencion").empty();
                   Estadistica_especifica.grafica_grados(data.alumnos);
                   Estadistica_especifica.grafica_grupos(data.grupos);
                   Estadistica_especifica.grafica_docentes(data.docentes);
@@ -71,15 +72,14 @@ let Estadistica_especifica = {
         });
     },
     grafica_grados: (grados) => {
-      console.log(grados);
         arreglo_alumnos = [];
-        for (let i = 0; i < ((grados.length) - 1); i++) {
-            arr_par = [grados[i].grado, parseInt(grados[i].total)]
+
+        for (let i = 1; i < (7); i++) {
+          arr_par = [i, parseInt(grados['alumnos'+i])];
             arreglo_alumnos.push(arr_par);
         }
-
-        ta = (grados.length) - 1;
-        t_alumnos = parseInt(grados[ta]);
+        ta = 6;
+        t_alumnos = parseInt(grados['t_alumnos']);
 
         Highcharts.theme = {
             colors: ['#3C5AA2', '#3C5AA2', '#3C5AA2', '#3C5AA2', '#3C5AA2', '#3C5AA2', '#3C5AA2', '#3C5AA2', '#3C5AA2', '#3C5AA2',
@@ -181,31 +181,17 @@ let Estadistica_especifica = {
         });
 
         $(".highcharts-background").css("fill", "#FFF");
-        if (screen.width < 600) {
-            estadPrimaria.setSize(
-                ($(document).width() / 10) * 5,
-                400,
-                false
-            );
-        }
-        else {
-            estadPrimaria.setSize(
-                ($(document).width() / 10) * 5,
-                400,
-                false
-            );
-        }
-
     },//grafica_grados
     grafica_grupos: (grupos) => {
         arreglo_grupos = [];
-        for (let i = 0; i < ((grupos.length) - 1); i++) {
-            arr_par = [grupos[i].grado, parseInt(grupos[i].total)]
+        for (let i = 1; i < (7); i++) {
+            arr_par = [i, parseInt(grupos['grupos'+i])];
             arreglo_grupos.push(arr_par);
         }
+        arreglo_grupos.push(['multi', parseInt(grupos['gruposmulti'])]);
 
-        tg = (grupos.length) - 1;
-        t_grupos = parseInt(grupos[tg]);
+        tg = 6;
+        t_grupos = parseInt(grupos['t_grupos']);
 
         Highcharts.theme = {
             colors: ['#ECC462', '#ECC462', '#ECC462', '#ECC462', '#ECC462', '#ECC462', '#ECC462', '#ECC462', '#ECC462', '#ECC462',
@@ -307,31 +293,17 @@ let Estadistica_especifica = {
         });
 
         $(".highcharts-background").css("fill", "#FFF");
-        if (screen.width < 600) {
-            estadPrimaria.setSize(
-                ($(document).width() / 10) * 5,
-                400,
-                false
-            );
-        }
-        else {
-            estadPrimaria.setSize(
-                ($(document).width() / 10) * 5,
-                400,
-                false
-            );
-        }
     },//grafica_grupos
     grafica_docentes: (docentes) => {
-
+console.log(docentes);
         arreglo_docentes = [];
-        for (let i = 0; i < ((docentes.length) - 1); i++) {
-            arr_par = [docentes[i].grado, parseInt(docentes[i].total)]
-            arreglo_docentes.push(arr_par);
-        }
-
-        td = (docentes.length) - 1;
-        t_docentes = parseInt(docentes[td]);
+        // for (let i = 0; i < ((docentes.length) - 1); i++) {
+        //     arr_par = [docentes[i].grado, parseInt(docentes[i].total)];
+        //     arreglo_docentes.push(['Docentes', parseInt(docentes)]);
+        // }
+        arreglo_docentes.push(['Docentes', parseInt(docentes)]);
+        td = 1;
+        t_docentes = parseInt(docentes);
 
 
         Highcharts.theme = {
@@ -398,7 +370,7 @@ let Estadistica_especifica = {
             xAxis: {
                 type: 'category',
                 title: {
-                    text: 'Grados'
+                    text: ''
                 }
             },
             yAxis: {
@@ -426,7 +398,7 @@ let Estadistica_especifica = {
             },
 
             series: [{
-                name: 'Número de docentes en',
+                name: 'Número de docentes',
                 colorByPoint: true,
                 data: arreglo_docentes
             }]
@@ -434,20 +406,6 @@ let Estadistica_especifica = {
         });
 
         $(".highcharts-background").css("fill", "#FFF");
-        if (screen.width < 600) {
-            estadPrimaria.setSize(
-                ($(document).width() / 10) * 5,
-                400,
-                false
-            );
-        }
-        else {
-            estadPrimaria.setSize(
-                ($(document).width() / 10) * 5,
-                400,
-                false
-            );
-        }
     },//graficadocentes
     grafica_eficiencia_terminal: (valor_et) => {
         // Dibujamos el radial progress bar para Eficiencia Terminal

@@ -160,10 +160,10 @@ class Estadistica extends CI_Controller {
 				else {
 					$data['vacio']  = 'false';
 				}
-				$data['alumnos']  = $datos_alumnos[0];
-				$data['grupos']  = $datos_grupos[0];
+				$data['alumnos']  = (isset($datos_alumnos[0]))?$datos_alumnos[0]:0;
+				$data['grupos']  = (isset($datos_grupos[0]))?$datos_grupos[0]:0;
 				$data['docentes']  = $datos_docentes;
-				$data['indicadores']  = $datos_indicadores[0];
+				$data['indicadores']  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:0;
 				// echo "<pre>";print_r($data);die();
         envia_datos_json($this, $data);
         exit();
