@@ -3,10 +3,10 @@ class Riesgo_abandono_model extends CI_Model
 {
 
       function ciclo_escolar(){
-            $query="SELECT idciclo,descr as ciclo
-            FROM ciclo
-            -- INNER JOIN complemento_apa apa on apa.ciclo
-            ORDER BY status";
+            $query="SELECT c.idciclo, c.descr as ciclo
+                  FROM ciclo c
+                  INNER JOIN complemento_apa apa ON c.descr LIKE CONCAT('%', apa.ciclo, '%')
+                  GROUP BY c.idciclo";
       return  $this->db->query($query)->result_array();
       }
 
