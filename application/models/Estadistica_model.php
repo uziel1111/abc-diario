@@ -4,155 +4,139 @@ class Estadistica_model extends CI_Model
  	function obtener_alumnos_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($id_municipio,$id_nivel,$id_sostenimiento,$id_modalidad,$id_ciclo){
  		$where=" WHERE est.idciclo={$id_ciclo}";
  		if($id_municipio!=0){
- 			$where.=" AND c.idmunicipio={$id_municipio}";
+ 			$where.=" AND est.idmunicipio={$id_municipio}";
  		}
 
- 		$query1="SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,
- 				'total' AS sostenimiento,'0' AS idmodalidad,
-                'total' AS modalidad,
-                '' AS alumn_m_t,
-                '' AS alumn_h_t,
-                '' AS alumn_t_t,
- 				SUM(est.alumnos1) AS alumnos1,
- 				SUM(est.alumnos2) AS alumnos2,
-				SUM(est.alumnos3) AS alumnos3,
-				SUM(est.alumnos4) AS alumnos4,
-				SUM(est.alumnos5) AS alumnos5,
-				SUM(est.alumnos6) AS alumnos6	
-				FROM estadistica_x_idcentrocfg est
-				INNER JOIN centrocfg cfg ON cfg.idcentrocfg=est.idcentrocfg
-				INNER JOIN cct c ON c.idct=cfg.idct
-				INNER JOIN c_sostenimiento cs ON cs.idsostenimiento=c.sostenimiento
-				INNER JOIN c_modalidad m ON m.descr=c.ssnivel
-				INNER JOIN municipio mun ON mun.idmunicipio=c.idmunicipio
-				INNER JOIN niveleducativo n ON n.idnivel=c.nivel
-				{$where}
-				GROUP BY cfg.nivel";
-		$query2="SELECT n.idnivel,n.descr AS nivel,cs.idsostenimiento,
-				cs.descr AS sostenimiento,'0' AS idmodalidad,
-				'total' AS modalidad,
-				'0' AS alumn_m_t,
-                '0' AS alumn_h_t,
-				'0' AS alumn_t_t,
-				SUM(est.alumnos1) AS alumnos1,
-				SUM(est.alumnos2) AS alumnos2,
-				SUM(est.alumnos3) AS alumnos3,
-				SUM(est.alumnos4) AS alumnos4,
-				SUM(est.alumnos5) AS alumnos5,
-				SUM(est.alumnos6) AS alumnos6
-				FROM estadistica_x_idcentrocfg est
-				INNER JOIN centrocfg cfg ON cfg.idcentrocfg=est.idcentrocfg
-				INNER JOIN cct c ON c.idct=cfg.idct
-				INNER JOIN c_sostenimiento cs ON cs.idsostenimiento=c.sostenimiento
-				INNER JOIN c_modalidad m ON m.descr=c.ssnivel
-				INNER JOIN municipio mun ON mun.idmunicipio=c.idmunicipio
-				INNER JOIN niveleducativo n ON n.idnivel=c.nivel
-				{$where}
-				GROUP BY cfg.nivel,c.sostenimiento";
-  		$query3="SELECT n.idnivel,n.descr AS nivel,cs.idsostenimiento,
-  				cs.descr AS sostenimiento,m.idmodalidad,
-  				m.descr AS modalidad,
-  				'0' AS alumn_m_t,
-                '0' AS alumn_h_t,
-  				'0' AS alumn_t_t,
-  				SUM(est.alumnos1) AS alumnos1,
-  				SUM(est.alumnos2) AS alumnos2,
-				SUM(est.alumnos3) AS alumnos3,
-				SUM(est.alumnos4) AS alumnos4,
-				SUM(est.alumnos5) AS alumnos5,
-				SUM(est.alumnos6) AS alumnos6
-				FROM estadistica_x_idcentrocfg est
-				INNER JOIN centrocfg cfg ON cfg.idcentrocfg=est.idcentrocfg
-				INNER JOIN cct c ON c.idct=cfg.idct
-				INNER JOIN c_sostenimiento cs ON cs.idsostenimiento=c.sostenimiento
-				INNER JOIN c_modalidad m ON m.descr=c.ssnivel
-				INNER JOIN municipio mun ON mun.idmunicipio=c.idmunicipio
-				INNER JOIN niveleducativo n ON n.idnivel=c.nivel
-				{$where}
-				GROUP BY cfg.nivel,c.sostenimiento,c.ssnivel
-				ORDER BY  idnivel,idsostenimiento,idmodalidad";
+ 		$query1="(SELECT est.idnivel, n.descr AS nivel, '0' AS idsostenimiento, 'total' AS sostenimiento, 
+			'0' AS idmodalidad,
+			'total' AS modalidad,
+			SUM(IF(ISNULL(est.t_alumnos_m),0 , t_alumnos_m)) AS alumn_m_t,
+			SUM(IF(ISNULL(est.t_alumnos_h),0 , t_alumnos_h)) AS alumn_h_t,
+			SUM(IF(ISNULL(est.t_alumnos),0 , t_alumnos)) AS alumn_t_t,
+			SUM(est.alumnos1) AS alumnos1,
+			SUM(est.alumnos2) AS alumnos2,
+			SUM(est.alumnos3) AS alumnos3,
+			SUM(est.alumnos4) AS alumnos4,
+			SUM(est.alumnos5) AS alumnos5,
+			SUM(est.alumnos6) AS alumnos6
+			FROM estadistica_x_muni est
+			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
+			{$where}
+			GROUP BY est.idnivel)
+			UNION
+			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento, 
+			'0' AS idmodalidad,
+			'total' AS modalidad,
+			SUM(IF(ISNULL(est.t_alumnos_m),0 , t_alumnos_m)) AS alumn_m_t,
+			SUM(IF(ISNULL(est.t_alumnos_h),0 , t_alumnos_h)) AS alumn_h_t,
+			SUM(IF(ISNULL(est.t_alumnos),0 , t_alumnos)) AS alumn_t_t,
+			SUM(est.alumnos1) AS alumnos1,
+			SUM(est.alumnos2) AS alumnos2,
+			SUM(est.alumnos3) AS alumnos3,
+			SUM(est.alumnos4) AS alumnos4,
+			SUM(est.alumnos5) AS alumnos5,
+			SUM(est.alumnos6) AS alumnos6
+			FROM estadistica_x_muni est
+			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
+			INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
+			{$where}
+			GROUP BY est.idnivel,s.idsostenimiento)
+			UNION
+			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento, 
+			est.idmodalidad,
+			m.descr AS modalidad,
+			SUM(IF(ISNULL(est.t_alumnos_m),0 , t_alumnos_m)) AS alumn_m_t,
+			SUM(IF(ISNULL(est.t_alumnos_h),0 , t_alumnos_h)) AS alumn_h_t,
+			SUM(IF(ISNULL(est.t_alumnos),0 , t_alumnos)) AS alumn_t_t,
+			SUM(est.alumnos1) AS alumnos1,
+			SUM(est.alumnos2) AS alumnos2,
+			SUM(est.alumnos3) AS alumnos3,
+			SUM(est.alumnos4) AS alumnos4,
+			SUM(est.alumnos5) AS alumnos5,
+			SUM(est.alumnos6) AS alumnos6
+			FROM estadistica_x_muni est
+			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
+			INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
+			INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
+			{$where}
+			GROUP BY est.idnivel,s.idsostenimiento, m.idmodalidad
+			ORDER BY  est.idnivel,s.idsostenimiento,m.idmodalidad)
+			";
 				
-  		return $this->db->query($query1 . ' UNION ALL ' . $query2. ' UNION ALL ' . $query3)->result_array();
+  		return $this->db->query($query1)->result_array();
   	}
 
   	function obtener_docentes_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($id_municipio,$id_nivel,$id_sostenimiento,$id_modalidad,$id_ciclo){
  		$where=" WHERE est.idciclo={$id_ciclo}";
  		if($id_municipio!=0){
- 			$where.=" AND c.idmunicipio={$id_municipio}";
+ 			$where.=" AND est.idmunicipio={$id_municipio}";
  		}
 
- 		$query1="SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,
- 				'total' AS sostenimiento,'0' AS idmodalidad,
-                'total' AS modalidad,
- 				'' AS docentes_m,
- 				'' AS docentes_h,
-				SUM(est.t_docentes) AS docentes_t_g,
-				'' AS directivo_m_congrup,
-				'' AS directivo_h_congrup,
-				'' AS directivo_t_congrup,
-				'' AS directivo_m_singrup,
-				'' AS directivo_h_singrup,
-				'' AS directivo_t_singrup
-				FROM estadistica_x_idcentrocfg est
-				INNER JOIN centrocfg cfg ON cfg.idcentrocfg=est.idcentrocfg
-				INNER JOIN cct c ON c.idct=cfg.idct
-				INNER JOIN c_sostenimiento cs ON cs.idsostenimiento=c.sostenimiento
-				INNER JOIN c_modalidad m ON m.descr=c.ssnivel
-				INNER JOIN municipio mun ON mun.idmunicipio=c.idmunicipio
-				INNER JOIN niveleducativo n ON n.idnivel=c.nivel
-				{$where}
-				GROUP BY cfg.nivel";
-		$query2="SELECT n.idnivel,n.descr AS nivel,cs.idsostenimiento,
-				cs.descr AS sostenimiento,'0' AS idmodalidad,
+ 		$query1="
+				(SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,
+				'total' AS sostenimiento,'0' AS idmodalidad,
 				'total' AS modalidad,
- 				'' AS docentes_m,
- 				'' AS docentes_h,
+				'' AS docentes_m,
+				'' AS docentes_h,
 				SUM(est.t_docentes) AS docentes_t_g,
 				'' AS directivo_m_congrup,
 				'' AS directivo_h_congrup,
-				'' AS directivo_t_congrup,
+				est.t_direc_congrupo AS directivo_t_congrup,
 				'' AS directivo_m_singrup,
 				'' AS directivo_h_singrup,
-				'' AS directivo_t_singrup
-				FROM estadistica_x_idcentrocfg est
-				INNER JOIN centrocfg cfg ON cfg.idcentrocfg=est.idcentrocfg
-				INNER JOIN cct c ON c.idct=cfg.idct
-				INNER JOIN c_sostenimiento cs ON cs.idsostenimiento=c.sostenimiento
-				INNER JOIN c_modalidad m ON m.descr=c.ssnivel
-				INNER JOIN municipio mun ON mun.idmunicipio=c.idmunicipio
-				INNER JOIN niveleducativo n ON n.idnivel=c.nivel
+				est.t_direc_singrupo AS directivo_t_singrup 
+				FROM estadistica_x_muni est
+				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				{$where}
-				GROUP BY c.nivel,c.sostenimiento";
-  		$query3="SELECT n.idnivel,n.descr AS nivel,cs.idsostenimiento,
-  				cs.descr AS sostenimiento,m.idmodalidad,
-  				m.descr AS modalidad,
- 				'' AS docentes_m,
- 				'' AS docentes_h,
+				GROUP BY est.idnivel)
+				UNION(
+				SELECT n.idnivel,n.descr AS nivel,s.idsostenimiento,
+				s.descr AS sostenimiento,'0' AS idmodalidad,
+				'total' AS modalidad,
+				'' AS docentes_m,
+				'' AS docentes_h,
 				SUM(est.t_docentes) AS docentes_t_g,
 				'' AS directivo_m_congrup,
 				'' AS directivo_h_congrup,
-				'' AS directivo_t_congrup,
+				est.t_direc_congrupo AS directivo_t_congrup,
 				'' AS directivo_m_singrup,
 				'' AS directivo_h_singrup,
-				'' AS directivo_t_singrup
-				FROM estadistica_x_idcentrocfg est
-				INNER JOIN centrocfg cfg ON cfg.idcentrocfg=est.idcentrocfg
-				INNER JOIN cct c ON c.idct=cfg.idct
-				INNER JOIN c_sostenimiento cs ON cs.idsostenimiento=c.sostenimiento
-				INNER JOIN c_modalidad m ON m.descr=c.ssnivel
-				INNER JOIN municipio mun ON mun.idmunicipio=c.idmunicipio
-				INNER JOIN niveleducativo n ON n.idnivel=c.nivel
+				est.t_direc_singrupo AS directivo_t_singrup 
+				FROM estadistica_x_muni est
+				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
+				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
 				{$where}
-				GROUP BY cfg.nivel,c.sostenimiento,c.ssnivel
-				ORDER BY  idnivel,idsostenimiento,idmodalidad";
-				// echo $query1 . ' UNION ALL ' . $query2. ' UNION ALL ' . $query3; die();
-  		return $this->db->query($query1 . ' UNION ALL ' . $query2. ' UNION ALL ' . $query3)->result_array();
+				GROUP BY est.idnivel, s.idsostenimiento
+				)
+				UNION(
+				SELECT n.idnivel,n.descr AS nivel,s.idsostenimiento,
+				s.descr AS sostenimiento,m.idmodalidad,
+				m.descr AS modalidad,
+				'' AS docentes_m,
+				'' AS docentes_h,
+				SUM(est.t_docentes) AS docentes_t_g,
+				'' AS directivo_m_congrup,
+				'' AS directivo_h_congrup,
+				est.t_direc_congrupo AS directivo_t_congrup,
+				'' AS directivo_m_singrup,
+				'' AS directivo_h_singrup,
+				est.t_direc_singrupo AS directivo_t_singrup 
+				FROM estadistica_x_muni est
+				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
+				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
+				INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
+				{$where}
+				GROUP BY est.idnivel, s.idsostenimiento, m.idmodalidad
+				ORDER BY  est.idnivel,est.idsostenimiento,est.idmodalidad
+				)
+				";
+  		return $this->db->query($query1)->result_array();
   	}
 
   	function obtener_infraestructura_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($id_municipio,$id_nivel,$id_sostenimiento,$id_modalidad,$id_ciclo){
  		$where=" WHERE est.idciclo={$id_ciclo}";
  		if($id_municipio!=0){
- 			$where.=" AND c.idmunicipio={$id_municipio}";
+ 			$where.=" AND est.idmunicipio={$id_municipio}";
  		}
 
  		$query1="SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,

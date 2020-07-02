@@ -89,7 +89,7 @@ public function obtener_grafica_xestadomunicipio(){
 				exit();
 		}
 
-		public function bucador_zona()
+		public function bucador_zona()//corregir nombre plisss...
 		{
 					//SOSTENIMIENTOS
 					$sostenimientos = $this->Generico_model->sostenimientos();
