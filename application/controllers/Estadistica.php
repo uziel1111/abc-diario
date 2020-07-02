@@ -12,8 +12,8 @@ class Estadistica extends CI_Controller {
 	public function estadistica_general() {
     	$data = array();
 			$filtros_zona = array();
-    	$ciclo=$this->Generico_model->ciclo_escolar();
-    	$municipios=$this->Generico_model->municipios();
+			$municipios=$this->Generico_model->municipios();
+    	$ciclo=$this->Estadistica_model->trae_ciclos_est_muni();
     	$data['ciclo']=$ciclo;
     	$data['municipios']=$municipios;
 			$string = $this->load->view('estadistica/filtros_zona', $filtros_zona, TRUE);
@@ -25,7 +25,8 @@ class Estadistica extends CI_Controller {
     	$data = array();
     	$idmunicipio = $this->input->post('municipio');
     	$niveles=$this->Generico_model->obtener_nivel_xidmunicipio($idmunicipio);
-		$respuesta = array("niveles" => $niveles);
+			$ciclo=$this->Estadistica_model->trae_ciclos_est_muni_param($idmunicipio);
+		$respuesta = array("niveles" => $niveles,"ciclo" => $ciclo);
 		envia_datos_json($this, $respuesta);
 		exit();
     }//
@@ -35,7 +36,8 @@ class Estadistica extends CI_Controller {
     	$idmunicipio = $this->input->post('municipio');
     	$idnivel = $this->input->post('nivel');
     	$sostenimientos=$this->Generico_model->obtener_sostenimiento_xidmunicipioxidnivel($idmunicipio,$idnivel);
-		$respuesta = array("sostenimientos" => $sostenimientos);
+			$ciclo=$this->Estadistica_model->trae_ciclos_est_muni_param($idmunicipio,$idnivel);
+		$respuesta = array("sostenimientos" => $sostenimientos,"ciclo" => $ciclo);
 		envia_datos_json($this, $respuesta);
 		exit();
     }//
@@ -46,7 +48,20 @@ class Estadistica extends CI_Controller {
     	$idnivel = $this->input->post('nivel');
     	$idsostenimiento = $this->input->post('sostenimiento');
     	$modalidades=$this->Generico_model->obtener_modalidad_xidmunicipioxidnivelxsostenimiento($idmunicipio,$idnivel,$idsostenimiento);
-		$respuesta = array("modalidades" => $modalidades);
+			$ciclo=$this->Estadistica_model->trae_ciclos_est_muni_param($idmunicipio,$idnivel,$idsostenimiento);
+		$respuesta = array("modalidades" => $modalidades,"ciclo" => $ciclo);
+		envia_datos_json($this, $respuesta);
+		exit();
+    }//
+
+		public function ciclo_est() {
+    	$data = array();
+    	$idmunicipio = $this->input->post('municipio');
+    	$idnivel = $this->input->post('nivel');
+    	$idsostenimiento = $this->input->post('sostenimiento');
+			$idmodalidad = $this->input->post('modalidad');
+    	$ciclo=$this->Estadistica_model->trae_ciclos_est_muni_param($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad);
+		$respuesta = array("ciclo" => $ciclo);
 		envia_datos_json($this, $respuesta);
 		exit();
     }//
@@ -87,8 +102,8 @@ class Estadistica extends CI_Controller {
         	$modalidad=$modalidad[0]['nombre'];
      	}
 
-    
-    	
+
+
     	$ciclo = $this->Generico_model->obtener_ciclo($idciclo);
     	$data["idmunicipio"] = $idmunicipio;
     	$data["idnivel"] = $idnivel;
@@ -137,18 +152,18 @@ class Estadistica extends CI_Controller {
 		$total_alumnos = 0;
 		$total_grupos = 0;
 		$total_docentes = 0;
-		
-		for ($i=0; $i < count($datos_alumnos); $i++) { 
+
+		for ($i=0; $i < count($datos_alumnos); $i++) {
 			$total_alumnos += $datos_alumnos[$i]['total'];
 		}
 		array_push($datos_alumnos,$total_alumnos);
 
-        for ($i=0; $i < count($datos_grupo); $i++) { 
+        for ($i=0; $i < count($datos_grupo); $i++) {
 			$total_grupos += $datos_grupo[$i]['total'];
 		}
 		array_push($datos_grupo,$total_grupos);
-		
-		for ($i=0; $i < count($datos_docentes); $i++) { 
+
+		for ($i=0; $i < count($datos_docentes); $i++) {
 			$total_docentes += $datos_docentes[$i]['total'];
 		}
         array_push($datos_docentes,$total_docentes);
