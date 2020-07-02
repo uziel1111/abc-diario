@@ -45,7 +45,7 @@ $("#btn_buscar_escuelas_xcct").click(function () {
       	}else{
       		Mensaje.alerta("warning","","La CCT es incorrecta,ingrese una CCT valida");
       	}
-	
+
 });
 
 var Busqueda_escuela = {
@@ -64,7 +64,7 @@ var Busqueda_escuela = {
 	      		Mensaje.cerrar();
 	      		$("#div_lista_escuelas").empty();
 	      		$("#div_lista_escuelas").append(data.vista);
-	      		
+
 	      	},
 	      	error: function (jqXHR, textStatus, errorThrown) {
 				Mensaje.cerrar();
@@ -80,3 +80,55 @@ var Busqueda_escuela = {
 
 
 };
+
+$("#filtro_municipio_busqueda").change(function (e) {
+	e.preventDefault();
+	e.stopImmediatePropagation();
+	ruta = base_url+'Info_escuela/obtener_idnivel_xmuni';
+  $.ajax({
+    url: ruta,
+    type: 'POST',
+    dataType: 'json',
+    data: {"idmunicipio": $("#filtro_municipio_busqueda").val()},
+    beforeSend: function (xhr) {
+      Mensaje.cargando('Cargando');
+    },
+    success: function (dato) {
+      Mensaje.cerrar();
+			$("#filtro_nivel_busqueda").empty();
+			$("#filtro_nivel_busqueda").append(dato.slc_nivel);
+			$("#filtro_sostenimiento_busqueda").empty();
+			$("#filtro_sostenimiento_busqueda").append(dato.slc_sost);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+			Mensaje.cerrar();
+			Mensaje.error_ajax(jqXHR,textStatus, errorThrown);
+		}
+  });
+
+});
+
+$("#filtro_nivel_busqueda").change(function (e) {
+	e.preventDefault();
+	e.stopImmediatePropagation();
+	ruta = base_url+'Info_escuela/obtener_idsost_xidnivel_xmuni';
+  $.ajax({
+    url: ruta,
+    type: 'POST',
+    dataType: 'json',
+    data: {"idmunicipio": $("#filtro_municipio_busqueda").val(),"idnivel": $("#filtro_nivel_busqueda").val()},
+    beforeSend: function (xhr) {
+      Mensaje.cargando('Cargando');
+    },
+    success: function (dato) {
+      Mensaje.cerrar();
+			$("#filtro_sostenimiento_busqueda").empty();
+			$("#filtro_sostenimiento_busqueda").append(dato.slc_sost);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+			Mensaje.cerrar();
+			Mensaje.error_ajax(jqXHR,textStatus, errorThrown);
+		}
+  });
+
+});
