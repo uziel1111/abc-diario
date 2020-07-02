@@ -11,9 +11,9 @@ class Riesgo_Abandono extends CI_Controller {
 
 	public function vista_principal_riesgo() {
     	$data = array();
-    	$ciclo=$this->Generico_model->ciclo_escolar();
+    	$ciclo=$this->Riesgo_abandono_model->ciclo_escolar();
     	$municipios=$this->Generico_model->municipios();
-    	$nivel=$this->Generico_model->niveles();
+    	$nivel=$this->Riesgo_abandono_model->niveles();
     	$data['ciclo']=$ciclo;
     	$data['nivel']=$nivel;
     	$data['municipios']=$municipios;

@@ -1,6 +1,22 @@
 <?php
 class Riesgo_abandono_model extends CI_Model
 {
+
+      function ciclo_escolar(){
+            $query="SELECT idciclo,descr as ciclo
+            FROM ciclo
+            -- INNER JOIN complemento_apa apa on apa.ciclo
+            ORDER BY status";
+      return  $this->db->query($query)->result_array();
+      }
+
+      function niveles(){
+            $query="SELECT n.idnivel, n.descr as nombre, n.subfijo 
+            FROM niveleducativo n
+            INNER JOIN complemento_apa apa on apa.idnivel = n.idnivel
+            GROUP BY n.idnivel";
+            return  $this->db->query($query)->result_array();
+      }
 	function obtener_riesgo_xmunicipioxnivelxcicloxperiodo($idmunicipio,$idnivel,$ciclo,$idperiodo){
 		$datos=['ACT'];
 		$where="";
