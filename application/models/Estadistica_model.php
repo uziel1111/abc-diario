@@ -3,10 +3,11 @@ class Estadistica_model extends CI_Model
 {
  	function obtener_alumnos_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($id_municipio,$id_nivel,$id_sostenimiento,$id_modalidad,$id_ciclo){
  		$where=" WHERE est.idciclo={$id_ciclo}";
+ 		$tabla = " estadistica_x_estado ";
  		if($id_municipio!=0){
  			$where.=" AND est.idmunicipio={$id_municipio}";
+ 			$tabla = "estadistica_x_muni";
  		}
-
  		$query1="(SELECT est.idnivel, n.descr AS nivel, '0' AS idsostenimiento, 'total' AS sostenimiento, 
 			'0' AS idmodalidad,
 			'total' AS modalidad,
@@ -19,7 +20,7 @@ class Estadistica_model extends CI_Model
 			SUM(est.alumnos4) AS alumnos4,
 			SUM(est.alumnos5) AS alumnos5,
 			SUM(est.alumnos6) AS alumnos6
-			FROM estadistica_x_muni est
+			FROM {$tabla} est
 			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 			{$where}
 			GROUP BY est.idnivel)
@@ -36,7 +37,7 @@ class Estadistica_model extends CI_Model
 			SUM(est.alumnos4) AS alumnos4,
 			SUM(est.alumnos5) AS alumnos5,
 			SUM(est.alumnos6) AS alumnos6
-			FROM estadistica_x_muni est
+			FROM {$tabla} est
 			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 			INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
 			{$where}
@@ -54,7 +55,7 @@ class Estadistica_model extends CI_Model
 			SUM(est.alumnos4) AS alumnos4,
 			SUM(est.alumnos5) AS alumnos5,
 			SUM(est.alumnos6) AS alumnos6
-			FROM estadistica_x_muni est
+			FROM {$tabla} est
 			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 			INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
 			INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
@@ -68,8 +69,10 @@ class Estadistica_model extends CI_Model
 
   	function obtener_docentes_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($id_municipio,$id_nivel,$id_sostenimiento,$id_modalidad,$id_ciclo){
  		$where=" WHERE est.idciclo={$id_ciclo}";
+ 		$tabla = " estadistica_x_estado ";
  		if($id_municipio!=0){
  			$where.=" AND est.idmunicipio={$id_municipio}";
+ 			$tabla = "estadistica_x_muni";
  		}
 
  		$query1="
@@ -85,7 +88,7 @@ class Estadistica_model extends CI_Model
 				'' AS directivo_m_singrup,
 				'' AS directivo_h_singrup,
 				est.t_direc_singrupo AS directivo_t_singrup 
-				FROM estadistica_x_muni est
+				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				{$where}
 				GROUP BY est.idnivel)
@@ -102,7 +105,7 @@ class Estadistica_model extends CI_Model
 				'' AS directivo_m_singrup,
 				'' AS directivo_h_singrup,
 				est.t_direc_singrupo AS directivo_t_singrup 
-				FROM estadistica_x_muni est
+				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
 				{$where}
@@ -121,7 +124,7 @@ class Estadistica_model extends CI_Model
 				'' AS directivo_m_singrup,
 				'' AS directivo_h_singrup,
 				est.t_direc_singrupo AS directivo_t_singrup 
-				FROM estadistica_x_muni est
+				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
 				INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
@@ -135,35 +138,16 @@ class Estadistica_model extends CI_Model
 
   	function obtener_infraestructura_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($id_municipio,$id_nivel,$id_sostenimiento,$id_modalidad,$id_ciclo){
  		$where=" WHERE est.idciclo={$id_ciclo}";
+ 		$tabla = " estadistica_x_estado ";
  		if($id_municipio!=0){
  			$where.=" AND est.idmunicipio={$id_municipio}";
+ 			$tabla = "estadistica_x_muni";
  		}
 
- 		$query1="SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,
- 				'total' AS sostenimiento,'0' AS idmodalidad,
-                'total' AS modalidad,
-                count(est.idcentrocfg)AS nescuelas,
-				SUM(est.grupos1) AS grupos_1,
-				SUM(est.grupos2) AS grupos_2,
-				SUM(est.grupos3) AS grupos_3,
-				SUM(est.grupos4) AS grupos_4,
-				SUM(est.grupos5) AS grupos_5,
-				SUM(est.grupos6) AS grupos_6,
-				SUM(est.gruposmulti) AS grupos_multi,
-				SUM(t_grupos) AS grupos_t
-				FROM estadistica_x_idcentrocfg est
-				INNER JOIN centrocfg cfg ON cfg.idcentrocfg=est.idcentrocfg
-				INNER JOIN cct c ON c.idct=cfg.idct
-				INNER JOIN c_sostenimiento cs ON cs.idsostenimiento=c.sostenimiento
-				INNER JOIN c_modalidad m ON m.descr=c.ssnivel
-				INNER JOIN municipio mun ON mun.idmunicipio=c.idmunicipio
-				INNER JOIN niveleducativo n ON n.idnivel=c.nivel
-				{$where}
-				GROUP BY cfg.nivel";
-		$query2="SELECT n.idnivel,n.descr AS nivel,cs.idsostenimiento,
-				cs.descr AS sostenimiento,'0' AS idmodalidad,
+ 		$query1="(SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,
+				'total' AS sostenimiento,'0' AS idmodalidad,
 				'total' AS modalidad,
-				count(est.idcentrocfg)AS nescuelas,
+				SUM(est.n_escuelas)AS nescuelas,
 				SUM(est.grupos1) AS grupos_1,
 				SUM(est.grupos2) AS grupos_2,
 				SUM(est.grupos3) AS grupos_3,
@@ -172,19 +156,15 @@ class Estadistica_model extends CI_Model
 				SUM(est.grupos6) AS grupos_6,
 				SUM(est.gruposmulti) AS grupos_multi,
 				SUM(t_grupos) AS grupos_t
-				FROM estadistica_x_idcentrocfg est
-				INNER JOIN centrocfg cfg ON cfg.idcentrocfg=est.idcentrocfg
-				INNER JOIN cct c ON c.idct=cfg.idct
-				INNER JOIN c_sostenimiento cs ON cs.idsostenimiento=c.sostenimiento
-				INNER JOIN c_modalidad m ON m.descr=c.ssnivel
-				INNER JOIN municipio mun ON mun.idmunicipio=c.idmunicipio
-				INNER JOIN niveleducativo n ON n.idnivel=c.nivel
+				FROM {$tabla} est
+				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				{$where}
-				GROUP BY cfg.nivel,c.sostenimiento";
-  		$query3="SELECT n.idnivel,n.descr AS nivel,cs.idsostenimiento,
-  				cs.descr AS sostenimiento,m.idmodalidad,
-  				m.descr AS modalidad,
-  				count(est.idcentrocfg)AS nescuelas,
+				GROUP BY est.idnivel)
+				UNION(
+				SELECT n.idnivel,n.descr AS nivel,s.idsostenimiento,
+				s.descr AS sostenimiento,'0' AS idmodalidad,
+				'total' AS modalidad,
+				SUM(est.n_escuelas)AS nescuelas,
 				SUM(est.grupos1) AS grupos_1,
 				SUM(est.grupos2) AS grupos_2,
 				SUM(est.grupos3) AS grupos_3,
@@ -193,27 +173,49 @@ class Estadistica_model extends CI_Model
 				SUM(est.grupos6) AS grupos_6,
 				SUM(est.gruposmulti) AS grupos_multi,
 				SUM(t_grupos) AS grupos_t
-				FROM estadistica_x_idcentrocfg est
-				INNER JOIN centrocfg cfg ON cfg.idcentrocfg=est.idcentrocfg
-				INNER JOIN cct c ON c.idct=cfg.idct
-				INNER JOIN c_sostenimiento cs ON cs.idsostenimiento=c.sostenimiento
-				INNER JOIN c_modalidad m ON m.descr=c.ssnivel
-				INNER JOIN municipio mun ON mun.idmunicipio=c.idmunicipio
-				INNER JOIN niveleducativo n ON n.idnivel=c.nivel
+				FROM {$tabla} est
+				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
+				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
 				{$where}
-				GROUP BY cfg.nivel,c.sostenimiento,c.ssnivel
-				ORDER BY  idnivel,idsostenimiento,idmodalidad";
-  		return $this->db->query($query1 . ' UNION ALL ' . $query2. ' UNION ALL ' . $query3)->result_array();
+				GROUP BY est.idnivel, s.idsostenimiento
+				)
+				UNION(
+				SELECT n.idnivel,n.descr AS nivel,s.idsostenimiento,
+				s.descr AS sostenimiento,m.idmodalidad,
+				m.descr AS modalidad,
+				SUM(est.n_escuelas)AS nescuelas,
+				SUM(est.grupos1) AS grupos_1,
+				SUM(est.grupos2) AS grupos_2,
+				SUM(est.grupos3) AS grupos_3,
+				SUM(est.grupos4) AS grupos_4,
+				SUM(est.grupos5) AS grupos_5,
+				SUM(est.grupos6) AS grupos_6,
+				SUM(est.gruposmulti) AS grupos_multi,
+				SUM(t_grupos) AS grupos_t
+				FROM {$tabla} est
+				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
+				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
+				INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
+				{$where}
+				GROUP BY est.idnivel, s.idsostenimiento, m.idmodalidad
+				)";
+  		return $this->db->query($query1)->result_array();
   	}
 
   	function indicadores_asistencia_xmunicipio($id_municipio){
   		$where="";
+  		$tabla = " indicadores_x_estado ";
+  		$campos = " e.identidad,e.nombre as muninicipio ";
+  		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
  		if($id_municipio!=0){
  			$where.=" where m.idmunicipio={$id_municipio}";
+ 			$tabla = " indicadores_x_muni ";
+ 			$campos = " i.idmunicipio,m.nombre as muninicipio ";
+  			$inner = " INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio ";
  		}
-  		$query="SELECT i.idmunicipio,m.nombre as muninicipio,i.idnivel,n.descr as nivel,i.idciclo,c.descr as ciclo,i.cobertura,i.absorcion
-  			FROM indicadores_x_muni as i
-  			INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio
+  		$query="SELECT {$campos},i.idnivel,n.descr as nivel,i.idciclo,c.descr as ciclo,i.cobertura,i.absorcion
+  			FROM {$tabla} as i
+  			{$inner}
   			INNER JOIN niveleducativo n ON n.idnivel=i.idnivel
   			INNER JOIN ciclo c ON c.idciclo=i.idciclo
   			{$where}
@@ -223,12 +225,18 @@ class Estadistica_model extends CI_Model
 
   	function indicadores_permanencia_xmunicipio($id_municipio){
   		$where="";
+  		$tabla = " indicadores_x_estado ";
+  		$campos = " e.identidad,e.nombre as muninicipio ";
+  		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
  		if($id_municipio!=0){
  			$where.=" where m.idmunicipio={$id_municipio}";
+ 			$tabla = " indicadores_x_muni ";
+ 			$campos = " i.idmunicipio,m.nombre as muninicipio ";
+  			$inner = " INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio ";
  		}
-  		$query="SELECT i.idmunicipio,m.nombre as muninicipio,i.idnivel,n.descr as nivel,i.idciclo,c.descr as ciclo,i.retencion,i.aprobacion,i.eficiencia_terminal 
-  			FROM indicadores_x_muni as i
-  			INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio
+  		$query="SELECT {$campos},i.idnivel,n.descr as nivel,i.idciclo,c.descr as ciclo,i.retencion,i.aprobacion,i.eficiencia_terminal
+  			FROM {$tabla} as i
+  			{$inner}
   			INNER JOIN niveleducativo n ON n.idnivel=i.idnivel
   			INNER JOIN ciclo c ON c.idciclo=i.idciclo
   			{$where}
@@ -238,14 +246,20 @@ class Estadistica_model extends CI_Model
 
   	function indicadores_aprendizaje_xmunicipio($id_municipio){
   		$where="";
+  		$campos = " p.identidad,e.nombre as muninicipio ";
+  		$tabla = " planea_nlogro_x_entidad ";
+  		$inner = " INNER JOIN entidad e ON e.identidad=p.identidad ";
  		if($id_municipio!=0){
  			$where.=" where m.idmunicipio={$id_municipio}";
+ 			$campos = " p.idmunicipio,m.nombre as muninicipio ";
+  			$tabla = " planea_nlogro_x_muni ";
+  			$inner = " INNER JOIN municipio m ON m.idmunicipio=p.idmunicipio ";
  		}
-  		$query="SELECT p.idmunicipio,m.nombre as muninicipio,p.idnivel,n.descr as nivel,
+  		$query="SELECT {$campos},p.idnivel,n.descr as nivel,
   				p.ni_lyc,p.nii_lyc,p.niii_lyc,p.niv_lyc,p.ni_mat,p.nii_mat,p.niii_mat,
   				p.niv_mat
-  			FROM planea_nlogro_x_muni as p
-  			INNER JOIN municipio m ON m.idmunicipio=p.idmunicipio
+  			FROM {$tabla} as p
+  			{$inner}
   			INNER JOIN niveleducativo n ON n.idnivel=p.idnivel
   			{$where}
   			";
@@ -257,7 +271,7 @@ class Estadistica_model extends CI_Model
   		if($idmunicipio>0){
   			$where="WHERE idmunicipio={$idmunicipio}";
   		}
-  		$query="SELECT * FROM analfabetismo_xmuni 
+  		$query="SELECT * FROM analfabetismo_xmuni
   			{$where}
   		";
   		return $this->db->query($query)->result_array();
@@ -282,13 +296,13 @@ class Estadistica_model extends CI_Model
 				  rezago_edu_xmuni
 				{$where}
 				";
-		return $this->db->query($query)->result_array();	
+		return $this->db->query($query)->result_array();
   	}
 
 	function datos_escuela_grupos($cct,$ciclo) {
 
 		if ($ciclo == trae_ciclo_actual()) {
-		$str_query = "SELECT count(*) as total, concat(gp.grado,'°') as grado from grupo_prim gp 
+		$str_query = "SELECT count(*) as total, concat(gp.grado,'°') as grado from grupo_prim gp
 					  inner join centrocfg cfg on cfg.idcentrocfg = gp.idcentrocfg
 					  inner join cct c on c.idct = cfg.idct
 					  where c.cct = ? and gp.status = ? group by gp.grado;";
@@ -377,7 +391,7 @@ class Estadistica_model extends CI_Model
     			n.descr as nivel,m.nombre as municipio,m.idmunicipio,
     				concat_ws(ct.entrecalle,' ',ct.ycalle,' ',ct.colonia) AS domicilio,
     			cfg.idcentrocfg
-    			FROM cct ct 
+    			FROM cct ct
     			INNER JOIN centrocfg cfg ON cfg.idct=ct.idct
     			INNER JOIN municipio m ON m.idmunicipio=ct.idmunicipio
     			INNER JOIN niveleducativo n ON n.idnivel=cfg.nivel
@@ -470,5 +484,46 @@ class Estadistica_model extends CI_Model
 						return	array('total'=>0, 'grupo'=>'aún no hay historio');
 					}
 			}//datos_escuela_ef
+
+      public function trae_ciclos_est_muni() {
+        $query="SELECT
+                c.idciclo,c.descr as ciclo
+                FROM estadistica_x_estado est
+                INNER JOIN ciclo c ON est.idciclo = c.idciclo
+                GROUP BY c.idciclo";
+          return  $this->db->query($query)->result_array();
+			}//trae_ciclos_est_muni
+
+      public function trae_ciclos_est_muni_param($id_municipio,$idnivel=0,$idsostenimiento=-1,$idmodalidad=0) {
+        $join = " ";
+        if($id_municipio>0){
+              $where = "WHERE est.idmunicipio = {$id_municipio} ";
+              $from = "estadistica_x_muni";
+            }
+            else{
+              $where = 'WHERE 1=1 ';
+              $from = "estadistica_x_estado";
+            }
+            if($idnivel>0){
+              $where .= " AND n.idnivel = {$idnivel}";
+              $join .= " INNER JOIN niveleducativo n on est.idnivel = n.idnivel ";
+            }
+            if($idsostenimiento> -1){
+              $where .= " AND s.idsostenimiento = {$idsostenimiento}";
+              $join .= " INNER JOIN c_sostenimiento s ON est.idsostenimiento= s.idsostenimiento ";
+            }
+            if($idmodalidad>0){
+              $where .= " AND m.idmodalidad = {$idmodalidad}";
+              $join .= " INNER JOIN c_modalidad m ON est.idmodalidad = m.idmodalidad ";
+            }
+        $query="SELECT
+                c.idciclo,c.descr as ciclo
+                FROM {$from} est
+                INNER JOIN ciclo c ON est.idciclo = c.idciclo
+                {$join}
+                {$where}
+                GROUP BY c.idciclo";
+          return  $this->db->query($query)->result_array();
+			}//trae_ciclos_est_muni
 
 }//

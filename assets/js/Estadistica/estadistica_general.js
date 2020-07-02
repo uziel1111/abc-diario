@@ -41,6 +41,7 @@ $("#filtro_municipio").change(function () {
 		$('#filtro_nivel').prop('disabled', false);
 		Estadistica_general.niveles($("#filtro_municipio").val());
 	}else{
+		Estadistica_general.niveles($("#filtro_municipio").val());
 		$('#filtro_nivel').prop('disabled', true);
 		$('#filtro_sostenimiento').prop('disabled', true);
 		$('#filtro_modalidad').prop('disabled', true);
@@ -72,6 +73,10 @@ $("#filtro_sostenimiento").change(function () {
 	}
 });
 
+$("#filtro_modalidad").change(function () {
+		Estadistica_general.ciclo_est($("#filtro_sostenimiento").val(),$("#filtro_municipio").val(),$("#filtro_nivel").val(),$("#filtro_modalidad").val());
+});
+
 
 var Estadistica_general = {
 
@@ -92,6 +97,16 @@ var Estadistica_general = {
 	      		for (let i=0; i<data.niveles.length; i++) {
 	      			$("#filtro_nivel").append("<option value='"+data.niveles[i]['idnivel']+"'>"+data.niveles[i]['nombre']+"</option>");
 	      		}
+
+						$("#filtro_ciclo_escolar").empty();
+						if (data.ciclo.length==0) {
+							$("#filtro_ciclo_escolar").append("<option value='0'>Sin datos</option>");
+						}
+						else {
+							for (let i=0; i<data.ciclo.length; i++) {
+		      			$("#filtro_ciclo_escolar").append("<option value='"+data.ciclo[i]['idciclo']+"'>"+data.ciclo[i]['ciclo']+"</option>");
+		      		}
+						}
 	        	$('#filtro_sostenimiento').prop('disabled', true);
 				$('#filtro_modalidad').prop('disabled', true);
 				$("#filtro_sostenimiento option[value='-1'").attr("selected",true);
@@ -122,6 +137,15 @@ var Estadistica_general = {
 	          	for (let i=0; i<data.sostenimientos.length; i++) {
 	      			$("#filtro_sostenimiento").append("<option value='"+data.sostenimientos[i]['idsostenimiento']+"'>"+data.sostenimientos[i]['nombre']+"</option>");
 	      		}
+						$("#filtro_ciclo_escolar").empty();
+						if (data.ciclo.length==0) {
+							$("#filtro_ciclo_escolar").append("<option value='0'>Sin datos</option>");
+						}
+						else {
+							for (let i=0; i<data.ciclo.length; i++) {
+		      			$("#filtro_ciclo_escolar").append("<option value='"+data.ciclo[i]['idciclo']+"'>"+data.ciclo[i]['ciclo']+"</option>");
+		      		}
+						}
 	      		$('#filtro_modalidad').prop('disabled', true);
 				$("#filtro_modalidad option[value='0'").attr("selected",true);
 	        },
@@ -149,6 +173,15 @@ var Estadistica_general = {
 	          	for (let i=0; i<data.modalidades.length; i++) {
 	      			$("#filtro_modalidad").append("<option value='"+data.modalidades[i]['idmodalidad']+"'>"+data.modalidades[i]['nombre']+"</option>");
 	      		}
+						$("#filtro_ciclo_escolar").empty();
+						if (data.ciclo.length==0) {
+							$("#filtro_ciclo_escolar").append("<option value='0'>Sin datos</option>");
+						}
+						else {
+							for (let i=0; i<data.ciclo.length; i++) {
+		      			$("#filtro_ciclo_escolar").append("<option value='"+data.ciclo[i]['idciclo']+"'>"+data.ciclo[i]['ciclo']+"</option>");
+		      		}
+						}
 	        },
 	        error: function (jqXHR, textStatus, errorThrown) {
 	        	Mensaje.cerrar();
@@ -156,6 +189,35 @@ var Estadistica_general = {
 	    	}
 	    });
   	},//modalidades
+
+		ciclo_est: (sostenimiento,municipio,nivel, modalidad) => {
+     	ruta = base_url + "estadistica/ciclo_est";
+	    $.ajax({
+	        url: ruta,
+	        type: 'POST',
+	        dataType: 'json',
+	        data: {sostenimiento:sostenimiento,municipio:municipio,nivel:nivel,modalidad:modalidad},
+	        beforeSend: function (xhr) {
+	        	Mensaje.cargando('Cargando modalidad');
+	        },
+	        success: function (data) {
+	        	Mensaje.cerrar();
+						$("#filtro_ciclo_escolar").empty();
+						if (data.ciclo.length==0) {
+							$("#filtro_ciclo_escolar").append("<option value='0'>Sin datos</option>");
+						}
+						else {
+							for (let i=0; i<data.ciclo.length; i++) {
+		      			$("#filtro_ciclo_escolar").append("<option value='"+data.ciclo[i]['idciclo']+"'>"+data.ciclo[i]['ciclo']+"</option>");
+		      		}
+						}
+	        },
+	        error: function (jqXHR, textStatus, errorThrown) {
+	        	Mensaje.cerrar();
+				Mensaje.error_ajax(jqXHR,textStatus, errorThrown);
+	    	}
+	    });
+  	},//ciclo_est
 
   	resultado_estadistica_municipio: (municipio,nivel,sostenimiento,modalidad,ciclo) => {
      	ruta = base_url + "estadistica/obtener_estadistica_xmunicipio_edo";

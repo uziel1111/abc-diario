@@ -345,16 +345,16 @@
                         <?php foreach ($aprendizaje as $row){ ?>
                               <tr>
                               <td><?=$row['nivel']?></td>
-                              <td style="text-align: center;"><?=($row['lyc_i']).'%'?>></td>
-                              <td style="text-align: center;"><?=($row['lyc_ii']).'%'?></td>
-                              <td  style="text-align: center;"><?=($row['lyc_iii']).'%'?></td>
-                              <td style="text-align: center;"><?=($row['lyc_iv']).'%'?></td>
-                              <td style="text-align: center;"><?=(intval($row['lyc_ii'])+intval($row['lyc_iii'])+intval($row['lyc_iv'])).'%'?></td>
-                              <td style="text-align: center;"><?=($row['mat_i']).'%' ?>></td>
-                              <td style="text-align: center;"><?=($row['mat_ii']).'%' ?></td>
-                              <td style="text-align: center;"><?=($row['mat_iii']).'%' ?></td>
-                              <td style="text-align: center;"><?=($row['mat_iv']).'%' ?></td>
-                              <td style="text-align: center;"><?=(intval($row['mat_ii'])+intval($row['mat_iii'])+intval($row['mat_iv'])).'%'?></td>
+                              <td style="text-align: center;"><?=($row['ni_lyc']).'%'?></td>
+                              <td style="text-align: center;"><?=($row['nii_lyc']).'%'?></td>
+                              <td  style="text-align: center;"><?=($row['niii_lyc']).'%'?></td>
+                              <td style="text-align: center;"><?=($row['niv_lyc']).'%'?></td>
+                              <td style="text-align: center;"><?=(intval($row['nii_lyc'])+intval($row['niii_lyc'])+intval($row['niv_lyc'])).'%'?></td>
+                              <td style="text-align: center;"><?=($row['ni_mat']).'%' ?></td>
+                              <td style="text-align: center;"><?=($row['nii_mat']).'%' ?></td>
+                              <td style="text-align: center;"><?=($row['niii_mat']).'%' ?></td>
+                              <td style="text-align: center;"><?=($row['niv_mat']).'%' ?></td>
+                              <td style="text-align: center;"><?=(intval($row['nii_mat'])+intval($row['niii_mat'])+intval($row['niv_mat'])).'%'?></td>
                               </tr>
                         <?php } ?>
                             </tbody>

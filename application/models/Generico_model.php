@@ -15,38 +15,40 @@ class Generico_model extends CI_Model
     }// sostenimientos()
   function obtener_nivel_xidmunicipio($id_municipio){
     if($id_municipio>0){
-          $where = "AND ct.idmunicipio = {$id_municipio}";
+          $where = "WHERE est.idmunicipio = {$id_municipio}";
+          $from = "estadistica_x_muni";
         }
         else{
           $where = ' ';
+          $from = "estadistica_x_estado";
         }
         $str_query = "SELECT
-                      n.idnivel, n.descr as nombre, n.subfijo
-                      FROM cct ct
-                      INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
-                      INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
-                      WHERE ct.`status`='ACT' AND cfg.`status`='A'
-                      {$where}
+                    	n.idnivel, n.descr as nombre, n.subfijo
+                    	FROM {$from} est
+                    	INNER JOIN niveleducativo n on est.idnivel = n.idnivel
+                    	{$where}
                       GROUP BY n.idnivel";
 
         return $this->db->query($str_query)->result_array();
     }// obtener_nivel_xidmunicipio()
     function obtener_sostenimiento_xidmunicipioxidnivel($id_municipio,$idnivel){
-      $where = ' ';
       if($id_municipio>0){
-            $where .= " AND ct.idmunicipio = {$id_municipio}";
+            $where = "WHERE est.idmunicipio = {$id_municipio} ";
+            $from = "estadistica_x_muni";
+          }
+          else{
+            $where = 'WHERE 1=1 ';
+            $from = "estadistica_x_estado";
           }
       if($idnivel>0){
             $where .= " AND n.idnivel = {$idnivel}";
           }
           $str_query = "SELECT
-                        s.idsostenimiento, s.descr as nombre, s.estatus
-                        FROM cct ct
-                        INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
-                        INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
-                        INNER JOIN c_sostenimiento s ON ct.sostenimiento= s.idsostenimiento
-                        WHERE ct.`status`='ACT' AND cfg.`status`='A' AND s.estatus='A'
-                        {$where}
+                          s.idsostenimiento, s.descr as nombre, s.estatus
+                          FROM {$from} est
+                          INNER JOIN niveleducativo n on est.idnivel = n.idnivel
+                          INNER JOIN c_sostenimiento s ON est.idsostenimiento = s.idsostenimiento
+                          {$where}
                         GROUP BY s.idsostenimiento";
 
           return $this->db->query($str_query)->result_array();
@@ -91,29 +93,31 @@ class Generico_model extends CI_Model
   }
 
   function obtener_modalidad_xidmunicipioxidnivelxsostenimiento($id_municipio,$idnivel,$idsostenimiento){
-      $where = ' ';
-      if($id_municipio>0){
-        $where .= " AND ct.idmunicipio = {$id_municipio}";
-      }
+    if($id_municipio>0){
+          $where = "WHERE est.idmunicipio = {$id_municipio} ";
+          $from = "estadistica_x_muni";
+        }
+        else{
+          $where = 'WHERE 1=1 ';
+          $from = "estadistica_x_estado";
+        }
+
       if($idnivel>0){
         $where .= " AND n.idnivel = {$idnivel}";
       }
-
       if($idsostenimiento>-1){
         $where .= " AND s.idsostenimiento = {$idsostenimiento}";
       }
 
           $str_query = "SELECT
-                        m.idmodalidad, m.descr as nombre
-                        FROM cct ct
-                        INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
-                        INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
-                        INNER JOIN c_sostenimiento s ON ct.sostenimiento= s.idsostenimiento
-                        INNER JOIN c_modalidad m ON m.descr=ct.ssnivel
-                        WHERE ct.`status`='ACT' AND cfg.`status`='A' AND s.estatus='A'
-                        {$where}
-                        GROUP BY s.idsostenimiento";
-
+                  			m.idmodalidad, m.descr as nombre
+                  			FROM {$from} est
+                  			INNER JOIN niveleducativo n on est.idnivel = n.idnivel
+                  			INNER JOIN c_sostenimiento s ON est.idsostenimiento= s.idsostenimiento
+                  			INNER JOIN c_modalidad m ON est.idmodalidad = m.idmodalidad
+                  			{$where}
+                  			GROUP BY m.idmodalidad";
+// echo "<pre>";print_r($str_query);die();
           return $this->db->query($str_query)->result_array();
     }// obtener_sostenimiento_xidmunicipioxidnivel()
 
@@ -149,7 +153,7 @@ class Generico_model extends CI_Model
   }//info_escuela_get
 
    function info_escuela_post($idcentrocfg){
-    $query = "SELECT 
+    $query = "SELECT
     c.nombre,
     c.cct,
     CASE
