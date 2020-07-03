@@ -9,6 +9,7 @@ class Info_escuela extends CI_Controller {
         $this->load->model('Estadistica_model');
         $this->load->model('Generico_model');
         $this->load->model('Planea_model');
+        $this->load->model('Riesgo_abandono_model');
     }//_construct
 
     function busqueda_general() {
@@ -99,17 +100,8 @@ class Info_escuela extends CI_Controller {
    		$turno = $this->input->get('turno');
       $info_escuela = $this->Generico_model->info_escuela_get($cct,$turno);
     }
-      // $planea_info = $this->planea_escuela($info_escuela);
-    // echo "<pre>";print_r($info_escuela); die();
-      // $planea_logro = $this->planea_nivel_logro($info_escuela[0]['idcentrocfg']);
-      // consola($planea_logro);
-      // echo"<pre>";
-      // // print_r($info_escuela[0]['cct']);
-      // print_r($turno);
-      // die();
-   		// $data = $this->busqueda_especifica($info_escuela[0]['cct'], $turno);
+      $data['ciclos'] = $this->Generico_model->ciclo_escolar();
    		$data['info'] = $info_escuela;
-
    		carga_pagina_basica($this,$data,'escuela/info_escuela');
    }//info_escuela
 
@@ -144,19 +136,88 @@ class Info_escuela extends CI_Controller {
    }//obtener_idnivel_xmuni
 
 
-function obtener_idsost_xidnivel_xmuni(){
-  $idmunicipio = $this->input->post('idmunicipio');
-  $idnivel = $this->input->post('idnivel');
+// function obtener_idsost_xidnivel_xmuni(){
+//   $idmunicipio = $this->input->post('idmunicipio');
+//   $idnivel = $this->input->post('idnivel');
 
-  $sostenimiento=$this->Listadoesc_model->sostenimientos($idmunicipio,$idnivel);
-  $str_select2 = "<option value='0'>Todos</option>";
-  foreach ($sostenimiento as $key => $row) {
-    $str_select2 .= " <option value=".$row['idsostenimiento'].">".$row['nombre']."</option>";
-  }
+//   $sostenimiento=$this->Listadoesc_model->sostenimientos($idmunicipio,$idnivel);
+//   $str_select2 = "<option value='0'>Todos</option>";
+//   foreach ($sostenimiento as $key => $row) {
+//     $str_select2 .= " <option value=".$row['idsostenimiento'].">".$row['nombre']."</option>";
+//   }
 
-  $respuesta = array("slc_sost" => $str_select2);
-  envia_datos_json($this, $respuesta);
-  exit();
-}//obtener_idnivel_xmuni
+//   $respuesta = array("slc_sost" => $str_select2);
+//   envia_datos_json($this, $respuesta);
+//   exit();
+// }//obtener_idnivel_xmuni
+
+   function get_datos_permanencia(){
+    $cct = $this->input->post('cct');
+    $idturno = $this->input->post('turno');
+    $periodo = $this->input->post('periodo');
+    $ciclo = $this->input->post('ciclo');
+    $ciclo_corto = trae_ciclo_corto($ciclo);
+    $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
+
+    $riesgo = $this->Riesgo_abandono_model->obtener_riesgo_xcct($cct, $idturno, $ciclo_corto, $periodo);
+        $array_muy_alto=array();
+        $array_alto=array();
+        $muy_alto1=0;
+        $muy_alto2=0;
+        $muy_alto3=0;
+        $muy_alto4=0;
+        $muy_alto5=0;
+        $muy_alto6=0;
+        $alto1=0;
+        $alto2=0;
+        $alto3=0;
+        $alto4=0;
+        $alto5=0;
+        $alto6=0;
+        $total_alumnnos=0;
+        $total_alumnnos_riesgo=0;
+        if(count($riesgo)){
+          $muy_alto=$riesgo[0]['muy_alto'];
+      $alto=$riesgo[0]['alto'];
+      $medio=$riesgo[0]['medio'];
+      $bajo=$riesgo[0]['bajo'];
+          $muy_alto1=$riesgo[0]['muy_alto1'];
+          $muy_alto2=$riesgo[0]['muy_alto2'];
+          $muy_alto3=$riesgo[0]['muy_alto3'];
+          $muy_alto4=$riesgo[0]['muy_alto4'];
+          $muy_alto5=$riesgo[0]['muy_alto5'];
+          $muy_alto6=$riesgo[0]['muy_alto6'];
+          $alto1=$riesgo[0]['alto1'];
+          $alto2=$riesgo[0]['alto2'];
+          $alto3=$riesgo[0]['alto3'];
+          $alto4=$riesgo[0]['alto4'];
+          $alto5=$riesgo[0]['alto5'];
+          $alto6=$riesgo[0]['alto6'];
+          $total_alumnos_riesgo=intval($riesgo[0]['total']);
+          $total_alumnos=intval($muy_alto1)+intval($muy_alto2)+intval($muy_alto3)+intval($muy_alto4)+intval($muy_alto5)+intval($muy_alto6)+intval($alto1)+intval($alto2)+intval($alto3)+intval($alto4)+intval($alto5)+intval($alto6);
+        }
+        array_push($array_muy_alto,intval($muy_alto1));
+        array_push($array_muy_alto,intval($muy_alto2));
+        array_push($array_muy_alto,intval($muy_alto3));
+        array_push($array_muy_alto,intval($muy_alto4));
+        array_push($array_muy_alto,intval($muy_alto5));
+        array_push($array_muy_alto,intval($muy_alto6));
+        array_push($array_alto,intval($alto1));
+        array_push($array_alto,intval($alto2));
+        array_push($array_alto,intval($alto3));
+        array_push($array_alto,intval($alto4));
+        array_push($array_alto,intval($alto5));
+        array_push($array_alto,intval($alto6));
+
+        $idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
+        
+        $datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
+        $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:0;
+     
+        $respuesta = array("muy_alto" => intval($muy_alto),"alto" => intval($alto),"medio" => intval($medio),"bajo" => intval($bajo),"array_muy_alto" => $array_muy_alto,"array_alto" => $array_alto,"total_alumnos" => intval($total_alumnos),"total_alumnos_riesgo"=>$total_alumnos_riesgo, 'indicadores' => $indicadores);
+        envia_datos_json($this, $respuesta);
+        exit();
+
+   }
 
 }//class

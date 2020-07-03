@@ -50,20 +50,61 @@
 				    <div id="conten_docentes_info"></div>
 				  </div>
 				  <div class="tab-pane fade" id="permanencia">
-				    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+				    <div class="container">
+				    	<div class="row">
+				    		<div class="col-xs-12 col-sm-12 col-md-3">
+						      <div class="form-group">
+						        <label for="itxt_ciclo_info" class="control-label">Ciclo</label>
+						        <select id="itxt_ciclo_info" name="itxt_ciclo_info" class="form-control font-family text-uppercase">
+						          <option value="">Seleccione</option>
+						          <?php foreach ($ciclos as $ciclo): ?>
+						            <option value="<?= $ciclo['ciclo']?>"><?= $ciclo['ciclo']?></option>
+						          <?php endforeach ?>
+						        </select>
+						      </div><!-- .form-group -->
+						    </div><!-- .col-xs-12 col-sm-12 col-md-2 -->
+						    <div class="col-xs-12 col-sm-12 col-md-3">
+						      <div class="form-group">
+						        <label for="itxt_periodo_info" class="control-label">Periodo</label>
+						        <select id="itxt_periodo_info" name="itxt_periodo_info" class="form-control font-family text-uppercase">
+						          <option value="">Seleccione</option>
+						          <option value="1">Periodo 1</option>
+						          <option value="2">Periodo 2</option>
+						          <option value="3">Periodo 2</option>
+						        </select>
+						      </div><!-- .form-group -->
+						    </div><!-- .col-xs-12 col-sm-12 col-md-2 -->
+						    <div class="col-xs-12 col-sm-12 col-md-3">
+						    	<br>
+						    	<button class="btn btn-primary" id="btn_buscar_permanencia">Buscar</button>
+						    </div><!-- .col-xs-12 col-sm-12 col-md-2 -->
+				    	</div>
+				    	<div id="div_riesgo_info"></div>
+				    	<div id="div_tabla_riesgo_grafica_pie_info"></div>
+				    	<div id="div_riesgo_grafica_barras_info"></div>
+				    	<div id="div_tabla_riesgo_grafica_barras_info"></div>
+				    	<div class="row">
+				    		<div class="col-md-4"><div id="containerRPB03ete_info"></div></div>
+				    		<div class="col-md-4"><div id="dv_info_graf_Retencion_info"></div></div>
+				    	</div>
+				    </div>
 				  </div>
 				  <div class="tab-pane fade" id="aprendizaje">
-				    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
+				    
 				  </div>
 				</div>
 			</div>
 		</div>
 	</div>
 </main>
+<script src="<?= base_url('assets/js/utilerias/progressbar.min.js');?>"></script>
 <script src="<?= base_url('assets/highcharts5.0.3/highcharts.js'); ?>"></script>
 <!--Problemas con esta versión <script src="https://code.highcharts.com/highcharts.js"></script>-->
 <script src="<?= base_url('assets/highcharts5.0.3/modules/data.js'); ?>"></script>
 <!--Problemas con esta versión <script src="https://code.highcharts.com/modules/data.js"></script>-->
 <script src="<?= base_url('assets/highcharts5.0.3/modules/drilldown.js'); ?>"></script>
 <!--Problemas con esta versión<script src="https://code.highcharts.com/modules/drilldown.js"></script>-->
+
 <script src="<?= base_url('assets/js/info_escuela/asistencia.js') ?>"></script>
+<script src="<?= base_url('assets/js/info_escuela/permanencia.js') ?>"></script>
+<script src="<?= base_url('assets/js/info_escuela/info_escuela.js') ?>"></script>
