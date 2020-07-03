@@ -179,4 +179,44 @@ class Planea_model extends CI_Model
           return $this->db->query($query,array($idcfg))->result_array();
         }
 
+        function estadisticas_x_cct($cct, $turno, $periodo, $idcampodis){
+            $str_query = "SELECT
+                          id_contenido,
+                          contenidos,
+                          reactivos,
+                          total_reac_xct,
+                          total,
+                          alumnos_evaluados,
+                          ROUND((total* 100)/(total_reac_xct * alumnos_evaluados), 1)AS porcen_alum_respok
+                          FROM (
+                                SELECT
+                                *,
+                                SUM(n_aciertos) AS total,
+                                SUM(n_almn_eval) AS alumnos_evaluados
+                                FROM (
+                                      SELECT
+                                      t3.id_contenido,
+                                      t3.`contenido` AS contenidos,
+                                      GROUP_CONCAT(DISTINCT t2.n_reactivo) AS reactivos,
+                                      COUNT(DISTINCT t2.n_reactivo) AS total_reac_xct,
+                                      t1.n_aciertos,
+                                      t1.n_almn_eval
+                                      FROM cct e
+                                      INNER JOIN centrocfg cfg ON e.idct =cfg.idct
+                                      INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+                                      INNER JOIN periodoplanea pp ON t1.id_periodo = pp.id_periodo
+                                      INNER JOIN planea_reactivo t2 ON t1.id_reactivo=t2.id_reactivo
+                                      INNER JOIN planea_contenido t3 ON t2.id_contenido= t3.id_contenido
+                                      INNER JOIN planea_unidad_analisis t4 ON t3.id_unidad_analisis=t4.id_unidad_analisis
+                                      INNER JOIN planea_camposdisciplinares t5 ON t4.id_campodisiplinario=t5.id_campodisiplinario
+                                      WHERE e.cct ={$cct} AND cfg.turno = '{$turno}' pp.id_periodo = {$periodo}
+                                      AND t5.id_campodisiplinario = {$idcampodis}
+                                      GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
+                              GROUP BY id_contenido
+                            ) AS datos2";
+          return $this->db->query($str_query)->result_array();
+        }
+
+
+
 }// Planea_model

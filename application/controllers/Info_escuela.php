@@ -105,35 +105,35 @@ class Info_escuela extends CI_Controller {
    		carga_pagina_basica($this,$data,'escuela/info_escuela');
    }//info_escuela
 
-   function planea_escuela($datos){
-    consola($datos);
+   // function planea_escuela($datos){
+   //  consola($datos);
 
-   }//planea_escuela
+   // }//planea_escuela
 
-   function planea_nivel_logro($idcfg){
-      $niveles_logro = $this->Planea_model->planea_logro_escuela($idcfg);
-      return $niveles_logro;
+   // function planea_nivel_logro($idcfg){
+   //    $niveles_logro = $this->Planea_model->planea_logro_escuela($idcfg);
+   //    return $niveles_logro;
 
-   }//planea_nivel_logro
+   // }//planea_nivel_logro
 
-   function obtener_idnivel_xmuni(){
-     $idmunicipio = $this->input->post('idmunicipio');
-     $arr_datos = $this->Listadoesc_model->niveles($idmunicipio);
-     $str_select = "<option value='0'>Todos</option>";
-     foreach ($arr_datos as $key => $row) {
-       $str_select .= " <option value=".$row['idnivel'].">".$row['nombre']."</option>";
-     }
+   // function obtener_idnivel_xmuni(){
+   //   $idmunicipio = $this->input->post('idmunicipio');
+   //   $arr_datos = $this->Listadoesc_model->niveles($idmunicipio);
+   //   $str_select = "<option value='0'>Todos</option>";
+   //   foreach ($arr_datos as $key => $row) {
+   //     $str_select .= " <option value=".$row['idnivel'].">".$row['nombre']."</option>";
+   //   }
 
-     $sostenimiento=$this->Listadoesc_model->sostenimientos($idmunicipio);
-     $str_select2 = "<option value='0'>Todos</option>";
-     foreach ($sostenimiento as $key => $row) {
-       $str_select2 .= " <option value=".$row['idsostenimiento'].">".$row['nombre']."</option>";
-     }
+   //   $sostenimiento=$this->Listadoesc_model->sostenimientos($idmunicipio);
+   //   $str_select2 = "<option value='0'>Todos</option>";
+   //   foreach ($sostenimiento as $key => $row) {
+   //     $str_select2 .= " <option value=".$row['idsostenimiento'].">".$row['nombre']."</option>";
+   //   }
 
-     $respuesta = array("slc_nivel" => $str_select,"slc_sost" => $str_select2);
-     envia_datos_json($this, $respuesta);
-     exit();
-   }//obtener_idnivel_xmuni
+   //   $respuesta = array("slc_nivel" => $str_select,"slc_sost" => $str_select2);
+   //   envia_datos_json($this, $respuesta);
+   //   exit();
+   // }//obtener_idnivel_xmuni
 
 
 // function obtener_idsost_xidnivel_xmuni(){
@@ -210,7 +210,7 @@ class Info_escuela extends CI_Controller {
         array_push($array_alto,intval($alto6));
 
         $idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
-        
+
         $datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
         $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:0;
      
@@ -219,5 +219,19 @@ class Info_escuela extends CI_Controller {
         exit();
 
    }
+
+   public function obtener_grafica_x_campodisiplinario(){
+    $cct = $this->input->post('cct');
+    $idturno = $this->input->post('turno');
+    $periodo = $this->input->post("periodo");
+    $campodisip = $this->input->post("campodisip");
+    $datos = $this->Planea_model->estadisticas_x_cct($cct, $turno, $periodo, $campodisip)
+    $periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
+      
+      $respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
+      
+      envia_datos_json($this, $respuesta);
+      exit();
+    }
 
 }//class
