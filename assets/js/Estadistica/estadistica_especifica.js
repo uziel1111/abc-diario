@@ -61,8 +61,6 @@ let Estadistica_especifica = {
                   Estadistica_especifica.grafica_docentes(data.docentes);
                   Estadistica_especifica.grafica_eficiencia_terminal(data.indicadores['eficiencia_terminal']);
                   Estadistica_especifica.grafica_retencion(data.indicadores['retencion']);
-                  // $("#datos_escuela").empty();
-                  // $("#datos_escuela").append(data);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
