@@ -160,6 +160,7 @@ class Generico_model extends CI_Model
         WHEN c.turno = 100 THEN 'MATUTINO'
         WHEN c.turno = 200 THEN 'VESPERTINO'
     END AS turno,
+    cfg.turno AS idturno,
     n.descr AS nivel,
     m.descr AS modalidad,
     s.descr AS sostenimiento,

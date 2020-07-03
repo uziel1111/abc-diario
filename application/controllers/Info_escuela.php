@@ -22,7 +22,7 @@ class Info_escuela extends CI_Controller {
 
       carga_pagina_basica($this,$data,'escuela/busqueda_escuela');
 
-    }//busqueda_especifica
+    }//busqueda_general
 
     function lista_escuelas() {
       $idmunicipio = $this->input->post('municipio');
@@ -64,27 +64,32 @@ class Info_escuela extends CI_Controller {
       envia_datos_json($this, $respuesta);
       exit();
 
-    }//busqueda_especifica
+    }//listado_escuelas
 
-    function busqueda_especifica($cct) {
+    function busqueda_especifica() {
+      $cct = $this->input->post('cct');
+      $idturno = $this->input->post('turno');
+      $idciclo = trae_ciclo_actual();
+      // $idciclo = $this->Generico_model->get_idciclo
 
-        $ciclo = trae_ciclo_actual();
+        $datos_alumnos = $this->Estadistica_model->datos_estadistica_alumnosxgrado_xescuela($cct,$idturno,$idciclo);
+        $datos_grupo = $this->Estadistica_model->datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo);
+        $datos_docentes = $this->Estadistica_model->datos_estadistica_docentes_xescuela($cct,$idturno,$idciclo);
 
-        $datos_alumnos = $this->Estadistica_model->datos_escuela_alumnos($cct,$ciclo);
-        $datos_grupo = $this->Estadistica_model->datos_escuela_grupos($cct,$ciclo);
-        $datos_docentes = $this->Estadistica_model->datos_escuela_docentes($cct,$ciclo);
-
-        $data['grados']  = $datos_alumnos;
+        $data['alumnos']  = $datos_alumnos;
         $data['grupos']  = $datos_grupo;
         $data['docentes']  = $datos_docentes;
-
-        return $data;
+        $respuesta = array("data" => $data);
+        envia_datos_json($this, $respuesta);
+        exit();
     }//busqueda_especifica
 
    function info_escuela (){
    	if(isset($_POST['idcfg'])){
       $idcfg = $this->input->post('idcfg');
       $info_escuela = $this->Generico_model->info_escuela_post($idcfg);
+      
+      $turno = $info_escuela[0]['idturno'];
       $info_escuela[0]['idcentrocfg']=$idcfg;
     }else{
    		$cct = $this->input->get('cct');
@@ -93,9 +98,13 @@ class Info_escuela extends CI_Controller {
     }
       // $planea_info = $this->planea_escuela($info_escuela);
     // echo "<pre>";print_r($info_escuela); die();
-      $planea_logro = $this->planea_nivel_logro($info_escuela[0]['idcentrocfg']);
+      // $planea_logro = $this->planea_nivel_logro($info_escuela[0]['idcentrocfg']);
       // consola($planea_logro);
-   		$data = $this->busqueda_especifica($info_escuela[0]['cct']);
+      // echo"<pre>";
+      // // print_r($info_escuela[0]['cct']);
+      // print_r($turno);
+      // die();
+   		// $data = $this->busqueda_especifica($info_escuela[0]['cct'], $turno);
    		$data['info'] = $info_escuela;
 
    		carga_pagina_basica($this,$data,'escuela/info_escuela');

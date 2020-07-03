@@ -556,6 +556,9 @@ class Estadistica_model extends CI_Model
             		INNER JOIN turno t ON cfg.turno = t.idturno
             		INNER JOIN cct ct ON cfg.idct = ct.idct
             		WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' AND est.idciclo = {$idciclo}";
+        echo"<pre>";
+        print_r($query);
+        die();
           return  $this->db->query($query)->result_array();
 			}//datos_estadistica_alumnosxgrado_xescuela
       public function datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo) {
