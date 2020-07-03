@@ -547,7 +547,7 @@ class Estadistica_model extends CI_Model
               		GROUP BY t.idturno";
           return  $this->db->query($query)->result_array();
 			}//turno_escolar_estadist_xesc
-
+///////estadistica e indicadores x escuela Alex
       public function datos_estadistica_alumnosxgrado_xescuela($cct,$idturno,$idciclo) {
         $query="SELECT
             		est.alumnos1,est.alumnos2,est.alumnos3,est.alumnos4,est.alumnos5,est.alumnos6,est.t_alumnos
@@ -597,7 +597,7 @@ class Estadistica_model extends CI_Model
             		WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' AND est.idciclo = {$idciclo}";
           return  $this->db->query($query)->result_array();
 			}//datos_indicadores_xescuela
-
+///////end alex
       public function trae_nivel_zona() {
         $query="SELECT
                 n.idnivel, n.descr as nombre, n.subfijo
