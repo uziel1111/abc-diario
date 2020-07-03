@@ -344,14 +344,13 @@ class Estadistica_model extends CI_Model
   function obtener_sostenimiento_xidnivel_zona($idnivel){
 
         $str_query = "SELECT
-                        s.idsostenimiento, s.descr as nombre, s.estatus
-                        FROM cct ct
-                        INNER JOIN centrocfg cfg ON ct.idct =cfg.idct
-                        INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
-                        INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
-                        LEFT JOIN c_zona z on ct.zonaid = z.zonaid
-                        WHERE n.idnivel = ?
-                        GROUP BY s.idsostenimiento";
+                      s.idsostenimiento, s.descr as nombre, s.estatus
+                      FROM estadistica_x_zona est
+                      INNER JOIN c_zona z ON est.zonaid = z.zonaid
+                      INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
+                      INNER JOIN c_sostenimiento s ON z.idsostenimiento = s.idsostenimiento
+                      WHERE n.idnivel = ?
+                      GROUP BY s.idsostenimiento";
 
         return $this->db->query($str_query,[$idnivel])->result_array();
     }// obtener_sostenimiento_xidnivel_zona()
@@ -404,14 +403,13 @@ class Estadistica_model extends CI_Model
     function obtener_nzona_xidnivelxidsost_zona($idnivel,$idsostenimieto){
 
           $str_query = "SELECT
-                        z.zonaid, z.zona_escolar as nombre, z.cct_supervisor
-                        FROM cct ct
-                        INNER JOIN centrocfg cfg ON ct.idct =cfg.idct
-                        INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
-                        INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
-                        LEFT JOIN c_zona z on ct.zonaid = z.zonaid
-                        WHERE n.idnivel = ? AND s.idsostenimiento = ?
-                        GROUP BY z.zonaid";
+                      z.zonaid, z.zona_escolar as nombre, z.cct_supervisor
+                      FROM estadistica_x_zona est
+                      INNER JOIN c_zona z ON est.zonaid = z.zonaid
+                      INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
+                      INNER JOIN c_sostenimiento s ON z.idsostenimiento = s.idsostenimiento
+                      WHERE n.idnivel = ? AND s.idsostenimiento = ?
+                      GROUP BY z.zonaid";
 
           return $this->db->query($str_query,[$idnivel,$idsostenimieto])->result_array();
       }// obtener_nzona_xidnivelxidsost_zona()
@@ -420,16 +418,13 @@ class Estadistica_model extends CI_Model
 
             $str_query = "SELECT
                           c.idciclo, c.descr as nombre, c.`status`
-                          FROM cct ct
-                          INNER JOIN centrocfg cfg ON ct.idct =cfg.idct
-                          INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
-                          INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
-
-                          LEFT JOIN c_zona z on ct.zonaid = z.zonaid
-                          INNER JOIN estadistica_x_zona ez ON z.zonaid = ez.zonaid
-                          INNER JOIN ciclo c ON ez.idciclo = c.idciclo
+                          FROM estadistica_x_zona est
+                          INNER JOIN c_zona z ON est.zonaid = z.zonaid
+                          INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
+                          INNER JOIN c_sostenimiento s ON z.idsostenimiento = s.idsostenimiento
+                          INNER JOIN ciclo c ON est.idciclo = c.idciclo
                           WHERE n.idnivel = ? AND s.idsostenimiento = ? AND z.zonaid = ?
-                          GROUP BY c.idciclo";
+                          GROUP BY z.zonaid";
 
             return $this->db->query($str_query,[$idnivel,$idsostenimieto,$numzona])->result_array();
         }// obtener_nzona_xidnivelxidsost_zona()
@@ -438,12 +433,17 @@ class Estadistica_model extends CI_Model
 
         function obtener_estadistica_xzona($idnivel,$idsostenimieto,$numzona,$idciclo){
               $str_query = "SELECT
-                            alumnos1,alumnos2,alumnos3,alumnos4,alumnos5,alumnos6,t_alumnos,
+                            n.descr as nivel, alumnos1,alumnos2,alumnos3,alumnos4,alumnos5,alumnos6,t_alumnos,
                             grupos1,grupos2,grupos3,grupos4,grupos5,grupos6,gruposmulti,t_grupos,
                             t_docentes,
-                            n_escuelas
+                            n_escuelas,
+                            t_alumnos_m,
+                            t_alumnos_h,
+                            t_direc_congrupo,
+                            t_direc_singrupo
                             FROM estadistica_x_zona ez
                             INNER JOIN c_zona z ON ez.zonaid = z.zonaid
+                            INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
                             WHERE z.idnivel = ? AND z.idsostenimiento = ? AND ez.zonaid = ? AND ez.idciclo = ? ";
 
               return $this->db->query($str_query,[$idnivel,$idsostenimieto,$numzona,$idciclo])->result_array();
@@ -451,10 +451,11 @@ class Estadistica_model extends CI_Model
 
           function obtener_indicadores_xzona($idnivel,$idsostenimieto,$numzona,$idciclo){
                 $str_query = "SELECT
-                              cobertura,absorcion,retencion,
+                              n.descr as nivel,cobertura,absorcion,retencion,
                               aprobacion,eficiencia_terminal
                               FROM indicadores_zona ez
                               INNER JOIN c_zona z ON ez.zonaid = z.zonaid
+                              INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
                               WHERE z.idnivel = ? AND z.idsostenimiento = ? AND ez.zonaid = ? AND ez.idciclo = ? ";
 
                 return $this->db->query($str_query,[$idnivel,$idsostenimieto,$numzona,$idciclo])->result_array();
@@ -462,14 +463,16 @@ class Estadistica_model extends CI_Model
 
             function obtener_indicadoresplanea_xzona($idnivel,$idsostenimieto,$numzona,$idciclo){
                   $str_query = "SELECT
-                                  pz.periodo_planea,
+                                  n.descr as nivel, pz.periodo_planea,
                                   pz.ni_lyc,pz.nii_lyc,pz.niii_lyc,pz.niv_lyc,
                                   pz.ni_mat,pz.nii_mat,pz.niii_mat,pz.niv_mat
                                   FROM planea_nlogro_x_zona pz
                                   INNER JOIN c_zona z ON pz.zonaid = z.zonaid
-                                  WHERE z.idnivel = ? AND z.idsostenimiento = ? AND pz.zonaid = ? AND pz.periodo_planea = ? ";
+                                  INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
+                                  WHERE z.idnivel = ? AND z.idsostenimiento = ? AND pz.zonaid = ?
+                                  order by pz.periodo_planea desc ";
 
-                  return $this->db->query($str_query,[$idnivel,$idsostenimieto,$numzona,$idciclo])->result_array();
+                  return $this->db->query($str_query,[$idnivel,$idsostenimieto,$numzona])->result_array();
               }// obtener_indicadoresplanea_xzona()
 
 			public function datos_escuela_ef_ret($cct,$ciclo)
@@ -594,5 +597,15 @@ class Estadistica_model extends CI_Model
             		WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' AND est.idciclo = {$idciclo}";
           return  $this->db->query($query)->result_array();
 			}//datos_indicadores_xescuela
+
+      public function trae_nivel_zona() {
+        $query="SELECT
+                n.idnivel, n.descr as nombre, n.subfijo
+                FROM estadistica_x_zona est
+                INNER JOIN c_zona z ON est.zonaid = z.zonaid
+                INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
+                GROUP BY n.idnivel";
+          return  $this->db->query($query)->result_array();
+			}//trae_nivel_zona
 
 }//

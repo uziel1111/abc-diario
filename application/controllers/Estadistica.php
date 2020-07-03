@@ -14,6 +14,7 @@ class Estadistica extends CI_Controller {
 			$filtros_zona = array();
 			$municipios=$this->Generico_model->municipios();
     	$ciclo=$this->Estadistica_model->trae_ciclos_est_muni();
+			$filtros_zona['nivel'] = $this->Estadistica_model->trae_nivel_zona();
     	$data['ciclo']=$ciclo;
     	$data['municipios']=$municipios;
 			$string = $this->load->view('estadistica/filtros_zona', $filtros_zona, TRUE);
@@ -220,11 +221,12 @@ class Estadistica extends CI_Controller {
 			$numzona = $this->input->post('numzona');
 			$idciclo = $this->input->post('idciclo');
 			$arr_datos = $this->Estadistica_model->obtener_estadistica_xzona($idnivel,$idsostenimieto,$numzona,$idciclo);
-			$arr_zona['arr_datos_a_g_d_e'] = $arr_datos;
+			$arr_zona['arr_datos_a_g_d_e'] = $arr_datos[0];
 			$arr_datos = $this->Estadistica_model->obtener_indicadores_xzona($idnivel,$idsostenimieto,$numzona,$idciclo);
-			$arr_zona['arr_datos_ind'] = $arr_datos;
+			$arr_zona['arr_datos_ind'] = $arr_datos[0];
 			$arr_datos = $this->Estadistica_model->obtener_indicadoresplanea_xzona($idnivel,$idsostenimieto,$numzona,$idciclo);
-			$arr_zona['arr_datos_indplanea'] = $arr_datos;
+			$arr_zona['arr_datos_indplanea'] = $arr_datos[0];
+			// echo "<pre>";print_r($arr_zona);die();
 			$vista = $this->load->view('estadistica/contenido_zona', $arr_zona, TRUE);
 			$respuesta = array("vista" => $vista);
 			envia_datos_json($this, $respuesta);

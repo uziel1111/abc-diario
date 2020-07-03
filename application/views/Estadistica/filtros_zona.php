@@ -5,9 +5,9 @@
 							<label>Nivel</label>
 							<select name="filtro_nivel_zona" id="filtro_nivel_zona" class="form-control">
 								<option value="0" disabled="true" selected='true'>SELECCIONE UN NIVEL EDUCATIVO</option>
-								<option value="1">PREESCOLAR</option>
-								<option value="2">PRIMARIA</option>
-								<option value="3">SECUNDARIA</option>
+								<?php foreach ($nivel as $key => $value) { ?>
+			 							<option value="<?= $value['idnivel'] ?>"> <?= $value['nombre'] ?></option>
+			 						<?php } ?>
 							</select>
 						</div>
 						<div class="col-md-2">
