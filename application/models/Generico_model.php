@@ -208,4 +208,9 @@ WHERE
       return  $this->db->query($query,[$idciclo])->result_array();
   }// obtener_nombre_nivel()
 
+  function get_idciclo_x_desc($ciclo){
+    $query="SELECT  idciclo FROM ciclo WHERE descr = ? ";
+      return  $this->db->query($query,[$ciclo])->row();
+  }
+
 }// Generico_model

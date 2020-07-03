@@ -69,17 +69,20 @@ class Info_escuela extends CI_Controller {
     function busqueda_especifica() {
       $cct = $this->input->post('cct');
       $idturno = $this->input->post('turno');
-      $idciclo = trae_ciclo_actual();
-      // $idciclo = $this->Generico_model->get_idciclo
+      $ciclo = trae_ciclo_actual();
+      $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
+      // echo"<pre>";
+      // print_r($idciclo);
+      // die();
 
         $datos_alumnos = $this->Estadistica_model->datos_estadistica_alumnosxgrado_xescuela($cct,$idturno,$idciclo);
-        $datos_grupo = $this->Estadistica_model->datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo);
+        // echo"<pre>";
+        // print_r($datos_alumnos);
+        // die();
+        $datos_grupos = $this->Estadistica_model->datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo);
         $datos_docentes = $this->Estadistica_model->datos_estadistica_docentes_xescuela($cct,$idturno,$idciclo);
 
-        $data['alumnos']  = $datos_alumnos;
-        $data['grupos']  = $datos_grupo;
-        $data['docentes']  = $datos_docentes;
-        $respuesta = array("data" => $data);
+        $respuesta = array("alumnos" => $datos_alumnos[0], 'grupos' => $datos_grupos[0], 'docentes' => $datos_docentes[0]);
         envia_datos_json($this, $respuesta);
         exit();
     }//busqueda_especifica
