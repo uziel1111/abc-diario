@@ -238,9 +238,11 @@ function obtener_idsost_xidnivel_xmuni(){
       $cct = $this->input->post('cct');
       $idturno = $this->input->post('turno');
       
-      $datos = $this->Planea_model->niveles_de_logro($cct, $idturno);
+      $datos_idcentrocfg = $this->Planea_model->niveles_de_logro_idcentrocfg($cct, $idturno);
+      $datos_entidad = $this->Planea_model->niveles_de_logro_entidad($cct, $idturno);
+      $datos_nacional = $this->Planea_model->niveles_de_logro_nacional($cct, $idturno);
         
-      $respuesta = array('datos' => $datos);
+      $respuesta = array('centrocfg' => $datos_idcentrocfg, 'entidad' => $datos_entidad, 'nacional' => $datos_nacional);
         
       envia_datos_json($this, $respuesta);
       exit();
