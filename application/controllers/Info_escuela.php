@@ -242,9 +242,10 @@ function obtener_idsost_xidnivel_xmuni(){
       $data['entidad'] = $this->Planea_model->niveles_de_logro_idcentrocfg($cct, $idturno);
       $data['nacional'] = $this->Planea_model->niveles_de_logro_idcentrocfg($cct, $idturno);
 
-      
+      $vista_tabla = $this->load->view('escuela/tabla_nlogro',$data, TRUE);
+
         
-      $respuesta = array('centrocfg' => $datos_idcentrocfg, 'entidad' => $datos_entidad, 'nacional' => $datos_nacional);
+      $respuesta = array('vista' => $vista_tabla, 'datos' => $data,);
         
       envia_datos_json($this, $respuesta);
       exit();

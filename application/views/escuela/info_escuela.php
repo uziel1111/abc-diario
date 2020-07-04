@@ -118,7 +118,9 @@
 					</p>
 					<div class="collapse" id="collapseExample3">
 					  <div class="card card-body">
-					    <div id="div_planea_info_nlogro"></div>
+					    <div id="div_planea_info_nlogro_tabla"></div>
+					    <div id="div_planea_info_nlogro_lyc"></div>
+					    <div id="div_planea_info_nlogro_mate"></div>
 					  </div>
 					</div>
 					<p>
