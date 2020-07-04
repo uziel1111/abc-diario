@@ -112,13 +112,13 @@
 					  </div>
 					</div>
 					<p>
-						<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
+						<a id="btn_planea_info_nlogro"  class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
 					    	Planea por niveles de logro
 					  	</a>
 					</p>
 					<div class="collapse" id="collapseExample3">
 					  <div class="card card-body">
-					    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+					    <div id="div_planea_info_nlogro"></div>
 					  </div>
 					</div>
 					<p>
