@@ -116,40 +116,40 @@ class Info_escuela extends CI_Controller {
 
    // }//planea_nivel_logro
 
-   // function obtener_idnivel_xmuni(){
-   //   $idmunicipio = $this->input->post('idmunicipio');
-   //   $arr_datos = $this->Listadoesc_model->niveles($idmunicipio);
-   //   $str_select = "<option value='0'>Todos</option>";
-   //   foreach ($arr_datos as $key => $row) {
-   //     $str_select .= " <option value=".$row['idnivel'].">".$row['nombre']."</option>";
-   //   }
+   function obtener_idnivel_xmuni(){
+     $idmunicipio = $this->input->post('idmunicipio');
+     $arr_datos = $this->Listadoesc_model->niveles($idmunicipio);
+     $str_select = "<option value='0'>Todos</option>";
+     foreach ($arr_datos as $key => $row) {
+       $str_select .= " <option value=".$row['idnivel'].">".$row['nombre']."</option>";
+     }
 
-   //   $sostenimiento=$this->Listadoesc_model->sostenimientos($idmunicipio);
-   //   $str_select2 = "<option value='0'>Todos</option>";
-   //   foreach ($sostenimiento as $key => $row) {
-   //     $str_select2 .= " <option value=".$row['idsostenimiento'].">".$row['nombre']."</option>";
-   //   }
+     $sostenimiento=$this->Listadoesc_model->sostenimientos($idmunicipio);
+     $str_select2 = "<option value='0'>Todos</option>";
+     foreach ($sostenimiento as $key => $row) {
+       $str_select2 .= " <option value=".$row['idsostenimiento'].">".$row['nombre']."</option>";
+     }
 
-   //   $respuesta = array("slc_nivel" => $str_select,"slc_sost" => $str_select2);
-   //   envia_datos_json($this, $respuesta);
-   //   exit();
-   // }//obtener_idnivel_xmuni
+     $respuesta = array("slc_nivel" => $str_select,"slc_sost" => $str_select2);
+     envia_datos_json($this, $respuesta);
+     exit();
+   }//obtener_idnivel_xmuni
 
 
-// function obtener_idsost_xidnivel_xmuni(){
-//   $idmunicipio = $this->input->post('idmunicipio');
-//   $idnivel = $this->input->post('idnivel');
+function obtener_idsost_xidnivel_xmuni(){
+  $idmunicipio = $this->input->post('idmunicipio');
+  $idnivel = $this->input->post('idnivel');
 
-//   $sostenimiento=$this->Listadoesc_model->sostenimientos($idmunicipio,$idnivel);
-//   $str_select2 = "<option value='0'>Todos</option>";
-//   foreach ($sostenimiento as $key => $row) {
-//     $str_select2 .= " <option value=".$row['idsostenimiento'].">".$row['nombre']."</option>";
-//   }
+  $sostenimiento=$this->Listadoesc_model->sostenimientos($idmunicipio,$idnivel);
+  $str_select2 = "<option value='0'>Todos</option>";
+  foreach ($sostenimiento as $key => $row) {
+    $str_select2 .= " <option value=".$row['idsostenimiento'].">".$row['nombre']."</option>";
+  }
 
-//   $respuesta = array("slc_sost" => $str_select2);
-//   envia_datos_json($this, $respuesta);
-//   exit();
-// }//obtener_idnivel_xmuni
+  $respuesta = array("slc_sost" => $str_select2);
+  envia_datos_json($this, $respuesta);
+  exit();
+}//obtener_idnivel_xmuni
 
    function get_datos_permanencia(){
     $cct = $this->input->post('cct');
