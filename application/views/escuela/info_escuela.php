@@ -92,23 +92,23 @@
 				  <div class="tab-pane fade" id="aprendizaje">
 				  	<br>
 				    <p>
-					  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+					  <a id="btn_planea_info" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 					    Planea por contenido tematico Lenguaje y comunicación
 					  </a>
 					</p>
 					<div class="collapse" id="collapseExample">
 					  <div class="card card-body">
-					    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+					    <div id="div_planea_lyc_info"></div>
 					  </div>
 					</div>
 					<p>
-						<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+						<a id="btn_planea_info_mate" class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
 						    Planea por contenido tematico Matemáticas
 						</a>
 					</p>
 					<div class="collapse" id="collapseExample2">
 					  <div class="card card-body">
-					    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+					    <div id="div_planea_mate_info"></div>
 					  </div>
 					</div>
 					<p>
@@ -147,4 +147,6 @@
 
 <script src="<?= base_url('assets/js/info_escuela/asistencia.js') ?>"></script>
 <script src="<?= base_url('assets/js/info_escuela/permanencia.js') ?>"></script>
+<script src="<?= base_url('assets/js/planea/graficas.js') ?>"></script>
+<script src="<?= base_url('assets/js/info_escuela/aprendizaje.js') ?>"></script>
 <script src="<?= base_url('assets/js/info_escuela/info_escuela.js') ?>"></script>

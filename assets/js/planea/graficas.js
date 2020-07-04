@@ -2,7 +2,7 @@
       //////////////////////////////////////////////////////////// Por Unidades de Análisis
 var Graficasm = {
 
-  	graficoplanea_contenido: (arr_datos, periodoplanea,campodisip) => {
+  	graficoplanea_contenido: (arr_datos, periodoplanea,campodisip, div) => {
     amarillo = (arr_datos.length - 10);
     verde = amarillo + 5;
     var colores = ['#FF0000','#FF0000','#FF0000','#FF0000','#FF0000'];
@@ -62,7 +62,7 @@ var Graficasm = {
       // Apply the theme
       Highcharts.setOptions(Highcharts.theme);
       // Codigo para graficar la seccion estadistica de la escuela
-      var estadPreescolar = new Highcharts.chart('div_graficas_masivo', {
+      var estadPreescolar = new Highcharts.chart(div, {
           lang: {
               //drillUpText: '◁ Regresar a {series.name}'
           },

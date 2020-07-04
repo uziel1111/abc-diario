@@ -223,12 +223,12 @@ class Info_escuela extends CI_Controller {
    public function obtener_grafica_x_campodisiplinario(){
     $cct = $this->input->post('cct');
     $idturno = $this->input->post('turno');
-    $periodo = $this->input->post("periodo");
+    $periodo = 2;
     $campodisip = $this->input->post("campodisip");
-    $datos = $this->Planea_model->estadisticas_x_cct($cct, $turno, $periodo, $campodisip)
+    $datos = $this->Planea_model->estadisticas_x_cct($cct, $idturno, $periodo, $campodisip);
     $periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
       
-      $respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
+      $respuesta = array('datos' => $datos, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
       
       envia_datos_json($this, $respuesta);
       exit();

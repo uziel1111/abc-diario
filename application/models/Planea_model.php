@@ -209,11 +209,12 @@ class Planea_model extends CI_Model
                                       INNER JOIN planea_contenido t3 ON t2.id_contenido= t3.id_contenido
                                       INNER JOIN planea_unidad_analisis t4 ON t3.id_unidad_analisis=t4.id_unidad_analisis
                                       INNER JOIN planea_camposdisciplinares t5 ON t4.id_campodisiplinario=t5.id_campodisiplinario
-                                      WHERE e.cct ={$cct} AND cfg.turno = '{$turno}' pp.id_periodo = {$periodo}
+                                      WHERE e.cct ='{$cct}' AND cfg.turno = '{$turno}' AND pp.id_periodo = {$periodo}
                                       AND t5.id_campodisiplinario = {$idcampodis}
                                       GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
                               GROUP BY id_contenido
                             ) AS datos2";
+                            // echo $str_query; die();
           return $this->db->query($str_query)->result_array();
         }
 

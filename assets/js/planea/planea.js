@@ -111,6 +111,7 @@ obtener_niveles_xidmunicipio: () => {
 },
 obtener_grafica_xestadomunicipio: () => {
 	ruta = base_url+'Planea/obtener_grafica_xestadomunicipio';
+  var div = "div_graficas_masivo";
   $.ajax({
     url: ruta,
     type: 'POST',
@@ -122,7 +123,7 @@ obtener_grafica_xestadomunicipio: () => {
     success: function (dato) {
       Mensaje.cerrar();
 			// console.log(dato.datos);
-			Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip);
+			Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip, div);
     },
     error: function (jqXHR, textStatus, errorThrown) {
 			Mensaje.cerrar();
@@ -132,6 +133,7 @@ obtener_grafica_xestadomunicipio: () => {
 },
 obtener_grafica_xestadozona: () => {
   ruta = base_url+'Planea/obtener_grafica_xestadozona';
+  var div = "div_graficas_masivo";
   $.ajax({
     url: ruta,
     type: 'POST',
@@ -143,7 +145,7 @@ obtener_grafica_xestadozona: () => {
     success: function (dato) {
       Mensaje.cerrar();
       console.log(dato);
-      Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip);
+      Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip, div);
     },
     error: function (jqXHR, textStatus, errorThrown) {
       Mensaje.cerrar();
