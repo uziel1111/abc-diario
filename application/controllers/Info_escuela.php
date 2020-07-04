@@ -92,7 +92,7 @@ class Info_escuela extends CI_Controller {
    	if(isset($_POST['idcfg'])){
       $idcfg = $this->input->post('idcfg');
       $info_escuela = $this->Generico_model->info_escuela_post($idcfg);
-      
+
       $turno = $info_escuela[0]['idturno'];
       $info_escuela[0]['idcentrocfg']=$idcfg;
     }else{
@@ -213,7 +213,7 @@ function obtener_idsost_xidnivel_xmuni(){
 
         $datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
         $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:0;
-     
+
         $respuesta = array("muy_alto" => intval($muy_alto),"alto" => intval($alto),"medio" => intval($medio),"bajo" => intval($bajo),"array_muy_alto" => $array_muy_alto,"array_alto" => $array_alto,"total_alumnos" => intval($total_alumnos),"total_alumnos_riesgo"=>$total_alumnos_riesgo, 'indicadores' => $indicadores);
         envia_datos_json($this, $respuesta);
         exit();
@@ -227,9 +227,9 @@ function obtener_idsost_xidnivel_xmuni(){
     $campodisip = $this->input->post("campodisip");
     $datos = $this->Planea_model->estadisticas_x_cct($cct, $idturno, $periodo, $campodisip);
     $periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
-      
+
       $respuesta = array('datos' => $datos, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
-      
+
       envia_datos_json($this, $respuesta);
       exit();
     }
@@ -244,9 +244,9 @@ function obtener_idsost_xidnivel_xmuni(){
 
       $vista_tabla = $this->load->view('escuela/tabla_nlogro',$data, TRUE);
 
-        
-      $respuesta = array('vista' => $vista_tabla, 'datos' => $data,);
-        
+
+      $respuesta = array('vista' => $vista_tabla, 'datos' => $data['centrocfg']);
+
       envia_datos_json($this, $respuesta);
       exit();
     }
