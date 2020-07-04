@@ -234,4 +234,18 @@ function obtener_idsost_xidnivel_xmuni(){
       exit();
     }
 
+    public function obtener_info_nlogro(){
+      $cct = $this->input->post('cct');
+      $idturno = $this->input->post('turno');
+      
+      $datos_idcentrocfg = $this->Planea_model->niveles_de_logro_idcentrocfg($cct, $idturno);
+      $datos_entidad = $this->Planea_model->niveles_de_logro_entidad($cct, $idturno);
+      $datos_nacional = $this->Planea_model->niveles_de_logro_nacional($cct, $idturno);
+        
+      $respuesta = array('centrocfg' => $datos_idcentrocfg, 'entidad' => $datos_entidad, 'nacional' => $datos_nacional);
+        
+      envia_datos_json($this, $respuesta);
+      exit();
+    }
+
 }//class

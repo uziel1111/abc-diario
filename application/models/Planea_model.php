@@ -218,6 +218,66 @@ class Planea_model extends CI_Model
           return $this->db->query($str_query)->result_array();
         }
 
+        function niveles_de_logro_idcentrocfg($cct, $turno){
+          $str_query = "SELECT 
+            pcfg.periodo_planea AS periodo,
+            pcfg.ni_lyc,
+            pcfg.nii_lyc,
+            pcfg.niii_lyc,
+            pcfg.niv_lyc,
+            pcfg.ni_mat,
+            pcfg.nii_mat,
+            pcfg.niii_mat,
+            pcfg.niv_mat,
+            'mi_escuela' AS origen
+            FROM planea_nlogro_x_idcentrocfg pcfg
+            INNER JOIN centrocfg cfg ON cfg.idcentrocfg = pcfg.idcentrocfg
+            INNER JOIN cct ct ON ct.idct = cfg.idct
+            WHERE ct.cct = '{$cct}' AND cfg.turno = '{$turno}'
+            ORDER BY pcfg.periodo_planea ASC";
+         return $this->db->query($str_query)->result_array();
+        }
+
+        function niveles_de_logro_entidad($cct, $turno){
+          $str_query = "SELECT 
+            pent.periodo_planea AS periodo,
+            pent.ni_lyc,
+            pent.nii_lyc,
+            pent.niii_lyc,
+            pent.niv_lyc,
+            pent.ni_mat,
+            pent.nii_mat,
+            pent.niii_mat,
+            pent.niv_mat,
+            'entidad' AS origen
+            FROM planea_nlogro_x_entidad pent
+            INNER JOIN centrocfg cfg ON cfg.nivel = pent.idnivel
+            INNER JOIN cct ct ON ct.idct = cfg.idct
+            WHERE ct.cct = '{$cct}' AND cfg.turno = '{$turno}'
+            ORDER BY pent.periodo_planea ASC";
+          return $this->db->query($str_query)->result_array();
+        }
+
+        function niveles_de_logro_nacional($cct, $turno){
+          $str_query = "SELECT
+            pnac.periodo_planea AS periodo,
+            pnac.ni_lyc AS 'ni_lyc',
+            pnac.nii_lyc AS 'nii_lyc',
+            pnac.niii_lyc AS 'niii_lyc',
+            pnac.niv_lyc AS 'niv_lyc',
+            pnac.ni_mat AS 'ni_mat',
+            pnac.nii_mat AS 'nii_mat',
+            pnac.niii_mat AS 'niii_mat',
+            pnac.niv_mat AS 'niv_mat',
+            'nacional' AS origen
+            FROM planea_nlogro_x_nacional pnac
+            INNER JOIN centrocfg cfg ON cfg.nivel = pnac.idnivel
+            INNER JOIN cct ct ON ct.idct = cfg.idct
+            WHERE ct.cct = '{$cct}' AND cfg.turno = '{$turno}'
+            ORDER BY pnac.periodo_planea ASC";
+          return $this->db->query($str_query)->result_array();
+        }
+
 
 
 }// Planea_model
