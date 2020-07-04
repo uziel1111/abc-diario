@@ -80,7 +80,7 @@ var Aprendisaje = {
       },
       success: function (dato) {
         Mensaje.cerrar();
-        // console.log(dato.datos);
+        console.log(dato.datos);
 
       },
       error: function (jqXHR, textStatus, errorThrown) {

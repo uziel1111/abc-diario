@@ -234,4 +234,16 @@ function obtener_idsost_xidnivel_xmuni(){
       exit();
     }
 
+    public function obtener_info_nlogro(){
+      $cct = $this->input->post('cct');
+      $idturno = $this->input->post('turno');
+      
+      $datos = $this->Planea_model->niveles_de_logro($cct, $idturno);
+        
+      $respuesta = array('datos' => $datos);
+        
+      envia_datos_json($this, $respuesta);
+      exit();
+    }
+
 }//class
