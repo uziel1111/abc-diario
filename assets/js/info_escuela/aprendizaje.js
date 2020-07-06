@@ -80,7 +80,8 @@ var Aprendisaje = {
       },
       success: function (dato) {
         Mensaje.cerrar();
-        // console.log(dato.datos);
+        $("#div_planea_info_nlogro_tabla").empty();
+        $("#div_planea_info_nlogro_tabla").append(dato.vista);
         Aprendisaje.grafica_info_nlogro(dato.datos, 'div_planea_info_nlogro_lyc', 'div_planea_info_nlogro_mate');
       },
       error: function (jqXHR, textStatus, errorThrown) {
