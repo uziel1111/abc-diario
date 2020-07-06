@@ -1,4 +1,6 @@
 <hr />
+<div class="" id="div_estadistica_prueb">
+
 <div class="row">
   <div id="dv_flot_est" class="col-12">
     <div id="filtros_est_gen">
@@ -26,6 +28,8 @@
         echo form_button($data);
         ?>
         <?= form_close() ?>
+
+        <button class="btn btn-success btn-block" type="button" id="btn_prueba">xxxxxxxx</button>
       </div><!-- col-md-1 -->
     </div>
   </div>
@@ -241,7 +245,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" id="dv_tablas_estmuni">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
       <div class="card-header rounded text-muted">Asistencia</div>
@@ -456,9 +460,17 @@
     </div>
   </div>
 </div>
+</div>
 
 <script>
   $(function() {
+    $("#btn_prueba").click(function () {
+    	alert("ok");
+    	var container = $('#div_estadistica_prueb'), scrollTo = $('#dv_tablas_estmuni');
+    		container.animate({
+    	    scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
+    	});
+    });
     $(window).scroll(function() {
       var scroll = $(window).scrollTop();
       var position = 300;
