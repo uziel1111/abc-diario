@@ -179,4 +179,105 @@ class Planea_model extends CI_Model
           return $this->db->query($query,array($idcfg))->result_array();
         }
 
+        function estadisticas_x_cct($cct, $turno, $periodo, $idcampodis){
+            $str_query = "SELECT
+                          id_contenido,
+                          contenidos,
+                          reactivos,
+                          total_reac_xct,
+                          total,
+                          alumnos_evaluados,
+                          ROUND((total* 100)/(total_reac_xct * alumnos_evaluados), 1)AS porcen_alum_respok
+                          FROM (
+                                SELECT
+                                *,
+                                SUM(n_aciertos) AS total,
+                                SUM(n_almn_eval) AS alumnos_evaluados
+                                FROM (
+                                      SELECT
+                                      t3.id_contenido,
+                                      t3.`contenido` AS contenidos,
+                                      GROUP_CONCAT(DISTINCT t2.n_reactivo) AS reactivos,
+                                      COUNT(DISTINCT t2.n_reactivo) AS total_reac_xct,
+                                      t1.n_aciertos,
+                                      t1.n_almn_eval
+                                      FROM cct e
+                                      INNER JOIN centrocfg cfg ON e.idct =cfg.idct
+                                      INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+                                      INNER JOIN periodoplanea pp ON t1.id_periodo = pp.id_periodo
+                                      INNER JOIN planea_reactivo t2 ON t1.id_reactivo=t2.id_reactivo
+                                      INNER JOIN planea_contenido t3 ON t2.id_contenido= t3.id_contenido
+                                      INNER JOIN planea_unidad_analisis t4 ON t3.id_unidad_analisis=t4.id_unidad_analisis
+                                      INNER JOIN planea_camposdisciplinares t5 ON t4.id_campodisiplinario=t5.id_campodisiplinario
+                                      WHERE e.cct ='{$cct}' AND cfg.turno = '{$turno}' AND pp.id_periodo = {$periodo}
+                                      AND t5.id_campodisiplinario = {$idcampodis}
+                                      GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
+                              GROUP BY id_contenido
+                            ) AS datos2";
+                            // echo $str_query; die();
+          return $this->db->query($str_query)->result_array();
+        }
+
+        function niveles_de_logro_idcentrocfg($cct, $turno){
+          $str_query = "SELECT 
+            pcfg.periodo_planea AS periodo,
+            pcfg.ni_lyc,
+            pcfg.nii_lyc,
+            pcfg.niii_lyc,
+            pcfg.niv_lyc,
+            pcfg.ni_mat,
+            pcfg.nii_mat,
+            pcfg.niii_mat,
+            pcfg.niv_mat,
+            'mi_escuela' AS origen
+            FROM planea_nlogro_x_idcentrocfg pcfg
+            INNER JOIN centrocfg cfg ON cfg.idcentrocfg = pcfg.idcentrocfg
+            INNER JOIN cct ct ON ct.idct = cfg.idct
+            WHERE ct.cct = '{$cct}' AND cfg.turno = '{$turno}'
+            ORDER BY pcfg.periodo_planea ASC";
+         return $this->db->query($str_query)->result_array();
+        }
+
+        function niveles_de_logro_entidad($cct, $turno){
+          $str_query = "SELECT 
+            pent.periodo_planea AS periodo,
+            pent.ni_lyc,
+            pent.nii_lyc,
+            pent.niii_lyc,
+            pent.niv_lyc,
+            pent.ni_mat,
+            pent.nii_mat,
+            pent.niii_mat,
+            pent.niv_mat,
+            'entidad' AS origen
+            FROM planea_nlogro_x_entidad pent
+            INNER JOIN centrocfg cfg ON cfg.nivel = pent.idnivel
+            INNER JOIN cct ct ON ct.idct = cfg.idct
+            WHERE ct.cct = '{$cct}' AND cfg.turno = '{$turno}'
+            ORDER BY pent.periodo_planea ASC";
+          return $this->db->query($str_query)->result_array();
+        }
+
+        function niveles_de_logro_nacional($cct, $turno){
+          $str_query = "SELECT
+            pnac.periodo_planea AS periodo,
+            pnac.ni_lyc AS 'ni_lyc',
+            pnac.nii_lyc AS 'nii_lyc',
+            pnac.niii_lyc AS 'niii_lyc',
+            pnac.niv_lyc AS 'niv_lyc',
+            pnac.ni_mat AS 'ni_mat',
+            pnac.nii_mat AS 'nii_mat',
+            pnac.niii_mat AS 'niii_mat',
+            pnac.niv_mat AS 'niv_mat',
+            'nacional' AS origen
+            FROM planea_nlogro_x_nacional pnac
+            INNER JOIN centrocfg cfg ON cfg.nivel = pnac.idnivel
+            INNER JOIN cct ct ON ct.idct = cfg.idct
+            WHERE ct.cct = '{$cct}' AND cfg.turno = '{$turno}'
+            ORDER BY pnac.periodo_planea ASC";
+          return $this->db->query($str_query)->result_array();
+        }
+
+
+
 }// Planea_model
