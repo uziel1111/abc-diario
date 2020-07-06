@@ -8,14 +8,17 @@ var Miscelanea = {
   },
 
   goto_seccion : function(id_dv_seccion){
+
     if (id_dv_seccion!='') {
       setTimeout(function () {
         var my_element = document.getElementById(id_dv_seccion);
-        my_element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "nearest"
-        });
+        if (my_element!=null) {
+          my_element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest"
+          });
+        }
       }, 400);
     }
   }

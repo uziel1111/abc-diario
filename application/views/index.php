@@ -66,9 +66,8 @@
                     </div>
                     <div class="card-body">
                     <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action">Estado / Municipio</li>
-                            <li class="list-group-item list-group-item-action">Por zona escolar</li>
-                            <li class="list-group-item list-group-item-action">Por escuela</li>
+                            <a href="<?=base_url('Riesgo_Abandono/vista_principal_riesgo');?>"><li class="list-group-item list-group-item-action">Estado / Municipio</li></a>
+                            <a href="<?=base_url('Info_escuela/busqueda_general');?>"><li class="list-group-item list-group-item-action">Por escuela</li></a>
                         </ul>
                     </div>
                 </div>
