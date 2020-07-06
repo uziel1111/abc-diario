@@ -1,5 +1,5 @@
 <main role="main">
-	<div class="container">
+	<div class="container" id="dv_contenido">
 		<div class="card shadow">
 			<div class="card-header bg-primary text-light">
 				<i class="fas fa-search"></i> Estadística

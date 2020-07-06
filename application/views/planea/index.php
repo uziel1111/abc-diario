@@ -203,6 +203,5 @@
 <!--Problemas con esta versión <script src="https://code.highcharts.com/modules/data.js"></script>-->
 <script src="<?= base_url('assets/highcharts5.0.3/modules/drilldown.js'); ?>"></script>
 <!--Problemas con esta versión<script src="https://code.highcharts.com/modules/drilldown.js"></script>-->
-<script src="<?= base_url('assets/js/utilerias/miscelanea.js') ?>"></script>
 <script src="<?= base_url('assets/js/planea/graficas.js') ?>"></script>
 <script src="<?= base_url('assets/js/planea/planea.js') ?>"></script>

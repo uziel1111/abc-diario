@@ -9,7 +9,7 @@ class Estadistica extends CI_Controller {
 		$this->load->model('Generico_model');
 	}
 
-	public function estadistica_general() {
+	public function estadistica_general($seccion=null,$sub_seccion=null) {
     	$data = array();
 			$filtros_zona = array();
 			$municipios=$this->Generico_model->municipios();
@@ -19,6 +19,8 @@ class Estadistica extends CI_Controller {
     	$data['municipios']=$municipios;
 			$string = $this->load->view('estadistica/filtros_zona', $filtros_zona, TRUE);
 			$data['filtros_zona'] = $string;
+			$data['seccion'] = $seccion;
+			$data['sub_seccion'] = $sub_seccion;
 		carga_pagina_basica($this,$data,'estadistica/estadistica_general');
     }//estadistica_general
 

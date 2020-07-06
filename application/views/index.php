@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action">Estado / Municipio</li>
+                            <a href="<?= base_url('Estadistica/estadistica_general'); ?>"><li class="list-group-item list-group-item-action">Estado / Municipio</li></a>
                             <li class="list-group-item list-group-item-action">Por zona escolar</li>
                             <li class="list-group-item list-group-item-action">Por escuela</li>
                         </ul>

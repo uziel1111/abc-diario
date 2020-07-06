@@ -31,11 +31,10 @@ $("#btn_limpiar_municipio_estado").click(function () {
 	$("#div_estadistica").empty();
 });
 
-
 $("#btn_buscar_municipio_estado").click(function () {
 	Estadistica_general.resultado_estadistica_municipio($("#filtro_municipio").val(),$("#filtro_nivel").val(),$("#filtro_sostenimiento").val(),$("#filtro_modalidad").val(),$("#filtro_ciclo_escolar").val());
+	Miscelanea.goto_seccion("dv_tablas_estmuni");
 });
-
 $("#filtro_municipio").change(function () {
 	if($("#filtro_municipio").val()!=0){
 		$('#filtro_nivel').prop('disabled', false);
