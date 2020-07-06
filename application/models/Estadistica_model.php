@@ -589,7 +589,7 @@ class Estadistica_model extends CI_Model
 
       public function datos_indicadores_xescuela($cct,$idturno,$idciclo) {
         $query="SELECT
-            		est.eficiencia_terminal, est.retencion
+            		est.eficiencia_terminal, est.retencion, est.aprobacion
             		FROM indicadores_x_idcentrocfg est
             		INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
             		INNER JOIN turno t ON cfg.turno = t.idturno
