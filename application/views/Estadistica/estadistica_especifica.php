@@ -41,7 +41,7 @@
                             <button class="btn btn-info text-light btn-block" type="button" id="limpiar_filtros">Limpiar</button>
                         </div>
                         <div class="col-md-3 col-lg-2 mt-2">
-                            <button class="btn btn-success btn-block" type="button" id="buscar_filtros">Buscar</button>
+                            <button class="btn btn-success btn-block text-light" type="button" id="buscar_filtros">Buscar</button>
                         </div>
                     </div>
                 </div>
