@@ -1,5 +1,5 @@
 <div class="dv_tablas_estzona col-md-12">
-    <div class="card mb-3 card-style-1">
+    <div class="card mb-3 card-style-1" id="dv_alumnos_zona">
         <div class="card-header card-1-header bgcolor-2">Alumnos</div>
         <div class="card-body">
             <div class="table-responsive">
@@ -46,7 +46,7 @@
     </div>
     <!-- card -->
 
-    <div class="card mb-3 card-style-1">
+    <div class="card mb-3 card-style-1" id="dv_personal_zona">
         <div class="card-header card-1-header bgcolor-2">Personal docente</div>
         <div class="card-body">
             <div class="table-responsive">
@@ -78,7 +78,7 @@
     </div>
     <!-- card -->
 
-    <div class="card mb-3 card-style-1">
+    <div class="card mb-3 card-style-1" id="dv_infraestructura_zona">
         <div class="card-header card-1-header bgcolor-2">Infraestructura</div>
         <div class="card-body">
             <div class="table-responsive">
@@ -124,7 +124,7 @@
         <!-- card-body -->
     </div>
 
-    <div class="card mb-3 card-style-1">
+    <div class="card mb-3 card-style-1" id="dv_asistencia_zona">
         <div class="card-header card-1-header bgcolor-2">Indicadores de asistencia</div>
         <div class="card-body">
             <div class="table-responsive">
@@ -153,7 +153,7 @@
         <!-- card-body -->
     </div>
 
-    <div class="card mb-3 card-style-1">
+    <div class="card mb-3 card-style-1" id="dv_permanencia_zona">
         <div class="card-header card-1-header bgcolor-2">Indicadores de permanencia</div>
         <div class="card-body">
             <div class="table-responsive">
@@ -184,7 +184,7 @@
         </div>
         <!-- card-body -->
     </div>
-    <div class="card mb-3 card-style-1">
+    <div class="card mb-3 card-style-1" id="dv_aprendizaje_zona">
         <div class="card-header card-1-header bgcolor-2">Indicadores de aprendizaje</div>
         <div class="card-body">
             <div class="table-responsive">

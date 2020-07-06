@@ -12,9 +12,9 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <a href="<?= base_url('Estadistica/estadistica_general'); ?>"><li class="list-group-item list-group-item-action">Estado / Municipio</li></a>
-                            <li class="list-group-item list-group-item-action">Por zona escolar</li>
-                            <li class="list-group-item list-group-item-action">Por escuela</li>
+                            <a href="<?=base_url('Estadistica/estadistica_general/estado_municipio/alumnos');?>"><li class="list-group-item list-group-item-action">Estado / Municipio</li></a>
+                            <a href="<?=base_url('Estadistica/estadistica_general/zona_escolar/alumnos');?>"><li class="list-group-item list-group-item-action">Por zona escolar</li></a>
+                            <a href="<?=base_url('Estadistica/estadistica_especifica');?>"><li class="list-group-item list-group-item-action">Por escuela</li></a>
                         </ul>
                     </div>
                 </div>
@@ -30,9 +30,9 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action">Estado / Municipio</li>
-                            <li class="list-group-item list-group-item-action">Por zona escolar</li>
-                            <li class="list-group-item list-group-item-action">Por escuela</li>
+                            <a href="<?=base_url('Estadistica/estadistica_general/estado_municipio/asistencia');?>"><li class="list-group-item list-group-item-action">Estado / Municipio</li></a>
+                            <a href="<?=base_url('Estadistica/estadistica_general/zona_escolar/asistencia');?>"><li class="list-group-item list-group-item-action">Por zona escolar</li></a>
+                            <a href="<?=base_url('Estadistica/estadistica_especifica');?>"><li class="list-group-item list-group-item-action">Por escuela</li></a>
                         </ul>
                     </div>
                 </div>
@@ -48,9 +48,9 @@
                     </div>
                     <div class="card-body">
                     <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action">Estado / Municipio</li>
-                            <li class="list-group-item list-group-item-action">Por zona escolar</li>
-                            <li class="list-group-item list-group-item-action">Por escuela</li>
+                            <a href="<?=base_url('Estadistica/estadistica_general/estado_municipio/aprendizaje');?>"><li class="list-group-item list-group-item-action">Estado / Municipio</li></a>
+                            <a href="<?=base_url('Estadistica/estadistica_general/zona_escolar/aprendizaje');?>"><li class="list-group-item list-group-item-action">Por zona escolar</li></a>
+                            <a href="<?=base_url('Info_escuela/busqueda_general');?>"><li class="list-group-item list-group-item-action">Por escuela</li></a>
                         </ul>
                     </div>
                 </div>

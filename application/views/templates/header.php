@@ -79,6 +79,27 @@
     </div>
   </section>
 
+  <style>
+    .ir-arriba {
+      display: none;
+      background-repeat: no-repeat;
+      font-size: 20px;
+      color: black;
+      cursor: pointer;
+      position: fixed;
+      bottom: 50px;
+      right: 10px;
+      z-index: 2;
+    }
+  </style>
+
+  <a class="ir-arriba" javascript:void(0) title="Volver arriba">
+    <span class="fa-stack">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+    </span>
+  </a>
+
   <a class="ir-arriba" javascript:void(0) title="Volver arriba">
     <span class="fa-stack">
       <i class="fa fa-circle fa-stack-2x"></i>

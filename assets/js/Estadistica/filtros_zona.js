@@ -97,5 +97,8 @@ $("#filtro_num_zona").change(function (e) {
 $("#btn_buscar_zona_escolar").click(function (e) {
 	e.preventDefault();
 	e.stopImmediatePropagation();
-	Estadistica_zona.resultado_estadistica_zona($("#filtro_nivel_zona").val(),$("#filtro_sostenimiento_zona").val(),$("#filtro_num_zona").val(),$("#filtro_ciclo_escolar_zona").val());
+	Estadistica_zona.resultado_estadistica_zona($("#filtro_nivel_zona").val(),$("#filtro_sostenimiento_zona").val(),$("#filtro_num_zona").val(),$("#filtro_ciclo_escolar_zona").val(),
+	() =>{
+		Miscelanea.goto_seccion($("#dv_id_subseccion").val());
+	});
 });

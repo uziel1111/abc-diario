@@ -26,13 +26,11 @@
         echo form_button($data);
         ?>
         <?= form_close() ?>
-
-        <button class="btn btn-success btn-block" type="button" id="btn_prueba">xxxxxxxx</button>
       </div><!-- col-md-1 -->
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" id="dv_alumnos_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
       <div class="card-header rounded text-muted">Alumnos</div>
@@ -104,7 +102,7 @@
   </div>
 </div>
 <br>
-<div class="row">
+<div class="row" id="dv_personal_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
       <div class="card-header rounded text-muted">Personal Docente</div>
@@ -174,7 +172,7 @@
     </div><!-- card -->
   </div>
 </div>
-<div class="row">
+<div class="row" id="dv_infraestructura_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
       <div class="card-header rounded text-muted">Infraestructura</div>
@@ -243,7 +241,7 @@
     </div>
   </div>
 </div>
-<div class="row" id="dv_tablas_estmuni">
+<div class="row" id="dv_asistencia_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
       <div class="card-header rounded text-muted">Asistencia</div>
@@ -277,7 +275,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" id="dv_permanencia_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
       <div class="card-header rounded text-muted">Permanencia</div>
@@ -312,7 +310,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" id="dv_aprendizaje_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
       <div class="card-header rounded text-muted">Aprendizaje</div>
@@ -370,7 +368,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" id="dv_rezagoeducativo_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
       <div class="card-header rounded text-muted">Rezago Educativo</div>
@@ -424,7 +422,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" id="dv_analfabetismo_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
       <div class="card-header rounded text-muted">Analfabetismo</div>

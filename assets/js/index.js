@@ -1,3 +1,6 @@
+$(document).ready(function ($) {
+Index.irArriba();
+});
 $("#estadistica_general").click(function(e) {
     e.preventDefault();
     // alert("en estadistica general");
@@ -10,7 +13,6 @@ $("#estadistica_especifica").click(function(e) {
     Index.estadistica_especifica();
 
 });
-
 
 
 var Index = {
@@ -55,6 +57,14 @@ var Index = {
 
                 }
             });
-        } //estadistica_especifica
+        }, //estadistica_especifica
+
+        irArriba: () => {
+      	  	$('.ir-arriba').click(function(){ $('body,html').animate({ scrollTop:'0px' },1000); });
+      	  	$(window).scroll(function(){
+      	    	if($(this).scrollTop() > 0){ $('.ir-arriba').slideDown(600); }else{ $('.ir-arriba').slideUp(600); }
+      	  	});
+      	  	$('.ir-abajo').click(function(){ $('body,html').animate({ scrollTop:'1000px' },1000); });
+      	}
 
 };

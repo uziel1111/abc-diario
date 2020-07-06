@@ -1,5 +1,9 @@
 $("#filtros_zona_escolar").hide();
 
+if ($("#dv_id_seccion").val()=='zona_escolar') {
+	setTimeout(function () { $("input[name=busqueda_estadistica]").trigger("click"); }, 400);
+}
+
 $("input[name=busqueda_estadistica]").click(function () {
 	if($('input:radio[name=busqueda_estadistica]:checked').val()=="municipio"){
 		$("#filtros_municipio_estado").show();
@@ -32,8 +36,10 @@ $("#btn_limpiar_municipio_estado").click(function () {
 });
 
 $("#btn_buscar_municipio_estado").click(function () {
-	Estadistica_general.resultado_estadistica_municipio($("#filtro_municipio").val(),$("#filtro_nivel").val(),$("#filtro_sostenimiento").val(),$("#filtro_modalidad").val(),$("#filtro_ciclo_escolar").val());
-	Miscelanea.goto_seccion("dv_tablas_estmuni");
+	Estadistica_general.resultado_estadistica_municipio($("#filtro_municipio").val(),$("#filtro_nivel").val(),$("#filtro_sostenimiento").val(),$("#filtro_modalidad").val(),$("#filtro_ciclo_escolar").val(),
+	() =>{
+		Miscelanea.goto_seccion($("#dv_id_subseccion").val());
+	});
 });
 $("#filtro_municipio").change(function () {
 	if($("#filtro_municipio").val()!=0){
@@ -218,7 +224,7 @@ var Estadistica_general = {
 	    });
   	},//ciclo_est
 
-  	resultado_estadistica_municipio: (municipio,nivel,sostenimiento,modalidad,ciclo) => {
+  	resultado_estadistica_municipio: (municipio,nivel,sostenimiento,modalidad,ciclo,callback) => {
      	ruta = base_url + "estadistica/obtener_estadistica_xmunicipio_edo";
 	    $.ajax({
 	        url: ruta,
@@ -232,6 +238,7 @@ var Estadistica_general = {
 	        	Mensaje.cerrar();
 	        	$("#div_estadistica").empty();
 	        	$("#div_estadistica").append(data.vista);
+						callback();
 	        },
 	        error: function (jqXHR, textStatus, errorThrown) {
 	        	Mensaje.cerrar();

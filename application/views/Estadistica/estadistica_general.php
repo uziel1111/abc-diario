@@ -9,13 +9,13 @@
 					<div class="row">
 						<div class="col-auto">
 							<div class="custom-control custom-radio">
-								<input name="busqueda_estadistica" id="busqueda_estadistica_municipio" value="municipio" type="radio" class="custom-control-input" checked>
+								<input name="busqueda_estadistica" id="busqueda_estadistica_municipio" value="municipio" type="radio" class="custom-control-input" <?=($seccion=='estado_municipio')?'checked':'' ?>>
 								<label class="custom-control-label font-weight-bold" for="busqueda_estadistica_municipio"> Por Estado/Municipio</label>
 							</div>
 						</div>
 						<div class="col-auto">
 							<div class="custom-control custom-radio">
-								<input name="busqueda_estadistica" id="busqueda_estadistica_zona_escolar" value="zona_escolar" type="radio" class="custom-control-input">
+								<input name="busqueda_estadistica" id="busqueda_estadistica_zona_escolar" value="zona_escolar" type="radio" class="custom-control-input" <?=($seccion=='zona_escolar')?'checked':'' ?>>
 								<label class="custom-control-label font-weight-bold" for="busqueda_estadistica_zona_escolar"> Por Zona Escolar</label>
 							</div>
 						</div>
@@ -79,6 +79,9 @@
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="" id="dv_id_seccion" value="<?=$seccion?>">
+		<input type="hidden" name="" id="dv_id_subseccion" value="<?='dv_'.$sub_seccion.(($seccion=='estado_municipio')?'_emunicipio':'_zona')
+		?>">
 	</div>
 </main>
 
