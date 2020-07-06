@@ -10,6 +10,7 @@ class Info_escuela extends CI_Controller {
         $this->load->model('Generico_model');
         $this->load->model('Planea_model');
         $this->load->model('Riesgo_abandono_model');
+        $this->load->model('Eficienciat_model');
     }//_construct
 
     function busqueda_general() {
@@ -268,6 +269,19 @@ function obtener_idsost_xidnivel_xmuni(){
       }
 
       return array_unique($ciclos_data);
+    }
+
+    public function ete_info(){
+      $cct = $this->input->post('cct');
+      $turno = $this->input->post('turno');
+
+      $eft = $this->Eficienciat_model->eficiencia_terminal($cct, $turno);
+      $contenido_may = $this->Eficienciat_model->indicadores_sum($cct, $turno);
+      $ete = round((($eft->eficiencia_terminal* $contenido_may->mayor)/100),2);
+      $respuesta = array('ete' => $ete, 'periodo' => $contenido_may->periodo);
+
+      envia_datos_json($this, $respuesta);
+      exit();
     }
 
 }//class

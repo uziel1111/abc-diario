@@ -86,6 +86,9 @@
 				    	<div class="row">
 				    		<div class="col-md-4"><div id="containerRPB03ete_info"></div></div>
 				    		<div class="col-md-4"><div id="dv_info_graf_Retencion_info"></div></div>
+				    		<div class="col-md-4">
+				    			<div id="dv_info_graf_aprobacion_info"></div>
+				    		</div>
 				    	</div>
 				    </div>
 				  </div>
@@ -124,7 +127,7 @@
 					  </div>
 					</div>
 					<p>
-						<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
+						<a id="btn_planea_info_ete" class="btn btn-primary" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
 					    	Eficiencia termial efectiva
 					  	</a>
 					</p>
@@ -133,7 +136,21 @@
 					    De quienes inician el nivel educativo, ¿Qué porcentaje lo termina y además aprende lo esencial?
 
 						A esta pregunta responde el nuevo indicador de Eficiencia Terminal Efectiva (ETE), que toma como base la eficiencia terminal tradicional y le aplica el porcentaje de estudiantes que supera el nivel I en PLANEA.
-						<div id="div_ete_info"></div>
+						<div class="row">
+							<div class="col-md-4">
+							</div>
+							<div class="col-md-4">
+								<div id="div_ete_info"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4"></div>
+							<div class="col-md-4">
+								Eficiencia Terminal Efectiva
+								Porcentaje de alumnos egresados con aprendizajes suficientes.
+								<h5 id="conten_planea_ciclo"></h5>
+							</div>
+						</div>
 					  </div>
 					</div>
 				  </div>

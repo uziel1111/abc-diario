@@ -25,6 +25,7 @@ let Permanencia = {
 	      		Permanencia.grafica_barras_riesgo(data.array_muy_alto,data.array_alto,data.total_alumnos);
             Permanencia.grafica_eficiencia_terminal(data.indicadores['eficiencia_terminal']);
             Permanencia.grafica_retencion(data.indicadores['retencion']);
+            Permanencia.grafica_aprobacion(data.indicadores['aprovacion']);
 	      		let tabla='<table width="100%" class="table table-bordered">';
 					tabla+=	'<tbody>';
 					tabla+= '<tr style="background-color:#D8D8D8;">';
@@ -371,5 +372,52 @@ let Permanencia = {
         bar.text.style.fontSize = '2rem';
 
         bar.animate(Math.min(varix / 100, 1));  // Number from 0.0 to 1.0
-    }//grafica_retencion
+    },//grafica_retencion
+
+    grafica_aprobacion: (varix) => {
+        // Dibujamos el radial progress bar para cobertura
+        // var valor_et=80;
+        var bar = new ProgressBar.Circle(dv_info_graf_aprobacion_info, {
+            color: '#888888',
+            // This has to be the same size as the maximum width to
+            // prevent clipping
+            strokeWidth: 8,
+            trailWidth: 5,
+            easing: 'easeInOut',
+            duration: 7400,
+            text: {
+                autoStyleContainer: false
+            },
+            from: { color: '#D6DADC', width: 5 },
+            to: { color: '#ECC462', width: 8 },
+            // Set default step function for all animate calls
+            step: function (state, circle) {
+                circle.path.setAttribute('stroke', state.color);
+                circle.path.setAttribute('stroke-width', state.width);
+
+                if (circle.value() == 1.0) {
+                    var value = Math.round(circle.value() * 100);
+                }
+                else {
+                    var value = circle.value() * 100;
+                    value = value.toFixed(2);
+                }
+                if (value === 0) {
+                    circle.setText('');
+                } else {
+                    if (value > 1) {
+                        circle.setText(varix + '% <br><center>Aprovación</center>');
+                    }
+                    else {
+                        circle.setText(value + '%');
+                    }
+                }
+
+            }
+        });
+        bar.text.style.fontFamily = '"Arial", Helvetica, sans-serif';
+        bar.text.style.fontSize = '2rem';
+
+        bar.animate(Math.min(varix / 100, 1));  // Number from 0.0 to 1.0
+    }//grafica_aprovacion
 }

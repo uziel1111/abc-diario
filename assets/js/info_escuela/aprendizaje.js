@@ -2,7 +2,6 @@ $(function () {
     // obj_graficap = new Graficasm();
 });
 var visible_collaps = false;
-var visible_collaps_nlogro = false;
 $("#btn_planea_info_mate").click(function(){
   if(visible_collaps == false){
     visible_collaps = true;
@@ -10,10 +9,19 @@ $("#btn_planea_info_mate").click(function(){
   }
 
 });
+var visible_collaps_nlogro = false;
 $("#btn_planea_info_nlogro").click(function(){
   if(visible_collaps_nlogro == false){
     visible_collaps_nlogro = true;
     Aprendisaje.obtener_info_nlogro();
+  }
+
+});
+var visible_collaps_eficiencia = false;
+$("#btn_planea_info_ete").click(function(){
+  if(visible_collaps_eficiencia == false){
+    visible_collaps_eficiencia = true;
+    Aprendisaje.obtener_info_ete();
   }
 
 });
@@ -83,6 +91,30 @@ var Aprendisaje = {
         $("#div_planea_info_nlogro_tabla").empty();
         $("#div_planea_info_nlogro_tabla").append(dato.vista);
         Aprendisaje.grafica_info_nlogro(dato.datos, 'div_planea_info_nlogro_lyc', 'div_planea_info_nlogro_mate');
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        Mensaje.cerrar();
+        Mensaje.error_ajax(jqXHR,textStatus, errorThrown);
+      }
+    });
+  },
+
+  obtener_info_ete: () =>{
+    ruta = base_url+'Info_escuela/ete_info';
+    $.ajax({
+      url: ruta,
+      type: 'POST',
+      dataType: 'json',
+      data: {'cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val()},
+      beforeSend: function (xhr) {
+        Mensaje.cargando('Cargando niveles');
+      },
+      success: function (dato) {
+        Mensaje.cerrar();
+        $("#conten_planea_ciclo").empty();
+        var texto = "PLANEA "+ dato.periodo;
+        $("#conten_planea_ciclo").append(texto);
+        Aprendisaje.grafica_ete(dato.ete);
       },
       error: function (jqXHR, textStatus, errorThrown) {
         Mensaje.cerrar();
@@ -268,6 +300,53 @@ var Aprendisaje = {
              false
           );
 
-  }
+  },
+
+  grafica_ete: (varix) => {
+        // Dibujamos el radial progress bar para cobertura
+        // var valor_et=80;
+        var bar = new ProgressBar.Circle(div_ete_info, {
+            color: '#888888',
+            // This has to be the same size as the maximum width to
+            // prevent clipping
+            strokeWidth: 8,
+            trailWidth: 5,
+            easing: 'easeInOut',
+            duration: 7400,
+            text: {
+                autoStyleContainer: false
+            },
+            from: { color: '#D6DADC', width: 5 },
+            to: { color: '#ECC462', width: 8 },
+            // Set default step function for all animate calls
+            step: function (state, circle) {
+                circle.path.setAttribute('stroke', state.color);
+                circle.path.setAttribute('stroke-width', state.width);
+
+                if (circle.value() == 1.0) {
+                    var value = Math.round(circle.value() * 100);
+                }
+                else {
+                    var value = circle.value() * 100;
+                    value = value.toFixed(2);
+                }
+                if (value === 0) {
+                    circle.setText('');
+                } else {
+                    if (value > 1) {
+                        circle.setText(varix);
+                    }
+                    else {
+                        circle.setText(value + '%');
+                    }
+                }
+
+            }
+        });
+        bar.text.style.fontFamily = '"Arial", Helvetica, sans-serif';
+        bar.text.style.fontSize = '2rem';
+
+        bar.animate(Math.min(varix / 100, 1));  // Number from 0.0 to 1.0
+    }//grafica_retencion
 
 }
