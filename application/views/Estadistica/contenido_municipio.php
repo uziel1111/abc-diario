@@ -1,6 +1,4 @@
 <hr />
-<div class="" id="div_estadistica_prueb">
-
 <div class="row">
   <div id="dv_flot_est" class="col-12">
     <div id="filtros_est_gen">
@@ -460,17 +458,12 @@
     </div>
   </div>
 </div>
+<div>
 </div>
 
 <script>
   $(function() {
-    $("#btn_prueba").click(function () {
-    	alert("ok");
-    	var container = $('#div_estadistica_prueb'), scrollTo = $('#dv_tablas_estmuni');
-    		container.animate({
-    	    scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
-    	});
-    });
+
     $(window).scroll(function() {
       var scroll = $(window).scrollTop();
       var position = 300;

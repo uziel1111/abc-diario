@@ -5,6 +5,16 @@ var Miscelanea = {
     $("#"+idModal +" .modal-body").empty();
     $("#"+idModal +" .modal-body").html(dom);
     $("#"+idModal).modal("show");
+  },
+  goto_seccion : function(id_dv_seccion){
+    setTimeout(function () {
+      var my_element = document.getElementById(id_dv_seccion);
+      my_element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest"
+      });
+    }, 400);
   }
 
 };
