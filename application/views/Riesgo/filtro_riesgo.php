@@ -51,7 +51,7 @@
 								<button class="btn btn-info text-light btn-block" type="button" id="btn_limpiar_municipio_estado_riesgo">Limpiar</button>
 							</div>
 							<div class="col-md-3 col-lg-2 mt-2">
-								<button class="btn btn-success btn-block" type="button" id="btn_buscar_municipio_estado_riesgo">Buscar</button>
+								<button class="btn btn-success btn-block text-light" type="button" id="btn_buscar_municipio_estado_riesgo">Buscar</button>
 							</div>
 						</div>
 					</div>

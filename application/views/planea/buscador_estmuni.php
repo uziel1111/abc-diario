@@ -30,6 +30,6 @@
     <?= anchor(base_url(), 'Regresar', array('class' => 'btn btn-info text-light btn-block')) ?>
   </div><!--  col-sm-6 -->
   <div class="col-md-3 col-lg-2 mt-2">
-    <?= form_submit('mysubmit', 'Buscar', array('id' => 'btn_busqueda_xestadomun', 'class' => 'btn btn-success btn-block')); ?>
+    <?= form_submit('mysubmit', 'Buscar', array('id' => 'btn_busqueda_xestadomun', 'class' => 'btn btn-success btn-block text-light')); ?>
   </div><!--  col-sm-6 -->
 </div><!-- row -->
