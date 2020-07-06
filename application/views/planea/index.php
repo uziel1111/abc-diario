@@ -48,25 +48,6 @@
         </div><!-- card -->
     </div>
 </main>
-<!-- Modal Reactivos -->
-<div class="modal fade" id="modal_visor_reactivos" tabindex="-1" role="dialog" aria-hidden="true" style="overflow-y: scroll;">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content modal-style-1">
-            <div class="modal-header bgcolor-2">
-                <h5 class="modal-title text-white" id="exampleModalLabel">Consulta por reactivos</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <span class="fz-18 fw800" id="modal_reactivos_title"></span>
-                <hr>
-                <div id="div_reactivos"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
 
 <!-- Modal Apoyos -->
 <div class="modal fade" id="modal_visor_apoyos_academ" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" style="overflow-y: scroll;">
@@ -104,41 +85,9 @@
 </div>
 <!-- End Modal -->
 
-<!-- Modal Apoyos -->
-<div class="modal fade" id="modal_visor_pdfc2" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" style="overflow-y: scroll;">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content modal-style-1">
-            <div class="modal-header bgcolor-2">
-                <h5 class="modal-title text-white" id="exampleModalLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="div_listalinks"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
 
-<!-- Modal Apoyos -->
-<div class="modal fade" id="modal_visor_pdfc3" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" style="overflow-y: scroll;">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content modal-style-1">
-            <div class="modal-header bgcolor-3">
-                <h5 class="modal-title text-white" id="exampleModalLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="div_listalinks"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
+
+
 
 <!-- Modal Apoyos -->
 <div class="modal fade" id="modal_visor_material_reactivos" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" style="overflow-y: scroll;">
