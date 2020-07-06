@@ -20,7 +20,6 @@
   <!-- <script src="https://kit.fontawesome.com/bcaa9c2716.js" crossorigin="anonymous"></script> -->
   <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <link href="<?= base_url('assets/plugins/isotope/isotope.min.css'); ?>" rel="stylesheet" />
   <script type="text/javascript">
     var base_url = "<?= base_url() ?>";
   </script>
