@@ -1,47 +1,60 @@
 <main role="main">
 	<div class="container">
-		<div class="card ">
-			<div class="card-header">
-				<h5 align="center">Datos generales de la escuela</h5>
+		<div class="card shadow">
+			<div class="card-header bg-primary text-light">
+				<i class="fas fa-search"></i> Datos generales de la escuela
 			</div>
 			<div class="card-body">
-				<input type="hidden" id="idturnoinfo" value="<?= $info[0]['idturno']?>">
-				<input type="hidden" id="cctinfo" value="<?= $info[0]['cct']?>">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-							Nombre del centro de trabajo: <?=$info[0]['nombre']?>
-							<div class="row">
-								CCT: <?=$info[0]['cct']?>
-								Turno: <?=$info[0]['turno']?>
-								Nivel: <?=$info[0]['nivel']?>
+				<input type="hidden" id="idturnoinfo" value="<?= $info[0]['idturno'] ?>">
+				<input type="hidden" id="cctinfo" value="<?= $info[0]['cct'] ?>">
+				<div class="card shadow bg-light mb-3">
+					<div class="card-header"><?= $info[0]['nombre'] ?></div>
+					<div class="card-body">
+						<h2 class="border-bottom"><?= $info[0]['cct'] ?></h2>
+						<div class="row">
+							<div class="col-12 col-md-6">
+								Turno: <span class="font-weight-bold"><?= $info[0]['turno'] ?></span>
 							</div>
-							<div class="row">
-								Modalidad: <?=$info[0]['modalidad']?>
-								Sostenimiento: <?=$info[0]['sostenimiento']?>
+							<div class="col-12 col-md-6">
+								Nivel: <span class="font-weight-bold"><?= $info[0]['nivel'] ?></span>
 							</div>
-							<div class="row">
-								Domicilio: <?=$info[0]['domicilio']?>
-								Localidad: <?=$info[0]['localidad']?>
-								Municipio: <?=$info[0]['municipio']?>
+							<div class="col-12 col-md-6">
+								Modalidad: <span class="font-weight-bold"><?= $info[0]['modalidad'] ?></span>
 							</div>
-							<div class="row">
-								Nombre del director: <?=$info[0]['nombre']?>
-								Estatus de la escuela: <?=$info[0]['estatus']?>
+							<div class="col-12 col-md-6">
+								Sostenimiento: <span class="font-weight-bold"><?= $info[0]['sostenimiento'] ?></span>
+							</div>
+							<div class="col-12 col-md-6">
+								Domicilio: <span class="font-weight-bold"><?= $info[0]['domicilio'] ?></span>
+							</div>
+							<div class="col-12 col-md-6">
+								Localidad: <span class="font-weight-bold"><?= $info[0]['localidad'] ?></span>
+							</div>
+							<div class="col-12 col-md-6">
+								Municipio: <span class="font-weight-bold"><?= $info[0]['municipio'] ?></span>
+							</div>
+							<div class="col-12 col-md-6">
+								Localidad: <span class="font-weight-bold"><?= $info[0]['localidad'] ?></span>
+							</div>
+							<div class="col-12 col-md-6">
+								Nombre del director: <span class="font-weight-bold"><?= $info[0]['nombre'] ?></span>
+							</div>
+							<div class="col-12 col-md-6">
+								Estatus de la escuela: <span class="font-weight-bold"><?= $info[0]['estatus'] ?></span>
 							</div>
 						</div>
 					</div>
 				</div>
-				<ul class="nav nav-tabs">
-				  <li class="nav-item">
-				    <a class="nav-link active" data-toggle="tab" href="#asistencia" id="tab_asistencia_info">Asistencia</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab" href="#permanencia" id="tab_permanencia_info">Permanencia</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab" href="#aprendizaje" id="tab_aprendizaje_info">Aprendizaje</a>
-				  </li>
+				<ul class="nav nav-pills nav-fill mt-4">
+					<li class="nav-item">
+						<a class="nav-link p-2 h5 font-weight-bold active" data-toggle="tab" href="#asistencia" id="tab_asistencia_info">Asistencia</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link p-2 h5 font-weight-bold" data-toggle="tab" href="#permanencia" id="tab_permanencia_info">Permanencia</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link p-2 h5 font-weight-bold" data-toggle="tab" href="#aprendizaje" id="tab_aprendizaje_info">Aprendizaje</a>
+					</li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
 				  <div class="tab-pane fade active show" id="asistencia">
