@@ -226,8 +226,8 @@ function obtener_idsost_xidnivel_xmuni(){
     $idturno = $this->input->post('turno');
     $periodo = 2;
     $campodisip = $this->input->post("campodisip");
-    $datos = $this->Planea_model->estadisticas_x_cct($cct, $idturno, $periodo, $campodisip);
-    $periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
+    $datos = $this->Planea_model->estadisticas_x_cct_info($cct, $idturno, $campodisip);
+    $periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo_info($periodo);
 
       $respuesta = array('datos' => $datos, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
 
