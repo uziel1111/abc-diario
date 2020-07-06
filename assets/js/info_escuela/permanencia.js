@@ -23,6 +23,9 @@ let Permanencia = {
 	      		$("#div_tabla_riesgo_grafica_barras_info").empty();
 	      		Permanencia.grafica(data.muy_alto,data.alto,data.medio,data.bajo);
 	      		Permanencia.grafica_barras_riesgo(data.array_muy_alto,data.array_alto,data.total_alumnos);
+            $("#containerRPB03ete_info").empty();
+            $("#dv_info_graf_Retencion_info").empty();
+            $("#dv_info_graf_aprobacion_info").empty();
             Permanencia.grafica_eficiencia_terminal(data.indicadores['eficiencia_terminal']);
             Permanencia.grafica_retencion(data.indicadores['retencion']);
             Permanencia.grafica_aprobacion(data.indicadores['aprovacion']);
@@ -409,7 +412,7 @@ let Permanencia = {
                         circle.setText(varix + '% <br><center>Aprovación</center>');
                     }
                     else {
-                        circle.setText(value + '%');
+                        circle.setText(value + '% <br><center>Aprovación</center>');
                     }
                 }
 
