@@ -83,7 +83,7 @@
 						          <option value="">Seleccione</option>
 						          <option value="1">Periodo 1</option>
 						          <option value="2">Periodo 2</option>
-						          <option value="3">Periodo 2</option>
+						          <option value="3">Periodo 3</option>
 						        </select>
 						      </div><!-- .form-group -->
 						    </div><!-- .col-xs-12 col-sm-12 col-md-2 -->

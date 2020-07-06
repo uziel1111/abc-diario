@@ -334,7 +334,7 @@ var Aprendisaje = {
                     circle.setText('');
                 } else {
                     if (value > 1) {
-                        circle.setText(varix);
+                        circle.setText(varix+ '%');
                     }
                     else {
                         circle.setText(value + '%');

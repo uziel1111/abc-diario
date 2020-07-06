@@ -182,15 +182,15 @@
 	</tbody>
 </table>
 </div>
+<div class="row">		
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+		<div style="display:inline-block; width:20px; height:20px; background-color:#ECC462; border: 1px solid black;"></div>
+		<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?= $ciclos[0]?></p>
+	</div>
+</div>
 <div class="row">
-	<!-- <div class="col-md-4"> -->
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-			<div style="display:inline-block; width:20px; height:20px; background-color:#ECC462; border: 1px solid black;"></div>
-			<p style="display:inline-block; font-size:1.5em; margin-left:10px;">2016</p>
-		</div>
-	<!-- </div> -->
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<div style="display:inline-block; width:20px; height:20px; background-color:#D5831C; border: 1px solid black;"></div>
-		<p style="display:inline-block; font-size:1.5em; margin-left:10px;">2018</p>
+		<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?=$ciclos[1]?></p>
 	</div>
 </div>

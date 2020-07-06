@@ -88,13 +88,28 @@ class Planea_model extends CI_Model
 
         function obtener_periodoplane_xidperiodo($idperiodo){
           $str_query = "SELECT
-                        pp.id_periodo, pp.periodo
+                        pp.id_periodo, max(pp.periodo) as periodo
                         FROM cct ct
                         INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
                         INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
                         INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
                         INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
-                        WHERE ct.`status`='ACT' AND cfg.`status`='A' AND pp.id_periodo = {$idperiodo}
+                        WHERE ct.`status`='ACT' AND cfg.`status`='A' 
+                        AND pp.id_periodo = {$idperiodo}
+                        GROUP BY pp.id_periodo";
+
+          return $this->db->query($str_query)->row('periodo');
+        }
+
+        function obtener_periodoplane_xidperiodo_info(){
+          $str_query = "SELECT
+                        pp.id_periodo, max(pp.periodo) as periodo
+                        FROM cct ct
+                        INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
+                        INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
+                        INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
+                        INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
+                        WHERE ct.`status`='ACT' AND cfg.`status`='A' 
                         GROUP BY pp.id_periodo";
 
           return $this->db->query($str_query)->row('periodo');
@@ -195,6 +210,7 @@ class Planea_model extends CI_Model
                                 SUM(n_almn_eval) AS alumnos_evaluados
                                 FROM (
                                       SELECT
+                                      MAX(pp.periodo) as periodo,
                                       t3.id_contenido,
                                       t3.`contenido` AS contenidos,
                                       GROUP_CONCAT(DISTINCT t2.n_reactivo) AS reactivos,
@@ -210,6 +226,46 @@ class Planea_model extends CI_Model
                                       INNER JOIN planea_unidad_analisis t4 ON t3.id_unidad_analisis=t4.id_unidad_analisis
                                       INNER JOIN planea_camposdisciplinares t5 ON t4.id_campodisiplinario=t5.id_campodisiplinario
                                       WHERE e.cct ='{$cct}' AND cfg.turno = '{$turno}' AND pp.id_periodo = {$periodo}
+                                      AND t5.id_campodisiplinario = {$idcampodis}
+                                      GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
+                              GROUP BY id_contenido
+                            ) AS datos2";
+                            // echo $str_query; die();
+          return $this->db->query($str_query)->result_array();
+        }
+
+        function estadisticas_x_cct_info($cct, $turno, $idcampodis){
+            $str_query = "SELECT
+                          id_contenido,
+                          contenidos,
+                          reactivos,
+                          total_reac_xct,
+                          total,
+                          alumnos_evaluados,
+                          ROUND((total* 100)/(total_reac_xct * alumnos_evaluados), 1)AS porcen_alum_respok
+                          FROM (
+                                SELECT
+                                *,
+                                SUM(n_aciertos) AS total,
+                                SUM(n_almn_eval) AS alumnos_evaluados
+                                FROM (
+                                      SELECT
+                                      MAX(pp.periodo) as periodo,
+                                      t3.id_contenido,
+                                      t3.`contenido` AS contenidos,
+                                      GROUP_CONCAT(DISTINCT t2.n_reactivo) AS reactivos,
+                                      COUNT(DISTINCT t2.n_reactivo) AS total_reac_xct,
+                                      t1.n_aciertos,
+                                      t1.n_almn_eval
+                                      FROM cct e
+                                      INNER JOIN centrocfg cfg ON e.idct =cfg.idct
+                                      INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+                                      INNER JOIN periodoplanea pp ON t1.id_periodo = pp.id_periodo
+                                      INNER JOIN planea_reactivo t2 ON t1.id_reactivo=t2.id_reactivo
+                                      INNER JOIN planea_contenido t3 ON t2.id_contenido= t3.id_contenido
+                                      INNER JOIN planea_unidad_analisis t4 ON t3.id_unidad_analisis=t4.id_unidad_analisis
+                                      INNER JOIN planea_camposdisciplinares t5 ON t4.id_campodisiplinario=t5.id_campodisiplinario
+                                      WHERE e.cct ='{$cct}' AND cfg.turno = '{$turno}'
                                       AND t5.id_campodisiplinario = {$idcampodis}
                                       GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
                               GROUP BY id_contenido
