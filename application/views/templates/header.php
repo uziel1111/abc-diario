@@ -20,7 +20,6 @@
   <!-- <script src="https://kit.fontawesome.com/bcaa9c2716.js" crossorigin="anonymous"></script> -->
   <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <link href="<?= base_url('assets/plugins/isotope/isotope.min.css'); ?>" rel="stylesheet" />
   <script type="text/javascript">
     var base_url = "<?= base_url() ?>";
   </script>
@@ -38,7 +37,7 @@
             <img src="<?= base_url('assets/img/template/main-logo.png'); ?>" class="img-fluid pl-2" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
           </button>
           <span class="navbar-text">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -58,7 +57,7 @@
                     <a class="dropdown-item" href="<?= base_url('Planea'); ?>">Resultados de PLANEA</a>
                   </div>
                 </li>
-                <li class="nav-item dropdown nav-secondary ml-3">
+                <li class="nav-item dropdown nav-secondary">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa-layers fa-fw">
                       <i class="fas fa-circle text-secondary"></i>
