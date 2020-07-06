@@ -30,13 +30,12 @@
     </div>
   </div><!-- col-md-4 -->
 </div><!-- row -->
-<div class="row">
-  <div class="col-0 col-sm-0 col-md-8 col-lg-8 mt-2"></div><!--  col-0 -->
-  <div class="col-6 col-sm-6 col-md-2 col-lg-2 mt-2">
-    <?= anchor(base_url(), 'Regresar', array('class' => 'btn btn-light btn-block btn-style-1')) ?>
+<div class="row justify-content-end mt-3">
+  <div class="col-md-3 col-lg-2 mt-2">
+    <?= anchor(base_url(), 'Regresar', array('class' => 'btn btn-info text-light btn-block')) ?>
   </div><!--  col-sm-6 -->
-  <div class="col-6 col-sm-6 col-md-2 col-lg-2 mt-2">
-    <?= form_submit('mysubmit', 'Buscar', array('id' => 'btn_busqueda_xestadozona', 'class'=>'btn btn-info btn-block btn-style-1' )); ?>
+  <div class="col-md-3 col-lg-2 mt-2">
+    <?= form_submit('mysubmit', 'Buscar', array('id' => 'btn_busqueda_xestadozona', 'class'=>'btn btn-success btn-block' )); ?>
   </div><!--  col-sm-6 -->
 </div><!-- row -->
 

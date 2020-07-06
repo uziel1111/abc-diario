@@ -20,6 +20,7 @@
   <!-- <script src="https://kit.fontawesome.com/bcaa9c2716.js" crossorigin="anonymous"></script> -->
   <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link href="<?= base_url('assets/plugins/isotope/isotope.min.css'); ?>" rel="stylesheet" />
   <script type="text/javascript">
     var base_url = "<?= base_url() ?>";
   </script>
@@ -33,7 +34,8 @@
       <nav class="navbar navbar-expand-lg">
         <div class="container nav-box shadow">
           <a class="navbar-brand" href="<?= base_url(); ?>">
-            <img src="<?= base_url('assets/img/template/main-logo.png'); ?>" class="img-fluid" alt="">
+            <img src="<?= base_url('assets/img/template/horizontal_sepyc.png'); ?>" class="img-fluid border-right pr-4" alt="">
+            <img src="<?= base_url('assets/img/template/main-logo.png'); ?>" class="img-fluid pl-2" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
