@@ -35,77 +35,149 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td colspan="9" style="background-color:silver;">PLANEA 2016</td>
+			<td colspan="9" style="background-color:silver;">PLANEA <?=$ciclos[0]?></td>
 		</tr>
 		<tr>
+			<?php if ($centrocfg[0]['periodo'] == $ciclos[0]): ?>
 			<th class="text-center">Tu escuela</th>
-			<th class="text-center">11.9%</th>
-			<th class="text-center">30.5%</th>
-			<th class="text-center">28.8%</th>
-			<th class="text-center">28.8%</th>
-			<th class="text-center">32.2%</th>
-			<th class="text-center">15.3%</th>
-			<th class="text-center">18.6%</th>
-			<th class="text-center">33.9%</th>
+			<th class="text-center"><?= $centrocfg[0]['ni_lyc']?>%</th>
+			<th class="text-center"><?= $centrocfg[0]['nii_lyc']?>%</th>
+			<th class="text-center"><?= $centrocfg[0]['niii_lyc']?>%</th>
+			<th class="text-center"><?= $centrocfg[0]['niv_lyc']?>%</th>
+			<th class="text-center"><?= $centrocfg[0]['ni_mat']?>%</th>
+			<th class="text-center"><?= $centrocfg[0]['nii_mat']?>%</th>
+			<th class="text-center"><?= $centrocfg[0]['niii_mat']?>%</th>
+			<th class="text-center"><?= $centrocfg[0]['niv_mat']?>%</th>
+			<?php else: ?>
+			<th class="text-center">Tu escuela</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<?php endif ?>
 		</tr>
 		<tr>
-			<th class="text-center">Estado de Coahuila</th>
-			<th class="text-center">36.65%</th>
-			<th class="text-center">34.72%</th>
-			<th class="text-center">21.97%</th>
-			<th class="text-center">6.66%</th>
-			<th class="text-center">47.67%</th>
-			<th class="text-center">18.51%</th>
-			<th class="text-center">19.01%</th>
-			<th class="text-center">14.8%</th>
+			<?php if ($entidad[0]['periodo'] == $ciclos[0]): ?>
+			<th class="text-center">Estado de Sinaloa</th>
+			<th class="text-center"><?= $entidad[0]['ni_lyc']?>%</th>
+			<th class="text-center"><?= $entidad[0]['nii_lyc']?>%</th>
+			<th class="text-center"><?= $entidad[0]['niii_lyc']?>%</th>
+			<th class="text-center"><?= $entidad[0]['niv_lyc']?>%</th>
+			<th class="text-center"><?= $entidad[0]['ni_mat']?>%</th>
+			<th class="text-center"><?= $entidad[0]['nii_mat']?>%</th>
+			<th class="text-center"><?= $entidad[0]['niii_mat']?>%</th>
+			<th class="text-center"><?= $entidad[0]['niv_mat']?>%</th>
+			<?php else: ?>
+			<th class="text-center">Tu escuela</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<?php endif ?>
 		</tr>
 		<tr>
+			<?php if ($nacional[0]['periodo'] == $ciclos[0]): ?>
 			<th class="text-center">Nacional</th>
-			<th class="text-center">36.5%</th>
-			<th class="text-center">34.6%</th>
-			<th class="text-center">21.8%</th>
-			<th class="text-center">7.1%</th>
-			<th class="text-center">47.8%</th>
-			<th class="text-center">18.5%</th>
-			<th class="text-center">18.7%</th>
-			<th class="text-center">15%</th>
+			<th class="text-center"><?= $nacional[0]['ni_lyc']?>%</th>
+			<th class="text-center"><?= $nacional[0]['nii_lyc']?>%</th>
+			<th class="text-center"><?= $nacional[0]['niii_lyc']?>%</th>
+			<th class="text-center"><?= $nacional[0]['niv_lyc']?>%</th>
+			<th class="text-center"><?= $nacional[0]['ni_mat']?>%</th>
+			<th class="text-center"><?= $nacional[0]['nii_mat']?>%</th>
+			<th class="text-center"><?= $nacional[0]['niii_mat']?>%</th>
+			<th class="text-center"><?= $nacional[0]['niv_mat']?>%</th>
+			<?php else: ?>
+			<th class="text-center">Tu escuela</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<?php endif ?>
 		</tr>
 
 		<tr>
-			<td colspan="9" style="background-color:silver;">PLANEA 2018</td>
+			<td colspan="9" style="background-color:silver;">PLANEA <?=$ciclos[1]?></td>
 		</tr>
 		<tr>
+			<?php if ($centrocfg[1]['periodo'] == $ciclos[1]): ?>
 			<th class="text-center">Tu escuela</th>
-			<th class="text-center">11.9%</th>
-			<th class="text-center">30.5%</th>
-			<th class="text-center">28.8%</th>
-			<th class="text-center">28.8%</th>
-			<th class="text-center">32.2%</th>
-			<th class="text-center">15.3%</th>
-			<th class="text-center">18.6%</th>
-			<th class="text-center">33.9%</th>
+			<th class="text-center"><?= $centrocfg[1]['ni_lyc']?>%</th>
+			<th class="text-center"><?= $centrocfg[1]['nii_lyc']?>%</th>
+			<th class="text-center"><?= $centrocfg[1]['niii_lyc']?>%</th>
+			<th class="text-center"><?= $centrocfg[1]['niv_lyc']?>%</th>
+			<th class="text-center"><?= $centrocfg[1]['ni_mat']?>%</th>
+			<th class="text-center"><?= $centrocfg[1]['nii_mat']?>%</th>
+			<th class="text-center"><?= $centrocfg[1]['niii_mat']?>%</th>
+			<th class="text-center"><?= $centrocfg[1]['niv_mat']?>%</th>
+			<?php else: ?>
+			<th class="text-center">Tu escuela</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<?php endif ?>
 		</tr>
 		<tr>
-			<th class="text-center">Estado de Coahuila</th>
-			<th class="text-center">36.65%</th>
-			<th class="text-center">34.72%</th>
-			<th class="text-center">21.97%</th>
-			<th class="text-center">6.66%</th>
-			<th class="text-center">47.67%</th>
-			<th class="text-center">18.51%</th>
-			<th class="text-center">19.01%</th>
-			<th class="text-center">14.8%</th>
+			<?php if ($entidad[1]['periodo'] == $ciclos[1]): ?>
+			<th class="text-center">Estado de Sinaloa</th>
+			<th class="text-center"><?= $entidad[1]['ni_lyc']?>%</th>
+			<th class="text-center"><?= $entidad[1]['nii_lyc']?>%</th>
+			<th class="text-center"><?= $entidad[1]['niii_lyc']?>%</th>
+			<th class="text-center"><?= $entidad[1]['niv_lyc']?>%</th>
+			<th class="text-center"><?= $entidad[1]['ni_mat']?>%</th>
+			<th class="text-center"><?= $entidad[1]['nii_mat']?>%</th>
+			<th class="text-center"><?= $entidad[1]['niii_mat']?>%</th>
+			<th class="text-center"><?= $entidad[1]['niv_mat']?>%</th>
+			<?php else: ?>
+			<th class="text-center">Tu escuela</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<?php endif ?>
 		</tr>
 		<tr>
+			<?php if ($nacional[1]['periodo'] == $ciclos[1]): ?>
 			<th class="text-center">Nacional</th>
-			<th class="text-center">36.5%</th>
-			<th class="text-center">34.6%</th>
-			<th class="text-center">21.8%</th>
-			<th class="text-center">7.1%</th>
-			<th class="text-center">47.8%</th>
-			<th class="text-center">18.5%</th>
-			<th class="text-center">18.7%</th>
-			<th class="text-center">15%</th>
+			<th class="text-center"><?= $nacional[1]['ni_lyc']?>%</th>
+			<th class="text-center"><?= $nacional[1]['nii_lyc']?>%</th>
+			<th class="text-center"><?= $nacional[1]['niii_lyc']?>%</th>
+			<th class="text-center"><?= $nacional[1]['niv_lyc']?>%</th>
+			<th class="text-center"><?= $nacional[1]['ni_mat']?>%</th>
+			<th class="text-center"><?= $nacional[1]['nii_mat']?>%</th>
+			<th class="text-center"><?= $nacional[1]['niii_mat']?>%</th>
+			<th class="text-center"><?= $nacional[1]['niv_mat']?>%</th>
+			<?php else: ?>
+			<th class="text-center">Tu escuela</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<th class="text-center">-</th>
+			<?php endif ?>
 		</tr>
 	</tbody>
 </table>

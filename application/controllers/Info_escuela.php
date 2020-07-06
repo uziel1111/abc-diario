@@ -239,9 +239,12 @@ function obtener_idsost_xidnivel_xmuni(){
       $idturno = $this->input->post('turno');
 
       $data['centrocfg'] = $this->Planea_model->niveles_de_logro_idcentrocfg($cct, $idturno);
-      $data['entidad'] = $this->Planea_model->niveles_de_logro_idcentrocfg($cct, $idturno);
-      $data['nacional'] = $this->Planea_model->niveles_de_logro_idcentrocfg($cct, $idturno);
-
+      $data['entidad'] = $this->Planea_model->niveles_de_logro_entidad($cct, $idturno);
+      $data['nacional'] = $this->Planea_model->niveles_de_logro_nacional($cct, $idturno);
+      $data['ciclos'] = $this->obtener_ciclos($data['centrocfg'], $data['entidad'], $data['nacional']);
+      // echo"<pre>";
+      // print_r($data);
+      // die();
       $vista_tabla = $this->load->view('escuela/tabla_nlogro',$data, TRUE);
 
 
@@ -249,6 +252,22 @@ function obtener_idsost_xidnivel_xmuni(){
 
       envia_datos_json($this, $respuesta);
       exit();
+    }
+
+    private function obtener_ciclos($data_cfg, $data_entidad, $data_nacional){
+      $ciclos_data = array();
+      $tam_datos = count($data_cfg);
+      foreach ($data_cfg as $dato) {
+        array_push($ciclos_data, $dato['periodo']);
+      }
+      foreach ($data_entidad as $dato) {
+        array_push($ciclos_data, $dato['periodo']);
+      }
+      foreach ($data_nacional as $dato) {
+        array_push($ciclos_data, $dato['periodo']);
+      }
+
+      return array_unique($ciclos_data);
     }
 
 }//class

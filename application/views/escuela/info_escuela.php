@@ -130,7 +130,10 @@
 					</p>
 					<div class="collapse" id="collapseExample4">
 					  <div class="card card-body">
-					    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+					    De quienes inician el nivel educativo, ¿Qué porcentaje lo termina y además aprende lo esencial?
+
+						A esta pregunta responde el nuevo indicador de Eficiencia Terminal Efectiva (ETE), que toma como base la eficiencia terminal tradicional y le aplica el porcentaje de estudiantes que supera el nivel I en PLANEA.
+						<div id="div_ete_info"></div>
 					  </div>
 					</div>
 				  </div>
