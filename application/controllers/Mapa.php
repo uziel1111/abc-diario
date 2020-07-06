@@ -9,7 +9,7 @@ class Mapa extends CI_Controller {
 			$this->load->model('Listadoesc_model');
 		}
 
-		public function busqueda_x_mapa(){
+		public function busqueda_x_mapa($tipo_busqueda=null){
 					$data = array();
 					$data2 = array();
 					$arr_municipios = array();
@@ -42,6 +42,7 @@ class Mapa extends CI_Controller {
 					$data2['niveles'] = $arr_niveles;
 					$data2['sostenimientos'] = $arr_sostenimientos;
 					$data2['programas'] = $arr_federales;
+					$data2['tipo_busqueda'] = $tipo_busqueda;
 					$string = $this->load->view('mapa/buscador_x_mapa', $data2, TRUE);
 					$data['buscador'] = $string;
 					carga_pagina_basica($this,$data,'mapa/index');

@@ -84,8 +84,8 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action">Por clave de escuela</li>
-                            <li class="list-group-item list-group-item-action">Por municipio, nivel, sostenimiento y nombre</li>
+                            <a href="<?=base_url('Mapa/busqueda_x_mapa/cct');?>"><li class="list-group-item list-group-item-action">Por clave de escuela</li></a>
+                            <a href="<?=base_url('Mapa/busqueda_x_mapa/paramentros');?>"><li class="list-group-item list-group-item-action">Por municipio, nivel, sostenimiento y nombre</li></a>
                         </ul>
                     </div>
                 </div>
