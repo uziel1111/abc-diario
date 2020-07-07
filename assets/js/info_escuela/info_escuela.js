@@ -24,6 +24,7 @@ var Info_escuela = {
 		$("#aprendizaje_info").empty();
 	},
 	get_view_asistencia: () => {
+		Info_escuela.limpia_contenedores();
 	    $.ajax({
 	      url: base_url+'Info_escuela/get_asistencia',
 	      type: 'POST',
@@ -35,7 +36,7 @@ var Info_escuela = {
 	      },
 	      success: function (data) {
 	        Mensaje.cerrar();
-	        Info_escuela.limpia_contenedores();
+	        
 	        $("#asistencia_info").append(data.vista);
 	        Asistencia.get_datos_asistencia();
 	      },
@@ -46,6 +47,7 @@ var Info_escuela = {
 	    });
 	},
 	get_view_permanencia: () => {
+		Info_escuela.limpia_contenedores();
 	    $.ajax({
 	      url: base_url+'Info_escuela/get_permanencia',
 	      type: 'POST',
@@ -57,7 +59,7 @@ var Info_escuela = {
 	      },
 	      success: function (data) {
 	        Mensaje.cerrar();
-	        Info_escuela.limpia_contenedores();
+	        
 	        $("#permanencia_info").append(data.vista);
 	      },
 	      error: function (jqXHR, textStatus, errorThrown) {
@@ -67,6 +69,7 @@ var Info_escuela = {
 	    });
 	},
 	get_view_aprendizaje: () => {
+		Info_escuela.limpia_contenedores();
 	    $.ajax({
 	      url: base_url+'Info_escuela/get_aprendizaje',
 	      type: 'POST',
@@ -78,7 +81,7 @@ var Info_escuela = {
 	      },
 	      success: function (data) {
 	        Mensaje.cerrar();
-	        Info_escuela.limpia_contenedores();
+	        
 	        $("#aprendizaje_info").append(data.vista);
 	        Aprendisaje.obtener_grafica_lyc();
 	      },

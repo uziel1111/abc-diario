@@ -1,4 +1,4 @@
-let Asistencia = {
+var Asistencia = {
 
     get_datos_asistencia: () => {
         $.ajax({
