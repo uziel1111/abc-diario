@@ -3,6 +3,7 @@
 var Graficasm = {
 
   	graficoplanea_contenido: (arr_datos, periodoplanea,campodisip, div) => {
+      // console.log(campodisip);
     amarillo = (arr_datos.length - 10);
     verde = amarillo + 5;
     var colores = ['#FF0000','#FF0000','#FF0000','#FF0000','#FF0000'];
@@ -73,7 +74,7 @@ var Graficasm = {
               type: 'bar'
           },
           title: {
-              text: '<b style="font-size: 18px;">PLANEA '+periodoplanea+' '+((campodisip=1)?'Lenguaje y comunicación':'Matemáticas')+'</b>'
+              text: '<b style="font-size: 18px;">PLANEA '+periodoplanea+' '+((campodisip==1)?'Lenguaje y comunicación':'Matemáticas')+'</b>'
           },
           subtitle: {
               text: '<b style="font-size: 14px;"> Total de alumnos evaluados: '+new Intl.NumberFormat("en-IN").format(parseInt(arr_datos[0]['alumnos_evaluados']))+'</b>'
