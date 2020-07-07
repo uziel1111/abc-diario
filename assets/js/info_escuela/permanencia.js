@@ -4,7 +4,7 @@ $("#btn_buscar_permanencia").click(function(e){
 	Permanencia.get_datos_permanencia();
 });
 
-let Permanencia = {
+var Permanencia = {
 
     get_datos_permanencia: () => {
         $.ajax({

@@ -71,5 +71,9 @@
 		</div>
 	</div>
 </main>
-
+<script src="<?= base_url('assets/js/utilerias/progressbar.min.js');?>"></script>
+<script src="<?= base_url('assets/highcharts5.0.3/highcharts.js'); ?>"></script>
+<script src="<?= base_url('assets/highcharts5.0.3/modules/data.js'); ?>"></script>
+<script src="<?= base_url('assets/highcharts5.0.3/modules/drilldown.js'); ?>"></script>
+<script src="<?= base_url('assets/js/planea/graficas.js') ?>"></script>
 <script src="<?= base_url('assets/js/info_escuela/info_escuela.js') ?>"></script>
