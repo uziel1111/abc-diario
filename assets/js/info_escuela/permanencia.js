@@ -182,6 +182,21 @@ var Permanencia = {
               }]
           }]
       });
+			$(".highcharts-background").css("fill", "#FFF");
+			if (screen.width<600){
+				 riesgo_abandono.setSize(
+						 ($(document).width()/10)*5,
+						 400,
+						false
+				 );
+			 }
+			 else {
+				 riesgo_abandono.setSize(
+						 ($(document).width()/10)*5,
+						 400,
+						false
+				 );
+			 }
 
     },
     grafica_barras_riesgo: (array_muy_alto,array_alto,total_alumnos) => {
@@ -282,6 +297,21 @@ var Permanencia = {
             }]
 
         });
+				$(".highcharts-background").css("fill", "#FFF");
+				if (screen.width<600){
+					 distribucion_xgrado.setSize(
+							 ($(document).width()/10)*5,
+							 400,
+							false
+					 );
+				 }
+				 else {
+					 distribucion_xgrado.setSize(
+							 ($(document).width()/10)*5,
+							 400,
+							false
+					 );
+				 }
 
 
     },//grafica_riesgo_barras
