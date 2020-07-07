@@ -71,8 +71,17 @@
 				<div id="filtroxcct">
 					<div class="row">
 						<div class="col-md-12">
-							<label>CCT:</label>
-							<input name="busquedaxcct" id="busquedaxcct" class="form-control">
+							<div class="form-group form-group-style-1">
+	             <?=form_label('Clave Centro de Trabajo', 'cct');?>
+	            <div class="input-group">
+	                <div class="input-group-prepend">
+	                  <div class="input-group-text fw800" id="btnGroupAddon">25</div>
+	                </div>
+	                <?=form_input('cct', '', array('class' => 'form-control fw800', 'id' => 'busquedaxcct'));?>
+	              </div>
+	            </div>
+							<!-- <label>CCT:</label>
+							<input name="busquedaxcct" id="busquedaxcct" class="form-control"> -->
 						</div>
 					</div>
 
