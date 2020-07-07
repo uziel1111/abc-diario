@@ -8,7 +8,8 @@ class Estadistica_model extends CI_Model
  			$where.=" AND est.idmunicipio={$id_municipio}";
  			$tabla = "estadistica_x_muni";
  		}
- 		$query1="(SELECT est.idnivel, n.descr AS nivel, '0' AS idsostenimiento, 'total' AS sostenimiento,
+ 		$query1="SELECT * FROM(
+      (SELECT est.idnivel, n.descr AS nivel, '-1' AS idsostenimiento, 'total' AS sostenimiento,
 			'0' AS idmodalidad,
 			'total' AS modalidad,
 			SUM(IF(ISNULL(est.t_alumnos_m),0 , t_alumnos_m)) AS alumn_m_t,
@@ -61,7 +62,8 @@ class Estadistica_model extends CI_Model
 			INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
 			{$where}
 			GROUP BY est.idnivel,s.idsostenimiento, m.idmodalidad
-			ORDER BY  est.idnivel,s.idsostenimiento,m.idmodalidad)
+			ORDER BY  est.idnivel,s.idsostenimiento,m.idmodalidad)) as xxxx
+ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
 			";
 
   		return $this->db->query($query1)->result_array();
@@ -75,8 +77,8 @@ class Estadistica_model extends CI_Model
  			$tabla = "estadistica_x_muni";
  		}
 
- 		$query1="
-				(SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,
+ 		$query1="SELECT * FROM(
+				(SELECT n.idnivel,n.descr AS nivel,'-1' AS idsostenimiento,
 				'total' AS sostenimiento,'0' AS idmodalidad,
 				'total' AS modalidad,
 				'' AS docentes_m,
@@ -131,7 +133,8 @@ class Estadistica_model extends CI_Model
 				{$where}
 				GROUP BY est.idnivel, s.idsostenimiento, m.idmodalidad
 				ORDER BY  est.idnivel,est.idsostenimiento,est.idmodalidad
-				)
+				)) as xxxx
+  ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
 				";
   		return $this->db->query($query1)->result_array();
   	}
@@ -144,7 +147,7 @@ class Estadistica_model extends CI_Model
  			$tabla = "estadistica_x_muni";
  		}
 
- 		$query1="(SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,
+ 		$query1="SELECT * FROM((SELECT n.idnivel,n.descr AS nivel,'-1' AS idsostenimiento,
 				'total' AS sostenimiento,'0' AS idmodalidad,
 				'total' AS modalidad,
 				SUM(est.n_escuelas)AS nescuelas,
@@ -198,7 +201,8 @@ class Estadistica_model extends CI_Model
 				INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
 				{$where}
 				GROUP BY est.idnivel, s.idsostenimiento, m.idmodalidad
-				)";
+				)) as xxxx
+  ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad";
   		return $this->db->query($query1)->result_array();
   	}
 
