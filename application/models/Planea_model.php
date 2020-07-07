@@ -94,7 +94,7 @@ class Planea_model extends CI_Model
                         INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
                         INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
                         INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
-                        WHERE ct.`status`='ACT' AND cfg.`status`='A' 
+                        WHERE ct.`status`='ACT' AND cfg.`status`='A'
                         AND pp.id_periodo = {$idperiodo}
                         GROUP BY pp.id_periodo";
 
@@ -109,7 +109,7 @@ class Planea_model extends CI_Model
                         INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
                         INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
                         INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
-                        WHERE ct.`status`='ACT' AND cfg.`status`='A' 
+                        WHERE ct.`status`='ACT' AND cfg.`status`='A'
                         GROUP BY pp.id_periodo";
 
           return $this->db->query($str_query)->row('periodo');
@@ -147,7 +147,7 @@ class Planea_model extends CI_Model
               }*/
 
               if($zona != 0 ){
-                  $where = " AND e.zona = ?";
+                  $where = " AND e.zonact = ?";
                   array_push($array,$zona);
                 }
 
@@ -185,7 +185,7 @@ class Planea_model extends CI_Model
                                       GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
                               GROUP BY id_contenido
                             ) AS datos2";
-          return $this->db->query($str_query,$array)->result_array(); 
+          return $this->db->query($str_query,$array)->result_array();
         }//estadisticas_x_estadozona
 
         function planea_logro_escuela($idcfg)
@@ -275,7 +275,7 @@ class Planea_model extends CI_Model
         }
 
         function niveles_de_logro_idcentrocfg($cct, $turno){
-          $str_query = "SELECT 
+          $str_query = "SELECT
             pcfg.periodo_planea AS periodo,
             pcfg.ni_lyc,
             pcfg.nii_lyc,
@@ -295,7 +295,7 @@ class Planea_model extends CI_Model
         }
 
         function niveles_de_logro_entidad($cct, $turno){
-          $str_query = "SELECT 
+          $str_query = "SELECT
             pent.periodo_planea AS periodo,
             pent.ni_lyc,
             pent.nii_lyc,
@@ -333,7 +333,81 @@ class Planea_model extends CI_Model
             ORDER BY pnac.periodo_planea ASC";
           return $this->db->query($str_query)->result_array();
         }
+        function niveles_zona(){
+          $str_query = "SELECT
+                n.idnivel, n.descr as nombre, n.subfijo
+                FROM c_zona z
+                INNER JOIN cct ct ON z.cct_supervisor = ct.zonact
+                INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+                INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+                INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
+                GROUP BY n.idnivel";
+          return $this->db->query($str_query)->result_array();
+        }//niveles_zona
 
+        function sostenimiento_zona($idnivel=null){
+          $where = " ";
+          if ($idnivel!=null) {
+            $where = "WHERE n.idnivel = {$idnivel}";
+          }
+          $str_query = "SELECT
+                    s.idsostenimiento, s.descr as nombre, s.estatus
+                    FROM c_zona z
+                    INNER JOIN cct ct ON z.cct_supervisor = ct.zonact
+                    INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+                    INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+                    INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
+                    INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
+                    {$where}
+                    GROUP BY s.idsostenimiento";
+          return $this->db->query($str_query)->result_array();
+        }//niveles_zona
+
+        function zonas_zona($idnivel=null, $idsostenimiento=null){
+          $where = "WHERE 1=1 ";
+          if ($idnivel!=null) {
+            $where .= " AND n.idnivel = {$idnivel}";
+          }
+          if ($idsostenimiento!=null) {
+            $where .= " AND s.idsostenimiento = {$idsostenimiento}";
+          }
+          $str_query = "SELECT
+                        z.zonaid, z.zona_escolar, z.cct_supervisor
+                        FROM c_zona z
+                        INNER JOIN cct ct ON z.cct_supervisor = ct.zonact
+                        INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+                        INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+                        INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
+                        INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
+                    {$where}
+                    GROUP BY z.zonaid, z.zona_escolar, z.cct_supervisor";
+          return $this->db->query($str_query)->result_array();
+        }//niveles_zona
+
+        function  periodo_zona($idnivel,$idsostenimiento,$zona){
+          $where = "WHERE 1=1 ";
+          if ($idnivel!=null) {
+            $where .= " AND n.idnivel = {$idnivel}";
+          }
+          if ($idsostenimiento!=null) {
+            $where .= " AND s.idsostenimiento = {$idsostenimiento}";
+          }
+          if ($zona!=null) {
+            $where .= " AND z.cct_supervisor = '{$zona}'";
+          }
+          $str_query = "SELECT
+                        p.id_periodo, p.periodo
+                        FROM c_zona z
+                        INNER JOIN cct ct ON z.cct_supervisor = ct.zonact
+                        INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+                        INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+                        INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
+                        INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
+                        INNER JOIN periodoplanea p ON t1.id_periodo =p.id_periodo
+                    {$where}
+                    GROUP BY p.id_periodo";
+          return $this->db->query($str_query)->result_array();
+        }//periodo_zona
 
 
 }// Planea_model

@@ -255,7 +255,7 @@ class Estadistica_model extends CI_Model
   			$tabla = " planea_nlogro_x_muni ";
   			$inner = " INNER JOIN municipio m ON m.idmunicipio=p.idmunicipio ";
  		}
-  		$query="SELECT {$campos},p.idnivel,n.descr as nivel,
+  		$query="SELECT {$campos},p.idnivel,concat(n.descr,' (',p.periodo_planea,')') as nivel,
   				p.ni_lyc,p.nii_lyc,p.niii_lyc,p.niv_lyc,p.ni_mat,p.nii_mat,p.niii_mat,
   				p.niv_mat
   			FROM {$tabla} as p
@@ -270,10 +270,17 @@ class Estadistica_model extends CI_Model
   		$where="";
   		if($idmunicipio>0){
   			$where="WHERE idmunicipio={$idmunicipio}";
+        $query="SELECT * FROM analfabetismo_xmuni
+    			{$where}";
   		}
-  		$query="SELECT * FROM analfabetismo_xmuni
-  			{$where}
-  		";
+      else {
+        $query="SELECT
+            anio,
+            sum(analfabetismo_mayor15_m) as analfabetismo_mayor15_m,
+            sum(analfabetismo_mayor15_h) as analfabetismo_mayor15_h
+            FROM analfabetismo_xmuni
+            GROUP BY anio";
+      }
   		return $this->db->query($query)->result_array();
   	}
 
@@ -281,21 +288,38 @@ class Estadistica_model extends CI_Model
   		$where="";
   		if($idmunicipio>0){
   			$where=" WHERE idmunicipio={$idmunicipio}";
+        $query="SELECT idmunicipio,
+  				  anio,
+  				  p3A14_ptotal_m,
+  				  p3A14_ptotal_h,
+  				  p3A14_noa_m,
+  				  p3A14_noa_h,
+  				  p12A14ptotal_m,
+  				  p12A14ptotal_h,
+  				  p12A14noa_m,
+  				  p12A14noa_h
+  				FROM
+  				  rezago_edu_xmuni
+  				{$where}
+  				";
   		}
-  		$query="SELECT idmunicipio,
-				  anio,
-				  p3A14_ptotal_m,
-				  p3A14_ptotal_h,
-				  p3A14_noa_m,
-				  p3A14_noa_h,
-				  p12A14ptotal_m,
-				  p12A14ptotal_h,
-				  p12A14noa_m,
-				  p12A14noa_h
-				FROM
-				  rezago_edu_xmuni
-				{$where}
-				";
+      else {
+        $query="SELECT max(idmunicipio),
+  				  max(anio),
+  				  SUM(p3A14_ptotal_m) as p3A14_ptotal_m,
+  				  SUM(p3A14_ptotal_h) as p3A14_ptotal_h,
+  				  SUM(p3A14_noa_m) as p3A14_noa_m,
+  				  SUM(p3A14_noa_h) as p3A14_noa_h,
+  				  SUM(p12A14ptotal_m) as p12A14ptotal_m,
+  				  SUM(p12A14ptotal_h) as p12A14ptotal_h,
+  				  SUM(p12A14noa_m) as p12A14noa_m,
+  				  SUM(p12A14noa_h) as p12A14noa_h
+            				FROM
+            				  rezago_edu_xmuni
+          GROUP BY anio
+  				";
+      }
+
 		return $this->db->query($query)->result_array();
   	}
 

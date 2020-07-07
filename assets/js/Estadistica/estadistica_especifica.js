@@ -9,13 +9,13 @@ $("#limpiar_filtros").click(function (e) {
     e.preventDefault();
     $("#ciclo_escolar").val(0);
     $("#turno_est_esp").val(0);
-    $("#cct").val('');
+    $("#txt_cct_escuela").val('');
 });
 
 $("#buscar_filtros").click(function (e) {
     e.preventDefault();
     var idciclo = $("#ciclo_escolar").val();
-    var cct = $("#cct").val();
+    var cct = "25"+$("#txt_cct_escuela").val();
     var idturno = $("#turno_est_esp").val();
     if(cct != ''){
           if (idturno != null) {
@@ -43,7 +43,7 @@ let Estadistica_especifica = {
             dataType: 'json',
             data: { idciclo: idciclo, cct: cct,idturno:idturno  },
             beforeSend: function (xhr) {
-                Mensaje.cargando('Cargando datos para la cct: ' + cct + ' del ciclo: ' + idciclo);
+                Mensaje.cargando('Cargando datos para la cct: ' + cct );
             },
             success: function (data) {
                 Mensaje.cerrar();
@@ -171,7 +171,7 @@ let Estadistica_especifica = {
             },
 
             series: [{
-                name: 'Número de alumnos en',
+                name: 'Número de alumnos',
                 colorByPoint: true,
                 data: arreglo_alumnos
             }]
@@ -283,7 +283,7 @@ let Estadistica_especifica = {
             },
 
             series: [{
-                name: 'Número de grupos en',
+                name: 'Número de grupos',
                 colorByPoint: true,
                 data: arreglo_grupos
             }]
@@ -293,7 +293,6 @@ let Estadistica_especifica = {
         $(".highcharts-background").css("fill", "#FFF");
     },//grafica_grupos
     grafica_docentes: (docentes) => {
-console.log(docentes);
         arreglo_docentes = [];
         // for (let i = 0; i < ((docentes.length) - 1); i++) {
         //     arr_par = [docentes[i].grado, parseInt(docentes[i].total)];

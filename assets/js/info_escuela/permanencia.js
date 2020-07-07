@@ -11,7 +11,7 @@ let Permanencia = {
             url: base_url + 'Info_escuela/get_datos_permanencia',
             type: 'POST',
             dataType: 'json',
-            data: {'cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val(), 
+            data: {'cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val(),
             'ciclo': $("#itxt_ciclo_info").val(), 'periodo': $("#itxt_periodo_info").val()},
             beforeSend: function (xhr) {
                 Mensaje.cargando('Cargando datos');
@@ -409,10 +409,10 @@ let Permanencia = {
                     circle.setText('');
                 } else {
                     if (value > 1) {
-                        circle.setText(varix + '% <br><center>Aprovación</center>');
+                        circle.setText(varix + '% <br><center>Aprobación</center>');
                     }
                     else {
-                        circle.setText(value + '% <br><center>Aprovación</center>');
+                        circle.setText(value + '% <br><center>Aprobación</center>');
                     }
                 }
 

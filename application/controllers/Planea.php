@@ -74,9 +74,9 @@ public function obtener_grafica_xestadomunicipio(){
 			$campodisip = $this->input->post("campodisip");
 			$datos = $this->Planea_model->estadisticas_x_estadomunicipio($municipio, $nivel, $periodo, $campodisip);
 			$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
-			
+
 			$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
-			
+
 			envia_datos_json($this, $respuesta);
 			exit();
 		}
@@ -84,52 +84,35 @@ public function obtener_grafica_xestadomunicipio(){
 			$id_contenido = $this->input->post("id_cont");
 		    $datos = $this->Planea_model->obtener_reactivos_xcont_municipio($id_contenido);
 				$respuesta = array('graph_cont_reactivos_xcctxcont' => $datos);
-				
+
 				envia_datos_json($this, $respuesta);
 				exit();
 		}
 
 		public function bucador_zona()//corregir nombre plisss...
 		{
-					//SOSTENIMIENTOS
-					$sostenimientos = $this->Generico_model->sostenimientos();
-					
-					$arr_sostenimiento['0'] = 'SELECCIONE';
-					foreach ($sostenimientos as $sostenimiento) {
-						$arr_sostenimiento['1'] = $sostenimiento['nombre'];
-					}
+			// NIVEL POR PLANEA
+			$arr_niveles = $this->Planea_model->niveles_zona();
+			//SOSTENIMIENTOS
+			$arr_sostenimiento = $this->Planea_model->sostenimiento_zona();
 
-					// NIVEL POR PLANEA 
-					$arr_niveles['0'] = 'SELECCIONE';
-					$arr_niveles['2'] = 'PRIMARIA';
-					$arr_niveles['3'] = 'SECUNDARIA';
+			$arr_zonas = $this->Planea_model->zonas_zona();
 
 					//CAMPOS DICIPLINARIOS
-					$arr_campod['0'] = 'SELECCIONE';
-					$arr_campod['1'] = 'Lenguaje y comunicación';
-					$arr_campod['2'] = 'Matemáticas';
-
+					$arr_campod['0'] = array('id' =>'1' , 'nombre' => 'Lenguaje y comunicación');
+					$arr_campod['1'] = array('id' =>'2' , 'nombre' => 'Matemáticas');
 					//PERIODOS
-					$periodos = $this->Generico_model->periodos_planeaxreactivo();
+					$arr_periodos = $this->Generico_model->periodos_planeaxreactivo();
 
-					$arr_periodos['0'] = 'SELECCIONE';
-					foreach ($periodos as $periodo){
-						 $arr_periodos[$periodo['id_periodo']] = $periodo['periodo'];
-					}
-
-					$arr_zonas['0'] = 'SELECCIONE';
-					$arr_zonas['502'] = '502';
-					$arr_zonas['503'] = '503';
-					$arr_zonas['505'] = '505';
-					
 					$data2['niveles'] = $arr_niveles;
-					$data2['camposd'] = $arr_campod;
-					$data2['periodos'] = $arr_periodos;
 					$data2['sostenimiento'] = $arr_sostenimiento;
 					$data2['zona'] = $arr_zonas;
+					$data2['camposd'] = $arr_campod;
+					$data2['periodos'] = $arr_periodos;
+					// echo "<pre>";print_r($data2);die();
 					$filtros = $this->load->view('planea/buscador_zona', $data2, TRUE);
-					
-					
+
+
 					$response = array('filtros'=>$filtros);
 					envia_datos_json($this,$response);
 					exit;
@@ -143,10 +126,53 @@ public function obtener_grafica_xestadomunicipio(){
 			$sostenimiento = $this->input->post("sostenimiento");
 			$campodisip = $this->input->post("campodisip");
 			$datos = $this->Planea_model->estadisticas_x_estadozona($zona, $sostenimiento, $nivel, $periodo, $campodisip);
+			// echo "<pre>";print_r($campodisip);die();
 			$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
 			$respuesta = array('datos' => $datos, 'zona' => $zona, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
 			envia_datos_json($this, $respuesta);
 			exit();
 		}//obtener_grafica_xestadozona
+
+		public function obtener_sostenimiento_xidnivel_zona()
+		{
+			$idnivel = $this->input->post("idnivel");
+			$arr_sostenimiento = $this->Planea_model->sostenimiento_zona($idnivel);
+			$str_select = "<option value='-1'  disabled='true' selected='true'>SELECCIONE UN SOSTENIMIENTO</option>";
+			foreach ($arr_sostenimiento as $key => $value) {
+				$str_select .= "<option value={$value['idsostenimiento']}> {$value['nombre']} </option>";
+			}
+			$respuesta = array('str_select' => $str_select);
+			envia_datos_json($this, $respuesta);
+			exit();
+		}//obtener_sostenimiento_xidnivel_zona
+
+		public function obtener_zona_xidnivel_sos_zona()
+		{
+			$idnivel = $this->input->post("idnivel");
+			$idsostenimiento = $this->input->post("idsostenimiento");
+			$arr_zona = $this->Planea_model->zonas_zona($idnivel,$idsostenimiento);
+			$str_select = "<option value='0' disabled='true' selected='true'>SELECCIONE UNA ZONA ESCOLAR</option>";
+			foreach ($arr_zona as $key => $value) {
+				$str_select .= "<option value={$value['cct_supervisor']}> {$value['zona_escolar']} </option>";
+			}
+			$respuesta = array('str_select' => $str_select);
+			envia_datos_json($this, $respuesta);
+			exit();
+		}//obtener_zona_xidnivel_sos_zona
+
+		public function obtener_periodo_xidnivel_sos_zona()
+		{
+			$idnivel = $this->input->post("idnivel");
+			$idsostenimiento = $this->input->post("idsostenimiento");
+			$zona = $this->input->post("zona");
+			$arr_periodo = $this->Planea_model->periodo_zona($idnivel,$idsostenimiento,$zona);
+			$str_select = "<option value='0'  disabled='true' selected='true'>SELECCIONE UN PERIODO</option>";
+			foreach ($arr_periodo as $key => $value) {
+				$str_select .= "<option value={$value['id_periodo']}> {$value['periodo']} </option>";
+			}
+			$respuesta = array('str_select' => $str_select);
+			envia_datos_json($this, $respuesta);
+			exit();
+		}//obtener_periodo_xidnivel_sos_zona
 
 	}// Planea

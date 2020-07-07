@@ -10,7 +10,13 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label for="cct">Escriba clave de CT (escuela)</label>
-                                <input type="text" class="form-control" id="cct" required>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text fw800" id="btnGroupAddon">25</div>
+                                    </div>
+                                    <?=form_input('cct', '', array('class' => 'form-control fw800', 'id' => 'txt_cct_escuela'));?>
+                                  </div>
+                                <!-- <input type="text" class="form-control" id="cct" required> -->
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
