@@ -67,23 +67,7 @@
 </div>
 <!-- End Modal -->
 
-<!-- Modal Apoyos -->
-<div class="modal fade" id="modal_visor_apoyos_reactivos" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" style="overflow-y: scroll;">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content modal-style-1">
-            <div class="modal-header bgcolor-4">
-                <h5 class="modal-title text-white" id="exampleModalLabel">Texto / imagen complementario del reactivo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="div_listalinks"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
+
 
 
 
@@ -107,23 +91,7 @@
 </div>
 <!-- End Modal -->
 
-<!-- Modal react -->
-<div class="modal fade" id="modal_visor_reactivos_zom" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" style="overflow-y: scroll;">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content modal-style-1">
-            <div class="modal-header bgcolor-4">
-                <h5 class="modal-title text-white" id="exampleModalLabel">Reactivo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="div_listalinks"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
+
 <!-- Modal Apoyos -->
 <div class="modal fade" id="modal_operacion_recursos" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-md" role="document">

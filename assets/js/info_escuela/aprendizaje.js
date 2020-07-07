@@ -1,6 +1,4 @@
-$(function () {
-    // obj_graficap = new Graficasm();
-});
+
 var visible_collaps = false;
 $("#btn_planea_info_mate").click(function(){
   if(visible_collaps == false){

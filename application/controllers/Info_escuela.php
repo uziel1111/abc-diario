@@ -106,16 +106,29 @@ class Info_escuela extends CI_Controller {
    		carga_pagina_basica($this,$data,'escuela/info_escuela');
    }//info_escuela
 
-   // function planea_escuela($datos){
-   //  consola($datos);
+  public function get_asistencia(){
+    $vista = $this->load->view('escuela/info/asistencia',array(), TRUE);
+    $respuesta = array('vista' => $vista);
 
-   // }//planea_escuela
+    envia_datos_json($this, $respuesta);
+    exit();
+  }
 
-   // function planea_nivel_logro($idcfg){
-   //    $niveles_logro = $this->Planea_model->planea_logro_escuela($idcfg);
-   //    return $niveles_logro;
+  public function get_permanencia(){
+    $vista = $this->load->view('escuela/info/permanencia',array(), TRUE);
+    $respuesta = array('vista' => $vista);
 
-   // }//planea_nivel_logro
+    envia_datos_json($this, $respuesta);
+    exit();
+  }
+
+  public function get_aprendizaje(){
+    $vista = $this->load->view('escuela/info/aprendizaje',array(), TRUE);
+    $respuesta = array('vista' => $vista);
+
+    envia_datos_json($this, $respuesta);
+    exit();
+  }
 
    function obtener_idnivel_xmuni(){
      $idmunicipio = $this->input->post('idmunicipio');
