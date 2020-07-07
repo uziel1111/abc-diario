@@ -1,13 +1,14 @@
+<hr />
 <div class="dv_tablas_estzona col-md-12">
     <div class="card mb-3 card-style-1" id="dv_alumnos_zona">
-        <div class="card-header card-1-header bgcolor-2">Alumnos</div>
+        <div class="card-header card-1-header bg-success text-light ">Alumnos</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover">
                     <thead class="bg-light">
                         <tr>
                             <th rowspan="3" class="text-center align-middle">Nivel educativo</th>
-                            <th colspan="21" class="text-center">Alumnos</th>
+                            <th colspan="21" class="text-center ">Alumnos</th>
                         </tr>
                         <tr>
                             <th><i class="fa fa-female"></i></th>
@@ -22,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="parent bg-info text-light font-weight-bold" id="SECUNDARIA" title="Click para expander/contraer">
+                        <tr class="parent" id="SECUNDARIA" title="Click para expander/contraer">
                             <td class="pl-1"><img style="width:12px" class="mr-5" src="http://sarape.gob.mx/assets/img/expand-button.svg"><?= $arr_datos_a_g_d_e['nivel'] ?></td>
                             <td><?= $arr_datos_a_g_d_e['t_alumnos_m'] ?></td>
                             <td><?= $arr_datos_a_g_d_e['t_alumnos_h'] ?></td>
@@ -37,7 +38,7 @@
                     </tbody>
                 </table>
 
-                <div class="pie_tabla">
+                <div class="pie_tabla bg-info text-light font-weight-bold">
                     <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911).</div>
                 </div>
             </div>
@@ -47,7 +48,7 @@
     <!-- card -->
 
     <div class="card mb-3 card-style-1" id="dv_personal_zona">
-        <div class="card-header card-1-header bgcolor-2">Personal docente</div>
+        <div class="card-header card-1-header bg-success text-light">Personal docente</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover">
@@ -60,7 +61,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="parent bg-info text-light font-weight-bold" id="SECUNDARIA" title="Click para expander/contraer">
+                        <tr class="parent" id="SECUNDARIA" title="Click para expander/contraer">
                             <td class="pl-1"><img style="width:12px" class="mr-5" src="http://sarape.gob.mx/assets/img/expand-button.svg"><?= $arr_datos_a_g_d_e['nivel'] ?></td>
                             <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['t_docentes'] ?></td>
                             <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['t_direc_congrupo'] ?></td>
@@ -69,7 +70,7 @@
                     </tbody>
                 </table>
 
-                <div class="pie_tabla">
+                <div class="pie_tabla bg-info text-light font-weight-bold">
                     <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911).</div>
                 </div>
             </div>
@@ -79,7 +80,7 @@
     <!-- card -->
 
     <div class="card mb-3 card-style-1" id="dv_infraestructura_zona">
-        <div class="card-header card-1-header bgcolor-2">Infraestructura</div>
+        <div class="card-header card-1-header bg-success text-light">Infraestructura</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover">
@@ -101,7 +102,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="parent bg-info text-light font-weight-bold" id="SECUNDARIA" title="Click para expander/contraer">
+                        <tr class="parent" id="SECUNDARIA" title="Click para expander/contraer">
                             <td class="pl-1"><img style="width:12px" class="mr-5" src="http://sarape.gob.mx/assets/img/expand-button.svg"><?= $arr_datos_a_g_d_e['nivel'] ?></td>
                             <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['n_escuelas'] ?></td>
                             <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['grupos1'] ?></td>
@@ -116,7 +117,7 @@
                     </tbody>
                 </table>
 
-                <div class="pie_tabla">
+                <div class="pie_tabla bg-info text-light font-weight-bold">
                     <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911).</div>
                 </div>
             </div>
@@ -125,7 +126,7 @@
     </div>
 
     <div class="card mb-3 card-style-1" id="dv_asistencia_zona">
-        <div class="card-header card-1-header bgcolor-2">Indicadores de asistencia</div>
+        <div class="card-header card-1-header bg-success text-light">Indicadores de asistencia</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover">
@@ -145,7 +146,7 @@
                     </tbody>
                 </table>
 
-                <div class="pie_tabla">
+                <div class="pie_tabla bg-info text-light font-weight-bold">
                     <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911).</div>
                 </div>
             </div>
@@ -154,7 +155,7 @@
     </div>
 
     <div class="card mb-3 card-style-1" id="dv_permanencia_zona">
-        <div class="card-header card-1-header bgcolor-2">Indicadores de permanencia</div>
+        <div class="card-header card-1-header bg-success text-light">Indicadores de permanencia</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover">
@@ -176,7 +177,7 @@
                     </tbody>
                 </table>
 
-                <div class="pie_tabla">
+                <div class="pie_tabla bg-info text-light font-weight-bold">
                     <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911) - ciclo escolar 2016-2017</div>
                     <div id="">N/D : Dato no disponible</div>
                 </div>
@@ -185,7 +186,7 @@
         <!-- card-body -->
     </div>
     <div class="card mb-3 card-style-1" id="dv_aprendizaje_zona">
-        <div class="card-header card-1-header bgcolor-2">Indicadores de aprendizaje</div>
+        <div class="card-header card-1-header bg-success text-light">Indicadores de aprendizaje</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover">
@@ -238,7 +239,7 @@
                     </tbody>
                 </table>
 
-                <div class="pie_tabla">
+                <div class="pie_tabla bg-info text-light font-weight-bold">
                     <div id="fuentes_pie" class="font-italic">Fuente: SEP Federal.</div>
                 </div>
             </div>

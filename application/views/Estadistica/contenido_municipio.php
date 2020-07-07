@@ -1,10 +1,7 @@
-<hr />
+
 <div class="row">
   <div id="dv_flot_est" class="col-12">
     <div id="filtros_est_gen">
-      <div class="alert alert-success text-center" role="alert">
-        Municipio: <span class="font-weight-bold"><?= $municipio ?></span>, Nivel: <span class="font-weight-bold"><?= $nivel ?></span>, Sostenimiento: <span class="font-weight-bold"><?= $sostenimiento ?></span>, Modalidad: <span class="font-weight-bold"><?= $modalidad ?></span>, Ciclo escolar: <span class="font-weight-bold"><?= $ciclo ?></span>.
-      </div>
       <div class="col-12 mt-2 mb-3 text-center">
         <?= form_open('Reportes/est_generales_xmuni') ?>
         <?= form_hidden('idmunicipio', $idmunicipio) ?>
@@ -33,7 +30,7 @@
 <div class="row" id="dv_alumnos_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
-      <div class="card-header rounded text-muted">Alumnos</div>
+      <div class="bg-success text-light card-header rounded">Alumnos</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-hover">
@@ -93,7 +90,7 @@
                 } ?>
             </tbody>
           </table>
-          <div class="pie_tabla">
+          <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911.</div>
           </div>
         </div>
@@ -105,7 +102,7 @@
 <div class="row" id="dv_personal_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
-      <div class="card-header rounded text-muted">Personal Docente</div>
+      <div class="card-header rounded bg-success text-light ">Personal Docente</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-hover">
@@ -164,7 +161,7 @@
                 } ?>
             </tbody>
           </table>
-          <div class="pie_tabla">
+          <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911.</div>
           </div>
         </div>
@@ -175,7 +172,7 @@
 <div class="row" id="dv_infraestructura_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
-      <div class="card-header rounded text-muted">Infraestructura</div>
+      <div class="card-header rounded bg-success text-light ">Infraestructura</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-hover">
@@ -233,7 +230,7 @@
                 } ?>
             </tbody>
           </table>
-          <div class="pie_tabla">
+          <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911. </div>
           </div>
         </div>
@@ -244,7 +241,7 @@
 <div class="row" id="dv_asistencia_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
-      <div class="card-header rounded text-muted">Asistencia</div>
+      <div class="card-header rounded bg-success text-light ">Asistencia</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-hover">
@@ -265,7 +262,7 @@
               <?php } ?>
             </tbody>
           </table>
-          <div class="pie_tabla">
+          <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911.</div>
           </div>
           </tbody>
@@ -278,7 +275,7 @@
 <div class="row" id="dv_permanencia_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
-      <div class="card-header rounded text-muted">Permanencia</div>
+      <div class="card-header rounded bg-success text-light ">Permanencia</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-hover">
@@ -301,7 +298,7 @@
               <?php } ?>
             </tbody>
           </table>
-          <div class="pie_tabla">
+          <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911.</div>
             <div id="">N/D : Dato no disponible</div>
           </div>
@@ -313,7 +310,7 @@
 <div class="row" id="dv_aprendizaje_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
-      <div class="card-header rounded text-muted">Aprendizaje</div>
+      <div class="card-header rounded bg-success text-light ">Aprendizaje</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-hover">
@@ -359,7 +356,7 @@
               <?php } ?>
             </tbody>
           </table>
-          <div class="pie_tabla">
+          <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEP Federal.</div>
           </div>
           </table>
@@ -371,7 +368,7 @@
 <div class="row" id="dv_rezagoeducativo_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
-      <div class="card-header rounded text-muted">Rezago Educativo</div>
+      <div class="card-header rounded bg-success text-light ">Rezago Educativo</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-hover">
@@ -414,7 +411,7 @@
               <?php } ?>
             </tbody>
           </table>
-          <div class="pie_tabla">
+          <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: INEGI</div>
           </div>
         </div>
@@ -425,7 +422,7 @@
 <div class="row" id="dv_analfabetismo_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
-      <div class="card-header rounded text-muted">Analfabetismo</div>
+      <div class="card-header rounded bg-success text-light ">Analfabetismo</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-hover">
@@ -448,7 +445,7 @@
               <?php  } ?>
             </tbody>
           </table>
-          <div class="pie_tabla">
+          <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: INEGI</div>
           </div>
         </div>
