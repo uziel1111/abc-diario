@@ -140,26 +140,22 @@ class Generico_model extends CI_Model
 
   function info_escuela_get($cct,$turno){
     $query = "SELECT c.nombre,c.cct,
-                CASE  WHEN c.turno = 100 THEN 'MATUTINO'
-                WHEN c.turno = 200 THEN 'VESPERTINO'
-                END as turno,n.descr as nivel,m.descr as modalidad,s.descr as sostenimiento ,concat(domicilio,numero) as domicilio,c.localidad,mun.nombre as municipio,'director',if(c.status='ACT','ACTIVO','') as estatus, cfg.idcentrocfg FROM cct c
+                t.descripcion as turno,n.descr as nivel,m.descr as modalidad,s.descr as sostenimiento ,concat(domicilio,numero) as domicilio,c.localidad,mun.nombre as municipio,'director',if(c.status='ACT','ACTIVO','') as estatus, cfg.idcentrocfg
+								FROM cct c
                 left join niveleducativo n on n.idnivel = c.nivel
                 left join c_modalidad m on m.idmodalidad = c.idmodalidad
                 left join c_sostenimiento s on s.idsostenimiento = c.sostenimiento
                 left join municipio mun on mun.idmunicipio = c.idmunicipio
                 left join centrocfg cfg ON cfg.idct = c.idct
-                where c.cct = ? AND c.turno like ?;";
+								LEFT JOIN turno t ON cfg.turno = t.idturno
+                where c.cct = ? AND cfg.turno = ?";
       return $this->db->query($query,array($cct,$turno))->result_array();
   }//info_escuela_get
 
    function info_escuela_post($idcentrocfg){
     $query = "SELECT
     c.nombre,
-    c.cct,
-    CASE
-        WHEN c.turno = 100 THEN 'MATUTINO'
-        WHEN c.turno = 200 THEN 'VESPERTINO'
-    END AS turno,
+    c.cct,t.descripcion AS turno,
     cfg.turno AS idturno,
     n.descr AS nivel,
     m.descr AS modalidad,
@@ -181,6 +177,7 @@ FROM
     municipio mun ON mun.idmunicipio = c.idmunicipio
         INNER JOIN
     centrocfg cfg ON cfg.idct = c.idct
+    LEFT JOIN turno t ON cfg.turno = t.idturno
 WHERE
     cfg.idcentrocfg = ?;";
       return $this->db->query($query,array($idcentrocfg))->result_array();

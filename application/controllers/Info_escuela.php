@@ -101,8 +101,9 @@ class Info_escuela extends CI_Controller {
    		$turno = $this->input->get('turno');
       $info_escuela = $this->Generico_model->info_escuela_get($cct,$turno);
     }
-      
+
    		$data['info'] = $info_escuela;
+      // echo "<pre>";print_r($data);die();
    		carga_pagina_basica($this,$data,'escuela/info_escuela');
    }//info_escuela
 
