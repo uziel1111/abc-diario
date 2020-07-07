@@ -1,16 +1,19 @@
 
 $("#tab_asistencia_info").click(function(e){
   e.preventDefault();
+  // location.reload();
   Info_escuela.get_view_asistencia();
 });
 
 $("#tab_permanencia_info").click(function(e){
   e.preventDefault();
+  // location.reload();
   Info_escuela.get_view_permanencia();
 });
 
 $("#tab_aprendizaje_info").click(function(e){
   e.preventDefault();
+  // location.reload();
   Info_escuela.get_view_aprendizaje();
 });
 

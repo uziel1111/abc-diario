@@ -101,7 +101,7 @@ class Info_escuela extends CI_Controller {
    		$turno = $this->input->get('turno');
       $info_escuela = $this->Generico_model->info_escuela_get($cct,$turno);
     }
-      $data['ciclos'] = $this->Generico_model->ciclo_escolar();
+      
    		$data['info'] = $info_escuela;
    		carga_pagina_basica($this,$data,'escuela/info_escuela');
    }//info_escuela
@@ -115,7 +115,8 @@ class Info_escuela extends CI_Controller {
   }
 
   public function get_permanencia(){
-    $vista = $this->load->view('escuela/info/permanencia',array(), TRUE);
+    $data['ciclos'] = $this->Generico_model->ciclo_escolar();
+    $vista = $this->load->view('escuela/info/permanencia',$data, TRUE);
     $respuesta = array('vista' => $vista);
 
     envia_datos_json($this, $respuesta);
