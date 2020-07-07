@@ -157,7 +157,7 @@ var Graficasm = {
                html += "      <h5><span class='h3 badge badge-secondary text-white'>"+result[i]['n_reactivo']+"</span></h5>";
                html += "      </div>";
                html += "      <div class='col-10'>";
-               if (result[i]['url_apoyo']!=null) {
+               if (result[i]['url_apoyo']!=null && result[i]['url_apoyo']!='') {
                  html += "      <center><a style='color:blue;' href='#' onclick=Graficasm.apoyo_reactivo('"+base_url+"assets/"+result[i]['url_apoyo']+"')>Texto/imagen (apoyo)</a></center>";
                }
                html += "      </div>";
