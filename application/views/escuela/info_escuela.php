@@ -71,14 +71,5 @@
 		</div>
 	</div>
 </main>
-<script src="<?= base_url('assets/js/utilerias/progressbar.min.js');?>"></script>
-<script src="<?= base_url('assets/highcharts5.0.3/highcharts.js'); ?>"></script>
-<!--Problemas con esta versión <script src="https://code.highcharts.com/highcharts.js"></script>-->
-<script src="<?= base_url('assets/highcharts5.0.3/modules/data.js'); ?>"></script>
-<!--Problemas con esta versión <script src="https://code.highcharts.com/modules/data.js"></script>-->
-<script src="<?= base_url('assets/highcharts5.0.3/modules/drilldown.js'); ?>"></script>
-<!--Problemas con esta versión<script src="https://code.highcharts.com/modules/drilldown.js"></script>-->
 
-
-<script src="<?= base_url('assets/js/planea/graficas.js') ?>"></script>
 <script src="<?= base_url('assets/js/info_escuela/info_escuela.js') ?>"></script>

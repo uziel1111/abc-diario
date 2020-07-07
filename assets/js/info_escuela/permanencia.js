@@ -28,7 +28,7 @@ let Permanencia = {
             $("#dv_info_graf_aprobacion_info").empty();
             Permanencia.grafica_eficiencia_terminal(data.indicadores['eficiencia_terminal']);
             Permanencia.grafica_retencion(data.indicadores['retencion']);
-            Permanencia.grafica_aprobacion(data.indicadores['aprovacion']);
+            Permanencia.grafica_aprobacion(data.indicadores['aprobacion']);
 	      		let tabla='<table width="100%" class="table table-bordered">';
 					tabla+=	'<tbody>';
 					tabla+= '<tr style="background-color:#D8D8D8;">';
@@ -378,8 +378,7 @@ let Permanencia = {
     },//grafica_retencion
 
     grafica_aprobacion: (varix) => {
-        // Dibujamos el radial progress bar para cobertura
-        // var valor_et=80;
+       // varix = parseFloat(calculo);
         var bar = new ProgressBar.Circle(dv_info_graf_aprobacion_info, {
             color: '#888888',
             // This has to be the same size as the maximum width to
@@ -405,6 +404,7 @@ let Permanencia = {
                     var value = circle.value() * 100;
                     value = value.toFixed(2);
                 }
+                // alert(value);
                 if (value === 0) {
                     circle.setText('');
                 } else {
@@ -420,7 +420,6 @@ let Permanencia = {
         });
         bar.text.style.fontFamily = '"Arial", Helvetica, sans-serif';
         bar.text.style.fontSize = '2rem';
-
         bar.animate(Math.min(varix / 100, 1));  // Number from 0.0 to 1.0
     }//grafica_aprovacion
 }
