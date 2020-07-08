@@ -48,27 +48,55 @@
                       <i class="fas fa-circle text-primary"></i>
                       <i class="fa-inverse far fa-chart-bar fa-sm" data-fa-transform="shrink-6"></i>
                     </span>
-                    <p>Estadísticas</p>
+                    <p>Estadística...</p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="DropEstadisticas">
 
-                    <a class="dropdown-item" href="<?=base_url('Estadistica/estadistica_general/estado_municipio/alumnos');?>">General</a>
-                    <a class="dropdown-item" href="<?= base_url('Riesgo_abandono/vista_principal_riesgo'); ?>">Riesgo de abandono</a>
-                    <a class="dropdown-item" href="<?= base_url('Planea'); ?>">Resultados de PLANEA</a>
+                    <a class="dropdown-item" href="<?=base_url('Estadistica/estadistica_general/estado_municipio/alumnos');?>">Por estado / municipio</a>
+                    <a class="dropdown-item" href="<?= base_url('Estadistica/estadistica_general/zona_escolar/alumnos'); ?>">Por zona escolar</a>
+                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Por escuela</a>
+                    <a class="dropdown-item" href="<?= base_url('Riesgo_abandono/vista_principal_riesgo'); ?>">Riesgo de abandono escolar por estado / municipio</a>
+                    <a class="dropdown-item" href="<?= base_url('Riesgo_abandono/vista_principal_riesgo'); ?>">Riesgo de abandono por escuela</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown nav-secondary">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa-layers fa-fw">
                       <i class="fas fa-circle text-secondary"></i>
-                      <i class="fa-inverse fas fa-school fa-xs" data-fa-transform="shrink-6"></i>
+                      <i class="fa-inverse fas fa-check fa-xs" data-fa-transform="shrink-6"></i>
                     </span>
-                    <p>Escuela</p>
+                    <p>Aprendizaje</p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?= base_url('Estadistica/estadistica_especifica'); ?>">Datos de la escuela</a>
-                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Localiza tu escuela</a>
-                    <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/'); ?>">Tu escuela en el mapa</a>
+                    <a class="dropdown-item" href="<?= base_url('Planea'); ?>">Resultados PLANEA por estado / municipio</a>
+                    <a class="dropdown-item" href="<?= base_url('Planea'); ?>">Resultados PLANEA por zona escolar</a>
+                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Resultados PLANEA por escuela</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown nav-third">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa-layers fa-fw">
+                      <i class="fas fa-circle text-success"></i>
+                      <i class="fa-inverse fas fa-map-marker-alt fa-xs" data-fa-transform="shrink-6"></i>
+                    </span>
+                    <p>Ubica tu escuela</p>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/cct');?>">Por clave de escuela</a>
+                    <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/paramentros');?>">Por municipio, nivel, sostenimiento y nombre</a>
+                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general');?>">En listado de escuelas</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown nav-fourth">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa-layers fa-fw">
+                      <i class="fas fa-circle text-info"></i>
+                      <i class="fa-inverse fas fa-sign-out-alt fa-xs" data-fa-transform="shrink-6"></i>
+                    </span>
+                    <p>Otros</p>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<?= base_url('');?>">otro 1</a>
                   </div>
                 </li>
               </ul>
