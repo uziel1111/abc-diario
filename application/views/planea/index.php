@@ -37,7 +37,10 @@
                     <div class="card-header card-1-header bgcolor-2 text-muted">Resultados de búsqueda</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-12">
+                          <div class="col-1">
+                              <div class="div_grafiaca_txt rotate" hidden="true">Contenidos temáticos</div>
+                          </div>
+                            <div class="col-10">
                                 <div id="div_graficas_masivo"></div>
                             </div>
                         </div>

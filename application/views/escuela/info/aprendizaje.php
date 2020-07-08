@@ -6,7 +6,15 @@
 </p>
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
-    <div id="div_planea_lyc_info"></div>
+    <div class="row">
+      <div class="col-1">
+          <div class="div_grafiaca_txt rotate">Contenidos temáticos</div>
+      </div>
+        <div class="col-10">
+            <div id="div_planea_lyc_info"></div>
+        </div>
+    </div>
+
   </div>
 </div>
 <p>
@@ -16,7 +24,15 @@
 </p>
 <div class="collapse" id="collapseExample2">
   <div class="card card-body">
-    <div id="div_planea_mate_info"></div>
+    <div class="row">
+      <div class="col-1">
+          <div class="div_grafiaca_txt rotate">Contenidos temáticos</div>
+      </div>
+        <div class="col-10">
+            <div id="div_planea_mate_info"></div>
+        </div>
+    </div>
+
   </div>
 </div>
 <p>
