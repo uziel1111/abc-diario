@@ -81,24 +81,32 @@ nav.navbar>.nav-box {
 }
 
 .navbar-expand-lg .navbar-nav .nav-primary .nav-link>span>:first-child,
-.navbar-expand-lg .navbar-nav .nav-secondary .nav-link>span>:first-child {
+.navbar-expand-lg .navbar-nav .nav-secondary .nav-link>span>:first-child,
+.navbar-expand-lg .navbar-nav .nav-third .nav-link>span>:first-child,
+.navbar-expand-lg .navbar-nav .nav-fourth .nav-link>span>:first-child {
     transition: all 0.5s ease-in-out;
 }
 
 .navbar-expand-lg .navbar-nav .nav-primary .nav-link:hover>span>:first-child,
-.navbar-expand-lg .navbar-nav .nav-secondary .nav-link:hover>span>:first-child {
+.navbar-expand-lg .navbar-nav .nav-secondary .nav-link:hover>span>:first-child,
+.navbar-expand-lg .navbar-nav .nav-third .nav-link:hover>span>:first-child,
+.navbar-expand-lg .navbar-nav .nav-fourth .nav-link:hover>span>:first-child {
     transform: scale(1);
     animation: scale 0.5s;
 }
 
 .navbar-expand-lg .navbar-nav .nav-primary .nav-link:hover>span>:last-child,
-.navbar-expand-lg .navbar-nav .nav-secondary .nav-link:hover>span>:last-child {
+.navbar-expand-lg .navbar-nav .nav-secondary .nav-link:hover>span>:last-child,
+.navbar-expand-lg .navbar-nav .nav-third .nav-link:hover>span>:last-child,
+.navbar-expand-lg .navbar-nav .nav-fourth .nav-link:hover>span>:last-child {
     transform: scale-red(1);
     animation: scale-red 0.5s;
 }
 
 .navbar-expand-lg .navbar-nav .nav-primary .nav-link:hover>p,
-.navbar-expand-lg .navbar-nav .nav-secondary .nav-link:hover>p {
+.navbar-expand-lg .navbar-nav .nav-secondary .nav-link:hover>p,
+.navbar-expand-lg .navbar-nav .nav-third .nav-link:hover>p,
+.navbar-expand-lg .navbar-nav .nav-fourth .nav-link:hover>p {
     color: rgba(0, 0, 0, 0.7);
 }
 
@@ -108,6 +116,14 @@ nav.navbar>.nav-box {
 
 .navbar-expand-lg .navbar-nav .nav-secondary .nav-link[aria-expanded="true"] p {
     color: #e98ead !important;
+}
+
+.navbar-expand-lg .navbar-nav .nav-third .nav-link[aria-expanded="true"] p {
+    color: #9dc27f !important;
+}
+
+.navbar-expand-lg .navbar-nav .nav-fourth .nav-link[aria-expanded="true"] p {
+    color: #9b9b9b !important;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link[aria-expanded="true"]>span>:first-child {
@@ -120,6 +136,14 @@ nav.navbar>.nav-box {
 
 .navbar-expand-lg .navbar-nav .nav-secondary .nav-link[aria-expanded="true"]>span>svg:last-child {
     color: #e98ead !important;
+}
+
+.navbar-expand-lg .navbar-nav .nav-third .nav-link[aria-expanded="true"]>span>svg:last-child {
+    color: #9dc27f !important;
+}
+
+.navbar-expand-lg .navbar-nav .nav-fourth .nav-link[aria-expanded="true"]>span>svg:last-child {
+    color: #9b9b9b !important;
 }
 
 @keyframes scale {
@@ -164,6 +188,14 @@ nav.navbar>.nav-box {
 
 .navbar-expand-lg .navbar-nav .nav-secondary .dropdown-menu {
     border-top: 6px solid #e98ead;
+}
+
+.navbar-expand-lg .navbar-nav .nav-third .dropdown-menu {
+    border-top: 6px solid #9dc27f;
+}
+
+.navbar-expand-lg .navbar-nav .nav-fourth .dropdown-menu {
+    border-top: 6px solid #9b9b9b;
 }
 
 .speech-bubble {

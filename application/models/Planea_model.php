@@ -101,18 +101,18 @@ class Planea_model extends CI_Model
           return $this->db->query($str_query)->row('periodo');
         }
 
-        function obtener_periodoplane_xidperiodo_info(){
+        function obtener_periodoplane_xidperiodo_info($cct, $turno){
           $str_query = "SELECT
-                        pp.id_periodo, max(pp.periodo) as periodo
-                        FROM cct ct
-                        INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
-                        INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
-                        INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
-                        INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
-                        WHERE ct.`status`='ACT' AND cfg.`status`='A'
-                        GROUP BY pp.id_periodo";
+                      	pp.id_periodo, pp.periodo as periodo
+                      	FROM cct ct
+                      	INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
+                      	INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
+                      	INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
+                      	WHERE  ct.cct='{$cct}' AND cfg.turno='{$turno}'
+                      	GROUP BY pp.id_periodo
+                      	ORDER BY pp.periodo DESC";
 
-          return $this->db->query($str_query)->row('periodo');
+          return $this->db->query($str_query)->result_array();
         }
         function obtener_reactivos_xcont_municipio($id_contenido){
           $str_query = "SELECT

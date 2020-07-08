@@ -239,11 +239,11 @@ function obtener_idsost_xidnivel_xmuni(){
    public function obtener_grafica_x_campodisiplinario(){
     $cct = $this->input->post('cct');
     $idturno = $this->input->post('turno');
-    $periodo = 2;
     $campodisip = $this->input->post("campodisip");
     $datos = $this->Planea_model->estadisticas_x_cct_info($cct, $idturno, $campodisip);
-    $periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo_info($periodo);
-
+    $periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo_info($cct, $idturno);
+    $periodoplanea = $periodoplanea[0]['periodo'];
+    // echo "<pre>";print_r($periodoplanea);die();
       $respuesta = array('datos' => $datos, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
 
       envia_datos_json($this, $respuesta);
