@@ -1,7 +1,7 @@
 <main role="main">
 	<div class="container">
 		<div class="card shadow">
-			<div class="card-header bg-primary text-light">
+			<div class="card-header bg-warning text-light">
 				<i class="fas fa-search"></i> Datos generales de la escuela
 			</div>
 			<div class="card-body">

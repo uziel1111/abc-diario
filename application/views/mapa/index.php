@@ -1,20 +1,16 @@
 <!-- BUSCADOR IMPLEMENTADO EN OTRA VISTA -->
 <main role="main">
   <div class="container">
-    <div class="card shadow">
-      <div class="card-header bg-secondary text-light">
+
+    <div class="card shadow mt-4">
+      <div class="card-header bg-success text-light">
         <i class="fas fa-search"></i> Busca tu escuela
       </div>
       <div class="card-body pb-1 pt-1">
-        <div><?= $buscador; ?> </div>
-        <div id="contenedor_mapa_id"></div>
-      </div><!-- card-body -->
-    </div><!-- card -->
-    <div class="card shadow mt-4">
-      <div class="card-header bg-secondary text-light">
-        <i class="fas fa-search"></i> Mapa
-      </div>
-      <div class="card-body">
+
+          <div><?= $buscador; ?> </div>
+          <div id="contenedor_mapa_id"></div>
+
         <!-- DIV DE IMAGENES -->
         <div class="container-fluid pb-1 pt-1">
           <div class="row">
