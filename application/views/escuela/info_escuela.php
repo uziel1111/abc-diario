@@ -34,14 +34,12 @@
 								Municipio: <span class="font-weight-bold"><?= $info[0]['municipio'] ?></span>
 							</div>
 							<div class="col-12 col-md-6">
-								Localidad: <span class="font-weight-bold"><?= $info[0]['localidad'] ?></span>
+								Estatus de la escuela: <span class="font-weight-bold"><?= $info[0]['estatus'] ?></span>
 							</div>
 							<div class="col-12 col-md-6">
 								Nombre del director: <span class="font-weight-bold"><?= $info[0]['nombre'] ?></span>
 							</div>
-							<div class="col-12 col-md-6">
-								Estatus de la escuela: <span class="font-weight-bold"><?= $info[0]['estatus'] ?></span>
-							</div>
+
 						</div>
 					</div>
 				</div>
@@ -58,13 +56,13 @@
 				</ul>
 				<div id="myTabContent" class="tab-content">
 				  <div class="tab-pane fade active show" id="asistencia_info">
-				    
+
 				  </div>
 				  <div class="tab-pane fade" id="permanencia_info">
-				    
+
 				  </div>
 				  <div class="tab-pane fade" id="aprendizaje_info">
-				  	
+
 				  </div>
 				</div>
 			</div>
