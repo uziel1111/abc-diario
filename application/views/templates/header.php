@@ -56,7 +56,7 @@
                     <a class="dropdown-item" href="<?= base_url('Estadistica/estadistica_general/zona_escolar/alumnos'); ?>">Por zona escolar</a>
                     <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Por escuela</a>
                     <a class="dropdown-item" href="<?= base_url('Riesgo_abandono/vista_principal_riesgo'); ?>">Riesgo de abandono escolar por estado / municipio</a>
-                    <a class="dropdown-item" href="<?= base_url('Riesgo_abandono/vista_principal_riesgo'); ?>">Riesgo de abandono por escuela</a>
+                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Riesgo de abandono por escuela</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown nav-secondary">
