@@ -43,6 +43,12 @@
 								Estatus de la escuela: <span class="font-weight-bold"><?= $info[0]['estatus'] ?></span>
 							</div>
 						</div>
+						<br>
+						<div class="row">
+							<div class="col-12 col-md-6">
+								<a href="<?=base_url('Info_escuela/busqueda_general')?>" class="btn btn-success text-light">Regresar</a>
+							</div>
+						</div>
 					</div>
 				</div>
 				<ul class="nav nav-pills nav-fill mt-4">

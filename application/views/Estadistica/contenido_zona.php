@@ -11,9 +11,9 @@
                             <th colspan="21" class="text-center ">Alumnos</th>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-female"></i></th>
-                            <th><i class="fa fa-male"></i></th>
-                            <th><i class="fa fa-female"></i><i class="fa fa-male"></i></th>
+                            <th><i class="fa fa-female text-secondary"></i></th>
+                            <th><i class="fa fa-male text-primary"></i></th>
+                            <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
                             <th>1°</th>
                             <th>2°</th>
                             <th>3°</th>
@@ -88,7 +88,8 @@
                         <tr>
                             <th rowspan="2" class="text-center align-middle">Nivel educativo</th>
                             <th rowspan="2" class="text-center align-middle">Escuelas</th>
-                            <th colspan="8" class="text-center align-middle">Grupos</th>
+                            <th colspan="6" class="text-center align-middle">Grupos</th>
+                            <th colspan="2" class="text-center align-middle"></th>
                         </tr>
                         <tr>
                             <th>1°</th>
