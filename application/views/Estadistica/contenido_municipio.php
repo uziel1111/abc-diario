@@ -36,13 +36,13 @@
           <table class="table table-sm table-striped table-hover">
             <thead class="bg-light">
               <tr>
-                <th rowspan="3" class="text-center align-middle">Nivel educativo</th>
+                <th rowspan="3" class="align-middle">Nivel educativo</th>
                 <th colspan="21" class="text-center">Alumnos</th>
               </tr>
               <tr>
-                <th><i class="fa fa-female"></i></th>
-                <th><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-female"></i><i class="fa fa-male"></i></th>
+                <th><i class="fa fa-female text-secondary"></i></th>
+                <th><i class="fa fa-male text-primary"></i></th>
+                <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
                 <th>1°</th>
                 <th>2°</th>
                 <th>3°</th>
@@ -108,21 +108,21 @@
           <table class="table table-sm table-striped table-hover">
             <thead class="bg-light">
               <tr>
-                <th rowspan="2" class="text-center align-middle">Nivel educativo</th>
+                <th rowspan="2" class="align-middle">Nivel educativo</th>
                 <th colspan="3" class="text-center align-middle">Docentes</th>
                 <th colspan="3" class="text-center align-middle">Directivo con grupo</th>
                 <th colspan="3" class="text-center align-middle">Directivo sin grupo</th>
               </tr>
               <tr>
-                <th><i class="fa fa-female"></i></th>
-                <th><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-female"></i><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-female"></i></th>
-                <th><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-female"></i><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-female"></i></th>
-                <th><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-female"></i><i class="fa fa-male"></i></th>
+                <th><i class="fa fa-female text-secondary"></i></th>
+                <th><i class="fa fa-male text-primary"></i></th>
+                <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
+                <th><i class="fa fa-female text-secondary"></i></th>
+                <th><i class="fa fa-male text-primary"></i></th>
+                <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
+                <th><i class="fa fa-female text-secondary"></i></th>
+                <th><i class="fa fa-male text-primary"></i></th>
+                <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
               </tr>
             </thead>
             <tbody>
@@ -178,9 +178,10 @@
           <table class="table table-sm table-striped table-hover">
             <thead class="bg-light">
               <tr>
-                <th rowspan="2" class="text-center align-middle">Nivel educativo</th>
+                <th rowspan="2" class=" align-middle">Nivel educativo</th>
                 <th rowspan="2" class="text-center align-middle">Escuelas</th>
-                <th colspan="8" class="text-center align-middle">Grupos</th>
+                <th colspan="6" class="text-center align-middle">Grupos</th>
+                <th colspan="2" class="text-center align-middle"></th>
               </tr>
               <tr>
                 <th>1°</th>
@@ -218,15 +219,15 @@
                     <td class="pl-5"><?= $row['modalidad'] ?></td>
                 <?php }
 
-                  ($row['nescuelas'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['nescuelas']) . '</td>';
+                  ($row['nescuelas'] == 0) ? print '<td>-</td>' : print '<td class="text-center align-middle">' . number_format($row['nescuelas']) . '</td>';
                   ($row['grupos_1'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_1']) . '</td>';
                   ($row['grupos_2'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_2']) . '</td>';
                   ($row['grupos_3'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_3']) . '</td>';
                   ($row['grupos_4'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_4']) . '</td>';
                   ($row['grupos_5'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_5']) . '</td>';
                   ($row['grupos_6'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_6']) . '</td>';
-                  ($row['grupos_multi'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_multi']) . '</td>';
-                  ($row['grupos_t'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_t']) . '</td>';
+                  ($row['grupos_multi'] == 0) ? print '<td>-</td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_multi']) . '</td>';
+                  ($row['grupos_t'] == 0) ? print '<td>-</td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_t']) . '</td>';
                 } ?>
             </tbody>
           </table>
@@ -375,38 +376,38 @@
             <thead class="bg-light">
               <tr>
                 <th>Inasistencia escolar</th>
-                <th colspan="3">Población total</th>
-                <th colspan="3">Población que no asiste a la escuela</th>
+                <th colspan="3" class="text-center align-middle">Población total</th>
+                <th colspan="3" class="text-center align-middle">Población que no asiste a la escuela</th>
               </tr>
               <tr>
                 <th id="rezago">Población por grupo de edad<br> que no asiste a la escuela</th>
-                <th><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-female"></i></th>
-                <th><i class="fa fa-female"></i><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-female"></i></th>
-                <th><i class="fa fa-female"></i><i class="fa fa-male"></i></th>
+                <th><center><i class="fa fa-male text-primary"></i></center></th>
+                <th><center><i class="fa fa-female text-secondary text-center"></i></center></th>
+                <th><center><i class="fa fa-female text-secondary text-center"></i><i class="fa fa-male text-primary"></i></center></th>
+                <th><center><i class="fa fa-male text-primary"></i></center></th>
+                <th><center><i class="fa fa-female text-secondary"></i></center></th>
+                <th><center><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></center></th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($rezago as $row) { ?>
                 <tr>
                   <td>3 a 14 años</td>
-                  <td><?= number_format($row['p3A14_ptotal_h']) ?></td>
-                  <td><?= number_format($row['p3A14_ptotal_m']) ?></td>
-                  <td><?= number_format($row['p3A14_ptotal_h'] + $row['p3A14_ptotal_m']) ?></td>
-                  <td><?= number_format($row['p3A14_noa_h']) ?></td>
-                  <td><?= number_format($row['p3A14_noa_m']) ?></td>
-                  <td><?= number_format($row['p3A14_noa_m'] + $row['p3A14_noa_h']) ?></td>
+                  <td><center><?= number_format($row['p3A14_ptotal_h']) ?></center></td>
+                  <td><center><?= number_format($row['p3A14_ptotal_m']) ?></center></td>
+                  <td><center><?= number_format($row['p3A14_ptotal_h'] + $row['p3A14_ptotal_m']) ?></center></td>
+                  <td><center><?= number_format($row['p3A14_noa_h']) ?></center></td>
+                  <td><center><?= number_format($row['p3A14_noa_m']) ?></center></td>
+                  <td><center><?= number_format($row['p3A14_noa_m'] + $row['p3A14_noa_h']) ?></center></td>
                 </tr>
                 <tr>
                   <td>12 a 14 años</td>
-                  <td><?= number_format($row['p12A14ptotal_h']) ?></td>
-                  <td><?= number_format($row['p12A14ptotal_m']) ?></td>
-                  <td><?= number_format($row['p12A14ptotal_h'] + $row['p12A14ptotal_m']) ?></td>
-                  <td><?= number_format($row['p12A14noa_h']) ?></td>
-                  <td><?= number_format($row['p12A14noa_m']) ?></td>
-                  <td><?= number_format($row['p12A14noa_h'] + $row['p12A14noa_m']) ?></td>
+                  <td><center><?= number_format($row['p12A14ptotal_h']) ?></center></td>
+                  <td><center><?= number_format($row['p12A14ptotal_m']) ?></center></td>
+                  <td><center><?= number_format($row['p12A14ptotal_h'] + $row['p12A14ptotal_m']) ?></center></td>
+                  <td><center><?= number_format($row['p12A14noa_h']) ?></center></td>
+                  <td><center><?= number_format($row['p12A14noa_m']) ?></center></td>
+                  <td><center><?= number_format($row['p12A14noa_h'] + $row['p12A14noa_m']) ?></center></td>
                 </tr>
               <?php } ?>
             </tbody>
@@ -429,18 +430,18 @@
             <thead class="bg-light">
               <tr>
                 <th>Población</th>
-                <th><i class="fa fa-male"></i></th>
-                <th><i class="fa fa-female"></i></th>
-                <th><i class="fa fa-female"></i><i class="fa fa-male"></i></th>
+                <th class="text-center"><i class="fa fa-male text-primary"></i></th>
+                <th class="text-center"><i class="fa fa-female text-secondary"></i></th>
+                <th class="text-center"><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($analfabetismo as $row) { ?>
                 <tr>
                   <td>Mayor de 15 años que no saben leer y escribir</td>
-                  <td><?= number_format($row['analfabetismo_mayor15_h']) ?></td>
-                  <td><?= number_format($row['analfabetismo_mayor15_m']) ?></td>
-                  <td><?= number_format($row['analfabetismo_mayor15_m'] + $row['analfabetismo_mayor15_h']) ?></td>
+                  <td class="text-center"><?= number_format($row['analfabetismo_mayor15_h']) ?></td>
+                  <td class="text-center"><?= number_format($row['analfabetismo_mayor15_m']) ?></td>
+                  <td class="text-center"><?= number_format($row['analfabetismo_mayor15_m'] + $row['analfabetismo_mayor15_h']) ?></td>
                 </tr>
               <?php  } ?>
             </tbody>

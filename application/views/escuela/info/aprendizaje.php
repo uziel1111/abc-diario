@@ -1,7 +1,7 @@
 <br>
 <p>
   <a id="btn_planea_info" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Planea por contenido tematico Lenguaje y comunicación
+    PLANEA por contenido temático Lenguaje y comunicación
   </a>
 </p>
 <div class="collapse" id="collapseExample">
@@ -11,7 +11,7 @@
 </div>
 <p>
 	<a id="btn_planea_info_mate" class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-	    Planea por contenido tematico Matemáticas
+	    PLANEA por contenido temático Matemáticas
 	</a>
 </p>
 <div class="collapse" id="collapseExample2">
@@ -21,7 +21,7 @@
 </div>
 <p>
 	<a id="btn_planea_info_nlogro"  class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-    	Planea por niveles de logro
+    	PLANEA por niveles de logro
   	</a>
 </p>
 <div class="collapse" id="collapseExample3">
@@ -33,7 +33,7 @@
 </div>
 <p>
 	<a id="btn_planea_info_ete" class="btn btn-primary" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
-    	Eficiencia termial efectiva
+    	Eficiencia terminal efectiva
   	</a>
 </p>
 <div class="collapse" id="collapseExample4">
