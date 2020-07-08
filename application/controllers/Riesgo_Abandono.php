@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Riesgo_Abandono extends CI_Controller {
+class Riesgo_abandono extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
@@ -79,12 +79,12 @@ class Riesgo_Abandono extends CI_Controller {
       	array_push($array_alto,intval($alto4));
       	array_push($array_alto,intval($alto5));
       	array_push($array_alto,intval($alto6));
-     
+
       	$respuesta = array("muy_alto" => intval($muy_alto),"alto" => intval($alto),"medio" => intval($medio),"bajo" => intval($bajo),"array_muy_alto" => $array_muy_alto,"array_alto" => $array_alto,"total_alumnos" => intval($total_alumnos),"total_alumnos_riesgo"=>$total_alumnos_riesgo);
       	envia_datos_json($this, $respuesta);
       	exit();
     }
 
- 
+
 
 }// Riesgo de Abandono

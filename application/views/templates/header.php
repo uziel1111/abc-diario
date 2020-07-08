@@ -53,7 +53,7 @@
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="DropEstadisticas">
 
                     <a class="dropdown-item" href="<?=base_url('Estadistica/estadistica_general/estado_municipio/alumnos');?>">General</a>
-                    <a class="dropdown-item" href="<?= base_url('Riesgo_Abandono/vista_principal_riesgo'); ?>">Riesgo de abandono</a>
+                    <a class="dropdown-item" href="<?= base_url('Riesgo_abandono/vista_principal_riesgo'); ?>">Riesgo de abandono</a>
                     <a class="dropdown-item" href="<?= base_url('Planea'); ?>">Resultados de PLANEA</a>
                   </div>
                 </li>

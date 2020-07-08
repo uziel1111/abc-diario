@@ -144,7 +144,7 @@ class Estadistica extends CI_Controller {
 						$turnos = $this->Estadistica_model->turno_escolar_estadist_xesc();
 						$data['turnos'] = $turnos;
 						$data['ciclos'] = $ciclo;
-            carga_pagina_basica($this,$data,'Estadistica/estadistica_especifica');
+            carga_pagina_basica($this,$data,'estadistica/estadistica_especifica');
 
     }//estadistica_especifica
 
