@@ -63,7 +63,7 @@ class Estadistica_model extends CI_Model
 			{$where}
 			GROUP BY est.idnivel,s.idsostenimiento, m.idmodalidad
 			ORDER BY  est.idnivel,s.idsostenimiento,m.idmodalidad)) as xxxx
-ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
+ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalidad
 			";
 
   		return $this->db->query($query1)->result_array();
@@ -134,7 +134,7 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
 				GROUP BY est.idnivel, s.idsostenimiento, m.idmodalidad
 				ORDER BY  est.idnivel,est.idsostenimiento,est.idmodalidad
 				)) as xxxx
-  ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
+  ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalidad
 				";
   		return $this->db->query($query1)->result_array();
   	}
@@ -202,17 +202,17 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
 				{$where}
 				GROUP BY est.idnivel, s.idsostenimiento, m.idmodalidad
 				)) as xxxx
-  ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad";
+  ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalidad";
   		return $this->db->query($query1)->result_array();
   	}
 
-  	function indicadores_asistencia_xmunicipio($id_municipio){
-  		$where="";
+  	function indicadores_asistencia_xmunicipio($id_municipio,$idciclo){
+  		$where="WHERE i.idciclo = {$idciclo}";
   		$tabla = " indicadores_x_estado ";
   		$campos = " e.identidad,e.nombre as muninicipio ";
   		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
  		if($id_municipio!=0){
- 			$where.=" where m.idmunicipio={$id_municipio}";
+ 			$where.=" AND m.idmunicipio={$id_municipio}";
  			$tabla = " indicadores_x_muni ";
  			$campos = " i.idmunicipio,m.nombre as muninicipio ";
   			$inner = " INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio ";
@@ -227,18 +227,18 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
   		return $this->db->query($query)->result_array();
   	}
 
-  	function indicadores_permanencia_xmunicipio($id_municipio){
-  		$where="";
+  	function indicadores_permanencia_xmunicipio($id_municipio,$idciclo){
+  		$where="WHERE i.idciclo = {$idciclo}";
   		$tabla = " indicadores_x_estado ";
   		$campos = " e.identidad,e.nombre as muninicipio ";
   		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
  		if($id_municipio!=0){
- 			$where.=" where m.idmunicipio={$id_municipio}";
+ 			$where.=" AND m.idmunicipio={$id_municipio}";
  			$tabla = " indicadores_x_muni ";
  			$campos = " i.idmunicipio,m.nombre as muninicipio ";
   			$inner = " INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio ";
  		}
-  		$query="SELECT {$campos},i.idnivel,n.descr as nivel,i.idciclo,c.descr as ciclo,i.retencion,i.aprobacion,i.eficiencia_terminal
+  		$query="SELECT {$campos},i.idnivel,n.descr as nivel,i.idciclo,c.descr as ciclo,i.retencion,i.aprobacion,i.eficiencia_terminal as et
   			FROM {$tabla} as i
   			{$inner}
   			INNER JOIN niveleducativo n ON n.idnivel=i.idnivel

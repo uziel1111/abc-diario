@@ -37,18 +37,16 @@
             <thead class="bg-light">
               <tr>
                 <th rowspan="3" class="align-middle">Nivel educativo</th>
-                <th colspan="21" class="text-center">Alumnos</th>
+                <th colspan="19" class="text-center">Alumnos</th>
               </tr>
               <tr>
-                <th><i class="fa fa-female text-secondary"></i></th>
-                <th><i class="fa fa-male text-primary"></i></th>
-                <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
-                <th>1°</th>
-                <th>2°</th>
-                <th>3°</th>
-                <th>4°</th>
-                <th>5°</th>
-                <th>6°</th>
+                <th><center><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></center></th>
+                <th><center>1°</center></th>
+                <th><center>2°</center></th>
+                <th><center>3°</center></th>
+                <th><center>4°</center></th>
+                <th><center>5°</center></th>
+                <th><center>6°</center></th>
               </tr>
             </thead>
             <tbody>
@@ -77,15 +75,13 @@
                     <?php  } ?>
                     <td class="pl-5"><?= $row['modalidad'] ?></td>
                 <?php }
-                  ($row['alumn_m_t'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['alumn_m_t']) . '</td>';
-                  ($row['alumn_h_t'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['alumn_h_t']) . '</td>';
-                  ($row['alumn_t_t'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['alumn_t_t']) . '</td>';
-                  ($row['alumnos1'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['alumnos1']) . '</td>';
-                  ($row['alumnos2'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['alumnos2']) . '</td>';
-                  ($row['alumnos3'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['alumnos3']) . '</td>';
-                  ($row['alumnos4'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['alumnos4']) . '</td>';
-                  ($row['alumnos5'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['alumnos5']) . '</td>';
-                  ($row['alumnos6'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['alumnos6']) . '</td>';
+                  ($row['alumn_t_t'] == 0) ? print '<td><center>-</center></td>' : print '<td><center>' . number_format($row['alumn_t_t']) . '</center></td>';
+                  ($row['alumnos1'] == 0) ? print '<td><center>-</center></td>' : print '<td><center>' . number_format($row['alumnos1']) . '</center></td>';
+                  ($row['alumnos2'] == 0) ? print '<td><center>-</center></td>' : print '<td><center>' . number_format($row['alumnos2']) . '</center></td>';
+                  ($row['alumnos3'] == 0) ? print '<td><center>-</center></td>' : print '<td><center>' . number_format($row['alumnos3']) . '</center></td>';
+                  ($row['alumnos4'] == 0) ? print '<td><center>-</center></td>' : print '<td><center>' . number_format($row['alumnos4']) . '</center></td>';
+                  ($row['alumnos5'] == 0) ? print '<td><center>-</center></td>' : print '<td><center>' . number_format($row['alumnos5']) . '</center></td>';
+                  ($row['alumnos6'] == 0) ? print '<td><center>-</center></td>' : print '<td><center>' . number_format($row['alumnos6']) . '</center></td>';
                   // echo "</tr>";
                 } ?>
             </tbody>
@@ -109,20 +105,10 @@
             <thead class="bg-light">
               <tr>
                 <th rowspan="2" class="align-middle">Nivel educativo</th>
-                <th colspan="3" class="text-center align-middle">Docentes</th>
-                <th colspan="3" class="text-center align-middle">Directivo con grupo</th>
-                <th colspan="3" class="text-center align-middle">Directivo sin grupo</th>
+                <th colspan="1" class="text-center align-middle">Docentes</th>
               </tr>
               <tr>
-                <th><i class="fa fa-female text-secondary"></i></th>
-                <th><i class="fa fa-male text-primary"></i></th>
-                <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
-                <th><i class="fa fa-female text-secondary"></i></th>
-                <th><i class="fa fa-male text-primary"></i></th>
-                <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
-                <th><i class="fa fa-female text-secondary"></i></th>
-                <th><i class="fa fa-male text-primary"></i></th>
-                <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
+                <th><center><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></center></th>
               </tr>
             </thead>
             <tbody>
@@ -149,18 +135,11 @@
                     <?php  } ?>
                     <td class="pl-5"><?= $row['modalidad'] ?></td>
                 <?php }
-                  ($row['docentes_m'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['docentes_m']) . '</td>';
-                  ($row['docentes_h'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['docentes_h']) . '</td>';
-                  ($row['docentes_t_g'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['docentes_t_g']) . '</td>';
-                  ($row['directivo_m_congrup'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['directivo_m_congrup']) . '</td>';
-                  ($row['directivo_h_congrup'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['directivo_h_congrup']) . '</td>';
-                  ($row['directivo_t_congrup'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['directivo_t_congrup']) . '</td>';
-                  ($row['directivo_m_singrup'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['directivo_m_singrup']) . '</td>';
-                  ($row['directivo_h_singrup'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['directivo_h_singrup']) . '</td>';
-                  ($row['directivo_t_singrup'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['directivo_t_singrup']) . '</td>';
+                  ($row['docentes_t_g'] == 0) ? print '<td><center>-</center></td>' : print '<td><center>' . number_format($row['docentes_t_g']) . '</center></td>';
                 } ?>
             </tbody>
           </table>
+
           <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911.</div>
           </div>
@@ -248,7 +227,7 @@
           <table class="table table-sm table-striped table-hover">
             <thead class="bg-light">
               <tr>
-                <th class="text-center align-middle">Nivel</th>
+                <th class="text-left align-middle">Nivel</th>
                 <th class="text-center align-middle">Cobertura</th>
                 <th class="text-center align-middle">Absorción</th>
               </tr>
@@ -257,8 +236,8 @@
               <?php foreach ($asistencia as $row) { ?>
                 <tr>
                   <td><?= $row['nivel'] ?></td>
-                  <td style="text-align: center;"><?= $row['cobertura'] ?>%</td>
-                  <td style="text-align: center;"><?= $row['absorcion'] ?>%</td>
+                  <td style="text-align: center;"><?= (($row['cobertura']=='')?'-':$row['cobertura'].'%') ?></td>
+                  <td style="text-align: center;"><?= (($row['absorcion']=='')?'-':$row['absorcion'].'%') ?></td>
                 </tr>
               <?php } ?>
             </tbody>
@@ -292,16 +271,16 @@
               <?php foreach ($permanencia as $row) { ?>
                 <tr>
                   <td><?= $row['nivel'] ?></td>
-                  <td style="text-align: center;"><?= $row['retencion'] ?>%</td>
-                  <td style="text-align: center;"><?= $row['aprobacion'] ?>%</td>
-                  <td style="text-align: center;"><?= ($row['et'] == '0.00') ? print 'N/D' : print $row['et'] . '%' ?></td>
+                  <td style="text-align: center;"><?= (($row['retencion']=='')?'-':$row['retencion'].'%') ?></td>
+                  <td style="text-align: center;"><?= (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') ?></td>
+                  <td style="text-align: center;"><?= (($row['et']=='')?'-':$row['et'].'%') ?></td>
                 </tr>
               <?php } ?>
             </tbody>
           </table>
           <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911.</div>
-            <div id="">N/D : Dato no disponible</div>
+            <div id="">- : Dato no disponible</div>
           </div>
         </div>
       </div>
@@ -400,20 +379,12 @@
                   <td><center><?= number_format($row['p3A14_noa_m']) ?></center></td>
                   <td><center><?= number_format($row['p3A14_noa_m'] + $row['p3A14_noa_h']) ?></center></td>
                 </tr>
-                <tr>
-                  <td>12 a 14 años</td>
-                  <td><center><?= number_format($row['p12A14ptotal_h']) ?></center></td>
-                  <td><center><?= number_format($row['p12A14ptotal_m']) ?></center></td>
-                  <td><center><?= number_format($row['p12A14ptotal_h'] + $row['p12A14ptotal_m']) ?></center></td>
-                  <td><center><?= number_format($row['p12A14noa_h']) ?></center></td>
-                  <td><center><?= number_format($row['p12A14noa_m']) ?></center></td>
-                  <td><center><?= number_format($row['p12A14noa_h'] + $row['p12A14noa_m']) ?></center></td>
-                </tr>
+
               <?php } ?>
             </tbody>
           </table>
           <div class="pie_tabla bg-info text-light font-weight-bold">
-            <div id="fuentes_pie">Fuente: INEGI</div>
+            <div id="fuentes_pie">Fuente: INEGI 2015</div>
           </div>
         </div>
       </div>
@@ -447,7 +418,7 @@
             </tbody>
           </table>
           <div class="pie_tabla bg-info text-light font-weight-bold">
-            <div id="fuentes_pie">Fuente: INEGI</div>
+            <div id="fuentes_pie">Fuente: INEGI 2015</div>
           </div>
         </div>
       </div>

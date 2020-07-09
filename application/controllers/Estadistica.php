@@ -85,8 +85,8 @@ class Estadistica extends CI_Controller {
     	$alumnos = $this->Estadistica_model->obtener_alumnos_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
     	$docentes = $this->Estadistica_model->obtener_docentes_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
     	$infraestructura = $this->Estadistica_model->obtener_infraestructura_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
-    	$asistencia =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio);
-    	$permanencia =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio);
+    	$asistencia =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio,$idciclo);
+    	$permanencia =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio,$idciclo);
     	$aprendizaje =  $this->Estadistica_model->indicadores_aprendizaje_xmunicipio($idmunicipio);
     	$analfabetismo =  $this->Estadistica_model->analfabetismo_xmuni($idmunicipio);
     	$rezago =  $this->Estadistica_model->rezago_educativo_xmuni($idmunicipio);
