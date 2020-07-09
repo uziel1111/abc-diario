@@ -98,7 +98,7 @@ class Estadistica extends CI_Controller {
       	}
       	if($idsostenimiento>0){
         	$sostenimiento = $this->Generico_model->obtener_nombre_sostenimiento($idsostenimiento);
-        	$sostenimiento=$nivel[0]['nombre'];
+        	$sostenimiento=$sostenimiento[0]['nombre'];
      	}
      	if($idmodalidad>0){
         	$modalidad = $this->Generico_model->obtener_nombre_modalidad($idmodalidad);

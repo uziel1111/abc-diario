@@ -16,7 +16,7 @@
                             <a href="<?=base_url('Estadistica/estadistica_general/zona_escolar/alumnos');?>"><li class="list-group-item list-group-item-action">Por zona escolar</li></a>
                             <a href="<?=base_url('Info_escuela/busqueda_general');?>"><li class="list-group-item list-group-item-action">Por escuela</li></a>
                             <a href="<?=base_url('Riesgo_abandono/vista_principal_riesgo');?>"><li class="list-group-item list-group-item-action">Riesgo de abandono escolar por estado / municipio</li></a>
-                            <a href="<?=base_url('Riesgo_abandono/vista_principal_riesgo');?>"><li class="list-group-item list-group-item-action">Riesgo de abandono por escuela</li></a>
+                            <a href="<?=base_url('Info_escuela/busqueda_general');?>"><li class="list-group-item list-group-item-action">Riesgo de abandono por escuela</li></a>
                         </ul>
                     </div>
                 </div>

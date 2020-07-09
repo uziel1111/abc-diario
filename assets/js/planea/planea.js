@@ -2,14 +2,17 @@
 $("#slt_municipio_planea").change(function(){
 	Planea.obtener_niveles_xidmunicipio();
 	$("#div_graficas_masivo").empty();
+	$(".div_grafiaca_txt").attr("hidden",true);
 });
 $("#slt_nivel_planeaxm").change(function(){
 	Planea.obtener_perido_xidmunicipio_xidnivel();
 	$("#div_graficas_masivo").empty();
+	$(".div_grafiaca_txt").attr("hidden",true);
 });
 
 $("#btn_busqueda_xestadomun").click(function(){
 	$("#div_graficas_masivo").empty();
+	$(".div_grafiaca_txt").attr("hidden",true);
 	if($("#slt_nivel_planeaxm").val() == 0){
 		Mensaje.alerta("error","Seleccione nivel","");
 	}else{
@@ -20,6 +23,7 @@ $("#btn_busqueda_xestadomun").click(function(){
 				Mensaje.alerta("error","Seleccione campo disciplinario","");
 			}else{
 				$("#div_graficas_masivo").empty();
+				$('.div_grafiaca_txt').removeAttr('hidden');
 				Planea.obtener_grafica_xestadomunicipio();
 			}
 		}
@@ -28,6 +32,7 @@ $("#btn_busqueda_xestadomun").click(function(){
 
 $("#btn_busqueda_xestadozona").click(function(){
   $("#div_graficas_masivo").empty();
+	$(".div_grafiaca_txt").attr("hidden",true);
   if($("#slt_nivel_planeazn").val() == null){
     Mensaje.alerta("error","Seleccione nivel","");
   }else{
@@ -46,6 +51,7 @@ $("#btn_busqueda_xestadozona").click(function(){
 		        Mensaje.alerta("error","Seleccione campo disciplinario","");
 		      }else{
 						$("#div_graficas_masivo").empty();
+						$('.div_grafiaca_txt').removeAttr('hidden');
 		        Planea.obtener_grafica_xestadozona();
 		      }
 		    }
@@ -68,6 +74,7 @@ $("#xzona-tab").click(function(e) {
       success: function (dato) {
         Mensaje.cerrar();
         $("#div_graficas_masivo").empty();
+				$(".div_grafiaca_txt").attr("hidden",true);
         $('#buscador_zona').empty();
         $('#buscador_zona').append(dato.filtros);
 				$("#slt_modalidad_planeazn option[value='-1'").prop("selected",true);
@@ -104,6 +111,7 @@ $("#slt_nivel_planeazn").change(function (e) {
 			$("#slt_modalidad_planeazn").empty();
 			$("#slt_modalidad_planeazn").append(dato.str_select);
 			$('#slt_modalidad_planeazn').prop('disabled', false);
+			$(".div_grafiaca_txt").attr("hidden",true);
 			$("#slt_zona_planeazn option[value='0'").prop("selected",true);
 			$('#slt_zona_planeazn').prop('disabled', true);
 			$("#slt_periodo_planeazn option[value='0'").prop("selected",true);
@@ -134,6 +142,7 @@ $("#slt_modalidad_planeazn").change(function (e) {
     success: function (dato) {
       Mensaje.cerrar();
 			$("#div_graficas_masivo").empty();
+			$(".div_grafiaca_txt").attr("hidden",true);
 			$("#slt_zona_planeazn").empty();
 			$("#slt_zona_planeazn").append(dato.str_select);
 			$('#slt_zona_planeazn').prop('disabled', false);
@@ -165,6 +174,7 @@ $("#slt_zona_planeazn").change(function (e) {
     success: function (dato) {
       Mensaje.cerrar();
 			$("#div_graficas_masivo").empty();
+			$(".div_grafiaca_txt").attr("hidden",true);
 			$("#slt_periodo_planeazn").empty();
 			$("#slt_periodo_planeazn").append(dato.str_select);
 			$('#slt_periodo_planeazn').prop('disabled', false);
@@ -184,6 +194,7 @@ $("#slt_periodo_planeazn").change(function (e) {
 	e.preventDefault();
 	e.stopImmediatePropagation();
 	$("#div_graficas_masivo").empty();
+	$(".div_grafiaca_txt").attr("hidden",true);
 	$('#slt_campod_planeazn').prop('disabled', false);
 	$("#slt_campod_planeazn option[value='0'").prop("selected",true);
 });
@@ -203,6 +214,7 @@ obtener_perido_xidmunicipio_xidnivel: () => {
       success: function (dato) {
         Mensaje.cerrar();
 				$("#div_graficas_masivo").empty();
+				$(".div_grafiaca_txt").attr("hidden",true);
 				$("#slt_periodo_planeaxm").empty();
 				$("#slt_periodo_planeaxm").append(dato.options);
       },
@@ -225,6 +237,7 @@ obtener_niveles_xidmunicipio: () => {
     success: function (dato) {
       Mensaje.cerrar();
 			$("#div_graficas_masivo").empty();
+			$(".div_grafiaca_txt").attr("hidden",true);
 			$("#slt_nivel_planeaxm").empty();
 			$("#slt_nivel_planeaxm").append(dato.options);
     },
