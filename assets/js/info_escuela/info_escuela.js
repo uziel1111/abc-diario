@@ -1,3 +1,18 @@
+/* jshint esversion: 6 */
+$(function() {
+	// setTimeout(function(){
+	if($("#itxt_seccion_event").val() == 'escuela'){
+		$("#tab_asistencia_info").trigger( "click" );
+	}
+	if($("#itxt_seccion_event").val() == 'rescuela'){
+	 	$("#tab_permanencia_info").trigger( "click" );
+	}
+	if($("#itxt_seccion_event").val() == 'aprendizaje'){
+	 	$("#tab_aprendizaje_info").trigger( "click" );
+	}
+	// }, 2000);
+	 
+});
 
 $("#tab_asistencia_info").click(function(e){
   e.preventDefault();

@@ -4,6 +4,7 @@
 			<div class="card-header bg-warning text-light">
 				<i class="fas fa-search"></i> Datos generales de la escuela
 			</div>
+			<input type="hidden" name="itxt_seccion_event" id="itxt_seccion_event" value="<?=$seccion?>">
 			<div class="card-body">
 				<input type="hidden" id="idturnoinfo" value="<?= $info[0]['idturno'] ?>">
 				<input type="hidden" id="cctinfo" value="<?= $info[0]['cct'] ?>">
