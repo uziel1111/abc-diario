@@ -105,7 +105,7 @@ class Generico_model extends CI_Model
       if($idnivel>0){
         $where .= " AND n.idnivel = {$idnivel}";
       }
-      if($idsostenimiento>-1){
+      if($idsostenimiento>0){
         $where .= " AND s.idsostenimiento = {$idsostenimiento}";
       }
 

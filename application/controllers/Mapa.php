@@ -32,7 +32,7 @@ class Mapa extends CI_Controller {
 					}
 
 					$sostenimientos = $this->Listadoesc_model->sostenimientos();
-					$arr_sostenimientos['-1'] = 'TODOS';
+					$arr_sostenimientos['0'] = 'TODOS';
 					foreach ($sostenimientos as $sostenimiento){
 						 $arr_sostenimientos[$sostenimiento['idsostenimiento']] = $sostenimiento['nombre'];
 					}
@@ -58,7 +58,7 @@ class Mapa extends CI_Controller {
 						$str_select .= "<option value={$value['idnivel']}> {$value['nombre']} </option>";
 					}
 					$sostenimientos = $this->Listadoesc_model->sostenimientos($idmunicipio);
-					$str_select1 = '<option value=-1>TODOS</option>';
+					$str_select1 = '<option value=0>TODOS</option>';
 					foreach ($sostenimientos as $key => $value) {
 						$str_select1 .= "<option value={$value['idsostenimiento']}> {$value['nombre']} </option>";
 					}
@@ -72,7 +72,7 @@ class Mapa extends CI_Controller {
 					$idmunicipio = $this->input->post('idmunicipio');
 					$idnivel = $this->input->post('idnivel');
 					$sostenimientos = $this->Listadoesc_model->sostenimientos($idmunicipio);
-					$str_select = '<option value=-1>TODOS</option>';
+					$str_select = '<option value=0>TODOS</option>';
 					foreach ($sostenimientos as $key => $value) {
 						$str_select .= "<option value={$value['idsostenimiento']}> {$value['nombre']} </option>";
 					}

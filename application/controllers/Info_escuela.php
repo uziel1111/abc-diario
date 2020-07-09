@@ -43,7 +43,7 @@ class Info_escuela extends CI_Controller {
         $nivel = $this->Generico_model->obtener_nombre_nivel($idnivel);
         $nivel=$nivel[0]['nombre'];
       }
-      if($idsostenimiento!=-1){
+      if($idsostenimiento!=0){
         $sostenimiento = $this->Generico_model->obtener_nombre_sostenimiento($idsostenimiento);
         $sostenimiento=$sostenimiento[0]['nombre'];
       }

@@ -14,7 +14,7 @@ $("input[name=busqueda_escuela]").click(function () {
 $("#btn_limpiar_busqueda_general").click(function () {
 	$("#filtro_municipio_busqueda option[value='0'").attr("selected",true);
 	$("#filtro_nivel_busqueda option[value='0'").attr("selected",true);
-	$("#filtro_sostenimiento_busqueda option[value='-1'").attr("selected",true);
+	$("#filtro_sostenimiento_busqueda option[value='0'").attr("selected",true);
 	$("#div_lista_escuelas").empty();
 	$("nombre_cct").val("");
 });

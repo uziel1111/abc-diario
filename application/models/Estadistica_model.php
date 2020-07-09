@@ -9,7 +9,7 @@ class Estadistica_model extends CI_Model
  			$tabla = "estadistica_x_muni";
  		}
  		$query1="SELECT * FROM(
-      (SELECT est.idnivel, n.descr AS nivel, '-1' AS idsostenimiento, 'total' AS sostenimiento,
+      (SELECT est.idnivel, n.descr AS nivel, '0' AS idsostenimiento, 'total' AS sostenimiento,
 			'0' AS idmodalidad,
 			'total' AS modalidad,
 			SUM(IF(ISNULL(est.t_alumnos_m),0 , t_alumnos_m)) AS alumn_m_t,
@@ -78,7 +78,7 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
  		}
 
  		$query1="SELECT * FROM(
-				(SELECT n.idnivel,n.descr AS nivel,'-1' AS idsostenimiento,
+				(SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,
 				'total' AS sostenimiento,'0' AS idmodalidad,
 				'total' AS modalidad,
 				'' AS docentes_m,
@@ -147,7 +147,7 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
  			$tabla = "estadistica_x_muni";
  		}
 
- 		$query1="SELECT * FROM((SELECT n.idnivel,n.descr AS nivel,'-1' AS idsostenimiento,
+ 		$query1="SELECT * FROM((SELECT n.idnivel,n.descr AS nivel,'0' AS idsostenimiento,
 				'total' AS sostenimiento,'0' AS idmodalidad,
 				'total' AS modalidad,
 				SUM(est.n_escuelas)AS nescuelas,
@@ -382,9 +382,9 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
 
   //       return $this->db->query($str_query,[$idnivel])->result_array();
   //   }// obtener_sostenimiento_xidnivel_zona()
-  //   
+  //
     function obtener_modalidad_xidnivel_zona($idnivel){
-    	$str_query = "SELECT m.idmodalidad, m.descr AS nombre, m.estatus 
+    	$str_query = "SELECT m.idmodalidad, m.descr AS nombre, m.estatus
 		FROM estadistica_x_zona est
 		INNER JOIN c_zona z ON est.zonaid = z.zonaid
 		INNER JOIN cct ct ON ct.zonaid = z.zonaid
@@ -396,7 +396,7 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
 
     function escuelas($idmunicipio,$idnivel,$idsostenimiento,$nombre_cct,$cct){
     	$where="";
-    	$datos=['ACT'];
+    	$datos=['A'];
     	if($idmunicipio>0){
     		$where.=" AND m.idmunicipio= ? ";
     		array_push($datos, $idmunicipio);
@@ -407,7 +407,7 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
     		array_push($datos, $idnivel);
     	}
 
-    	if($idsostenimiento!=-1){
+    	if($idsostenimiento!=0){
     		$where.= " AND ct.sostenimiento= ?";
     		array_push($datos, $idsostenimiento);
     	}
@@ -436,6 +436,7 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
     			WHERE ct.status = ?
     			{$where}
     			";
+          // echo "<pre>";print_r($query);die();
     	return $this->db->query($query,$datos)->result_array();
     }
 
@@ -564,7 +565,7 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
           return  $this->db->query($query)->result_array();
 			}//trae_ciclos_est_muni
 
-      public function trae_ciclos_est_muni_param($id_municipio,$idnivel=0,$idsostenimiento=-1,$idmodalidad=0) {
+      public function trae_ciclos_est_muni_param($id_municipio,$idnivel=0,$idsostenimiento=0,$idmodalidad=0) {
         $join = " ";
         if($id_municipio>0){
               $where = "WHERE est.idmunicipio = {$id_municipio} ";
@@ -578,7 +579,7 @@ ORDER BY xxxx.idnivel,xxxx.idsostenimiento,xxxx.idmodalidad
               $where .= " AND n.idnivel = {$idnivel}";
               $join .= " INNER JOIN niveleducativo n on est.idnivel = n.idnivel ";
             }
-            if($idsostenimiento> -1){
+            if($idsostenimiento> 0){
               $where .= " AND s.idsostenimiento = {$idsostenimiento}";
               $join .= " INNER JOIN c_sostenimiento s ON est.idsostenimiento= s.idsostenimiento ";
             }

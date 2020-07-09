@@ -14,7 +14,7 @@ $("input[name=busqueda_estadistica]").click(function () {
 		$('#filtro_modalidad').prop('disabled', true);
 		$("#filtro_municipio option[value='0'").attr("selected",true);
 		$("#filtro_nivel option[value='0'").attr("selected",true);
-		$("#filtro_sostenimiento option[value='-1'").attr("selected",true);
+		$("#filtro_sostenimiento option[value='0'").attr("selected",true);
 		$("#filtro_modalidad option[value='0'").attr("selected",true);
 	}else{
 		$("#filtros_zona_escolar").show();
@@ -30,7 +30,7 @@ $("#btn_limpiar_municipio_estado").click(function () {
 	$('#filtro_modalidad').prop('disabled', true);
 	$("#filtro_municipio option[value='0'").attr("selected",true);
 	$("#filtro_nivel option[value='0'").attr("selected",true);
-	$("#filtro_sostenimiento option[value='-1'").attr("selected",true);
+	$("#filtro_sostenimiento option[value='0'").attr("selected",true);
 	$("#filtro_modalidad option[value='0'").attr("selected",true);
 	$("#div_estadistica").empty();
 });
@@ -51,7 +51,7 @@ $("#filtro_municipio").change(function () {
 		$('#filtro_sostenimiento').prop('disabled', true);
 		$('#filtro_modalidad').prop('disabled', true);
 		$("#filtro_nivel option[value='0'").attr("selected",true);
-		$("#filtro_sostenimiento option[value='-1'").attr("selected",true);
+		$("#filtro_sostenimiento option[value='0'").attr("selected",true);
 		$("#filtro_modalidad option[value='0'").attr("selected",true);
 	}
 });
@@ -63,13 +63,13 @@ $("#filtro_nivel").change(function () {
 	}else{
 		$('#filtro_sostenimiento').prop('disabled', true);
 		$('#filtro_modalidad').prop('disabled', true);
-		$("#filtro_sostenimiento option[value='-1'").attr("selected",true);
+		$("#filtro_sostenimiento option[value='0'").attr("selected",true);
 		$("#filtro_modalidad option[value='0'").attr("selected",true);
 	}
 });
 
 $("#filtro_sostenimiento").change(function () {
-	if($("#filtro_sostenimiento").val()!=-1){
+	if($("#filtro_sostenimiento").val()!=0){
 		$('#filtro_modalidad').prop('disabled', false);
 		Estadistica_general.modalidades($("#filtro_sostenimiento").val(),$("#filtro_municipio").val(),$("#filtro_nivel").val());
 	}else{
@@ -114,7 +114,7 @@ var Estadistica_general = {
 						}
 	        	$('#filtro_sostenimiento').prop('disabled', true);
 				$('#filtro_modalidad').prop('disabled', true);
-				$("#filtro_sostenimiento option[value='-1'").attr("selected",true);
+				$("#filtro_sostenimiento option[value='0'").attr("selected",true);
 				$("#filtro_modalidad option[value='0'").attr("selected",true);
 	      	},
 	      	error: function (jqXHR, textStatus, errorThrown) {
@@ -138,7 +138,7 @@ var Estadistica_general = {
 	        success: function (data) {
 	        	Mensaje.cerrar();
 	        	$("#filtro_sostenimiento").empty();
-	      		$("#filtro_sostenimiento").append("<option value='-1'>Todos</option>");
+	      		$("#filtro_sostenimiento").append("<option value='0'>Todos</option>");
 	          	for (let i=0; i<data.sostenimientos.length; i++) {
 	      			$("#filtro_sostenimiento").append("<option value='"+data.sostenimientos[i]['idsostenimiento']+"'>"+data.sostenimientos[i]['nombre']+"</option>");
 	      		}

@@ -77,7 +77,7 @@ $("#xzona-tab").click(function(e) {
 				$(".div_grafiaca_txt").attr("hidden",true);
         $('#buscador_zona').empty();
         $('#buscador_zona').append(dato.filtros);
-				$("#slt_modalidad_planeazn option[value='-1'").prop("selected",true);
+				$("#slt_modalidad_planeazn option[value='0'").prop("selected",true);
 				$('#slt_modalidad_planeazn').prop('disabled', true);
 				$("#slt_zona_planeazn option[value='0'").prop("selected",true);
 				$('#slt_zona_planeazn').prop('disabled', true);

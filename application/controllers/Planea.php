@@ -137,7 +137,7 @@ public function obtener_grafica_xestadomunicipio(){
 		{
 			$idnivel = $this->input->post("idnivel");
 			$arr_sostenimiento = $this->Planea_model->modalidad_zona($idnivel);
-			$str_select = "<option value='-1'  disabled='true' selected='true'>SELECCIONE UN SOSTENIMIENTO</option>";
+			$str_select = "<option value='0'  disabled='true' selected='true'>SELECCIONE UN SOSTENIMIENTO</option>";
 			foreach ($arr_sostenimiento as $key => $value) {
 				$str_select .= "<option value={$value['idmodalidad']}> {$value['nombre']} </option>";
 			}
