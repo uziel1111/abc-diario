@@ -97,19 +97,19 @@ regresa_icon: (nivel) => {
 		return "marker7";
 		break;
 		case "6":
-		return "marker8";
-		break;
-		case "7":
-		return "marker9";
-		break;
-		case "8":
-		return "marker10";
-		break;
-		case "9":
 		return "marker1";
 		break;
-		case "10":
+		case "7":
+		return "marker8";
+		break;
+		case "8":
 		return "marker2";
+		break;
+		case "9":
+		return "marker9";
+		break;
+		case "10":
+		return "marker11";
 		break;
 
 	}

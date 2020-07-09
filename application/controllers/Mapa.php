@@ -16,7 +16,7 @@ class Mapa extends CI_Controller {
 			$arr_niveles = array();
 			$arr_sostenimientos = array();
 			$arr_federales = array();
-
+			$sub = '';
 			if($tipo_busqueda == 'cct'){
 				$sub = "Por clave de escuela";
 			}else if($tipo_busqueda == "parametros"){

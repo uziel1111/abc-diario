@@ -40,7 +40,7 @@
                   <label class="d-inline-flex fw500"><i class="fa fa-map-marker" style="color:#ff8d00;"></i> Superior</label>
                 </div>
                 <div class="col-sm mb-1">
-                  <label class="d-inline-flex fw500"><i class="fa fa-map-marker" style="color:#ff0000;"></i> Formación para el trabajo</label>
+                  <label class="d-inline-flex fw500"><i class="fa fa-map-marker" style="color:#ff0000;"></i> Capacitación para el trabajo</label>
                 </div>
                 <div class="col-sm mb-1">
                   <label class="d-inline-flex fw500"><i class="fa fa-map-marker" style="color:#ff00ff;"></i> Otro nivel educativo</label>
