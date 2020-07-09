@@ -11,16 +11,16 @@ class Riesgo_abandono_model extends CI_Model
       }
 
       function niveles(){
-            $query="SELECT n.idnivel, n.descr as nombre, n.subfijo 
+            $query="SELECT n.idnivel, n.descr as nombre, n.subfijo
             FROM niveleducativo n
             INNER JOIN complemento_apa apa on apa.idnivel = n.idnivel
             GROUP BY n.idnivel";
             return  $this->db->query($query)->result_array();
       }
 	function obtener_riesgo_xmunicipioxnivelxcicloxperiodo($idmunicipio,$idnivel,$ciclo,$idperiodo){
-		$datos=['ACT'];
+		$datos=['A'];
 		$where="";
-		
+
 		if($idmunicipio>0){
 			$where.=" AND m.idmunicipio=?";
 			array_push($datos, $idmunicipio);
@@ -60,7 +60,7 @@ class Riesgo_abandono_model extends CI_Model
             INNER JOIN centrocfg cfg ON cfg.idcentrocfg=c.idcentrocfg
             INNER JOIN cct ct ON ct.idct=cfg.idct
             INNER JOIN municipio m ON m.idmunicipio=ct.idmunicipio
-            WHERE ct.status=? 
+            WHERE ct.status=?
             {$where}
             ";
         return $this->db->query($query,$datos)->result_array();
@@ -69,7 +69,7 @@ class Riesgo_abandono_model extends CI_Model
       function obtener_riesgo_xcct($cct, $turno, $ciclo, $idperiodo){
             // $datos=['ACT'];
             // $where="";
-            
+
             // if($idperiodo){
             //       $where.=" AND c.periodo=?";
             //       array_push($datos, $idperiodo);
