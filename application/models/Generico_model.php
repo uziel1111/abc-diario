@@ -6,7 +6,7 @@ class Generico_model extends CI_Model
       return  $this->db->query($query)->result_array();
     }// municipios()
   function niveles(){
-      $query="SELECT idnivel, descr as nombre, subfijo FROM niveleducativo";
+      $query="SELECT idnivel, descr as nombre, subfijo FROM niveleducativo order by FIELD(idnivel,6,8,1,2,3,4,5,7)";
       return  $this->db->query($query)->result_array();
     }// niveles()
   function sostenimientos(){
@@ -27,7 +27,8 @@ class Generico_model extends CI_Model
                     	FROM {$from} est
                     	INNER JOIN niveleducativo n on est.idnivel = n.idnivel
                     	{$where}
-                      GROUP BY n.idnivel";
+                      GROUP BY n.idnivel
+                      order by FIELD(n.idnivel,6,8,1,2,3,4,5,7)";
 
         return $this->db->query($str_query)->result_array();
     }// obtener_nivel_xidmunicipio()
@@ -188,7 +189,7 @@ WHERE
       return  $this->db->query($query,[$idmunicipio])->result_array();
   }// obtener_nombre_municipio()
   function obtener_nombre_nivel($idnivel){
-      $query="SELECT  descr as nombre FROM niveleducativo WHERE idnivel= ? ";
+      $query="SELECT  descr as nombre FROM niveleducativo WHERE idnivel= ? order by FIELD(idnivel,6,8,1,2,3,4,5,7)";
       return  $this->db->query($query,[$idnivel])->result_array();
   }// obtener_nombre_nivel()
 
