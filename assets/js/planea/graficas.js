@@ -84,7 +84,7 @@ var Graficasm = {
           },
           yAxis: {
               title: {
-                  text: '<div style="font-size: 1.1vh;">Porcentaje de alumnos con respuestas correctas</div>'
+                  text: '<div style="font-size: 14px;">Porcentaje de alumnos con respuestas correctas</div>'
               }
           },
           legend: {
