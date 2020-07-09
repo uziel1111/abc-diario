@@ -16,7 +16,7 @@ class Planea_model extends CI_Model
                       INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
                       INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg =pr.idcentrocfg
                       INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
-                      WHERE ct.`status`='ACT' AND cfg.`status`='A'
+                      WHERE ct.`status`='A' AND cfg.`status`='A'
                       {$where}
                       GROUP BY n.idnivel";
 
@@ -37,7 +37,7 @@ class Planea_model extends CI_Model
                         INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
                         INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
 												INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
-                        WHERE ct.`status`='ACT' AND cfg.`status`='A'
+                        WHERE ct.`status`='A' AND cfg.`status`='A'
                         {$where}
                         GROUP BY pp.id_periodo";
 
@@ -94,7 +94,7 @@ class Planea_model extends CI_Model
                         INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
                         INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
                         INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
-                        WHERE ct.`status`='ACT' AND cfg.`status`='A'
+                        WHERE ct.`status`='A' AND cfg.`status`='A'
                         AND pp.id_periodo = {$idperiodo}
                         GROUP BY pp.id_periodo";
 
@@ -187,7 +187,7 @@ class Planea_model extends CI_Model
         //                     ) AS datos2";
         //   return $this->db->query($str_query,$array)->result_array();
         // }//estadisticas_x_estadozona
-        // 
+        //
         function estadisticas_x_estadozona($zona, $modalidad, $nivel, $periodo, $campodisip)
         {
              $where = "";
@@ -227,7 +227,7 @@ class Planea_model extends CI_Model
                                       INNER JOIN planea_unidad_analisis t4 ON t3.id_unidad_analisis=t4.id_unidad_analisis
                                       INNER JOIN planea_camposdisciplinares t5 ON t4.id_campodisiplinario=t5.id_campodisiplinario
                                       INNER JOIN c_modalidad m ON m.idmodalidad = e.idmodalidad
-                                      WHERE cfg.nivel = ? AND pp.id_periodo = ? AND m.idmodalidad = ? 
+                                      WHERE cfg.nivel = ? AND pp.id_periodo = ? AND m.idmodalidad = ?
                                       AND t5.id_campodisiplinario = ? {$where}
                                       GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
                               GROUP BY id_contenido
@@ -448,7 +448,7 @@ class Planea_model extends CI_Model
         //             GROUP BY z.zonaid, z.zona_escolar, z.cct_supervisor";
         //   return $this->db->query($str_query)->result_array();
         // }//niveles_zona
-        
+
         function zonas_zona($idnivel=null, $idmodalidad=null){
           $where = "WHERE 1=1 ";
           if ($idnivel!=null) {
@@ -494,7 +494,7 @@ class Planea_model extends CI_Model
         //             GROUP BY p.id_periodo";
         //   return $this->db->query($str_query)->result_array();
         // }//periodo_zona
-        // 
+        //
         function  periodo_zona($idnivel,$idmodalidad,$zona){
           $where = "WHERE 1=1 ";
           if ($idnivel!=null) {

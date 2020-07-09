@@ -67,7 +67,7 @@ class Riesgo_abandono_model extends CI_Model
 	}
 
       function obtener_riesgo_xcct($cct, $turno, $ciclo, $idperiodo){
-            // $datos=['ACT'];
+            // $datos=['A'];
             // $where="";
 
             // if($idperiodo){

@@ -130,7 +130,7 @@ class Generico_model extends CI_Model
                   INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
                   INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
                   INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
-                  WHERE ct.`status`='ACT' AND cfg.`status`='A'
+                  WHERE ct.`status`='A' AND cfg.`status`='A'
                   GROUP BY pp.id_periodo";
       return  $this->db->query($query)->result_array();
   }//periodos_planea
@@ -165,7 +165,7 @@ class Generico_model extends CI_Model
     c.localidad,
     mun.nombre AS municipio,
     'director',
-    IF(c.status = 'ACT', 'ACTIVO', '') AS estatus
+    IF(c.status = 'A', 'ACTIVO', '') AS estatus
 FROM
     cct c
         LEFT JOIN
