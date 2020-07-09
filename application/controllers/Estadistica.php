@@ -11,16 +11,22 @@ class Estadistica extends CI_Controller {
 
 	public function estadistica_general($seccion=null,$sub_seccion=null) {
     	$data = array();
-			$filtros_zona = array();
-			$municipios=$this->Generico_model->municipios();
+		$filtros_zona = array();
+		$municipios=$this->Generico_model->municipios();
     	$ciclo=$this->Estadistica_model->trae_ciclos_est_muni();
-			$filtros_zona['nivel'] = $this->Estadistica_model->trae_nivel_zona();
+		$filtros_zona['nivel'] = $this->Estadistica_model->trae_nivel_zona();
+		if($seccion == 'estado_municipio'){
+			$sub = "Por estado / municipio";
+		}else if($seccion == "zona_escolar"){
+			$sub = "Por zona escolar";
+		}
     	$data['ciclo']=$ciclo;
     	$data['municipios']=$municipios;
-			$string = $this->load->view('estadistica/filtros_zona', $filtros_zona, TRUE);
-			$data['filtros_zona'] = $string;
-			$data['seccion'] = $seccion;
-			$data['sub_seccion'] = $sub_seccion;
+		$string = $this->load->view('estadistica/filtros_zona', $filtros_zona, TRUE);
+		$data['filtros_zona'] = $string;
+		$data['seccion'] = $seccion;
+		$data['subtitulo'] = $sub;
+		$data['sub_seccion'] = $sub_seccion;
 		carga_pagina_basica($this,$data,'estadistica/estadistica_general');
     }//estadistica_general
 

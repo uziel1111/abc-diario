@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="card shadow">
 			<div class="card-header bg-primary text-light">
-				<i class="fas fa-search"></i> Riesgo de Abandono Municipal / Estatal
+				<i class="fas fa-search"></i><?=isset($seccion)? $seccion : ''?> (Riesgo de Abandono Municipal / Estatal)
 			</div>
 			<div class="card-body">
 				<div id="filtros_riesgo_municipio_estado">

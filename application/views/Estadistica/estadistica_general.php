@@ -2,7 +2,7 @@
 	<div class="container" id="dv_contenido">
 		<div class="card shadow">
 			<div class="card-header bg-primary text-light">
-				<i class="fas fa-search"></i> Estadística
+				<i class="fas fa-search"></i> Estadística, indicadores y resultados educativos(<?= isset($subtitulo)? $subtitulo :""?>)
 			</div>
 			<div class="card-body">
 				<div class="alert alert-info" role="alert">

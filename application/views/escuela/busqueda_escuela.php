@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="card shadow">
 			<div class="card-header bg-warning text-light">
-				<i class="fas fa-search"></i> Localiza tu escuela
+				<i class="fas fa-search"></i> <?=isset($seccion)? $seccion : 'Localiza tu escuela'?>(<?= isset($subseccion)? $subseccion: ''?>)
 			</div>
 			<div class="card-body">
 				<div class="alert alert-info" role="alert">

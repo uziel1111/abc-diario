@@ -7,13 +7,18 @@ class Planea extends CI_Controller {
 			parent::__construct();
 			$this->load->model('Planea_model');
 		}
-		public function index(){
+		public function index($seccion = null){
 					$data = array();
 					$data2= array();
 					$municipios = $this->Generico_model->municipios();
 					$arr_municipios['0'] = 'TODOS';
 					foreach ($municipios as $municipio){
 						 $arr_municipios[$municipio['idmunicipio']] = $municipio['nombre'];
+					}
+					if($seccion == 'estado_mun'){
+						$sub = "Resultados PLANEA por estado / municipio";
+					}else if($seccion == "zona"){
+						$sub = "Resultados PLANEA por zona escolar";
 					}
 					// NIVEL POR PLANEA MUN
 					$arr_niveles['0'] = 'SELECCIONE';
@@ -37,6 +42,7 @@ class Planea extends CI_Controller {
 					$data2['periodos'] = $arr_periodos;
 					$string = $this->load->view('planea/buscador_estmuni', $data2, TRUE);
 					$data['buscador'] = $string;
+					$data['subtitulo'] = $sub;
 					carga_pagina_basica($this,$data,'planea/index');
 				}// index()
 

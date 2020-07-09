@@ -54,4 +54,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['mapa'] = 'Mapa/busqueda_x_mapa';
-$route['planea'] = 'Planea/index';
+// $route['planea'] = 'Planea/index';

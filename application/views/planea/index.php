@@ -2,7 +2,7 @@
     <div class="container">
         <div class="card shadow">
             <div class="card-header bg-secondary text-light">
-                <i class="fas fa-search"></i> Resultados de PLANEA
+                <i class="fas fa-search"></i> Aprendizaje(<?= isset($subtitulo)? $subtitulo :""?>)
             </div>
             <div class="card-body">
                 <div class="alert alert-info" role="alert">

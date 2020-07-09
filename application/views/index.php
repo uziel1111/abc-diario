@@ -14,9 +14,9 @@
                         <ul class="list-group list-group-flush">
                             <a href="<?=base_url('Estadistica/estadistica_general/estado_municipio/alumnos');?>"><li class="list-group-item list-group-item-action">Por estado / municipio</li></a>
                             <a href="<?=base_url('Estadistica/estadistica_general/zona_escolar/alumnos');?>"><li class="list-group-item list-group-item-action">Por zona escolar</li></a>
-                            <a href="<?=base_url('Info_escuela/busqueda_general');?>"><li class="list-group-item list-group-item-action">Por escuela</li></a>
-                            <a href="<?=base_url('Riesgo_abandono/vista_principal_riesgo');?>"><li class="list-group-item list-group-item-action">Riesgo de abandono escolar por estado / municipio</li></a>
-                            <a href="<?=base_url('Info_escuela/busqueda_general');?>"><li class="list-group-item list-group-item-action">Riesgo de abandono por escuela</li></a>
+                            <a href="<?=base_url('Info_escuela/busqueda_general/estadistica/escuela');?>"><li class="list-group-item list-group-item-action">Por escuela</li></a>
+                            <a href="<?=base_url('Riesgo_abandono/vista_principal_riesgo/estadistica');?>"><li class="list-group-item list-group-item-action">Riesgo de abandono escolar por estado / municipio</li></a>
+                            <a href="<?=base_url('Info_escuela/busqueda_general/estadistica/rescuela');?>"><li class="list-group-item list-group-item-action">Riesgo de abandono por escuela</li></a>
                         </ul>
                     </div>
                 </div>
@@ -33,9 +33,9 @@
                     </div>
                     <div class="card-body">
                     <ul class="list-group list-group-flush">
-                      <a href="<?=base_url('Planea');?>"><li class="list-group-item list-group-item-action">Resultados PLANEA por estado / municipio</li></a>
-                        <a href="<?=base_url('Planea');?>"><li class="list-group-item list-group-item-action">Resultados PLANEA por zona escolar</li></a>
-                      <a href="<?=base_url('Info_escuela/busqueda_general');?>"><li class="list-group-item list-group-item-action">Resultados PLANEA por escuela</li></a>
+                      <a href="<?=base_url('Planea/index/estado_mun');?>"><li class="list-group-item list-group-item-action">Resultados PLANEA por estado / municipio</li></a>
+                        <a href="<?=base_url('Planea/index/zona');?>"><li class="list-group-item list-group-item-action">Resultados PLANEA por zona escolar</li></a>
+                      <a href="<?=base_url('Info_escuela/busqueda_general/aprendizaje/escuela');?>"><li class="list-group-item list-group-item-action">Resultados PLANEA por escuela</li></a>
                         </ul>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                         <ul class="list-group list-group-flush">
                             <a href="<?=base_url('Mapa/busqueda_x_mapa/cct');?>"><li class="list-group-item list-group-item-action">Por clave de escuela</li></a>
                             <a href="<?=base_url('Mapa/busqueda_x_mapa/paramentros');?>"><li class="list-group-item list-group-item-action">Por municipio, nivel, sostenimiento y nombre</li></a>
-                            <a href="<?=base_url('Info_escuela/busqueda_general');?>"><li class="list-group-item list-group-item-action">En listado de escuelas</li></a>
+                            <a href="<?=base_url('Info_escuela/busqueda_general/ubica/listado');?>"><li class="list-group-item list-group-item-action">En listado de escuelas</li></a>
                         </ul>
                     </div>
                 </div>
