@@ -39,8 +39,16 @@ class Info_escuela extends CI_Controller {
       $data['municipios']=$municipios;
       $data['nivel'] = $nivel;
       $data['sostenimiento'] = $sostenimiento;
-      $data['seccion'] = $secc;
-      $data['subseccion'] = $sub;
+      if($seccion != null && $subseccion != null){
+        $data['seccion'] = $secc;
+        $data['subseccion'] = $sub;
+        if($seccion == 'aprendizaje'){
+          $data['seccion_corta'] = 'aprendizaje';
+        }else{
+          $data['seccion_corta'] = $subseccion;
+        }
+        
+      }
 
       carga_pagina_basica($this,$data,'escuela/busqueda_escuela');
 
@@ -112,6 +120,10 @@ class Info_escuela extends CI_Controller {
    function info_escuela (){
    	if(isset($_POST['idcfg'])){
       $idcfg = $this->input->post('idcfg');
+      $seccion = $this->input->post('seccion');
+      // echo "<pre>";
+      // print_r($seccion);
+      // die();
       $info_escuela = $this->Generico_model->info_escuela_post($idcfg);
 
       $turno = $info_escuela[0]['idturno'];
@@ -123,6 +135,7 @@ class Info_escuela extends CI_Controller {
     }
 
    		$data['info'] = $info_escuela;
+      $data['seccion'] = $seccion;
       // echo "<pre>";print_r($data);die();
    		carga_pagina_basica($this,$data,'escuela/info_escuela');
    }//info_escuela

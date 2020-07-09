@@ -4,6 +4,7 @@
 			<div class="card-header bg-warning text-light">
 				<i class="fas fa-search"></i> <?=isset($seccion)? $seccion : 'Localiza tu escuela'?>(<?= isset($subseccion)? $subseccion: ''?>)
 			</div>
+			<input type="hidden" name="itxt_seccion_eventos" id="itxt_seccion_eventos" value="<?= isset($seccion_corta)? $seccion_corta : ''?>">
 			<div class="card-body">
 				<div class="alert alert-info" role="alert">
 					<div class="row">
