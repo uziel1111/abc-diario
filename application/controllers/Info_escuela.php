@@ -13,14 +13,34 @@ class Info_escuela extends CI_Controller {
         $this->load->model('Eficienciat_model');
     }//_construct
 
-    function busqueda_general() {
+    function busqueda_general($seccion = null, $subseccion = null) {
       $data=array();
       $municipios=$this->Generico_model->municipios();
       $nivel=$this->Listadoesc_model->niveles();
       $sostenimiento=$this->Listadoesc_model->sostenimientos();
+      if($seccion == 'estadistica'){
+        $secc = "Estadística, indicadores y resultados educativos";
+        if($subseccion == 'escuela'){
+          $sub = "Por escuela";
+        }else if($subseccion == 'rescuela'){
+          $sub = "Riesgo de abandono por escuela";
+        }
+      }else if($seccion == "aprendizaje"){
+        $secc = "Aprendizaje";
+        if($subseccion == 'escuela'){
+          $sub = "Resultados PLANEA por escuela";
+        }
+      }else if($seccion == "ubica"){
+        $secc = "Ubica tu escuela";
+        if($subseccion == 'listado'){
+          $sub = "En listado de escuelas";
+        }
+      }
       $data['municipios']=$municipios;
       $data['nivel'] = $nivel;
       $data['sostenimiento'] = $sostenimiento;
+      $data['seccion'] = $secc;
+      $data['subseccion'] = $sub;
 
       carga_pagina_basica($this,$data,'escuela/busqueda_escuela');
 

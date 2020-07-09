@@ -10,63 +10,69 @@ class Mapa extends CI_Controller {
 		}
 
 		public function busqueda_x_mapa($tipo_busqueda=null){
-					$data = array();
-					$data2 = array();
-					$arr_municipios = array();
-					$arr_niveles = array();
-					$arr_sostenimientos = array();
-					$arr_federales = array();
+			$data = array();
+			$data2 = array();
+			$arr_municipios = array();
+			$arr_niveles = array();
+			$arr_sostenimientos = array();
+			$arr_federales = array();
 
+			if($tipo_busqueda == 'cct'){
+				$sub = "Por clave de escuela";
+			}else if($tipo_busqueda == "parametros"){
+				$sub = "Por municipio, nivel, sostenimiento y nombre";
+			}
 
-					$municipios = $this->Generico_model->municipios();
-					$arr_municipios['0'] = 'TODOS';
-					foreach ($municipios as $municipio){
-						 $arr_municipios[$municipio['idmunicipio']] = $municipio['nombre'];
-					}
+			$municipios = $this->Generico_model->municipios();
+			$arr_municipios['0'] = 'TODOS';
+			foreach ($municipios as $municipio){
+			 $arr_municipios[$municipio['idmunicipio']] = $municipio['nombre'];
+			}
 
-					$niveles = $this->Listadoesc_model->niveles();
-					$arr_niveles['0'] = 'TODOS';
+			$niveles = $this->Listadoesc_model->niveles();
+			$arr_niveles['0'] = 'TODOS';
 
-					foreach ($niveles as $nivel){
-						 $arr_niveles[$nivel['idnivel']] = $nivel['nombre'];
-					}
+			foreach ($niveles as $nivel){
+			 $arr_niveles[$nivel['idnivel']] = $nivel['nombre'];
+			}
 
-					$sostenimientos = $this->Listadoesc_model->sostenimientos();
-					$arr_sostenimientos['-1'] = 'TODOS';
-					foreach ($sostenimientos as $sostenimiento){
-						 $arr_sostenimientos[$sostenimiento['idsostenimiento']] = $sostenimiento['nombre'];
-					}
-					$arr_federales['0'] = 'TODOS';
+			$sostenimientos = $this->Listadoesc_model->sostenimientos();
+			$arr_sostenimientos['-1'] = 'TODOS';
+			foreach ($sostenimientos as $sostenimiento){
+			 $arr_sostenimientos[$sostenimiento['idsostenimiento']] = $sostenimiento['nombre'];
+			}
+			$arr_federales['0'] = 'TODOS';
 
-					$data2['municipios'] = $arr_municipios;
-					$data2['niveles'] = $arr_niveles;
-					$data2['sostenimientos'] = $arr_sostenimientos;
-					$data2['programas'] = $arr_federales;
-					$data2['tipo_busqueda'] = $tipo_busqueda;
-					$string = $this->load->view('mapa/buscador_x_mapa', $data2, TRUE);
-					$data['buscador'] = $string;
-					carga_pagina_basica($this,$data,'mapa/index');
-				}// index()
+			$data2['municipios'] = $arr_municipios;
+			$data2['niveles'] = $arr_niveles;
+			$data2['sostenimientos'] = $arr_sostenimientos;
+			$data2['programas'] = $arr_federales;
+			$data2['tipo_busqueda'] = $tipo_busqueda;
+			$string = $this->load->view('mapa/buscador_x_mapa', $data2, TRUE);
+			$data['buscador'] = $string;
+			$data['subtitulo'] = $sub;
+			carga_pagina_basica($this,$data,'mapa/index');
+		}// index()
 
-				public function obtener_niveles(){
-					$idmunicipio = $this->input->post('idmunicipio');
+		public function obtener_niveles(){
+			$idmunicipio = $this->input->post('idmunicipio');
 
-					$niveles = $this->Listadoesc_model->niveles($idmunicipio);
+			$niveles = $this->Listadoesc_model->niveles($idmunicipio);
 
-					$str_select = '<option value=0>TODOS</option>';
-					foreach ($niveles as $key => $value) {
-						$str_select .= "<option value={$value['idnivel']}> {$value['nombre']} </option>";
-					}
-					$sostenimientos = $this->Listadoesc_model->sostenimientos($idmunicipio);
-					$str_select1 = '<option value=-1>TODOS</option>';
-					foreach ($sostenimientos as $key => $value) {
-						$str_select1 .= "<option value={$value['idsostenimiento']}> {$value['nombre']} </option>";
-					}
-					$respuesta = array('options' => $str_select,'options1' => $str_select1);
-					envia_datos_json($this, $respuesta);
-					exit();
+			$str_select = '<option value=0>TODOS</option>';
+			foreach ($niveles as $key => $value) {
+				$str_select .= "<option value={$value['idnivel']}> {$value['nombre']} </option>";
+			}
+			$sostenimientos = $this->Listadoesc_model->sostenimientos($idmunicipio);
+			$str_select1 = '<option value=-1>TODOS</option>';
+			foreach ($sostenimientos as $key => $value) {
+				$str_select1 .= "<option value={$value['idsostenimiento']}> {$value['nombre']} </option>";
+			}
+			$respuesta = array('options' => $str_select,'options1' => $str_select1);
+			envia_datos_json($this, $respuesta);
+			exit();
 
-				}
+		}
 
 				public function obtener_sostenimientos(){
 					$idmunicipio = $this->input->post('idmunicipio');

@@ -54,9 +54,9 @@
 
                     <a class="dropdown-item" href="<?=base_url('Estadistica/estadistica_general/estado_municipio/alumnos');?>">Por estado / municipio</a>
                     <a class="dropdown-item" href="<?= base_url('Estadistica/estadistica_general/zona_escolar/alumnos'); ?>">Por zona escolar</a>
-                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Por escuela</a>
-                    <a class="dropdown-item" href="<?= base_url('Riesgo_abandono/vista_principal_riesgo'); ?>">Riesgo de abandono escolar por estado / municipio</a>
-                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Riesgo de abandono por escuela</a>
+                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/estadistica/escuela'); ?>">Por escuela</a>
+                    <a class="dropdown-item" href="<?= base_url('Riesgo_abandono/vista_principal_riesgo/estadistica'); ?>">Riesgo de abandono escolar por estado / municipio</a>
+                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/estadistica/rescuela'); ?>">Riesgo de abandono por escuela</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown nav-secondary">
@@ -68,9 +68,9 @@
                     <p>Aprendizaje</p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?= base_url('Planea'); ?>">Resultados PLANEA por estado / municipio</a>
-                    <a class="dropdown-item" href="<?= base_url('Planea'); ?>">Resultados PLANEA por zona escolar</a>
-                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general'); ?>">Resultados PLANEA por escuela</a>
+                    <a class="dropdown-item" href="<?= base_url('Planea/index/estado_mun'); ?>">Resultados PLANEA por estado / municipio</a>
+                    <a class="dropdown-item" href="<?= base_url('Planea/index/zona'); ?>">Resultados PLANEA por zona escolar</a>
+                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/aprendizaje/escuela'); ?>">Resultados PLANEA por escuela</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown nav-third">
@@ -84,7 +84,7 @@
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/cct');?>">Por clave de escuela</a>
                     <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/paramentros');?>">Por municipio, nivel, sostenimiento y nombre</a>
-                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general');?>">En listado de escuelas</a>
+                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/ubica/listado');?>">En listado de escuelas</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown nav-fourth">

@@ -9,14 +9,18 @@ class Riesgo_abandono extends CI_Controller {
 		$this->load->model('Generico_model');
 	}
 
-	public function vista_principal_riesgo() {
+	public function vista_principal_riesgo($seccion = null) {
     	$data = array();
     	$ciclo=$this->Riesgo_abandono_model->ciclo_escolar();
     	$municipios=$this->Generico_model->municipios();
     	$nivel=$this->Riesgo_abandono_model->niveles();
+      if($seccion == 'estadistica'){
+        $secc = "Estadística, indicadores y resultados educativos";
+      }
     	$data['ciclo']=$ciclo;
     	$data['nivel']=$nivel;
     	$data['municipios']=$municipios;
+      $data['seccion']=$secc;
 		carga_pagina_basica($this,$data,'Riesgo/filtro_riesgo');
     }//vista_principal_riesgo
 

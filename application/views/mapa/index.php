@@ -4,7 +4,7 @@
 
     <div class="card shadow mt-4">
       <div class="card-header bg-success text-light">
-        <i class="fas fa-search"></i> Busca tu escuela
+        <i class="fas fa-search"></i> Ubica tu escuela(<?= isset($subtitulo)? $subtitulo :""?>)
       </div>
       <div class="card-body pb-1 pt-1">
 
