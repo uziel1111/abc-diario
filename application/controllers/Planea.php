@@ -94,7 +94,7 @@ public function obtener_grafica_xestadomunicipio(){
 			// NIVEL POR PLANEA
 			$arr_niveles = $this->Planea_model->niveles_zona();
 			//SOSTENIMIENTOS
-			$arr_sostenimiento = $this->Planea_model->sostenimiento_zona();
+			$arr_modalidad = $this->Planea_model->modalidad_zona();
 
 			$arr_zonas = $this->Planea_model->zonas_zona();
 
@@ -105,7 +105,7 @@ public function obtener_grafica_xestadomunicipio(){
 					$arr_periodos = $this->Generico_model->periodos_planeaxreactivo();
 
 					$data2['niveles'] = $arr_niveles;
-					$data2['sostenimiento'] = $arr_sostenimiento;
+					$data2['modalidad'] = $arr_modalidad;
 					$data2['zona'] = $arr_zonas;
 					$data2['camposd'] = $arr_campod;
 					$data2['periodos'] = $arr_periodos;
@@ -123,9 +123,9 @@ public function obtener_grafica_xestadomunicipio(){
 			$zona = $this->input->post("zona");
 			$nivel = $this->input->post("nivel");
 			$periodo = $this->input->post("periodo");
-			$sostenimiento = $this->input->post("sostenimiento");
+			$modalidad = $this->input->post("modalidad");
 			$campodisip = $this->input->post("campodisip");
-			$datos = $this->Planea_model->estadisticas_x_estadozona($zona, $sostenimiento, $nivel, $periodo, $campodisip);
+			$datos = $this->Planea_model->estadisticas_x_estadozona($zona, $modalidad, $nivel, $periodo, $campodisip);
 			// echo "<pre>";print_r($campodisip);die();
 			$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
 			$respuesta = array('datos' => $datos, 'zona' => $zona, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
@@ -133,24 +133,24 @@ public function obtener_grafica_xestadomunicipio(){
 			exit();
 		}//obtener_grafica_xestadozona
 
-		public function obtener_sostenimiento_xidnivel_zona()
+		public function obtener_modalidad_xidnivel_zona()
 		{
 			$idnivel = $this->input->post("idnivel");
-			$arr_sostenimiento = $this->Planea_model->sostenimiento_zona($idnivel);
+			$arr_sostenimiento = $this->Planea_model->modalidad_zona($idnivel);
 			$str_select = "<option value='-1'  disabled='true' selected='true'>SELECCIONE UN SOSTENIMIENTO</option>";
 			foreach ($arr_sostenimiento as $key => $value) {
-				$str_select .= "<option value={$value['idsostenimiento']}> {$value['nombre']} </option>";
+				$str_select .= "<option value={$value['idmodalidad']}> {$value['nombre']} </option>";
 			}
 			$respuesta = array('str_select' => $str_select);
 			envia_datos_json($this, $respuesta);
 			exit();
-		}//obtener_sostenimiento_xidnivel_zona
+		}//obtener_modalidad_xidnivel_zona
 
-		public function obtener_zona_xidnivel_sos_zona()
+		public function obtener_zona_xidnivel_modalidad_zona()
 		{
 			$idnivel = $this->input->post("idnivel");
-			$idsostenimiento = $this->input->post("idsostenimiento");
-			$arr_zona = $this->Planea_model->zonas_zona($idnivel,$idsostenimiento);
+			$idmodalidad = $this->input->post("idmodalidad");
+			$arr_zona = $this->Planea_model->zonas_zona($idnivel,$idmodalidad);
 			$str_select = "<option value='0' disabled='true' selected='true'>SELECCIONE UNA ZONA ESCOLAR</option>";
 			foreach ($arr_zona as $key => $value) {
 				$str_select .= "<option value={$value['cct_supervisor']}> {$value['zona_escolar']} </option>";
@@ -160,12 +160,12 @@ public function obtener_grafica_xestadomunicipio(){
 			exit();
 		}//obtener_zona_xidnivel_sos_zona
 
-		public function obtener_periodo_xidnivel_sos_zona()
+		public function obtener_periodo_xidnivel_modalidad_zona()
 		{
 			$idnivel = $this->input->post("idnivel");
-			$idsostenimiento = $this->input->post("idsostenimiento");
+			$idmodalidad = $this->input->post("idmodalidad");
 			$zona = $this->input->post("zona");
-			$arr_periodo = $this->Planea_model->periodo_zona($idnivel,$idsostenimiento,$zona);
+			$arr_periodo = $this->Planea_model->periodo_zona($idnivel,$idmodalidad,$zona);
 			$str_select = "<option value='0'  disabled='true' selected='true'>SELECCIONE UN PERIODO</option>";
 			foreach ($arr_periodo as $key => $value) {
 				$str_select .= "<option value={$value['id_periodo']}> {$value['periodo']} </option>";

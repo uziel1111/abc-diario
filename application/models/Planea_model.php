@@ -133,19 +133,65 @@ class Planea_model extends CI_Model
         }
 
 
-        function estadisticas_x_estadozona($zona, $sostenimiento, $nivel, $periodo, $campodisip)
+        // function estadisticas_x_estadozona($zona, $sostenimiento, $nivel, $periodo, $campodisip)
+        // {
+        //      $where = "";
+        //      $array = array($nivel, $periodo, $campodisip);
+        //      /*if($sostenimiento != 0 ){
+        //         $where.= " AND e.sostenimiento = ?";
+        //         array_push($array,$sostenimiento);
+        //         if($zona != 0 ){
+        //           $where = " AND e.zona = ?";
+        //           array_push($array,$zona);
+        //         }
+        //       }*/
+
+        //       if($zona != 0 ){
+        //           $where = " AND e.zonact = ?";
+        //           array_push($array,$zona);
+        //         }
+
+        //     $str_query = "SELECT
+        //                   id_contenido,
+        //                   contenidos,
+        //                   reactivos,
+        //                   total_reac_xct,
+        //                   total,
+        //                   alumnos_evaluados,
+        //                   ROUND((total* 100)/(total_reac_xct * alumnos_evaluados), 1)AS porcen_alum_respok
+        //                   FROM (
+        //                         SELECT
+        //                         *,
+        //                         SUM(n_aciertos) AS total,
+        //                         SUM(n_almn_eval) AS alumnos_evaluados
+        //                         FROM (
+        //                               SELECT
+        //                               t3.id_contenido,
+        //                               t3.`contenido` AS contenidos,
+        //                               GROUP_CONCAT(DISTINCT t2.n_reactivo) AS reactivos,
+        //                               COUNT(DISTINCT t2.n_reactivo) AS total_reac_xct,
+        //                               t1.n_aciertos,
+        //                               t1.n_almn_eval
+        //                               FROM cct e
+        //                               INNER JOIN centrocfg cfg ON e.idct =cfg.idct
+        //                               INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+        //                               INNER JOIN periodoplanea pp ON t1.id_periodo = pp.id_periodo
+        //                               INNER JOIN planea_reactivo t2 ON t1.id_reactivo=t2.id_reactivo
+        //                               INNER JOIN planea_contenido t3 ON t2.id_contenido= t3.id_contenido
+        //                               INNER JOIN planea_unidad_analisis t4 ON t3.id_unidad_analisis=t4.id_unidad_analisis
+        //                               INNER JOIN planea_camposdisciplinares t5 ON t4.id_campodisiplinario=t5.id_campodisiplinario
+        //                               WHERE cfg.nivel = ? AND pp.id_periodo = ?
+        //                               AND t5.id_campodisiplinario = ? {$where}
+        //                               GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
+        //                       GROUP BY id_contenido
+        //                     ) AS datos2";
+        //   return $this->db->query($str_query,$array)->result_array();
+        // }//estadisticas_x_estadozona
+        // 
+        function estadisticas_x_estadozona($zona, $modalidad, $nivel, $periodo, $campodisip)
         {
              $where = "";
-             $array = array($nivel, $periodo, $campodisip);
-             /*if($sostenimiento != 0 ){
-                $where.= " AND e.sostenimiento = ?";
-                array_push($array,$sostenimiento);
-                if($zona != 0 ){
-                  $where = " AND e.zona = ?";
-                  array_push($array,$zona);
-                }
-              }*/
-
+             $array = array($nivel, $periodo, $modalidad, $campodisip);
               if($zona != 0 ){
                   $where = " AND e.zonact = ?";
                   array_push($array,$zona);
@@ -180,7 +226,8 @@ class Planea_model extends CI_Model
                                       INNER JOIN planea_contenido t3 ON t2.id_contenido= t3.id_contenido
                                       INNER JOIN planea_unidad_analisis t4 ON t3.id_unidad_analisis=t4.id_unidad_analisis
                                       INNER JOIN planea_camposdisciplinares t5 ON t4.id_campodisiplinario=t5.id_campodisiplinario
-                                      WHERE cfg.nivel = ? AND pp.id_periodo = ?
+                                      INNER JOIN c_modalidad m ON m.idmodalidad = e.idmodalidad
+                                      WHERE cfg.nivel = ? AND pp.id_periodo = ? AND m.idmodalidad = ? 
                                       AND t5.id_campodisiplinario = ? {$where}
                                       GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
                               GROUP BY id_contenido
@@ -345,31 +392,70 @@ class Planea_model extends CI_Model
           return $this->db->query($str_query)->result_array();
         }//niveles_zona
 
-        function sostenimiento_zona($idnivel=null){
+        // function sostenimiento_zona($idnivel=null){
+        //   $where = " ";
+        //   if ($idnivel!=null) {
+        //     $where = "WHERE n.idnivel = {$idnivel}";
+        //   }
+        //   $str_query = "SELECT
+        //             s.idsostenimiento, s.descr as nombre, s.estatus
+        //             FROM c_zona z
+        //             INNER JOIN cct ct ON z.cct_supervisor = ct.zonact
+        //             INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+        //             INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+        //             INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
+        //             INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
+        //             {$where}
+        //             GROUP BY s.idsostenimiento";
+        //   return $this->db->query($str_query)->result_array();
+        // }//niveles_zona
+
+        function modalidad_zona($idnivel=null){
           $where = " ";
           if ($idnivel!=null) {
             $where = "WHERE n.idnivel = {$idnivel}";
           }
           $str_query = "SELECT
-                    s.idsostenimiento, s.descr as nombre, s.estatus
-                    FROM c_zona z
-                    INNER JOIN cct ct ON z.cct_supervisor = ct.zonact
-                    INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
-                    INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
-                    INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
-                    INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
-                    {$where}
-                    GROUP BY s.idsostenimiento";
+          m.idmodalidad, m.descr AS nombre, m.estatus
+          FROM c_zona z
+          INNER JOIN cct ct ON z.cct_supervisor = ct.zonact
+          INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+          INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+          INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
+          INNER JOIN c_modalidad m ON ct.idmodalidad = m.idmodalidad
+          {$where}
+          GROUP BY m.idmodalidad";
           return $this->db->query($str_query)->result_array();
         }//niveles_zona
 
-        function zonas_zona($idnivel=null, $idsostenimiento=null){
+        // function zonas_zona($idnivel=null, $idsostenimiento=null){
+        //   $where = "WHERE 1=1 ";
+        //   if ($idnivel!=null) {
+        //     $where .= " AND n.idnivel = {$idnivel}";
+        //   }
+        //   if ($idsostenimiento!=null) {
+        //     $where .= " AND s.idsostenimiento = {$idsostenimiento}";
+        //   }
+        //   $str_query = "SELECT
+        //                 z.zonaid, z.zona_escolar, z.cct_supervisor
+        //                 FROM c_zona z
+        //                 INNER JOIN cct ct ON z.cct_supervisor = ct.zonact
+        //                 INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+        //                 INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+        //                 INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
+        //                 INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
+        //             {$where}
+        //             GROUP BY z.zonaid, z.zona_escolar, z.cct_supervisor";
+        //   return $this->db->query($str_query)->result_array();
+        // }//niveles_zona
+        
+        function zonas_zona($idnivel=null, $idmodalidad=null){
           $where = "WHERE 1=1 ";
           if ($idnivel!=null) {
             $where .= " AND n.idnivel = {$idnivel}";
           }
-          if ($idsostenimiento!=null) {
-            $where .= " AND s.idsostenimiento = {$idsostenimiento}";
+          if ($idmodalidad!=null) {
+            $where .= " AND m.idmodalidad = {$idmodalidad}";
           }
           $str_query = "SELECT
                         z.zonaid, z.zona_escolar, z.cct_supervisor
@@ -378,19 +464,44 @@ class Planea_model extends CI_Model
                         INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
                         INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
                         INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
-                        INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
+                        INNER JOIN c_modalidad m ON ct.idmodalidad = m.idmodalidad
                     {$where}
                     GROUP BY z.zonaid, z.zona_escolar, z.cct_supervisor";
           return $this->db->query($str_query)->result_array();
         }//niveles_zona
 
-        function  periodo_zona($idnivel,$idsostenimiento,$zona){
+        // function  periodo_zona($idnivel,$idsostenimiento,$zona){
+        //   $where = "WHERE 1=1 ";
+        //   if ($idnivel!=null) {
+        //     $where .= " AND n.idnivel = {$idnivel}";
+        //   }
+        //   if ($idsostenimiento!=null) {
+        //     $where .= " AND s.idsostenimiento = {$idsostenimiento}";
+        //   }
+        //   if ($zona!=null) {
+        //     $where .= " AND z.cct_supervisor = '{$zona}'";
+        //   }
+        //   $str_query = "SELECT
+        //                 p.id_periodo, p.periodo
+        //                 FROM c_zona z
+        //                 INNER JOIN cct ct ON z.cct_supervisor = ct.zonact
+        //                 INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+        //                 INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
+        //                 INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
+        //                 INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
+        //                 INNER JOIN periodoplanea p ON t1.id_periodo =p.id_periodo
+        //             {$where}
+        //             GROUP BY p.id_periodo";
+        //   return $this->db->query($str_query)->result_array();
+        // }//periodo_zona
+        // 
+        function  periodo_zona($idnivel,$idmodalidad,$zona){
           $where = "WHERE 1=1 ";
           if ($idnivel!=null) {
             $where .= " AND n.idnivel = {$idnivel}";
           }
-          if ($idsostenimiento!=null) {
-            $where .= " AND s.idsostenimiento = {$idsostenimiento}";
+          if ($idmodalidad!=null) {
+            $where .= " AND m.idmodalidad = {$idmodalidad}";
           }
           if ($zona!=null) {
             $where .= " AND z.cct_supervisor = '{$zona}'";
@@ -402,7 +513,7 @@ class Planea_model extends CI_Model
                         INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
                         INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
                         INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
-                        INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
+                        INNER JOIN c_modalidad m ON ct.idmodalidad = m.idmodalidad
                         INNER JOIN periodoplanea p ON t1.id_periodo =p.id_periodo
                     {$where}
                     GROUP BY p.id_periodo";

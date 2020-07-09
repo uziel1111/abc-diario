@@ -10,8 +10,8 @@
 			</select>
 		</div>
 		<div class="col-12 col-md-4 col-lg-3">
-			<label>Sostenimiento</label>
-			<select name="filtro_sostenimiento_zona" id="filtro_sostenimiento_zona" class="form-control" disabled>
+			<label>Modalidad</label>
+			<select name="filtro_modalidad_zona" id="filtro_modalidad_zona" class="form-control" disabled>
 				<option value="0" disabled="true" selected='true'>SELECCIONE</option>
 			</select>
 		</div>

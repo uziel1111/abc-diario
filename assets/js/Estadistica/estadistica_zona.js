@@ -1,13 +1,13 @@
 var Estadistica_zona = {
 
 
-  	resultado_estadistica_zona: (idnivel,idsostenimieto,numzona,idciclo,callback) => {
+  	resultado_estadistica_zona: (idnivel,idmodalidad,numzona,idciclo,callback) => {
      	ruta = base_url + "estadistica/obtener_estadistica_xzona";
 	    $.ajax({
 	        url: ruta,
 	        type: 'POST',
 	        dataType: 'json',
-	        data: {idnivel:idnivel,idsostenimieto:idsostenimieto,numzona:numzona,idciclo:idciclo},
+	        data: {idnivel:idnivel,idmodalidad:idmodalidad,numzona:numzona,idciclo:idciclo},
 	        beforeSend: function (xhr) {
 	        	Mensaje.cargando('Cargando estadística');
 	        },

@@ -180,23 +180,23 @@ class Estadistica extends CI_Controller {
     }//busqueda_especifica
 
 		//estadistica por zona Alex
-		public function obtener_sostenimiento_xidnivel_zona() {
+		public function obtener_modalidad_xidnivel_zona() {
 			$idnivel = $this->input->post('idnivel');
-			$arr_datos = $this->Estadistica_model->obtener_sostenimiento_xidnivel_zona($idnivel);
+			$arr_datos = $this->Estadistica_model->obtener_modalidad_xidnivel_zona($idnivel);
 			$str_select = "<option value='0' disabled='true' selected='true'>SELECCIONE</option>";
 	    foreach ($arr_datos as $key => $row) {
-	      $str_select .= " <option value=".$row['idsostenimiento'].">".$row['nombre']."</option>";
+	      $str_select .= " <option value=".$row['idmodalidad'].">".$row['nombre']."</option>";
 	    }
 			$respuesta = array("str_select" => $str_select);
 			envia_datos_json($this, $respuesta);
 			exit();
 		}//obtener_sostenimiento_xidnivel_zona()
 
-		public function obtener_nzona_xidnivelxidsost_zona() {
+		public function obtener_nzona_xidnivelxidmodalidad_zona() {
 			$data = array();
 			$idnivel = $this->input->post('idnivel');
-			$idsostenimieto = $this->input->post('idsostenimieto');
-			$arr_datos = $this->Estadistica_model->obtener_nzona_xidnivelxidsost_zona($idnivel,$idsostenimieto);
+			$idmodalidad = $this->input->post('idmodalidad');
+			$arr_datos = $this->Estadistica_model->obtener_nzona_xidnivelxidmodalidad_zona($idnivel,$idmodalidad);
 			$str_select = "<option value='0' disabled='true' selected='true'>SELECCIONE</option>";
 	    foreach ($arr_datos as $key => $row) {
 	      $str_select .= " <option value=".$row['zonaid'].">".$row['nombre']."</option>";
@@ -206,12 +206,12 @@ class Estadistica extends CI_Controller {
 			exit();
 		}//obtener_nzona_xidnivelxidsost_zona()
 
-		public function obtener_ciclo_xidnivelxidsostxnzona_zona() {
+		public function obtener_ciclo_xidnivelxidmodalidadxnzona_zona() {
 			$data = array();
 			$idnivel = $this->input->post('idnivel');
-			$idsostenimieto = $this->input->post('idsostenimieto');
+			$idmodalidad = $this->input->post('idmodalidad');
 			$numzona = $this->input->post('numzona');
-			$arr_datos = $this->Estadistica_model->obtener_ciclo_xidnivelxidsostxnzona_zona($idnivel,$idsostenimieto,$numzona);
+			$arr_datos = $this->Estadistica_model->obtener_ciclo_xidnivelxidmodalidadxnzona_zona($idnivel,$idmodalidad,$numzona);
 			$str_select = "<option value='0' disabled='true' selected='true' >SELECCIONE</option>";
 	    foreach ($arr_datos as $key => $row) {
 	      $str_select .= " <option value=".$row['idciclo'].">".$row['nombre']."</option>";
@@ -226,14 +226,16 @@ class Estadistica extends CI_Controller {
 			$data = array();
 			$arr_zona = array ();
 			$idnivel = $this->input->post('idnivel');
-			$idsostenimieto = $this->input->post('idsostenimieto');
+			$idmodalidad = $this->input->post('idmodalidad');
 			$numzona = $this->input->post('numzona');
 			$idciclo = $this->input->post('idciclo');
-			$arr_datos = $this->Estadistica_model->obtener_estadistica_xzona($idnivel,$idsostenimieto,$numzona,$idciclo);
+			$arr_datos = $this->Estadistica_model->obtener_estadistica_xzona($idnivel,$idmodalidad,$numzona,$idciclo);
+			// echo"<pre>";
+			// print_r($arr_datos);die();
 			$arr_zona['arr_datos_a_g_d_e'] = $arr_datos[0];
-			$arr_datos = $this->Estadistica_model->obtener_indicadores_xzona($idnivel,$idsostenimieto,$numzona,$idciclo);
+			$arr_datos = $this->Estadistica_model->obtener_indicadores_xzona($idnivel,$idmodalidad,$numzona,$idciclo);
 			$arr_zona['arr_datos_ind'] = $arr_datos[0];
-			$arr_datos = $this->Estadistica_model->obtener_indicadoresplanea_xzona($idnivel,$idsostenimieto,$numzona,$idciclo);
+			$arr_datos = $this->Estadistica_model->obtener_indicadoresplanea_xzona($idnivel,$idmodalidad,$numzona,$idciclo);
 			$arr_zona['arr_datos_indplanea'] = $arr_datos[0];
 			// echo "<pre>";print_r($arr_zona);die();
 			$vista = $this->load->view('estadistica/contenido_zona', $arr_zona, TRUE);

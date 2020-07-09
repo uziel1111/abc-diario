@@ -12,11 +12,11 @@
   </div><!-- col-md-4 -->
   <div class="col-12 col-sm-12 col-md-3 col-lg-3 mt-2">
     <div class="form-group form-group-style-1">
-      <label>Sostenimiento:</label>
-			<select name="slt_sostenimiento_planeazn" id="slt_sostenimiento_planeazn" class="form-control">
-				<option value="-1" disabled="true" selected="true">SELECCIONE UN SOSTENIMIENTO</option>
-				<?php foreach ($sostenimiento as $key => $value) { ?>
-					<option value="<?= $value['idsostenimiento'] ?>"> <?= $value['nombre'] ?></option>
+      <label>Modalidad:</label>
+			<select name="slt_modalidad_planeazn" id="slt_modalidad_planeazn" class="form-control">
+				<option value="-1" disabled="true" selected="true">SELECCIONE UNA MODALIDAD</option>
+				<?php foreach ($modalidad as $key => $value) { ?>
+					<option value="<?= $value['idmodalidad'] ?>"> <?= $value['nombre'] ?></option>
 				<?php } ?>
 			</select>
     </div>

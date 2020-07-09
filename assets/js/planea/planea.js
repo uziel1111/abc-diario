@@ -31,7 +31,7 @@ $("#btn_busqueda_xestadozona").click(function(){
   if($("#slt_nivel_planeazn").val() == null){
     Mensaje.alerta("error","Seleccione nivel","");
   }else{
-		if ($("#slt_sostenimiento_planeazn").val() == null) {
+		if ($("#slt_modalidad_planeazn").val() == null) {
 			  Mensaje.alerta("error","Seleccione sostenimiento","");
 		}
 		else {
@@ -70,8 +70,8 @@ $("#xzona-tab").click(function(e) {
         $("#div_graficas_masivo").empty();
         $('#buscador_zona').empty();
         $('#buscador_zona').append(dato.filtros);
-				$("#slt_sostenimiento_planeazn option[value='-1'").prop("selected",true);
-				$('#slt_sostenimiento_planeazn').prop('disabled', true);
+				$("#slt_modalidad_planeazn option[value='-1'").prop("selected",true);
+				$('#slt_modalidad_planeazn').prop('disabled', true);
 				$("#slt_zona_planeazn option[value='0'").prop("selected",true);
 				$('#slt_zona_planeazn').prop('disabled', true);
 				$("#slt_periodo_planeazn option[value='0'").prop("selected",true);
@@ -89,7 +89,7 @@ $("#xzona-tab").click(function(e) {
 $("#slt_nivel_planeazn").change(function (e) {
 	e.preventDefault();
 	e.stopImmediatePropagation();
-	ruta = base_url+'Planea/obtener_sostenimiento_xidnivel_zona';
+	ruta = base_url+'Planea/obtener_modalidad_xidnivel_zona';
   $.ajax({
     url: ruta,
     type: 'POST',
@@ -101,9 +101,9 @@ $("#slt_nivel_planeazn").change(function (e) {
     success: function (dato) {
       Mensaje.cerrar();
 			$("#div_graficas_masivo").empty();
-			$("#slt_sostenimiento_planeazn").empty();
-			$("#slt_sostenimiento_planeazn").append(dato.str_select);
-			$('#slt_sostenimiento_planeazn').prop('disabled', false);
+			$("#slt_modalidad_planeazn").empty();
+			$("#slt_modalidad_planeazn").append(dato.str_select);
+			$('#slt_modalidad_planeazn').prop('disabled', false);
 			$("#slt_zona_planeazn option[value='0'").prop("selected",true);
 			$('#slt_zona_planeazn').prop('disabled', true);
 			$("#slt_periodo_planeazn option[value='0'").prop("selected",true);
@@ -119,15 +119,15 @@ $("#slt_nivel_planeazn").change(function (e) {
 
 });
 
-$("#slt_sostenimiento_planeazn").change(function (e) {
+$("#slt_modalidad_planeazn").change(function (e) {
 	e.preventDefault();
 	e.stopImmediatePropagation();
-	ruta = base_url+'Planea/obtener_zona_xidnivel_sos_zona';
+	ruta = base_url+'Planea/obtener_zona_xidnivel_modalidad_zona';
   $.ajax({
     url: ruta,
     type: 'POST',
     dataType: 'json',
-    data: {"idnivel": $("#slt_nivel_planeazn").val(),"idsostenimiento": $("#slt_sostenimiento_planeazn").val()},
+    data: {"idnivel": $("#slt_nivel_planeazn").val(),"idmodalidad": $("#slt_modalidad_planeazn").val()},
     beforeSend: function (xhr) {
       Mensaje.cargando('Cargando');
     },
@@ -153,12 +153,12 @@ $("#slt_sostenimiento_planeazn").change(function (e) {
 $("#slt_zona_planeazn").change(function (e) {
 	e.preventDefault();
 	e.stopImmediatePropagation();
-	ruta = base_url+'Planea/obtener_periodo_xidnivel_sos_zona';
+	ruta = base_url+'Planea/obtener_periodo_xidnivel_modalidad_zona';
   $.ajax({
     url: ruta,
     type: 'POST',
     dataType: 'json',
-    data: {"idnivel": $("#slt_nivel_planeazn").val(),"idsostenimiento": $("#slt_sostenimiento_planeazn").val(),"zona": $("#slt_zona_planeazn").val()},
+    data: {"idnivel": $("#slt_nivel_planeazn").val(),"idmodalidad": $("#slt_modalidad_planeazn").val(),"zona": $("#slt_zona_planeazn").val()},
     beforeSend: function (xhr) {
       Mensaje.cargando('Cargando');
     },
@@ -263,7 +263,7 @@ obtener_grafica_xestadozona: () => {
     url: ruta,
     type: 'POST',
     dataType: 'json',
-    data: {nivel: $("#slt_nivel_planeazn").val(), sostenimiento: $("#slt_sostenimiento_planeazn").val(), zona: $("#slt_zona_planeazn").val(), periodo: $("#slt_periodo_planeazn").val(), campodisip: $("#slt_campod_planeazn").val()},
+    data: {nivel: $("#slt_nivel_planeazn").val(), modalidad: $("#slt_modalidad_planeazn").val(), zona: $("#slt_zona_planeazn").val(), periodo: $("#slt_periodo_planeazn").val(), campodisip: $("#slt_campod_planeazn").val()},
     beforeSend: function (xhr) {
       Mensaje.cargando('Cargando...');
     },
