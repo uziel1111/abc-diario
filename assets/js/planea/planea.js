@@ -1,4 +1,8 @@
-
+$(function() {
+	if($("#itxt_planea_event").val() == 'zona'){
+		$("#xzona-tab").trigger( "click" );
+	}
+});
 $("#slt_municipio_planea").change(function(){
 	Planea.obtener_niveles_xidmunicipio();
 	$("#div_graficas_masivo").empty();
@@ -62,7 +66,7 @@ $("#btn_busqueda_xestadozona").click(function(){
 
 $("#xzona-tab").click(function(e) {
     e.preventDefault();
-    ruta = base_url + 'Planea/bucador_zona';
+    ruta = base_url + 'Planea/buscador_zona';
     $.ajax({
       url: ruta,
       type: 'POST',

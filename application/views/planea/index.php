@@ -4,6 +4,7 @@
             <div class="card-header bg-secondary text-light">
                 <i class="fas fa-search"></i> Aprendizaje(<?= isset($subtitulo)? $subtitulo :""?>)
             </div>
+            <input type="hidden" name="itxt_planea_event" id="itxt_planea_event" value="<?= $seccion_event?>">
             <div class="card-body">
                 <div class="alert alert-info" role="alert">
                     <h4>Seleccione tipo de búsqueda</h4>

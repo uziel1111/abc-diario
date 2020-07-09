@@ -43,6 +43,7 @@ class Planea extends CI_Controller {
 					$string = $this->load->view('planea/buscador_estmuni', $data2, TRUE);
 					$data['buscador'] = $string;
 					$data['subtitulo'] = $sub;
+					$data['seccion_event'] = $seccion;
 					carga_pagina_basica($this,$data,'planea/index');
 				}// index()
 
@@ -95,7 +96,7 @@ public function obtener_grafica_xestadomunicipio(){
 				exit();
 		}
 
-		public function bucador_zona()//corregir nombre plisss...
+		public function buscador_zona()
 		{
 			// NIVEL POR PLANEA
 			$arr_niveles = $this->Planea_model->niveles_zona();
