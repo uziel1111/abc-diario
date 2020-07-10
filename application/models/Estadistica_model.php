@@ -460,7 +460,7 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
 			z.zonaid, z.zona_escolar AS nombre, z.cct_supervisor
 			FROM estadistica_x_zona est
 			INNER JOIN c_zona z ON est.zonaid = z.zonaid
-			INNER JOIN cct ct ON ct.zonaid = z.zonaid
+			INNER JOIN cct ct ON ct.zonact = z.cct_supervisor
 			INNER JOIN c_modalidad m ON m.idmodalidad = ct.idmodalidad
 			WHERE ct.nivel = ? AND m.idmodalidad = ?
 			GROUP BY z.zonaid";
