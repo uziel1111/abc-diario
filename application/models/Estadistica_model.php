@@ -224,6 +224,7 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
   			INNER JOIN ciclo c ON c.idciclo=i.idciclo
   			{$where}
   		";
+      // echo "<pre>";print_r($query);die();
   		return $this->db->query($query)->result_array();
   	}
 
