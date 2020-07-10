@@ -65,8 +65,7 @@
                                 <div class="col-12">
                                     <div id="div_planea_tabla">
                                     </div>
-                                    <div id="div_planea_nlogro_lyc"></div>
-                                    <div id="div_planea_nlogro_mate">esta</div>
+                                    <div id="div_planea_nlogro_generico"></div>
                                 </div>
                             </div>
                           </div>
