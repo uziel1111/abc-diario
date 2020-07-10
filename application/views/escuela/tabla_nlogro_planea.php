@@ -3,8 +3,14 @@
 	<thead>
 		<tr>
 			<th class="text-center" rowspan="2"></th>
-			<th class="text-center" colspan="4">Lenguaje y Comunicación</th>
-			<th class="text-center" colspan="4">Matemáticas</th>
+			<?php if ($campodisip == 1): ?>
+				<th class="text-center" colspan="4">Lenguaje y Comunicación</th>
+			<?php else: ?>
+				<th class="text-center" colspan="4">Matemáticas</th>
+			<?php endif ?>
+
+			
+			
 		</tr>
 		<tr>
 			<th class="text-center">I
@@ -19,7 +25,7 @@
 			<th class="text-center">IV
 				<br><span style="font-weight:normal">Excelente</span>
 			</th>
-			<th class="text-center">I
+			<!-- <th class="text-center">I
 				<br><span style="font-weight:normal">Insuficiente</span>
 			</th>
 			<th class="text-center">II
@@ -30,7 +36,7 @@
 			</th>
 			<th class="text-center">IV
 				<br><span style="font-weight:normal">Excelente</span>
-			</th>
+			</th> -->
 		</tr>
 	</thead>
 	<tbody>
@@ -41,20 +47,20 @@
 			<tr>
 				<?php if (isset($entidad[0]['periodo'])): ?>
 				<th class="text-center">Estado de Sinaloa</th>
-				<th class="text-center"><?= $entidad[0]['ni_lyc']?>%</th>
-				<th class="text-center"><?= $entidad[0]['nii_lyc']?>%</th>
-				<th class="text-center"><?= $entidad[0]['niii_lyc']?>%</th>
-				<th class="text-center"><?= $entidad[0]['niv_lyc']?>%</th>
-				<th class="text-center"><?= $entidad[0]['ni_mat']?>%</th>
-				<th class="text-center"><?= $entidad[0]['nii_mat']?>%</th>
-				<th class="text-center"><?= $entidad[0]['niii_mat']?>%</th>
-				<th class="text-center"><?= $entidad[0]['niv_mat']?>%</th>
+				<?php if ($campodisip == 1): ?>
+					<th class="text-center"><?= $entidad[0]['ni_lyc']?>%</th>
+					<th class="text-center"><?= $entidad[0]['nii_lyc']?>%</th>
+					<th class="text-center"><?= $entidad[0]['niii_lyc']?>%</th>
+					<th class="text-center"><?= $entidad[0]['niv_lyc']?>%</th>
+				<?php else: ?>
+					<th class="text-center"><?= $entidad[0]['ni_mat']?>%</th>
+					<th class="text-center"><?= $entidad[0]['nii_mat']?>%</th>
+					<th class="text-center"><?= $entidad[0]['niii_mat']?>%</th>
+					<th class="text-center"><?= $entidad[0]['niv_mat']?>%</th>
+				<?php endif ?>
+				
 				<?php else: ?>
 				<th class="text-center">Estado de Sinaloa</th>
-				<th class="text-center">-</th>
-				<th class="text-center">-</th>
-				<th class="text-center">-</th>
-				<th class="text-center">-</th>
 				<th class="text-center">-</th>
 				<th class="text-center">-</th>
 				<th class="text-center">-</th>
@@ -65,20 +71,20 @@
 			<tr>
 				<?php if (isset($zona[0]['periodo'])): ?>
 				<th class="text-center">Zona</th>
-				<th class="text-center"><?= $zona[0]['ni_lyc']?>%</th>
-				<th class="text-center"><?= $zona[0]['nii_lyc']?>%</th>
-				<th class="text-center"><?= $zona[0]['niii_lyc']?>%</th>
-				<th class="text-center"><?= $zona[0]['niv_lyc']?>%</th>
-				<th class="text-center"><?= $zona[0]['ni_mat']?>%</th>
-				<th class="text-center"><?= $zona[0]['nii_mat']?>%</th>
-				<th class="text-center"><?= $zona[0]['niii_mat']?>%</th>
-				<th class="text-center"><?= $zona[0]['niv_mat']?>%</th>
+				<?php if ($campodisip == 1): ?>
+					<th class="text-center"><?= $zona[0]['ni_lyc']?>%</th>
+					<th class="text-center"><?= $zona[0]['nii_lyc']?>%</th>
+					<th class="text-center"><?= $zona[0]['niii_lyc']?>%</th>
+					<th class="text-center"><?= $zona[0]['niv_lyc']?>%</th>
+				<?php else: ?>
+					<th class="text-center"><?= $zona[0]['ni_mat']?>%</th>
+					<th class="text-center"><?= $zona[0]['nii_mat']?>%</th>
+					<th class="text-center"><?= $zona[0]['niii_mat']?>%</th>
+					<th class="text-center"><?= $zona[0]['niv_mat']?>%</th>
+				<?php endif ?>
+				
 				<?php else: ?>
 				<th class="text-center">Zona</th>
-				<th class="text-center">-</th>
-				<th class="text-center">-</th>
-				<th class="text-center">-</th>
-				<th class="text-center">-</th>
 				<th class="text-center">-</th>
 				<th class="text-center">-</th>
 				<th class="text-center">-</th>
@@ -90,20 +96,20 @@
 		<tr>
 			<?php if (isset($nacional[0]['periodo'])): ?>
 			<th class="text-center">Nacional</th>
-			<th class="text-center"><?= $nacional[0]['ni_lyc']?>%</th>
-			<th class="text-center"><?= $nacional[0]['nii_lyc']?>%</th>
-			<th class="text-center"><?= $nacional[0]['niii_lyc']?>%</th>
-			<th class="text-center"><?= $nacional[0]['niv_lyc']?>%</th>
-			<th class="text-center"><?= $nacional[0]['ni_mat']?>%</th>
-			<th class="text-center"><?= $nacional[0]['nii_mat']?>%</th>
-			<th class="text-center"><?= $nacional[0]['niii_mat']?>%</th>
-			<th class="text-center"><?= $nacional[0]['niv_mat']?>%</th>
+			<?php if ($campodisip == 1): ?>
+				<th class="text-center"><?= $nacional[0]['ni_lyc']?>%</th>
+				<th class="text-center"><?= $nacional[0]['nii_lyc']?>%</th>
+				<th class="text-center"><?= $nacional[0]['niii_lyc']?>%</th>
+				<th class="text-center"><?= $nacional[0]['niv_lyc']?>%</th>
+			<?php else: ?>
+				<th class="text-center"><?= $nacional[0]['ni_mat']?>%</th>
+				<th class="text-center"><?= $nacional[0]['nii_mat']?>%</th>
+				<th class="text-center"><?= $nacional[0]['niii_mat']?>%</th>
+				<th class="text-center"><?= $nacional[0]['niv_mat']?>%</th>
+			<?php endif ?>
+			
 			<?php else: ?>
 			<th class="text-center">Nacional</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
 			<th class="text-center">-</th>
 			<th class="text-center">-</th>
 			<th class="text-center">-</th>

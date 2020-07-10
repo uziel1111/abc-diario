@@ -74,26 +74,25 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 
 
 
-public function obtener_grafica_xestadomunicipio(){
-			$municipio = $this->input->post("idmunicipio");
-			$nivel = $this->input->post("nivel");
-			$periodo = $this->input->post("periodo");
-			$campodisip = $this->input->post("campodisip");
-			$datos = $this->Planea_model->estadisticas_x_estadomunicipio($municipio, $nivel, $periodo, $campodisip);
-			$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
+	public function obtener_grafica_xestadomunicipio(){
+		$municipio = $this->input->post("idmunicipio");
+		$nivel = $this->input->post("nivel");
+		$periodo = $this->input->post("periodo");
+		$campodisip = $this->input->post("campodisip");
+		$datos = $this->Planea_model->estadisticas_x_estadomunicipio($municipio, $nivel, $periodo, $campodisip);
+		$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
 
-    $data['entidad'] = $this->Planea_model->niveles_de_logro_entidad_estadomun($municipio, $nivel, $periodo, $campodisip);
-    $data['nacional'] = $this->Planea_model->niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip);
-    $data['ciclo'] = $periodo;
+	    $data['entidad'] = $this->Planea_model->niveles_de_logro_entidad_estadomun($municipio, $nivel, $periodo, $campodisip);
+	    $data['nacional'] = $this->Planea_model->niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip);
+	    $data['ciclo'] = $periodoplanea;
+	    $data['campodisip'] = $campodisip;
 
-      $vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
+	    $vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
+		$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => $data['entidad']);
 
-
-			$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => $data['entidad']);
-
-			envia_datos_json($this, $respuesta);
-			exit();
-		}
+		envia_datos_json($this, $respuesta);
+		exit();
+	}
 		public function planea_xcont_xmunicipio(){
 			$id_contenido = $this->input->post("id_cont");
 		    $datos = $this->Planea_model->obtener_reactivos_xcont_municipio($id_contenido);
@@ -144,7 +143,9 @@ public function obtener_grafica_xestadomunicipio(){
 			$datos = $this->Planea_model->estadisticas_x_estadozona($zona, $modalidad, $nivel, $periodo, $campodisip);
 			$data['zona'] = $this->Planea_model->niveles_de_logro_entidad_edozona($zona, $periodo, $campodisip);
     		$data['nacional'] = $this->Planea_model->niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip);
-    		$data['ciclo'] = $periodo;
+    		$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
+    		$data['ciclo'] = $periodoplanea;
+    		$data['campodisip'] = $campodisip;
 
     		// echo"<pre>";
     		// print_r($data);
@@ -152,7 +153,7 @@ public function obtener_grafica_xestadomunicipio(){
 
       		$vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
 
-			$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
+			
 			$respuesta = array('datos' => $datos, 'zona' => $zona, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => $data['zona']);
 			envia_datos_json($this, $respuesta);
 			exit();

@@ -293,7 +293,7 @@ obtener_grafica_xestadozona: () => {
       Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip, div);
       $("#div_planea_tabla").empty();
 	  $("#div_planea_tabla").append(dato.vista);
-	  Planea.grafica_info_nlogro(dato.datosgraf, 'div_planea_nlogro_lyc', 'div_planea_nlogro_mate');
+	  Planea.grafica_info_nlogro(dato.datosgraf, 'div_planea_nlogro_generico', dato.campodisip);
     },
     error: function (jqXHR, textStatus, errorThrown) {
       Mensaje.cerrar();
@@ -302,7 +302,7 @@ obtener_grafica_xestadozona: () => {
   });
 },
 
-grafica_info_nlogro: (arr_datos, id_dv_mat, id_dv_lyc) => {
+grafica_info_nlogro: (arr_datos, id_div_contenedor, campo_dis) => {
 
     Highcharts.theme = {
         colors: ['#ECC462','#D5831C','#935116','#CCCC00','#FF9900','#3C5AA2'],
@@ -343,8 +343,15 @@ grafica_info_nlogro: (arr_datos, id_dv_mat, id_dv_lyc) => {
     // Creamos la gráfica
     var defaultTitle="Resultados PLANEA "+arr_datos[0]['periodo'] ;
     var defaultSubtitle="Haz clic para ver los porcentajes por área.";
-    $('#'+id_dv_lyc).empty();
-      var chartlyc = new Highcharts.chart(id_dv_lyc, {
+    if(campo_dis == 1){
+    	var titulo = "Lenguaje y Comunicación";
+    	var campos = [parseFloat(arr_datos[0]['ni_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['niv_lyc'])];
+    }else{
+    	var titulo = "Matemáticas";
+    	var campos = [parseFloat(arr_datos[0]['ni_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['niv_mat'])];
+    }
+    $('#'+id_div_contenedor).empty();
+      var chartgenerico = new Highcharts.chart(id_div_contenedor, {
           credits: {
               enabled: false
           },
@@ -352,7 +359,7 @@ grafica_info_nlogro: (arr_datos, id_dv_mat, id_dv_lyc) => {
               type: 'column'
           },
           title: {
-              text: '<b style="font-size: 2.3vh;">Lenguaje y Comunicación</b>'
+              text: '<b style="font-size: 2.3vh;">'+titulo+'</b>'
           },
           legend: {
               enabled: false
@@ -396,81 +403,14 @@ grafica_info_nlogro: (arr_datos, id_dv_mat, id_dv_lyc) => {
               useHTML: true
           },
           series: [{
-              name: 'Leng. y comunicación',
-              data: [parseFloat(arr_datos[0]['ni_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['niv_lyc'])]
+              name: titulo,
+              data: campos
           }]
 
       });
 
       $(".highcharts-background").css("fill","#FFF");
-          chartlyc.setSize(
-              ($(document).width()/10)*5,
-              400,
-             false
-          );
-    // Dibujamos un grafico tipo pie-drilldown planea 2006
-    // Create the chart
-    var defaultTitle="Resultados PLANEA "+arr_datos[0]['periodo'];
-    var defaultSubtitle="Haz clic para ver los porcentajes por área.";
-    $('#'+id_dv_mat).empty();
-    var chartmat = new Highcharts.chart(id_dv_mat, {
-        credits: {
-            enabled: false
-        },
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: '<b style="font-size: 2.3vh;">Matemáticas</b>'
-        },
-        legend: {
-            enabled: false
-        },
-        subtitle: {
-        },
-        xAxis: {
-            categories: [
-                'I <br> Insuficiente',
-                'II <br> Elemental',
-                'III <br> Bueno',
-                'IV <br>Excelente'
-            ],
-            crosshair: true
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Nivel de logro (%)'
-            }
-        },
-        plotOptions: {
-            series: {
-                borderWidth: 0,
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.y:.1f}%'
-                }
-            },
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        series: [{
-            name: 'Matemáticas',
-            data: [parseFloat(arr_datos[0]['ni_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['niv_mat'])]
-        }]
-    });
-    $(".highcharts-background").css("fill","#FFF");
-          chartmat.setSize(
+          chartgenerico.setSize(
               ($(document).width()/10)*5,
               400,
              false
