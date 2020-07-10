@@ -1,5 +1,5 @@
 $(function() {
-// jQuery("#div_contenedor_planea").hide();
+jQuery("#div_contenedor_planea").hide();
 });
 $("#slt_municipio_planea").change(function(){
 	Planea.obtener_niveles_xidmunicipio();
@@ -62,8 +62,14 @@ $("#btn_busqueda_xestadozona").click(function(){
   }
 });
 
+$("#xest_muni-tab").click(function(e){
+	$("#div_contenedor_planea").hide();
+});
+
 $("#xzona-tab").click(function(e) {
-	// jQuery("#div_contenedor_planea").hide();
+	$("#div_contenedor_planea").hide();
+	$("#div_planea_tabla").empty();
+	$("#div_planea_nlogro_generico").empty();
     e.preventDefault();
     ruta = base_url + 'Planea/buscador_zona';
     $.ajax({
@@ -76,7 +82,6 @@ $("#xzona-tab").click(function(e) {
       },
       success: function (dato) {
         Mensaje.cerrar();
-        // $("#div_contenedor_planea").show();
         $("#div_graficas_masivo").empty();
 		$(".div_grafiaca_txt").attr("hidden",true);
         $('#buscador_zona').empty();
@@ -265,11 +270,11 @@ obtener_grafica_xestadomunicipio: () => {
     },
     success: function (dato) {
       Mensaje.cerrar();
-		// jQuery("#div_contenedor_planea").show();
+		jQuery("#div_contenedor_planea").show();
 		Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip, div);
 		$("#div_planea_tabla").empty();
 		$("#div_planea_tabla").append(dato.vista);
-		Planea.grafica_info_nlogro(dato.datosgraf, 'div_planea_nlogro_lyc', 'div_planea_nlogro_mate');
+		Planea.grafica_info_nlogro(dato.datosgraf, 'div_planea_nlogro_generico', dato.campodisip, dato.periodoplanea);
     },
     error: function (jqXHR, textStatus, errorThrown) {
 			Mensaje.cerrar();
@@ -289,11 +294,12 @@ obtener_grafica_xestadozona: () => {
       Mensaje.cargando('Cargando...');
     },
     success: function (dato) {
+    $("#div_contenedor_planea").show();
       Mensaje.cerrar();
       Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip, div);
       $("#div_planea_tabla").empty();
 	  $("#div_planea_tabla").append(dato.vista);
-	  Planea.grafica_info_nlogro(dato.datosgraf, 'div_planea_nlogro_generico', dato.campodisip);
+	  Planea.grafica_info_nlogro(dato.datosgraf, 'div_planea_nlogro_generico', dato.campodisip, dato.periodoplanea);
     },
     error: function (jqXHR, textStatus, errorThrown) {
       Mensaje.cerrar();
@@ -302,7 +308,7 @@ obtener_grafica_xestadozona: () => {
   });
 },
 
-grafica_info_nlogro: (arr_datos, id_div_contenedor, campo_dis) => {
+grafica_info_nlogro: (arr_datos, id_div_contenedor, campo_dis, periodo) => {
 
     Highcharts.theme = {
         colors: ['#ECC462','#D5831C','#935116','#CCCC00','#FF9900','#3C5AA2'],
@@ -341,7 +347,7 @@ grafica_info_nlogro: (arr_datos, id_div_contenedor, campo_dis) => {
     Highcharts.setOptions(Highcharts.theme);
     // Dibujamos un grafico tipo pie-drilldown planea 2015
     // Creamos la gráfica
-    var defaultTitle="Resultados PLANEA "+arr_datos[0]['periodo'] ;
+    var defaultTitle="Resultados PLANEA "+periodo ;
     var defaultSubtitle="Haz clic para ver los porcentajes por área.";
     if(campo_dis == 1){
     	var titulo = "Lenguaje y Comunicación";
@@ -351,6 +357,7 @@ grafica_info_nlogro: (arr_datos, id_div_contenedor, campo_dis) => {
     	var campos = [parseFloat(arr_datos[0]['ni_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['niv_mat'])];
     }
     $('#'+id_div_contenedor).empty();
+    // alert(id_div_contenedor);
       var chartgenerico = new Highcharts.chart(id_div_contenedor, {
           credits: {
               enabled: false

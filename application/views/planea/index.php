@@ -36,7 +36,8 @@
                 </div>
                 <div class="card mb-3 card-style-1 mt-3">
                     <div class="card-header card-1-header bgcolor-2 text-muted">Resultados de búsqueda</div>
-                    <div class="card-body" id="div_contenedor_planea">
+                    <div class="card-body">
+                        <div id="div_contenedor_planea">
                         <p>
                           <a id="btn_planea_info" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                             PLANEA por contenido temático / reactivo
@@ -69,6 +70,7 @@
                                 </div>
                             </div>
                           </div>
+                        </div>
                         </div>
                     </div><!-- card-body -->
                 </div>

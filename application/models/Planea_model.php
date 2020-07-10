@@ -382,6 +382,12 @@ class Planea_model extends CI_Model
         }
 
         function niveles_de_logro_entidad_estadomun($municipio, $nivel, $periodo, $campodisip){
+          $tabla = 'planea_nlogro_x_entidad';
+          $where = "";
+          if($municipio != 0){
+            $tabla = 'planea_nlogro_x_muni';
+            $where = "pmuni.idmunicipio = {$municipio} AND";
+          }
           if($campodisip == 1){
             $campos = "
             pmuni.ni_lyc,
@@ -401,9 +407,10 @@ class Planea_model extends CI_Model
             pmuni.periodo_planea AS periodo,
             {$campos}
             'muni' AS origen
-            FROM planea_nlogro_x_muni pmuni
+            FROM {$tabla} pmuni
             INNER JOIN ciclo c ON SUBSTRING(c.descr, 1, 4) LIKE CONCAT('%', pmuni.periodo_planea, '%')
-            WHERE pmuni.idmunicipio = {$municipio} AND pmuni.idnivel = {$nivel} AND c.idciclo = {$periodo}";
+            WHERE {$where} pmuni.idnivel = {$nivel} AND c.idciclo = {$periodo}";
+            // echo $str_query; die();
           return $this->db->query($str_query)->result_array();
         }
 
