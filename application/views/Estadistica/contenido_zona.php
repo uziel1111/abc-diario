@@ -217,17 +217,17 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?= $arr_datos_indplanea['nivel'] ?> (<?= $arr_datos_indplanea['periodo_planea'] ?>)</td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['ni_lyc'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['nii_lyc'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['niii_lyc'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['niv_lyc'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['nii_lyc'] + $arr_datos_indplanea['niii_lyc'] + $arr_datos_indplanea['niv_lyc'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['ni_mat'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['nii_mat'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['niii_mat'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['niv_mat'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_indplanea['nii_mat'] + $arr_datos_indplanea['niii_mat'] + $arr_datos_indplanea['niv_mat'] ?></td>
+                            <td><?= ((isset($arr_datos_indplanea['nivel']))?$arr_datos_indplanea['nivel'] :'') ?> (<?= ((isset($arr_datos_indplanea['periodo_planea']))?$arr_datos_indplanea['periodo_planea'] :'') ?>)</td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['ni_lyc']))?$arr_datos_indplanea['ni_lyc'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['nii_lyc']))?$arr_datos_indplanea['nii_lyc'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['niii_lyc']))?$arr_datos_indplanea['niii_lyc'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['niv_lyc']))?$arr_datos_indplanea['niv_lyc'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['nii_lyc']))?$arr_datos_indplanea['nii_lyc'] :0) + ((isset($arr_datos_indplanea['niii_lyc']))?$arr_datos_indplanea['niii_lyc'] :0) + ((isset($arr_datos_indplanea['niv_lyc']))?$arr_datos_indplanea['niv_lyc'] :0) ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['ni_mat']))?$arr_datos_indplanea['ni_mat'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['nii_mat']))?$arr_datos_indplanea['nii_mat'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['niii_mat']))?$arr_datos_indplanea['niii_mat'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['niv_mat']))?$arr_datos_indplanea['niv_mat'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['nii_mat']))?$arr_datos_indplanea['nii_mat'] :0) + ((isset($arr_datos_indplanea['niii_mat']))?$arr_datos_indplanea['niii_mat'] :0) + ((isset($arr_datos_indplanea['niv_mat']))?$arr_datos_indplanea['niv_mat'] :0) ?></td>
                         </tr>
                     </tbody>
                 </table>
