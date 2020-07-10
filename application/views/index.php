@@ -93,7 +93,7 @@
                             <a href="<?=base_url('Info_escuela/busqueda_general');?>"><li class="list-group-item list-group-item-action">Por escuela</li></a>
                         </ul>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
 </main>
