@@ -672,7 +672,8 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
                 FROM estadistica_x_zona est
                 INNER JOIN c_zona z ON est.zonaid = z.zonaid
                 INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
-                GROUP BY n.idnivel";
+                GROUP BY n.idnivel
+                order by FIELD(n.idnivel,6,8,1,2,3,4,5,7)";
           return  $this->db->query($query)->result_array();
 			}//trae_nivel_zona
 

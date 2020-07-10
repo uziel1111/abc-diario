@@ -7,33 +7,29 @@
                 <table class="table table-sm table-striped table-hover">
                     <thead class="bg-light">
                         <tr>
-                            <th rowspan="3" class="text-center align-middle">Nivel educativo</th>
-                            <th colspan="21" class="text-center ">Alumnos</th>
+                            <th rowspan="3" class="align-middle">Nivel educativo</th>
+                            <th colspan="19" class="text-center ">Alumnos</th>
                         </tr>
                         <tr>
-                            <th><i class="fa fa-female text-secondary"></i></th>
-                            <th><i class="fa fa-male text-primary"></i></th>
-                            <th><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
-                            <th>1°</th>
-                            <th>2°</th>
-                            <th>3°</th>
-                            <th>4°</th>
-                            <th>5°</th>
-                            <th>6°</th>
+                            <th class="text-center"><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
+                            <th class="text-center">1°</th>
+                            <th class="text-center">2°</th>
+                            <th class="text-center">3°</th>
+                            <th class="text-center">4°</th>
+                            <th class="text-center">5°</th>
+                            <th class="text-center">6°</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="parent" id="SECUNDARIA" title="Click para expander/contraer">
-                            <td class="pl-1"><img style="width:12px" class="mr-5" src="http://sarape.gob.mx/assets/img/expand-button.svg"><?= $arr_datos_a_g_d_e['nivel'] ?></td>
-                            <td><?= $arr_datos_a_g_d_e['t_alumnos_m'] ?></td>
-                            <td><?= $arr_datos_a_g_d_e['t_alumnos_h'] ?></td>
-                            <td><?= $arr_datos_a_g_d_e['t_alumnos'] ?></td>
-                            <td><?= $arr_datos_a_g_d_e['alumnos1'] ?></td>
-                            <td><?= $arr_datos_a_g_d_e['alumnos2'] ?></td>
-                            <td><?= $arr_datos_a_g_d_e['alumnos3'] ?></td>
-                            <td><?= $arr_datos_a_g_d_e['alumnos4'] ?></td>
-                            <td><?= $arr_datos_a_g_d_e['alumnos5'] ?></td>
-                            <td><?= $arr_datos_a_g_d_e['alumnos6'] ?></td>
+                            <td class="pl-1"><img style="width:12px" class="mr-5"><?= $arr_datos_a_g_d_e['nivel'] ?></td>
+                            <td class="text-center"><?= $arr_datos_a_g_d_e['t_alumnos'] ?></td>
+                            <td class="text-center"><?= $arr_datos_a_g_d_e['alumnos1'] ?></td>
+                            <td class="text-center"><?= $arr_datos_a_g_d_e['alumnos2'] ?></td>
+                            <td class="text-center"><?= $arr_datos_a_g_d_e['alumnos3'] ?></td>
+                            <td class="text-center"><?= $arr_datos_a_g_d_e['alumnos4'] ?></td>
+                            <td class="text-center"><?= $arr_datos_a_g_d_e['alumnos5'] ?></td>
+                            <td class="text-center"><?= $arr_datos_a_g_d_e['alumnos6'] ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -54,18 +50,14 @@
                 <table class="table table-sm table-striped table-hover">
                     <thead class="bg-light">
                         <tr>
-                            <th rowspan="2" class="text-center align-middle">Nivel educativo</th>
+                            <th rowspan="2" class="align-middle">Nivel educativo</th>
                             <th class="text-center align-middle">Docentes</th>
-                            <th class="text-center align-middle">Directivo con grupo</th>
-                            <th class="text-center align-middle">Directivo sin grupo</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="parent" id="SECUNDARIA" title="Click para expander/contraer">
-                            <td class="pl-1"><img style="width:12px" class="mr-5" src="http://sarape.gob.mx/assets/img/expand-button.svg"><?= $arr_datos_a_g_d_e['nivel'] ?></td>
+                            <td class="pl-1"><img style="width:12px" class="mr-5" ><?= $arr_datos_a_g_d_e['nivel'] ?></td>
                             <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['t_docentes'] ?></td>
-                            <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['t_direc_congrupo'] ?></td>
-                            <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['t_direc_singrupo'] ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -86,25 +78,25 @@
                 <table class="table table-sm table-striped table-hover">
                     <thead class="bg-light">
                         <tr>
-                            <th rowspan="2" class="text-center align-middle">Nivel educativo</th>
+                            <th rowspan="2" class="text-left align-middle">Nivel educativo</th>
                             <th rowspan="2" class="text-center align-middle">Escuelas</th>
                             <th colspan="6" class="text-center align-middle">Grupos</th>
                             <th colspan="2" class="text-center align-middle"></th>
                         </tr>
                         <tr>
-                            <th>1°</th>
-                            <th>2°</th>
-                            <th>3°</th>
-                            <th>4°</th>
-                            <th>5°</th>
-                            <th>6°</th>
+                            <th class="text-center">1°</th>
+                            <th class="text-center">2°</th>
+                            <th class="text-center">3°</th>
+                            <th class="text-center">4°</th>
+                            <th class="text-center">5°</th>
+                            <th class="text-center">6°</th>
                             <th class="text-center align-middle">Multigrado</th>
                             <th class="text-center">Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="parent" id="SECUNDARIA" title="Click para expander/contraer">
-                            <td class="pl-1"><img style="width:12px" class="mr-5" src="http://sarape.gob.mx/assets/img/expand-button.svg"><?= $arr_datos_a_g_d_e['nivel'] ?></td>
+                            <td class="pl-1"><img style="width:12px" class="mr-5"><?= $arr_datos_a_g_d_e['nivel'] ?></td>
                             <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['n_escuelas'] ?></td>
                             <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['grupos1'] ?></td>
                             <td class="text-center align-middle"><?= $arr_datos_a_g_d_e['grupos2'] ?></td>
@@ -133,16 +125,16 @@
                 <table class="table table-sm table-striped table-hover">
                     <thead class="bg-light">
                         <tr>
-                            <th class="text-center align-middle">Nivel</th>
+                            <th class="align-middle">Nivel</th>
                             <th class="text-center align-middle">Cobertura</th>
                             <th class="text-center align-middle">Absorción</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?= $arr_datos_ind['nivel'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_ind['cobertura'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_ind['absorcion'] ?></td>
+                            <td><?= ((isset($arr_datos_ind['nivel']))?$arr_datos_ind['nivel'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_ind['cobertura']))?$arr_datos_ind['cobertura'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_ind['absorcion']))?$arr_datos_ind['absorcion'] :'') ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -162,7 +154,7 @@
                 <table class="table table-sm table-striped table-hover">
                     <thead class="bg-light">
                         <tr>
-                            <th class="text-center align-middle">Nivel</th>
+                            <th class="align-middle">Nivel</th>
                             <th class="text-center align-middle">Retención</th>
                             <th class="text-center align-middle">Aprobación</th>
                             <th class="text-center align-middle">Eficiencia Terminal</th>
@@ -170,17 +162,17 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?= $arr_datos_ind['nivel'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_ind['retencion'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_ind['aprobacion'] ?></td>
-                            <td style="text-align: center;"><?= $arr_datos_ind['eficiencia_terminal'] ?></td>
+                            <td><?= ((isset($arr_datos_ind['nivel']))?$arr_datos_ind['nivel'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_ind['retencion']))?$arr_datos_ind['retencion'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_ind['aprobacion']))?$arr_datos_ind['aprobacion'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($arr_datos_ind['eficiencia_terminal']))?$arr_datos_ind['eficiencia_terminal'] :'') ?></td>
                         </tr>
                     </tbody>
                 </table>
 
                 <div class="pie_tabla bg-info text-light font-weight-bold">
                     <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911) - ciclo escolar 2016-2017</div>
-                    <div id="">N/D : Dato no disponible</div>
+                    <div id="">- : Dato no disponible</div>
                 </div>
             </div>
         </div>
