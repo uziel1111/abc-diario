@@ -243,7 +243,7 @@ class Estadistica extends CI_Controller {
 			$arr_zona['arr_datos_ind'] = ((count($arr_datos)>0)?$arr_datos[0]:array());
 			$arr_datos = $this->Estadistica_model->obtener_indicadoresplanea_xzona($idnivel,$idmodalidad,$numzona,$idciclo);
 			$arr_zona['arr_datos_indplanea'] = ((count($arr_datos)>0)?$arr_datos[0]:array());
-			// echo "<pre>";print_r($arr_zona['arr_datos_ind']);die();
+			// echo "<pre>";print_r($arr_zona);die();
 			$vista = $this->load->view('estadistica/contenido_zona', $arr_zona, TRUE);
 			$respuesta = array("vista" => $vista);
 			envia_datos_json($this, $respuesta);

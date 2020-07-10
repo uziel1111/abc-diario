@@ -491,7 +491,7 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
 				INNER JOIN c_modalidad m ON m.idmodalidad = ct.idmodalidad
 				INNER JOIN ciclo c ON est.idciclo = c.idciclo
 				WHERE ct.nivel = ?  AND m.idmodalidad = ? AND z.zonaid = ?
-				GROUP BY z.zonaid";
+				GROUP BY c.idciclo";
             return $this->db->query($str_query,[$idnivel,$idmodalidad,$numzona])->result_array();
         }// obtener_nzona_xidnivelxidsost_zona()
 
@@ -511,7 +511,8 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
                             INNER JOIN c_zona z ON ez.zonaid = z.zonaid
                             INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
                             INNER JOIN cct ct ON ct.zonaid = z.zonaid
-                            WHERE z.idnivel = ? AND ct.idmodalidad = ? AND ez.zonaid = ? AND ez.idciclo = ? ";
+                            WHERE z.idnivel = ? AND ct.idmodalidad = ? AND ez.zonaid = ? AND ez.idciclo = ?
+                            GROUP BY z.zonaid";
 
               return $this->db->query($str_query,[$idnivel,$idmodalidad,$numzona,$idciclo])->result_array();
           }// obtener_estadistica_xzona()
@@ -524,7 +525,8 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
                               INNER JOIN c_zona z ON ez.zonaid = z.zonaid
                               INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
                               INNER JOIN cct ct ON ct.zonaid = z.zonaid
-                              WHERE z.idnivel = ? AND ct.idmodalidad = ? AND ez.zonaid = ? AND ez.idciclo = ? ";
+                              WHERE z.idnivel = ? AND ct.idmodalidad = ? AND ez.zonaid = ? AND ez.idciclo = ?
+                              GROUP BY z.zonaid";
 
                 return $this->db->query($str_query,[$idnivel,$idmodalidad,$numzona,$idciclo])->result_array();
             }// obtener_indicadores_xzona()
@@ -539,6 +541,7 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
                                   INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
                                   INNER JOIN cct ct ON ct.zonaid = z.zonaid
                                   WHERE z.idnivel = ? AND ct.idmodalidad = ? AND pz.zonaid = ?
+                                  GROUP BY z.zonaid
                                   order by pz.periodo_planea desc ";
 
                   return $this->db->query($str_query,[$idnivel,$idmodalidad,$numzona])->result_array();
