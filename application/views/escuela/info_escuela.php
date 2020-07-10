@@ -45,7 +45,8 @@
 						<br>
 						<div class="row">
 							<div class="col-12 col-md-6">
-								<a href="<?=base_url('Info_escuela/busqueda_general')?>" class="btn btn-success text-light">Regresar</a>
+								<a href="javascript:history.go(-1)" class="btn btn-success text-light">Regresar</a>
+								<!-- <?=base_url('Info_escuela/busqueda_general')?> -->
 							</div>
 						</div>
 					</div>
