@@ -97,12 +97,13 @@ class Reportes extends CI_Controller {
 				$idmodalidad = $this->input->post('idmodalidad');
 				$idciclo = $this->input->post('idciclo');
 				$nivel_result = $this->Generico_model->obtener_nombre_nivel($idnivel);
-				$nivel=$nivel_result[0]['nombre'];		
+				// echo "<pre>";print_r($nivel_result);die();
+				$nivel=((count($nivel_result)>0)?$nivel_result[0]['nombre']:'');
 				$result_alumnos = $this->Estadistica_model->obtener_alumnos_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
 		    	$result_docentes = $this->Estadistica_model->obtener_docentes_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
 		    	$result_infraest = $this->Estadistica_model->obtener_infraestructura_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
-		    	$result_asistencia_nv =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio);
-		    	$result_permanencia_nv =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio);
+		    	$result_asistencia_nv =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio,$idciclo);
+		    	$result_permanencia_nv =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio,$idciclo);
 		    	//falta ajustar query
 		    	// $result_planea =  $this->Estadistica_model->indicadores_aprendizaje_xmunicipio($idmunicipio);
 		    	$result_planea=[];
@@ -112,13 +113,13 @@ class Reportes extends CI_Controller {
 		    	$sostenimiento = $this->Generico_model->obtener_nombre_sostenimiento($idsostenimiento);
 		    	$modalidad = $this->Generico_model->obtener_nombre_modalidad($idmodalidad);
 		    	$ciclo = $this->Generico_model->obtener_ciclo($idciclo);
-		    	$municipio = $municipio[0]['nombre'];
-		    	$nivel = $nivel[0]['nombre'];
-		    	$sostenimiento = $sostenimiento[0]['nombre'];
-		    	$modalidad = $modalidad[0]['nombre'];
-		    	$ciclo = $ciclo[0]['nombre'];
+		    	$municipio = ((count($municipio)>0)?$municipio[0]['nombre']:'');
+		    	$nivel = ((count($nivel)>0)?$nivel[0]['nombre']:'');
+		    	$sostenimiento = ((count($sostenimiento)>0)?$sostenimiento[0]['nombre']:'');
+		    	$modalidad = ((count($modalidad)>0)?$modalidad[0]['nombre']:'');
+		    	$ciclo = ((count($ciclo)>0)?$ciclo[0]['nombre']:'');
 				$result_rezinegi =  $this->Estadistica_model->rezago_educativo_xmuni($idmunicipio);
-				
+
 
 				$obj_excel = new PHPExcel();
 				$obj_excel->getActiveSheet()->SetCellValue('A1', 'Estadística e indicadores educativos generales');
@@ -414,7 +415,7 @@ class Reportes extends CI_Controller {
 					$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['p12A14noa_h']+$row['p12A14noa_m']) );
 					$aux++;
 				}
-				$aux++; 
+				$aux++;
 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Analfabetismo');
 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
