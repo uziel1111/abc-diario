@@ -399,6 +399,25 @@ class Planea_model extends CI_Model
           return $this->db->query($str_query)->result_array();
         }
 
+        function niveles_de_logro_entidad_edozona($zona, $periodo, $campodisip){
+          $str_query = "SELECT
+            pzona.periodo_planea AS periodo,
+            pzona.ni_lyc,
+            pzona.nii_lyc,
+            pzona.niii_lyc,
+            pzona.niv_lyc,
+            pzona.ni_mat,
+            pzona.nii_mat,
+            pzona.niii_mat,
+            pzona.niv_mat,
+            'muni' AS origen
+            FROM planea_nlogro_x_zona pzona
+            INNER JOIN ciclo c ON SUBSTRING(c.descr, 1, 4) LIKE CONCAT('%', pzona.periodo_planea, '%')
+            INNER JOIN c_zona zona ON zona.zonaid = pzona.zonaid
+            WHERE zona.cct_supervisor = '{$zona}' AND c.idciclo = {$periodo}";
+          return $this->db->query($str_query)->result_array();
+        }
+
         function niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip){
           $str_query = "SELECT
             pnac.periodo_planea AS periodo,
