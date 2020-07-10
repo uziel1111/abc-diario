@@ -37,10 +37,10 @@ class Planea_model extends CI_Model
                         INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
                         INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
 												INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
-                        WHERE ct.`status`='ACT' AND cfg.`status`='A'
+                        WHERE ct.`status`='A' AND cfg.`status`='A'
                         {$where}
                         GROUP BY pp.id_periodo";
-
+        // echo $str_query; die();
           return $this->db->query($str_query)->result_array();
       }// obtener_perido_xidmunicipio_xidnivel()
 
@@ -380,6 +380,42 @@ class Planea_model extends CI_Model
             ORDER BY pnac.periodo_planea ASC";
           return $this->db->query($str_query)->result_array();
         }
+
+        function niveles_de_logro_entidad_estadomun($municipio, $nivel, $periodo, $campodisip){
+          $str_query = "SELECT
+            pmuni.periodo_planea AS periodo,
+            pmuni.ni_lyc,
+            pmuni.nii_lyc,
+            pmuni.niii_lyc,
+            pmuni.niv_lyc,
+            pmuni.ni_mat,
+            pmuni.nii_mat,
+            pmuni.niii_mat,
+            pmuni.niv_mat,
+            'muni' AS origen
+            FROM planea_nlogro_x_muni pmuni
+            INNER JOIN ciclo c ON SUBSTRING(c.descr, 1, 4) LIKE CONCAT('%', pmuni.periodo_planea, '%')
+            WHERE pmuni.idmunicipio = {$municipio} AND pmuni.idnivel = {$nivel} AND c.idciclo = {$periodo}";
+          return $this->db->query($str_query)->result_array();
+        }
+
+        function niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip){
+          $str_query = "SELECT
+            pnac.periodo_planea AS periodo,
+            pnac.ni_lyc,
+            pnac.nii_lyc,
+            pnac.niii_lyc,
+            pnac.niv_lyc,
+            pnac.ni_mat,
+            pnac.nii_mat,
+            pnac.niii_mat,
+            pnac.niv_mat,
+            'nacional' AS origen
+            FROM planea_nlogro_x_nacional pnac
+            INNER JOIN ciclo c ON SUBSTRING(c.descr, 1, 4) LIKE CONCAT('%', pnac.periodo_planea, '%')
+            WHERE pnac.idnivel = {$nivel} AND c.idciclo = {$periodo}";
+          return $this->db->query($str_query)->result_array();
+        }
         function niveles_zona(){
           $str_query = "SELECT
                 n.idnivel, n.descr as nombre, n.subfijo
@@ -425,6 +461,7 @@ class Planea_model extends CI_Model
           INNER JOIN c_modalidad m ON ct.idmodalidad = m.idmodalidad
           {$where}
           GROUP BY m.idmodalidad";
+          // echo $str_query; die();
           return $this->db->query($str_query)->result_array();
         }//niveles_zona
 

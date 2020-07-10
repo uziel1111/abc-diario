@@ -82,7 +82,18 @@ public function obtener_grafica_xestadomunicipio(){
 			$datos = $this->Planea_model->estadisticas_x_estadomunicipio($municipio, $nivel, $periodo, $campodisip);
 			$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
 
-			$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
+    $data['entidad'] = $this->Planea_model->niveles_de_logro_entidad_estadomun($municipio, $nivel, $periodo, $campodisip);
+    $data['nacional'] = $this->Planea_model->niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip);
+    $data['ciclo'] = $periodo;
+
+    // echo"<pre>";
+    // print_r($data);
+    // die();
+
+      $vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
+
+
+			$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => $data['nacional']);
 
 			envia_datos_json($this, $respuesta);
 			exit();
@@ -102,7 +113,9 @@ public function obtener_grafica_xestadomunicipio(){
 			$arr_niveles = $this->Planea_model->niveles_zona();
 			//SOSTENIMIENTOS
 			$arr_modalidad = $this->Planea_model->modalidad_zona();
-
+			// echo"<pre>";
+			// print_r($arr_modalidad);
+			// die();
 			$arr_zonas = $this->Planea_model->zonas_zona();
 
 					//CAMPOS DICIPLINARIOS

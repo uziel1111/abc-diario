@@ -37,13 +37,39 @@
                 <div class="card mb-3 card-style-1 mt-3">
                     <div class="card-header card-1-header bgcolor-2 text-muted">Resultados de búsqueda</div>
                     <div class="card-body">
-                        <div class="row">
-                          <div class="col-1">
-                              <div class="div_grafiaca_txt rotate" hidden="true">Contenidos temáticos</div>
-                          </div>
-                            <div class="col-10">
-                                <div id="div_graficas_masivo"></div>
+                        <p>
+                          <a id="btn_planea_info" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            PLANEA por contenido temático / reactivo
+                          </a>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                          <div class="card card-body">
+                            <div class="row">
+                              <div class="col-1">
+                                  <div class="div_grafiaca_txt rotate" hidden="true">Contenidos temáticos</div>
+                              </div>
+                                <div class="col-10">
+                                    <div id="div_graficas_masivo"></div>
+                                </div>
                             </div>
+                          </div>
+                        </div>
+                        <p>
+                            <a id="btn_planea_info_mate" class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                PLANEA por nivel de logro
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseExample2">
+                          <div class="card card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div id="div_planea_tabla">
+                                    </div>
+                                    <div id="div_planea_nlogro_lyc"></div>
+                                    <div id="div_planea_nlogro_mate">esta</div>
+                                </div>
+                            </div>
+                          </div>
                         </div>
                     </div><!-- card-body -->
                 </div>

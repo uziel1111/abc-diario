@@ -14,7 +14,6 @@
             <div id="div_planea_lyc_info"></div>
         </div>
     </div>
-
   </div>
 </div>
 <p>
