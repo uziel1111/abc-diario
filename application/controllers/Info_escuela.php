@@ -47,7 +47,7 @@ class Info_escuela extends CI_Controller {
         }else{
           $data['seccion_corta'] = $subseccion;
         }
-        
+
       }
 
       carga_pagina_basica($this,$data,'escuela/busqueda_escuela');
@@ -112,7 +112,7 @@ class Info_escuela extends CI_Controller {
         $datos_grupos = $this->Estadistica_model->datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo);
         $datos_docentes = $this->Estadistica_model->datos_estadistica_docentes_xescuela($cct,$idturno,$idciclo);
 
-        $respuesta = array("alumnos" => $datos_alumnos[0], 'grupos' => $datos_grupos[0], 'docentes' => $datos_docentes[0]);
+        $respuesta = array("alumnos" => ((isset($datos_alumnos[0]))?$datos_alumnos[0]:0), 'grupos' => ((isset($datos_grupos[0]))?$datos_grupos[0]:0), 'docentes' => ((isset($datos_docentes[0]))?$datos_docentes[0]:0));
         envia_datos_json($this, $respuesta);
         exit();
     }//busqueda_especifica
@@ -149,7 +149,8 @@ class Info_escuela extends CI_Controller {
   }
 
   public function get_permanencia(){
-    $data['ciclos'] = $this->Generico_model->ciclo_escolar();
+    // $data['ciclos'] = $this->Generico_model->ciclo_escolar();
+    $data['ciclos'] = array(['idciclo' => 1, 'ciclo' => '2019-2020']);
     $vista = $this->load->view('escuela/info/permanencia',$data, TRUE);
     $respuesta = array('vista' => $vista);
 
@@ -275,7 +276,7 @@ function obtener_idsost_xidnivel_xmuni(){
     $campodisip = $this->input->post("campodisip");
     $datos = $this->Planea_model->estadisticas_x_cct_info($cct, $idturno, $campodisip);
     $periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo_info($cct, $idturno);
-    $periodoplanea = $periodoplanea[0]['periodo'];
+    $periodoplanea = ((isset($periodoplanea[0]['periodo']))?$periodoplanea[0]['periodo']:'');
     // echo "<pre>";print_r($periodoplanea);die();
       $respuesta = array('datos' => $datos, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
 
@@ -291,7 +292,7 @@ function obtener_idsost_xidnivel_xmuni(){
       $data['entidad'] = $this->Planea_model->niveles_de_logro_entidad($cct, $idturno);
       $data['nacional'] = $this->Planea_model->niveles_de_logro_nacional($cct, $idturno);
       $data['ciclos'] = $this->obtener_ciclos($data['centrocfg'], $data['entidad'], $data['nacional']);
-
+      // echo "<pre>";print_r($data);die();
       $vista_tabla = $this->load->view('escuela/tabla_nlogro',$data, TRUE);
 
 
@@ -323,7 +324,14 @@ function obtener_idsost_xidnivel_xmuni(){
 
       $eft = $this->Eficienciat_model->eficiencia_terminal($cct, $turno);
       $contenido_may = $this->Eficienciat_model->indicadores_sum($cct, $turno);
-      $ete = round((($eft->eficiencia_terminal* $contenido_may->mayor)/100),2);
+      if ($eft!='') {
+        $ete = round((($eft->eficiencia_terminal* $contenido_may->mayor)/100),2);
+      }
+      else {
+        $ete = 0;
+      }
+
+
       $respuesta = array('ete' => $ete, 'periodo' => $contenido_may->periodo);
 
       envia_datos_json($this, $respuesta);

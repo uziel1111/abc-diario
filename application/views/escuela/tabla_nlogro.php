@@ -35,10 +35,10 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td colspan="9" style="background-color:silver;">PLANEA <?=$ciclos[0]?></td>
+			<td colspan="9" style="background-color:silver;">PLANEA <?=((isset($ciclos[0]))?$ciclos[0]:'')?></td>
 		</tr>
 		<tr>
-			<?php if ($centrocfg[0]['periodo'] == $ciclos[0]): ?>
+			<?php if (count($centrocfg)>0 && $centrocfg[0]['periodo'] == $ciclos[0]): ?>
 			<th class="text-center">Tu escuela</th>
 			<th class="text-center"><?= $centrocfg[0]['ni_lyc']?>%</th>
 			<th class="text-center"><?= $centrocfg[0]['nii_lyc']?>%</th>
@@ -61,7 +61,7 @@
 			<?php endif ?>
 		</tr>
 		<tr>
-			<?php if ($entidad[0]['periodo'] == $ciclos[0]): ?>
+			<?php if (count($entidad)>0 && $entidad[0]['periodo'] == $ciclos[0]): ?>
 			<th class="text-center">Estado de Sinaloa</th>
 			<th class="text-center"><?= $entidad[0]['ni_lyc']?>%</th>
 			<th class="text-center"><?= $entidad[0]['nii_lyc']?>%</th>
@@ -84,7 +84,7 @@
 			<?php endif ?>
 		</tr>
 		<tr>
-			<?php if ($nacional[0]['periodo'] == $ciclos[0]): ?>
+			<?php if (count($nacional)>0 && $nacional[0]['periodo'] == $ciclos[0]): ?>
 			<th class="text-center">Nacional</th>
 			<th class="text-center"><?= $nacional[0]['ni_lyc']?>%</th>
 			<th class="text-center"><?= $nacional[0]['nii_lyc']?>%</th>
@@ -108,10 +108,10 @@
 		</tr>
 
 		<tr>
-			<td colspan="9" style="background-color:silver;">PLANEA <?=$ciclos[1]?></td>
+			<td colspan="9" style="background-color:silver;">PLANEA <?=((isset($ciclos[1]))?$ciclos[1]:'')?></td>
 		</tr>
 		<tr>
-			<?php if ($centrocfg[1]['periodo'] == $ciclos[1]): ?>
+			<?php if (count($centrocfg)>0 && $centrocfg[1]['periodo'] == $ciclos[1]): ?>
 			<th class="text-center">Tu escuela</th>
 			<th class="text-center"><?= $centrocfg[1]['ni_lyc']?>%</th>
 			<th class="text-center"><?= $centrocfg[1]['nii_lyc']?>%</th>
@@ -134,7 +134,7 @@
 			<?php endif ?>
 		</tr>
 		<tr>
-			<?php if ($entidad[1]['periodo'] == $ciclos[1]): ?>
+			<?php if (count($entidad)>0 && $entidad[1]['periodo'] == $ciclos[1]): ?>
 			<th class="text-center">Estado de Sinaloa</th>
 			<th class="text-center"><?= $entidad[1]['ni_lyc']?>%</th>
 			<th class="text-center"><?= $entidad[1]['nii_lyc']?>%</th>
@@ -157,7 +157,7 @@
 			<?php endif ?>
 		</tr>
 		<tr>
-			<?php if ($nacional[1]['periodo'] == $ciclos[1]): ?>
+			<?php if (count($nacional)>0 && $nacional[1]['periodo'] == $ciclos[1]): ?>
 			<th class="text-center">Nacional</th>
 			<th class="text-center"><?= $nacional[1]['ni_lyc']?>%</th>
 			<th class="text-center"><?= $nacional[1]['nii_lyc']?>%</th>
@@ -182,15 +182,15 @@
 	</tbody>
 </table>
 </div>
-<div class="row">		
+<div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<div style="display:inline-block; width:20px; height:20px; background-color:#ECC462; border: 1px solid black;"></div>
-		<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?= $ciclos[0]?></p>
+		<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?= ((isset($ciclos[0]))?$ciclos[0]:'')?></p>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<div style="display:inline-block; width:20px; height:20px; background-color:#D5831C; border: 1px solid black;"></div>
-		<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?=$ciclos[1]?></p>
+		<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?=((isset($ciclos[1]))?$ciclos[1]:'')?></p>
 	</div>
 </div>
