@@ -382,16 +382,24 @@ class Planea_model extends CI_Model
         }
 
         function niveles_de_logro_entidad_estadomun($municipio, $nivel, $periodo, $campodisip){
-          $str_query = "SELECT
-            pmuni.periodo_planea AS periodo,
+          if($campodisip == 1){
+            $campos = "
             pmuni.ni_lyc,
             pmuni.nii_lyc,
             pmuni.niii_lyc,
             pmuni.niv_lyc,
+            ";
+          }else{
+            $campos = "
             pmuni.ni_mat,
             pmuni.nii_mat,
             pmuni.niii_mat,
             pmuni.niv_mat,
+            ";
+          }
+          $str_query = "SELECT
+            pmuni.periodo_planea AS periodo,
+            {$campos}
             'muni' AS origen
             FROM planea_nlogro_x_muni pmuni
             INNER JOIN ciclo c ON SUBSTRING(c.descr, 1, 4) LIKE CONCAT('%', pmuni.periodo_planea, '%')
@@ -400,16 +408,24 @@ class Planea_model extends CI_Model
         }
 
         function niveles_de_logro_entidad_edozona($zona, $periodo, $campodisip){
-          $str_query = "SELECT
-            pzona.periodo_planea AS periodo,
+          if($campodisip == 1){
+            $campos = "
             pzona.ni_lyc,
             pzona.nii_lyc,
             pzona.niii_lyc,
             pzona.niv_lyc,
+            ";
+          }else{
+            $campos = "
             pzona.ni_mat,
             pzona.nii_mat,
             pzona.niii_mat,
             pzona.niv_mat,
+            ";
+          }
+          $str_query = "SELECT
+            pzona.periodo_planea AS periodo,
+            {$campos}
             'muni' AS origen
             FROM planea_nlogro_x_zona pzona
             INNER JOIN ciclo c ON SUBSTRING(c.descr, 1, 4) LIKE CONCAT('%', pzona.periodo_planea, '%')
