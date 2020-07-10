@@ -37,29 +37,56 @@
 		<tr>
 			<td colspan="9" style="background-color:silver;">PLANEA <?=$ciclo?></td>
 		</tr>
-		<tr>
-			<?php if (isset($entidad[0]['periodo'])): ?>
-			<th class="text-center">Estado de Sinaloa</th>
-			<th class="text-center"><?= $entidad[0]['ni_lyc']?>%</th>
-			<th class="text-center"><?= $entidad[0]['nii_lyc']?>%</th>
-			<th class="text-center"><?= $entidad[0]['niii_lyc']?>%</th>
-			<th class="text-center"><?= $entidad[0]['niv_lyc']?>%</th>
-			<th class="text-center"><?= $entidad[0]['ni_mat']?>%</th>
-			<th class="text-center"><?= $entidad[0]['nii_mat']?>%</th>
-			<th class="text-center"><?= $entidad[0]['niii_mat']?>%</th>
-			<th class="text-center"><?= $entidad[0]['niv_mat']?>%</th>
-			<?php else: ?>
-			<th class="text-center">Estado de Sinaloa</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
-			<th class="text-center">-</th>
-			<?php endif ?>
-		</tr>
+		<?php if (isset($entidad)): ?>
+			<tr>
+				<?php if (isset($entidad[0]['periodo'])): ?>
+				<th class="text-center">Estado de Sinaloa</th>
+				<th class="text-center"><?= $entidad[0]['ni_lyc']?>%</th>
+				<th class="text-center"><?= $entidad[0]['nii_lyc']?>%</th>
+				<th class="text-center"><?= $entidad[0]['niii_lyc']?>%</th>
+				<th class="text-center"><?= $entidad[0]['niv_lyc']?>%</th>
+				<th class="text-center"><?= $entidad[0]['ni_mat']?>%</th>
+				<th class="text-center"><?= $entidad[0]['nii_mat']?>%</th>
+				<th class="text-center"><?= $entidad[0]['niii_mat']?>%</th>
+				<th class="text-center"><?= $entidad[0]['niv_mat']?>%</th>
+				<?php else: ?>
+				<th class="text-center">Estado de Sinaloa</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<?php endif ?>
+			</tr>
+		<?php else: ?>
+			<tr>
+				<?php if (isset($zona[0]['periodo'])): ?>
+				<th class="text-center">Zona</th>
+				<th class="text-center"><?= $zona[0]['ni_lyc']?>%</th>
+				<th class="text-center"><?= $zona[0]['nii_lyc']?>%</th>
+				<th class="text-center"><?= $zona[0]['niii_lyc']?>%</th>
+				<th class="text-center"><?= $zona[0]['niv_lyc']?>%</th>
+				<th class="text-center"><?= $zona[0]['ni_mat']?>%</th>
+				<th class="text-center"><?= $zona[0]['nii_mat']?>%</th>
+				<th class="text-center"><?= $zona[0]['niii_mat']?>%</th>
+				<th class="text-center"><?= $zona[0]['niv_mat']?>%</th>
+				<?php else: ?>
+				<th class="text-center">Zona</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<th class="text-center">-</th>
+				<?php endif ?>
+			</tr>
+		<?php endif ?>
+		
 		<tr>
 			<?php if (isset($nacional[0]['periodo'])): ?>
 			<th class="text-center">Nacional</th>

@@ -86,14 +86,10 @@ public function obtener_grafica_xestadomunicipio(){
     $data['nacional'] = $this->Planea_model->niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip);
     $data['ciclo'] = $periodo;
 
-    // echo"<pre>";
-    // print_r($data);
-    // die();
-
       $vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
 
 
-			$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => $data['nacional']);
+			$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => $data['entidad']);
 
 			envia_datos_json($this, $respuesta);
 			exit();
@@ -146,9 +142,18 @@ public function obtener_grafica_xestadomunicipio(){
 			$modalidad = $this->input->post("modalidad");
 			$campodisip = $this->input->post("campodisip");
 			$datos = $this->Planea_model->estadisticas_x_estadozona($zona, $modalidad, $nivel, $periodo, $campodisip);
-			// echo "<pre>";print_r($campodisip);die();
+			$data['zona'] = $this->Planea_model->niveles_de_logro_entidad_edozona($zona, $periodo, $campodisip);
+    		$data['nacional'] = $this->Planea_model->niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip);
+    		$data['ciclo'] = $periodo;
+
+    		// echo"<pre>";
+    		// print_r($data);
+    		// die();
+
+      		$vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
+
 			$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
-			$respuesta = array('datos' => $datos, 'zona' => $zona, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
+			$respuesta = array('datos' => $datos, 'zona' => $zona, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => $data['zona']);
 			envia_datos_json($this, $respuesta);
 			exit();
 		}//obtener_grafica_xestadozona
