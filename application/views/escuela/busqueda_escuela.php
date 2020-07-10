@@ -74,11 +74,20 @@
 						<div class="col-md-12">
 							<div class="form-group form-group-style-1">
 	             <?=form_label('Clave Centro de Trabajo', 'cct');?>
-	            <div class="input-group">
-	                <div class="input-group-prepend">
-	                  <div class="input-group-text fw800" id="btnGroupAddon">25</div>
-	                </div>
-	                <?=form_input('cct', '', array('class' => 'form-control fw800', 'id' => 'busquedaxcct'));?>
+	            <div class="row">
+									<div class="col-3 text-left align-left">
+										<div class="input-group-prepend">
+											<div class="input-group-text fw800" id="btnGroupAddon">25</div>
+											<?=form_input('cct', '', array('class' => 'form-control fw800', 'id' => 'busquedaxcct'));?>
+										</div>
+
+									</div>
+									<div class="col-md-3 col-lg-2 mt-2">
+										<button class="btn btn-info text-light btn-block" type="button" id="btn_limpiar_busqueda_xcct">Limpiar</button>
+									</div>
+									<div class="col-md-3 col-lg-2 mt-2">
+										<button class="btn btn-success btn-block text-light" type="button" id="btn_buscar_escuelas_xcct">Buscar</button>
+									</div>
 	              </div>
 	            </div>
 							<!-- <label>CCT:</label>
@@ -86,14 +95,9 @@
 						</div>
 					</div>
 
-					<div class="row justify-content-end mt-3">
-						<div class="col-md-3 col-lg-2 mt-2">
-							<button class="btn btn-info text-light btn-block" type="button" id="btn_limpiar_busqueda_xcct">Limpiar</button>
-						</div>
-						<div class="col-md-3 col-lg-2 mt-2">
-							<button class="btn btn-success btn-block text-light" type="button" id="btn_buscar_escuelas_xcct">Buscar</button>
-						</div>
-					</div>
+					<!-- <div class="row justify-content-end mt-3">
+
+					</div> -->
 
 				</div>
 				<br>

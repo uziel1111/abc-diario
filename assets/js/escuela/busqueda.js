@@ -18,6 +18,9 @@ $("#btn_limpiar_busqueda_general").click(function () {
 	$("#div_lista_escuelas").empty();
 	$("nombre_cct").val("");
 });
+$("#btn_limpiar_busqueda_xcct").click(function () {
+	$("#busquedaxcct").val("");
+});
 
 $("#busquedaxcct").keyup(function() {
   	if($("#busquedaxcct").val().length==8){

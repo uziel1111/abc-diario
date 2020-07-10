@@ -14,7 +14,8 @@ class Listadoesc_model extends CI_Model
               INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
               INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
               {$where}
-              GROUP BY n.idnivel";
+              GROUP BY n.idnivel
+              ORDER BY FIELD(n.idnivel,6,8,1,2,3,4,5,7)";
       return  $this->db->query($query)->result_array();
     }// niveles()
     function sostenimientos($idmunicipio=0, $idnivel=0){
