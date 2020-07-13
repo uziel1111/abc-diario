@@ -96,7 +96,8 @@
                     <p>Otros</p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?= base_url('');?>">otro 1</a>
+                    <a class="dropdown-item" href="https://mieducacion.sepyc.gob.mx/" target="_blank">SEPYC</a>
+                    <a class="dropdown-item" href="https://www.gob.mx/sep" target="_blank">SEP Federal</a>
                   </div>
                 </li>
               </ul>
