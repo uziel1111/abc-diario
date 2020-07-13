@@ -55,6 +55,9 @@ class Info_escuela extends CI_Controller {
     }//busqueda_general
 
     function lista_escuelas() {
+      // echo"<pre>";
+      // print_r($_POST);
+      // die();
       $idmunicipio = $this->input->post('municipio');
       $idsostenimiento = $this->input->post('sostenimiento');
       $idnivel = $this->input->post('nivel');
