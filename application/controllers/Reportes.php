@@ -466,18 +466,18 @@ class Reportes extends CI_Controller {
 				$obj_excel->getActiveSheet()->SetCellValue('D2', 'Nivel');
 				$obj_excel->getActiveSheet()->SetCellValue('E2', 'Municipio');
 				// $obj_excel->getActiveSheet()->SetCellValue('F2', 'Localidad');
-				$obj_excel->getActiveSheet()->SetCellValue('F2', 'Domicilio');
+				// $obj_excel->getActiveSheet()->SetCellValue('F2', 'Domicilio');
 
-				$obj_excel->getActiveSheet()->mergeCells('A1:G1');
-				$obj_excel->getActiveSheet()->getStyle('A1:G1')->applyFromArray($this->style_titulo);
+				$obj_excel->getActiveSheet()->mergeCells('A1:E1');
+				$obj_excel->getActiveSheet()->getStyle('A1:E1')->applyFromArray($this->style_titulo);
 				$obj_excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
 				$obj_excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 				$obj_excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 				$obj_excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
 				$obj_excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+				// $obj_excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
 				// $obj_excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getStyle('A2:F2')->applyFromArray($this->style_encabezado);
+				$obj_excel->getActiveSheet()->getStyle('A2:E2')->applyFromArray($this->style_encabezado);
 
 				$aux = 3;
 				foreach ($array as $row) {
@@ -486,9 +486,9 @@ class Reportes extends CI_Controller {
 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, utf8_encode($row['nombre']) );
 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, utf8_encode($row['nivel']) );
 					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, utf8_encode($row['municipio']) );
-					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, utf8_encode($row['domicilio']) );
+					// $obj_excel->getActiveSheet()->SetCellValue('F'.$aux, utf8_encode($row['domicilio']) );
 					// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, utf8_encode($row['domicilio']) );
-					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':F'.$aux)->applyFromArray($this->style_contenido);
+					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':E'.$aux)->applyFromArray($this->style_contenido);
 					$aux++;
 				}
 				date_default_timezone_set('America/Mexico_City');
