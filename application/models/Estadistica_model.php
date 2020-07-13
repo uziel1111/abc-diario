@@ -413,8 +413,8 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
     		array_push($datos, $idsostenimiento);
     	}
     	if($nombre_cct!=""){
-    		$where.= " AND ct.nombre= ?";
-    		array_push($datos, $nombre_cct);
+    		$where.= " AND ct.nombre LIKE '%{$nombre_cct}%' ";
+    		// array_push($datos, $nombre_cct);
     	}
     	if($cct!=""){
     		$where.= " AND ct.cct= ?";
