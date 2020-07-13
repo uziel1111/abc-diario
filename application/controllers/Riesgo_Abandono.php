@@ -21,7 +21,7 @@ class Riesgo_abandono extends CI_Controller {
     	$data['nivel']=$nivel;
     	$data['municipios']=$municipios;
       $data['seccion']=$secc;
-		carga_pagina_basica($this,$data,'Riesgo/filtro_riesgo');
+		carga_pagina_basica($this,$data,'riesgo/filtro_riesgo');
     }//vista_principal_riesgo
 
     public function obtener_riesgo_xmunicipioxnivelxcicloxperiodo(){
