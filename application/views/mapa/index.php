@@ -65,7 +65,7 @@
 
 <script src="https://jawj.github.io/OverlappingMarkerSpiderfier/bin/oms.min.js"></script>
 <script src="<?= base_url('assets/js/mapa/mapa.js') ?>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL9NSkD_-ADx476rc1v_oUh6aFWOBFTwo&callback=initMap" async defer>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer>
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 <!-- es la key de escuelapoblana -->
