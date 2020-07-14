@@ -2,7 +2,14 @@
 	<div class="container" id="dv_contenido">
 		<div class="card shadow">
 			<div class="card-header bg-primary text-light">
-				<i class="fas fa-search"></i> Estadística, indicadores y resultados educativos(<?= isset($subtitulo)? $subtitulo :""?>)
+				<div class="row">
+					<div class="col-10">
+						<i class="fas fa-search"></i> Estadística, indicadores y resultados educativos(<?= isset($subtitulo)? $subtitulo :""?>)
+					</div>
+					<div class="col-2 text-light text-right">
+						<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Titulo" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><i class="fa fa-info-circle"></i></a>
+					</div>
+				</div>
 			</div>
 			<div class="card-body">
 				<div class="alert alert-info" role="alert">

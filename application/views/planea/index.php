@@ -2,12 +2,19 @@
     <div class="container">
         <div class="card shadow">
             <div class="card-header bg-secondary text-light">
-                <i class="fas fa-search"></i> Aprendizaje(<?= isset($subtitulo)? $subtitulo :""?>)
+              <div class="row">
+      					<div class="col-11">
+      						<i class="fas fa-search"></i> Aprendizaje(<?= isset($subtitulo)? $subtitulo :""?>)
+      					</div>
+      					<div class="col-1 text-light text-right">
+      						<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Titulo" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><i class="fa fa-info-circle"></i></a>
+      					</div>
+      				</div>
+
             </div>
             <input type="hidden" name="itxt_planea_event" id="itxt_planea_event" value="<?= $seccion_event?>">
             <div class="card-body">
                 <div class="alert alert-info" role="alert">
-                    <h4>Seleccione tipo de búsqueda</h4>
                     <ul class="nav nav-pills nav-fill" id="tab_busqg" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active p-2 h5 font-weight-bold" id="xest_muni-tab" data-toggle="tab" href="#xest_muni" role="tab" aria-controls="xest_muni" aria-selected="true">Por estado / municipio</a>
