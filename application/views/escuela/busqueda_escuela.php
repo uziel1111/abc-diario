@@ -46,6 +46,7 @@
 						<div class="col-md-4">
 							<label>Sostenimiento:</label>
 							<select name="filtro_sostenimiento_busqueda" id="filtro_sostenimiento_busqueda" class="form-control">
+								<option value="0">Todos</option>
 								<?php foreach ($sostenimiento as $key => $value) { ?>
 									<option value="<?= $value['idsostenimiento'] ?>"> <?= $value['nombre'] ?></option>
 								<?php } ?>
