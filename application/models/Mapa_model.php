@@ -58,6 +58,7 @@ class Mapa_model extends CI_Model
                   ct.lat as latitud, ct.lon as longitud,
                   cfg.nivel as idnivel,
                   m.nombre as municipio,
+                  m.idmunicipio as idmunicipio,
                   ct.localidad,
                   ct.zona zona_escolar,
                   s.descr as sostenimiento,
@@ -71,6 +72,17 @@ class Mapa_model extends CI_Model
                   WHERE cfg.idcentrocfg= ? ";
         return $this->db->query($query,[$idcfg])->result_array();
     }//obtener_xidcct
+
+    function obtener_coordenadas_muni($idmunicipio){
+      if ($idmunicipio==0) {
+        return array(['lat' => 24.7903194,'lon' =>  -107.3878174]);
+      }
+      else {
+        $str_query = "SELECT lat,lon FROM municipio WHERE idmunicipio = {$idmunicipio}";
+        return $this->db->query($str_query)->result_array();
+      }
+
+    }// obtener_mismo_nivel()
 
     function obtener_mismo_nivel($latitud, $longitud, $id_nivel, $siguiente){
       if($siguiente == true && $id_nivel < 10){

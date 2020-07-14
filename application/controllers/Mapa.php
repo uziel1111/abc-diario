@@ -119,7 +119,8 @@ class Mapa extends CI_Controller {
 			            array_push($vfinal, $marcadorb);
 			            $marcadorb = array();
 			        }
-							$respuesta = array('response' => $vfinal);
+							$coordenadas = $this->Mapa_model->obtener_coordenadas_muni($idmunicipio);
+							$respuesta = array('response' => $vfinal,'coordenadas' => $coordenadas[0]);
 							envia_datos_json($this, $respuesta);
 							exit();
 				}
@@ -150,7 +151,8 @@ class Mapa extends CI_Controller {
 				            array_push($vfinal, $marcadorb);
 				            $marcadorb = array();
 				        }
-								$respuesta = array('response' => $vfinal);
+								$coordenadas = $this->Mapa_model->obtener_coordenadas_muni($escuela[0]['idmunicipio']);
+								$respuesta = array('response' => $vfinal,'coordenadas' => $coordenadas[0]);
 								envia_datos_json($this, $respuesta);
 								exit();
 					}
@@ -182,10 +184,20 @@ class Mapa extends CI_Controller {
 				            array_push($vfinal, $marcadorb);
 				            $marcadorb = array();
 				        }
-								$respuesta = array('response' => $vfinal);
+								$coordenadas = $this->Mapa_model->obtener_coordenadas_muni($escuela[0]['idmunicipio']);
+								$respuesta = array('response' => $vfinal,'coordenadas' => $coordenadas[0]);
 								envia_datos_json($this, $respuesta);
 								exit();
 					}
+				}
+
+				public function obtener_coordenadas_muni(){
+					$idmunicipio = $this->input->post('idmunicipio');
+					$coordenadas = $this->Mapa_model->obtener_coordenadas_muni($idmunicipio);
+					$respuesta = array('coordenadas' => $coordenadas[0]);
+					// echo "<pre>";print_r($respuesta);die();
+					envia_datos_json($this, $respuesta);
+					exit();
 				}
 
 		}// Mapa

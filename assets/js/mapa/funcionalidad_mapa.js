@@ -1,4 +1,5 @@
 $("#slt_municipio_mapa").change(function() {
+	Mapa.obtener_coordenadas_muni($("#slt_municipio_mapa").val());
 	Mapa.obtener_Niveles();
 });
 $("#slt_nivel_mapa").change(function() {
@@ -69,7 +70,7 @@ obtener_marcadores_filtro: () => {
     success: function (dato) {
       Mensaje.cerrar();
 			var marcadores = dato.response;
-			Mapa.pinta_en_mapa(marcadores);
+			Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
     },
     error: function (jqXHR, textStatus, errorThrown) {
 			Mensaje.cerrar();
@@ -127,7 +128,7 @@ cct_mismo_nivel: (idcfg) => {
     success: function (dato) {
       Mensaje.cerrar();
 			var marcadores = dato.response;
-			Mapa.pinta_en_mapa(marcadores);
+			Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
     },
     error: function (jqXHR, textStatus, errorThrown) {
 			Mensaje.cerrar();
@@ -148,7 +149,7 @@ cct_siguiente_nivel: (idcfg) => {
     success: function (dato) {
       Mensaje.cerrar();
 			var marcadores = dato.response;
-			Mapa.pinta_en_mapa(marcadores);
+			Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
     },
     error: function (jqXHR, textStatus, errorThrown) {
 			Mensaje.cerrar();
@@ -156,12 +157,12 @@ cct_siguiente_nivel: (idcfg) => {
 		}
   });
 },
-pinta_en_mapa: (marcadores) => {
+pinta_en_mapa: (marcadores, lat, lon) => {
 	if (marcadores != '') {
 		document.getElementById('contenedor_mapa_id').scrollIntoView();
 		var map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 10,
-			center: new google.maps.LatLng(marcadores[0][1],marcadores[0][2]),
+			zoom: 13,
+			center: new google.maps.LatLng(lat,lon),
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 		var infowindow = new google.maps.InfoWindow({
@@ -253,5 +254,29 @@ pinta_en_mapa: (marcadores) => {
 		document.body.appendChild(form);
 		Mensaje.cerrar();
 		form.submit();
+	},
+	obtener_coordenadas_muni: (idmunicipio) => {
+		ruta = base_url+'Mapa/obtener_coordenadas_muni';
+	  $.ajax({
+	    url: ruta,
+	    type: 'POST',
+	    dataType: 'json',
+	    data: {"idmunicipio": idmunicipio},
+	    beforeSend: function (xhr) {
+	      Mensaje.cargando('Cargando');
+	    },
+	    success: function (dato) {
+	      Mensaje.cerrar();
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 12,
+					center: new google.maps.LatLng(dato.coordenadas['lat'],dato.coordenadas['lon']),
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+	    },
+	    error: function (jqXHR, textStatus, errorThrown) {
+				Mensaje.cerrar();
+				Mensaje.error_ajax(jqXHR,textStatus, errorThrown);
+			}
+	  });
 	}
 }
