@@ -460,7 +460,7 @@ class Reportes extends CI_Controller {
 					$aux++;
 				}
 				date_default_timezone_set('America/Mexico_City');
-				$hoy = date("Y-m-d");
+				$hoy = date("Y-m-d_H-i-s");
 				$name_file = "Estadistica_e_indicadores_generales_".$hoy.'.xls';
 				$this->downloand_file($obj_excel,$name_file);
 
@@ -511,7 +511,7 @@ class Reportes extends CI_Controller {
 					$aux++;
 				}
 				date_default_timezone_set('America/Mexico_City');
-				$hoy = date("Y-m-d");
+				$hoy = date("Y-m-d_H-i-s");
 				$name_file = "Reporte_escuelas_".$hoy.'.xls';
 				$this->downloand_file($obj_excel,$name_file);
 
