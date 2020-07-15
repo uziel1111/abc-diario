@@ -92,7 +92,7 @@ $("#filtro_municipio_busqueda").change(function (e) {
     url: ruta,
     type: 'POST',
     dataType: 'json',
-    data: {"idmunicipio": $("#filtro_municipio_busqueda").val()},
+    data: {"idmunicipio": $("#filtro_municipio_busqueda").val(), "tipo_busqueda": $("#itxt_seccion_eventos").val()},
     beforeSend: function (xhr) {
       Mensaje.cargando('Cargando');
     },

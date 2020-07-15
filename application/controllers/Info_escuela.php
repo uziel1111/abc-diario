@@ -188,8 +188,17 @@ class Info_escuela extends CI_Controller {
   }
 
    function obtener_idnivel_xmuni(){
+    // echo"<pre>";
+    // print_r($_POST);
+    // die();
+     $tipo_busqueda = $this->input->post('tipo_busqueda');
      $idmunicipio = $this->input->post('idmunicipio');
-     $arr_datos = $this->Listadoesc_model->niveles($idmunicipio);
+     if($tipo_busqueda == 'aprendizaje'){
+      $arr_datos = $this->Listadoesc_model->niveles_planea($idmunicipio);
+     }else{
+      $arr_datos = $this->Listadoesc_model->niveles($idmunicipio);
+     }
+     
      $str_select = "<option value='0'>Todos</option>";
      foreach ($arr_datos as $key => $row) {
        $str_select .= " <option value=".$row['idnivel'].">".$row['nombre']."</option>";
