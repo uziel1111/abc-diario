@@ -81,14 +81,20 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 		$campodisip = $this->input->post("campodisip");
 		$datos = $this->Planea_model->estadisticas_x_estadomunicipio($municipio, $nivel, $periodo, $campodisip);
 		$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
-
-	    $data['entidad'] = $this->Planea_model->niveles_de_logro_entidad_estadomun($municipio, $nivel, $periodo, $campodisip);
+		$data['municipio'] = array();
+		if($municipio != 0){
+			$data['name_muni'] = $this->Generico_model->obtener_nombre_municipio($municipio);
+			$data['municipio'] = $this->Planea_model->niveles_de_logro_entidad_estadomun($municipio, $nivel, $periodo, $campodisip);
+		}
+		$data['idmunicipio'] = $municipio;
+	    
+	    $data['estado'] = $this->Planea_model->niveles_de_logro_entidad_estadomun(0, $nivel, $periodo, $campodisip);
 	    $data['nacional'] = $this->Planea_model->niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip);
 	    $data['ciclo'] = $periodoplanea;
 	    $data['campodisip'] = $campodisip;
 
 	    $vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
-		$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => $data['entidad']);
+		$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => ($municipio != 0)? $data['municipio']: $data['estado']);
 
 		envia_datos_json($this, $respuesta);
 		exit();
@@ -142,6 +148,7 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 			$campodisip = $this->input->post("campodisip");
 			$datos = $this->Planea_model->estadisticas_x_estadozona($zona, $modalidad, $nivel, $periodo, $campodisip);
 			$data['zona'] = $this->Planea_model->niveles_de_logro_entidad_edozona($zona, $periodo, $campodisip);
+			$data['estado'] = $this->Planea_model->niveles_de_logro_entidad_estadomun(0, $nivel, $periodo, $campodisip);
     		$data['nacional'] = $this->Planea_model->niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip);
     		$periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo($periodo);
     		$data['ciclo'] = $periodoplanea;

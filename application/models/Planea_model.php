@@ -432,6 +432,7 @@ class Planea_model extends CI_Model
           }
           $str_query = "SELECT
             pzona.periodo_planea AS periodo,
+            zona.zona_escolar AS zona,
             {$campos}
             'muni' AS origen
             FROM planea_nlogro_x_zona pzona
