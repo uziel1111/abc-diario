@@ -166,7 +166,7 @@ class Estadistica extends CI_Controller {
 				$datos_grupos = $this->Estadistica_model->datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo);
 				$datos_docentes = $this->Estadistica_model->datos_estadistica_docentes_xescuela($cct,$idturno,$idciclo);
 				$idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
-				// echo "<pre>";print_r($idciclo_ant);die();
+				// echo "<pre>";print_r($datos_docentes);die();
 				if ($idciclo_ant=='') {
 					$datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo);
 				}

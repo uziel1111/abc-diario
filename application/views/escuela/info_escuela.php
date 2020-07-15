@@ -45,7 +45,7 @@
 								Estatus de la escuela: <span class="font-weight-bold"><?= $info[0]['estatus'] ?></span>
 							</div>
 							<div class="col-12 col-md-6">
-								Nombre del director: <span class="font-weight-bold"><?= $info[0]['nombre'] ?></span>
+								Nombre del director: <span class="font-weight-bold"><?= $info[0]['nombre_direct_encargado'] ?></span>
 							</div>
 
 						</div>

@@ -141,7 +141,8 @@ class Generico_model extends CI_Model
 
   function info_escuela_get($cct,$turno){
     $query = "SELECT c.nombre,c.cct,
-                t.descripcion as turno,n.descr as nivel,m.descr as modalidad,s.descr as sostenimiento ,concat(domicilio,numero) as domicilio,c.localidad,mun.nombre as municipio,'director',if(c.status='ACT','ACTIVO','') as estatus, cfg.idcentrocfg
+                t.descripcion as turno,n.descr as nivel,m.descr as modalidad,s.descr as sostenimiento ,concat(domicilio,numero) as domicilio,c.localidad,mun.nombre as municipio,
+                c.nombre_direct_encargado,if(c.status='ACT','ACTIVO','') as estatus, cfg.idcentrocfg
 								FROM cct c
                 left join niveleducativo n on n.idnivel = c.nivel
                 left join c_modalidad m on m.idmodalidad = c.idmodalidad
@@ -164,7 +165,7 @@ class Generico_model extends CI_Model
     CONCAT(domicilio, numero) AS domicilio,
     c.localidad,
     mun.nombre AS municipio,
-    'director',
+    c.nombre_direct_encargado,
     IF(c.status = 'A', 'ACTIVO', '') AS estatus
 FROM
     cct c
