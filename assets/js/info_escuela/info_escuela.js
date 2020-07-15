@@ -11,7 +11,7 @@ $(function() {
 	 	$("#tab_aprendizaje_info").trigger( "click" );
 	}
 	// }, 2000);
-	 
+
 });
 
 $("#tab_asistencia_info").click(function(e){
@@ -44,14 +44,12 @@ var Info_escuela = {
 	      url: base_url+'Info_escuela/get_asistencia',
 	      type: 'POST',
 	      dataType: 'json',
-	      data: {'vista':'asistencia'
-	      },
+	      data: {'vista':'asistencia'},
 	      beforeSend: function (xhr) {
 	        Mensaje.cargando('Cargando vista');
 	      },
 	      success: function (data) {
 	        Mensaje.cerrar();
-	        
 	        $("#asistencia_info").append(data.vista);
 	        Asistencia.get_datos_asistencia();
 	      },
@@ -67,15 +65,20 @@ var Info_escuela = {
 	      url: base_url+'Info_escuela/get_permanencia',
 	      type: 'POST',
 	      dataType: 'json',
-	      data: {'vista':'permanencia'
+	      data: {'vista':'permanencia','cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val()
 	      },
 	      beforeSend: function (xhr) {
 	        Mensaje.cargando('Cargando vista');
 	      },
 	      success: function (data) {
 	        Mensaje.cerrar();
-	        
 	        $("#permanencia_info").append(data.vista);
+					$("#containerRPB03ete_info").empty();
+					$("#dv_info_graf_Retencion_info").empty();
+					$("#dv_info_graf_aprobacion_info").empty();
+					Permanencia.grafica_eficiencia_terminal(data.indicadores['eficiencia_terminal']);
+					Permanencia.grafica_retencion(data.indicadores['retencion']);
+					Permanencia.grafica_aprobacion(data.indicadores['aprobacion']);
 	      },
 	      error: function (jqXHR, textStatus, errorThrown) {
 	        Mensaje.cerrar();
@@ -96,7 +99,7 @@ var Info_escuela = {
 	      },
 	      success: function (data) {
 	        Mensaje.cerrar();
-	        
+
 	        $("#aprendizaje_info").append(data.vista);
 	        Aprendisaje.obtener_grafica_lyc();
 	      },

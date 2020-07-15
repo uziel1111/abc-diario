@@ -321,15 +321,15 @@ var Permanencia = {
             color: '#888888',
             // This has to be the same size as the maximum width to
             // prevent clipping
-            strokeWidth: 8,
-            trailWidth: 5,
+            strokeWidth: 4,
+            trailWidth: 2.5,
             easing: 'easeInOut',
             duration: 7400,
             text: {
                 autoStyleContainer: false
             },
-            from: { color: '#D6DADC', width: 5 },
-            to: { color: '#ECC462', width: 8 },
+            from: { color: '#D6DADC', width: 2.5 },
+            to: { color: '#ECC462', width: 4 },
             // Set default step function for all animate calls
             step: function (state, circle) {
                 circle.path.setAttribute('stroke', state.color);
@@ -356,7 +356,8 @@ var Permanencia = {
             }
         });
         bar.text.style.fontFamily = '"Arial", Helvetica, sans-serif';
-        bar.text.style.fontSize = '2rem';
+        bar.text.style.fontSize = '1rem';
+				bar.text.style.left = '27%';
 
         bar.animate(Math.min(valor_et / 100, 1));  // Number from 0.0 to 1.0
     },//grafica_eficiencia_terminal
@@ -367,15 +368,15 @@ var Permanencia = {
             color: '#888888',
             // This has to be the same size as the maximum width to
             // prevent clipping
-            strokeWidth: 8,
-            trailWidth: 5,
+            strokeWidth: 4,
+            trailWidth: 2.5,
             easing: 'easeInOut',
             duration: 7400,
             text: {
                 autoStyleContainer: false
             },
-            from: { color: '#D6DADC', width: 5 },
-            to: { color: '#ECC462', width: 8 },
+            from: { color: '#D6DADC', width: 2.5 },
+            to: { color: '#ECC462', width: 4 },
             // Set default step function for all animate calls
             step: function (state, circle) {
                 circle.path.setAttribute('stroke', state.color);
@@ -402,7 +403,8 @@ var Permanencia = {
             }
         });
         bar.text.style.fontFamily = '"Arial", Helvetica, sans-serif';
-        bar.text.style.fontSize = '2rem';
+        bar.text.style.fontSize = '1rem';
+				bar.text.style.left = '27%';
 
         bar.animate(Math.min(varix / 100, 1));  // Number from 0.0 to 1.0
     },//grafica_retencion
@@ -413,15 +415,15 @@ var Permanencia = {
             color: '#888888',
             // This has to be the same size as the maximum width to
             // prevent clipping
-            strokeWidth: 8,
-            trailWidth: 5,
+            strokeWidth: 4,
+            trailWidth: 2.5,
             easing: 'easeInOut',
             duration: 7400,
             text: {
                 autoStyleContainer: false
             },
-            from: { color: '#D6DADC', width: 5 },
-            to: { color: '#ECC462', width: 8 },
+            from: { color: '#D6DADC', width: 2.5 },
+            to: { color: '#ECC462', width: 4 },
             // Set default step function for all animate calls
             step: function (state, circle) {
                 circle.path.setAttribute('stroke', state.color);
@@ -449,7 +451,8 @@ var Permanencia = {
             }
         });
         bar.text.style.fontFamily = '"Arial", Helvetica, sans-serif';
-        bar.text.style.fontSize = '2rem';
+        bar.text.style.fontSize = '1rem';
+				bar.text.style.left = '27%';
         bar.animate(Math.min(varix / 100, 1));  // Number from 0.0 to 1.0
     }//grafica_aprovacion
 }
