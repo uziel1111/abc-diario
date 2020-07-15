@@ -49,6 +49,8 @@ $("#filtro_municipio").change(function () {
 	// 	Estadistica_general.niveles($("#filtro_municipio").val());
 	// }else{
 		Estadistica_general.niveles($("#filtro_municipio").val());
+		Estadistica_general.sostenimientos($("#filtro_municipio").val(),$("#filtro_nivel").val());
+		Estadistica_general.modalidades($("#filtro_sostenimiento").val(),$("#filtro_municipio").val(),$("#filtro_nivel").val());
 	// }
 });
 
@@ -57,6 +59,7 @@ $("#filtro_nivel").change(function () {
 	$("#filtro_modalidad option[value='0'").attr("selected",true);
 	// if($("#filtro_nivel").val()!=0){
 		Estadistica_general.sostenimientos($("#filtro_municipio").val(),$("#filtro_nivel").val());
+		Estadistica_general.modalidades($("#filtro_sostenimiento").val(),$("#filtro_municipio").val(),$("#filtro_nivel").val());
 	// }
 });
 

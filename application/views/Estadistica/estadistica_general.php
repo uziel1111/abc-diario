@@ -53,7 +53,7 @@
 							<div class="col-12 col-md-4 col-lg-2">
 								<label>Sostenimiento:</label>
 								<select name="filtro_sostenimiento" id="filtro_sostenimiento" class="form-control" >
-									<option>Todos</option>
+									<option value="0">Todos</option>
 									<?php foreach ($sostenimientos as $key => $value) { ?>
 										<option value="<?= $value['idsostenimiento'] ?>"> <?= $value['nombre'] ?></option>
 									<?php } ?>
@@ -62,7 +62,7 @@
 							<div class="col-12 col-md-4 col-lg-2">
 								<label>Modalidad:</label>
 								<select name="filtro_modalidad" id="filtro_modalidad" class="form-control" >
-									<option>Todos</option>
+									<option value="0">Todos</option>
 									<?php foreach ($modalidades as $key => $value) { ?>
 										<option value="<?= $value['idmodalidad'] ?>"> <?= $value['nombre'] ?></option>
 									<?php } ?>
