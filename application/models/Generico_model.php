@@ -160,6 +160,7 @@ class Generico_model extends CI_Model
     c.cct,t.descripcion AS turno,
     cfg.turno AS idturno,
     n.descr AS nivel,
+    n.idnivel,
     m.descr AS modalidad,
     s.descr AS sostenimiento,
     CONCAT(domicilio, numero) AS domicilio,

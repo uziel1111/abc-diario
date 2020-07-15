@@ -62,12 +62,14 @@
 					<li class="nav-item">
 						<a class="nav-link p-2 h5 font-weight-bold active" data-toggle="tab" href="#asistencia_info" id="tab_asistencia_info">Asistencia</a>
 					</li>
+					<?php if (($info[0]['idnivel'] != 1) && ($info[0]['idnivel'] == 2 || $info[0]['idnivel'] == 3 || $info[0]['idnivel'] == 4)): ?>
 					<li class="nav-item">
 						<a class="nav-link p-2 h5 font-weight-bold" data-toggle="tab" href="#permanencia_info" id="tab_permanencia_info">Permanencia</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link p-2 h5 font-weight-bold" data-toggle="tab" href="#aprendizaje_info" id="tab_aprendizaje_info">Aprendizaje</a>
 					</li>
+					<?php endif ?>
 				</ul>
 				<div id="myTabContent" class="tab-content">
 				  <div class="tab-pane fade active show" id="asistencia_info">
