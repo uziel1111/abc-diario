@@ -42,6 +42,12 @@ class Info_escuela extends CI_Controller {
       }else{
         $nivel=$this->Listadoesc_model->niveles();
       }
+      if($seccion == 'estadistica' && $subseccion == 'escuela'){
+        $nivel=$this->Listadoesc_model->niveles_estadistica();
+      }
+      if($seccion == 'estadistica' && $subseccion == 'rescuela'){
+        $nivel=$this->Listadoesc_model->niveles_riesgo();
+      }
       $data['nivel'] = $nivel;
       $data['sostenimiento'] = $sostenimiento;
       if($seccion != null && $subseccion != null){
@@ -195,6 +201,10 @@ class Info_escuela extends CI_Controller {
      $idmunicipio = $this->input->post('idmunicipio');
      if($tipo_busqueda == 'aprendizaje'){
       $arr_datos = $this->Listadoesc_model->niveles_planea($idmunicipio);
+     }else if($tipo_busqueda == 'rescuela'){
+      $arr_datos = $this->Listadoesc_model->niveles_riesgo($idmunicipio);
+     }else if($tipo_busqueda == 'escuela'){
+      $arr_datos = $this->Listadoesc_model->niveles_estadistica($idmunicipio);
      }else{
       $arr_datos = $this->Listadoesc_model->niveles($idmunicipio);
      }
