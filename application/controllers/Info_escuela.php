@@ -132,9 +132,10 @@ class Info_escuela extends CI_Controller {
       $turno = $info_escuela[0]['idturno'];
       $info_escuela[0]['idcentrocfg']=$idcfg;
     }else{
-   		$cct = $this->input->get('cct');
-   		$turno = $this->input->get('turno');
-      $info_escuela = $this->Generico_model->info_escuela_get($cct,$turno);
+   		// $cct = $this->input->get('cct');
+   		// $turno = $this->input->get('turno');
+      // $info_escuela = $this->Generico_model->info_escuela_get($cct,$turno);
+      redirect('Info_escuela/busqueda_general/ubica/listado');
     }
 
    		$data['info'] = $info_escuela;
