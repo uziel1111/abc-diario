@@ -152,10 +152,22 @@ class Info_escuela extends CI_Controller {
   }
 
   public function get_permanencia(){
+    $cct = $this->input->post('cct');
+    $idturno = $this->input->post('turno');
+    $ciclo = trae_ciclo_actual();
+    $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
+    // echo "<pre>";print_r($ciclo);die();
+    // $ciclo_corto = trae_ciclo_corto($ciclo);
+    $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
+
+    $vista = $this->load->view('escuela/info/asistencia',array(), TRUE);
+    $idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
+    $datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
+    $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:0;
     // $data['ciclos'] = $this->Generico_model->ciclo_escolar();
     $data['ciclos'] = array(['idciclo' => 1, 'ciclo' => '2019-2020']);
     $vista = $this->load->view('escuela/info/permanencia',$data, TRUE);
-    $respuesta = array('vista' => $vista);
+    $respuesta = array('vista' => $vista, 'indicadores' => $indicadores);
 
     envia_datos_json($this, $respuesta);
     exit();
