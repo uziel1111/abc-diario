@@ -16,7 +16,7 @@ class Info_escuela extends CI_Controller {
     function busqueda_general($seccion = null, $subseccion = null) {
       $data=array();
       $municipios=$this->Generico_model->municipios();
-      $nivel=$this->Listadoesc_model->niveles();
+      
       $sostenimiento=$this->Listadoesc_model->sostenimientos();
       if($seccion == 'estadistica'){
         $secc = "Estadística, indicadores y resultados educativos";
@@ -37,6 +37,11 @@ class Info_escuela extends CI_Controller {
         }
       }
       $data['municipios']=$municipios;
+      if($seccion == "aprendizaje" && $subseccion == 'escuela'){
+        $nivel=$this->Listadoesc_model->niveles_planea();
+      }else{
+        $nivel=$this->Listadoesc_model->niveles();
+      }
       $data['nivel'] = $nivel;
       $data['sostenimiento'] = $sostenimiento;
       if($seccion != null && $subseccion != null){
