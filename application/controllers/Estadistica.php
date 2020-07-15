@@ -13,6 +13,7 @@ class Estadistica extends CI_Controller {
     	$data = array();
 		$filtros_zona = array();
 		$municipios=$this->Generico_model->municipios();
+		$niveles = $this->Generico_model->obtener_nivel_xidmunicipio(0);
     	$ciclo=$this->Estadistica_model->trae_ciclos_est_muni();
 		$filtros_zona['nivel'] = $this->Estadistica_model->trae_nivel_zona();
 		if($seccion == 'estado_municipio'){
@@ -22,6 +23,9 @@ class Estadistica extends CI_Controller {
 		}
     	$data['ciclo']=$ciclo;
     	$data['municipios']=$municipios;
+    	$data['niveles'] = $niveles;
+    	$data['sostenimientos'] = $this->Generico_model->obtener_sostenimiento_xidmunicipioxidnivel(0,0);
+    	$data['modalidades'] = $this->Generico_model->obtener_modalidad_xidmunicipioxidnivelxsostenimiento(0,0,0);
 		$string = $this->load->view('estadistica/filtros_zona', $filtros_zona, TRUE);
 		$data['filtros_zona'] = $string;
 		$data['seccion'] = $seccion;
