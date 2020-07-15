@@ -429,7 +429,8 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
     			'Discontinuo'))) as turno,ct.nombre,cfg.nivel as idnivel,
     			n.descr as nivel,m.nombre as municipio,m.idmunicipio,
     				concat_ws(ct.entrecalle,' ',ct.ycalle,' ',ct.colonia) AS domicilio,
-    			cfg.idcentrocfg
+    			cfg.idcentrocfg,
+          ct.nombre_direct_encargado
     			FROM cct ct
     			INNER JOIN centrocfg cfg ON cfg.idct=ct.idct
     			INNER JOIN municipio m ON m.idmunicipio=ct.idmunicipio

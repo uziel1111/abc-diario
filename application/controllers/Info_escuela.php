@@ -114,8 +114,8 @@ class Info_escuela extends CI_Controller {
         // die();
         $datos_grupos = $this->Estadistica_model->datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo);
         $datos_docentes = $this->Estadistica_model->datos_estadistica_docentes_xescuela($cct,$idturno,$idciclo);
-
-        $respuesta = array("alumnos" => ((isset($datos_alumnos[0]))?$datos_alumnos[0]:0), 'grupos' => ((isset($datos_grupos[0]))?$datos_grupos[0]:0), 'docentes' => ((isset($datos_docentes[0]))?$datos_docentes[0]:0));
+        // echo "<pre>";print_r($datos_docentes);die();
+        $respuesta = array("alumnos" => ((isset($datos_alumnos[0]))?$datos_alumnos[0]:0), 'grupos' => ((isset($datos_grupos[0]))?$datos_grupos[0]:0), 'docentes' => ((isset($datos_docentes))?$datos_docentes:0));
         envia_datos_json($this, $respuesta);
         exit();
     }//busqueda_especifica
