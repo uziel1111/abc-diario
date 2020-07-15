@@ -35,8 +35,10 @@
     <div class="container px-0">
       <nav class="navbar navbar-expand-lg">
         <div class="container nav-box shadow">
-          <a class="navbar-brand" href="<?= base_url(); ?>">
+          <a class="navbar-brand" href="https://mieducacion.sepyc.gob.mx/" target="_blank">
             <img src="<?= base_url('assets/img/template/horizontal_sepyc.png'); ?>" class="img-fluid border-right pr-4" alt="">
+          </a>
+          <a class="navbar-brand" href="<?= base_url(); ?>">
             <img src="<?= base_url('assets/img/template/main-logo.png'); ?>" class="img-fluid pl-2" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,9 +96,9 @@
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa-layers fa-fw">
                       <i class="fas fa-circle text-info"></i>
-                      <i class="fa-inverse fas fa-sign-out-alt fa-xs" data-fa-transform="shrink-6"></i>
+                      <i class="fa-inverse fa fa-window-maximize fa-xs" data-fa-transform="shrink-6"></i>
                     </span>
-                    <p>Otros</p>
+                    <p>Enlaces</p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="https://mieducacion.sepyc.gob.mx/" target="_blank">SEPYC</a>

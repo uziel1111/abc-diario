@@ -326,12 +326,12 @@
                   <td style="text-align: center;"><?= ($row['nii_lyc']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['niii_lyc']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['niv_lyc']) . '%' ?></td>
-                  <td style="text-align: center;"><?= (intval($row['nii_lyc']) + intval($row['niii_lyc']) + intval($row['niv_lyc'])) . '%' ?></td>
+                  <td style="text-align: center;"><?= (($row['nii_lyc']) + ($row['niii_lyc']) + ($row['niv_lyc'])) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['ni_mat']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['nii_mat']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['niii_mat']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['niv_mat']) . '%' ?></td>
-                  <td style="text-align: center;"><?= (intval($row['nii_mat']) + intval($row['niii_mat']) + intval($row['niv_mat'])) . '%' ?></td>
+                  <td style="text-align: center;"><?= (($row['nii_mat']) + ($row['niii_mat']) + ($row['niv_mat'])) . '%' ?></td>
                 </tr>
               <?php } ?>
             </tbody>
