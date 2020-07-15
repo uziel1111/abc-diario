@@ -70,7 +70,18 @@ obtener_marcadores_filtro: () => {
     success: function (dato) {
       Mensaje.cerrar();
 			var marcadores = dato.response;
-			Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
+			// console.log(marcadores);
+			if (marcadores.length==0) {
+				Mensaje.alerta("error","No se encontraron escuelas","");
+			}
+			else {
+				if (marcadores.length<5) {
+					Mapa.pinta_en_mapa(marcadores, marcadores[0][1], marcadores[0][2]);
+				}
+				else {
+					Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
+				}
+			}
     },
     error: function (jqXHR, textStatus, errorThrown) {
 			Mensaje.cerrar();
@@ -128,6 +139,7 @@ cct_mismo_nivel: (idcfg) => {
     success: function (dato) {
       Mensaje.cerrar();
 			var marcadores = dato.response;
+
 			Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
     },
     error: function (jqXHR, textStatus, errorThrown) {
@@ -232,6 +244,7 @@ pinta_en_mapa: (marcadores, lat, lon) => {
 	       }
 	   }else {
 	   	//alert('No se encontraron escuelas');
+			Mensaje.alerta("error","No se encontraron escuelas","");
 	   	Mensaje.cerrar();
 	   	initMap();
 	   }
