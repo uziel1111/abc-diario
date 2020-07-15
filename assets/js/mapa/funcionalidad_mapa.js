@@ -229,8 +229,10 @@ pinta_en_mapa: (marcadores, lat, lon) => {
 	           		contentString +='</table>';
 	           		contentString +='<p class="text-center">';
 	           		contentString +='<button class="btn btn-primary mr-5" onclick="Mapa.cct_mismo_nivel('+idcfg+')" data-toggle="tooltip" data-placement="top" title="Busca 5 escuelas del mismo nivel"><i class="far fa-clone"></i></button>';
-	           		contentString +='<button class="btn btn-primary mr-5" onclick="Mapa.cct_siguiente_nivel('+idcfg+')" data-toggle="tooltip" data-placement="top" title="Busca 5 escuelas del siguiente nivel"><i class="fa fa-share-square"></i></button>';
-	           		if (marcadores[i][7] != 'NO APLICA') {
+								if (marcadores[i][7]!='SUPERIOR' && marcadores[i][7]!='CAPACITACION PARA EL TRABAJO' && marcadores[i][7]!='ESPECIAL') {
+									contentString +='<button class="btn btn-primary mr-5" onclick="Mapa.cct_siguiente_nivel('+idcfg+')" data-toggle="tooltip" data-placement="top" title="Busca 5 escuelas del siguiente nivel"><i class="fa fa-share-square"></i></button>';
+								}
+								if (marcadores[i][7] != 'NO APLICA' && marcadores[i][7]!='SUPERIOR' && marcadores[i][7]!='CAPACITACION PARA EL TRABAJO' && marcadores[i][7]!='ESPECIAL') {
 	           			contentString +='<button class="btn btn-primary mr-5" onclick="Mapa.obtener_info('+idcfg+')" data-toggle="tooltip" data-placement="top" title="Información de la escuela"><i class="fa fa-info-circle"></i></button>';
 	           		}
 	           		contentString +='</p>';
