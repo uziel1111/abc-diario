@@ -22,7 +22,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript">
     var base_url = "<?= base_url() ?>";
-    $(function () {
+    $(function() {
       $('[data-toggle="popover"]').popover()
     });
   </script>
@@ -33,6 +33,16 @@
 
   <section id="header-bg-1">
     <div class="container px-0">
+
+      <div class="top-header">
+        <div class="container">
+          <div class="row">
+            <div class="col text-center">
+              Portal de Información Educativa
+            </div>
+          </div>
+        </div>
+      </div>
       <nav class="navbar navbar-expand-lg">
         <div class="container nav-box shadow">
           <a class="navbar-brand" href="https://mieducacion.sepyc.gob.mx/" target="_blank">
@@ -57,7 +67,7 @@
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="DropEstadisticas">
 
-                    <a class="dropdown-item" href="<?=base_url('Estadistica/estadistica_general/estado_municipio/alumnos');?>">Por estado / municipio</a>
+                    <a class="dropdown-item" href="<?= base_url('Estadistica/estadistica_general/estado_municipio/alumnos'); ?>">Por estado / municipio</a>
                     <a class="dropdown-item" href="<?= base_url('Estadistica/estadistica_general/zona_escolar/alumnos'); ?>">Por zona escolar</a>
                     <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/estadistica/escuela'); ?>">Por escuela</a>
                     <a class="dropdown-item" href="<?= base_url('Riesgo_abandono/vista_principal_riesgo/estadistica'); ?>">Riesgo de abandono escolar por estado / municipio</a>
@@ -87,9 +97,9 @@
                     <p>Ubica tu escuela</p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/cct');?>">Por clave de escuela</a>
-                    <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/paramentros');?>">Por municipio, nivel, sostenimiento y nombre</a>
-                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/ubica/listado');?>">En listado de escuelas</a>
+                    <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/cct'); ?>">Por clave de escuela</a>
+                    <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/paramentros'); ?>">Por municipio, nivel, sostenimiento y nombre</a>
+                    <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/ubica/listado'); ?>">En listado de escuelas</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown nav-fourth">
@@ -109,6 +119,7 @@
             </div>
           </span>
         </div>
+
       </nav>
     </div>
   </section>
