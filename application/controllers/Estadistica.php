@@ -137,7 +137,7 @@ class Estadistica extends CI_Controller {
     	$data["rezago"] = $rezago;
     	$data["analfabetismo"] = $analfabetismo;
     	// echo"<pre>";
-    	// print_r($data["alumnos"]);
+    	// print_r($data);
     	// die();
 		$vista = $this->load->view("estadistica/contenido_municipio",$data,TRUE);
 		$respuesta = array("vista" => $vista);

@@ -53,7 +53,7 @@
               <?php
               foreach ($alumnos as $row) {
                 if ($row['sostenimiento'] == 'total' && $row['modalidad'] == 'total') {
-                  if ($row['idnivel'] == $idnivel) { ?>
+                  if ($row['idnivel'] == $idnivel || $idnivel == 0) { ?>
                     <tr class="parent bg-info text-light font-weight-bold" id="<?= str_replace(' ', '', $row['nivel']) ?>">
                     <?php  } else { ?>
                     <tr class="parent" id="<?= str_replace(' ', '', $row['nivel']) ?>">
@@ -61,14 +61,14 @@
 
                     <td class="pl-1"><img style="width:12px;" class="mr-5" src="<?= base_url('assets/img/expand-button.svg') ?>"><?= $row['nivel'] ?></td>
                     <?php } else if ($row['sostenimiento'] != 'total' && $row['modalidad'] == 'total') {
-                    if ($row['idnivel'] == $idnivel && $row['idsostenimiento'] == $idsostenimiento) { ?>
+                    if (($row['idnivel'] == $idnivel || $idnivel == 0) && $row['idsostenimiento'] == $idsostenimiento || $idsostenimiento == 0) { ?>
                     <tr class="child-<?= str_replace(' ', '', $row['nivel']) ?> child-parent bg-secondary text-light font-weight-bold" id="<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>">
                     <?php  } else { ?>
                     <tr class="child-<?= str_replace(' ', '', $row['nivel']) ?> child-parent hide-ini" id="<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>">
                     <?php  } ?>
                     <td class="pl-4"><img style="width:12px" class="mr-5" src="<?= base_url("assets/img/expand-button.svg") ?>"><?= $row['sostenimiento'] ?></td>
                     <?php } else if ($row['sostenimiento'] != 'total' && $row['modalidad'] != 'total') {
-                    if ($row['idnivel'] == $idnivel && $row['idsostenimiento'] == $idsostenimiento && $row['idmodalidad'] == $idmodalidad) { ?>
+                    if (($row['idnivel'] == $idnivel || $idnivel == 0) && ($row['idsostenimiento'] == $idsostenimiento || $idsostenimiento == 0) && $row['idmodalidad'] == $idmodalidad || $idmodalidad == 0) { ?>
                     <tr class="nieto-<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>  class-hide-<?= str_replace(' ', '', $row['nivel']) ?> bg-primary text-light font-weight-bold">
                     <?php  } else { ?>
                     <tr class="nieto-<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?> class-hide-<?= str_replace(' ', '', $row['nivel']) ?> hide-ini">
@@ -114,21 +114,21 @@
             <tbody>
               <?php foreach ($docentes as $row) {
                 if ($row['sostenimiento'] == 'total' && $row['modalidad'] == 'total') {
-                  if ($row['idnivel'] == $idnivel) { ?>
+                  if ($row['idnivel'] == $idnivel || $idnivel == 0) { ?>
                     <tr class="parent bg-info text-light font-weight-bold" id="<?= str_replace(' ', '', $row['nivel']) ?>">
                     <?php } else { ?>
                     <tr class="parent" id="<?= str_replace(' ', '', $row['nivel']) ?>">
                     <?php } ?>
                     <td class="pl-1"><img style="width:12px" class="mr-5" src="<?= base_url('assets/img/expand-button.svg') ?>"><?= $row['nivel'] ?></td>
                     <?php } else if ($row['sostenimiento'] != 'total' && $row['modalidad'] == 'total') {
-                    if ($row['idnivel'] == $idnivel && $row['idsostenimiento'] == $idsostenimiento) { ?>
+                    if (($row['idnivel'] == $idnivel || $idnivel == 0) && ($row['idsostenimiento'] == $idsostenimiento || $idsostenimiento == 0)) { ?>
                     <tr class="child-<?= str_replace(' ', '', $row['nivel']) ?> child-parent bg-secondary text-light font-weight-bold" id="<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>">
                     <?php  } else { ?>
                     <tr class="child-<?= str_replace(' ', '', $row['nivel']) ?> child-parent hide-ini" id="<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>">
                     <?php  } ?>
                     <td class="pl-4"><img style="width:12px" class="mr-5" src="<?= base_url('assets/img/expand-button.svg') ?>"><?= $row['sostenimiento'] ?></td>
                     <?php } elseif ($row['sostenimiento'] != 'total' && $row['modalidad'] != 'total') {
-                    if ($row['idnivel'] == $idnivel && $row['idsostenimiento'] == $idsostenimiento && $row['idmodalidad'] == $idmodalidad) { ?>
+                    if (($row['idnivel'] == $idnivel || $idnivel == 0) && ($row['idsostenimiento'] == $idsostenimiento || $idsostenimiento == 0) && ($row['idmodalidad'] == $idmodalidad || $idmodalidad == 0)) { ?>
                     <tr class="nieto-<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>  class-hide-<?= str_replace(' ', '', $row['nivel']) ?> bg-primary text-light font-weight-bold">
                     <?php  } else { ?>
                     <tr class="nieto-<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>  class-hide-<?= str_replace(' ', '', $row['nivel']) ?> hide-ini">
@@ -176,21 +176,21 @@
             <tbody>
               <?php foreach ($infraestructura as $row) {
                 if ($row['sostenimiento'] == 'total' && $row['modalidad'] == 'total') {
-                  if ($row['idnivel'] == $idnivel) { ?>
+                  if ($row['idnivel'] == $idnivel || $idnivel == 0) { ?>
                     <tr class="parent bg-info text-light font-weight-bold" id="<?= str_replace(' ', '', $row['nivel']) ?>">
                     <?php  } else { ?>
                     <tr class="parent" id="<?= str_replace(' ', '', $row['nivel']) ?>">
                     <?php  } ?>
                     <td class="pl-1"><img style="width:12px" class="mr-5" src="<?= base_url('assets/img/expand-button.svg') ?>"><?= $row['nivel'] ?></td>
                     <?php } else if ($row['sostenimiento'] != 'total' && $row['modalidad'] == 'total') {
-                    if ($row['idnivel'] == $idnivel && $row['idsostenimiento'] == $idsostenimiento) { ?>
+                    if (($row['idnivel'] == $idnivel || $idnivel == 0) && ($row['idsostenimiento'] == $idsostenimiento || $idsostenimiento == 0)) { ?>
                     <tr class="child-<?= str_replace(' ', '', $row['nivel']) ?> child-parent bg-secondary text-light font-weight-bold" id="<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>">
                     <?php  } else { ?>
                     <tr class="child-<?= str_replace(' ', '', $row['nivel']) ?> child-parent hide-ini" id="<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>">
                     <?php  } ?>
                     <td class="pl-4"><img style="width:12px" class="mr-5" src="<?= base_url("assets/img/expand-button.svg") ?>"><?= $row['sostenimiento'] ?></td>
                     <?php } else if ($row['sostenimiento'] != 'total' && $row['modalidad'] != 'total') {
-                    if ($row['idnivel'] == $idnivel && $row['idsostenimiento'] == $idsostenimiento && $row['idmodalidad'] == $idmodalidad) { ?>
+                    if (($row['idnivel'] == $idnivel || $idnivel == 0) && ($row['idsostenimiento'] == $idsostenimiento || $idsostenimiento == 0) && ($row['idmodalidad'] == $idmodalidad || $idmodalidad == 0)) { ?>
                     <tr class="nieto-<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>  class-hide-<?= str_replace(' ', '', $row['nivel']) ?> bg-primary text-light font-weight-bold">
                     <?php  } else {  ?>
                     <tr class="nieto-<?= str_replace(' ', '', $row['nivel']) . $row['sostenimiento'] ?>  class-hide-<?= str_replace(' ', '', $row['nivel']) ?> hide-ini">
