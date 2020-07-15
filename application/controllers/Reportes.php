@@ -81,12 +81,30 @@ class Reportes extends CI_Controller {
 
 	private function downloand_file($obj_excel,$nombre){
 				// Se modifican los encabezados del HTTP para indicar que se envia un archivo de Excel.
-				header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-				header("Content-Disposition: attachment;filename={$nombre}");
-				header("Cache-Control: max-age=0");
-				$obj_writer = PHPExcel_IOFactory::createWriter($obj_excel, "Excel2007");
-				ob_end_clean();
-				$obj_writer->save("php://output");
+				// header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+				// header("Content-Disposition: attachment;filename={$nombre}");
+				// header("Cache-Control: max-age=0");
+				// $obj_writer = PHPExcel_IOFactory::createWriter($obj_excel, "Excel2007");
+				// ob_end_clean();
+				// $obj_writer->save("php://output");
+
+				header("Content-type: application/ms-excel");
+				header("Content-Disposition: attachment;filename=\"" . $nombre . "\"");
+				header("Cache-control: private");
+				$objWriter = PHPExcel_IOFactory::createWriter($obj_excel, 'Excel5');
+				$objWriter->save("assets/export/$nombre");
+        readfile("assets/export/$nombre");
+  			unlink("assets/export/$nombre");
+
+				// $fcreacion = date("Y-m-d");
+        // $nombre_excel = "Estadistica_e_indicadores_generales_{$fcreacion}.xls";
+				// header('Content-type: application/ms-excel');
+        // header("Content-Disposition: attachment; filename=\"" . $nombre_excel . "\"");
+        // header("Cache-control: private");
+        // $objWriter = PHPExcel_IOFactory::createWriter($obj_phpexcel, 'Excel5');
+        // $objWriter->save("assets/export/$nombre_excel");
+        // readfile("assets/export/$nombre_excel");
+  			// unlink("assets/export/$nombre_excel");
 	}// downloand_file()
 
 
@@ -442,9 +460,10 @@ class Reportes extends CI_Controller {
 					$aux++;
 				}
 				date_default_timezone_set('America/Mexico_City');
-				$hoy = date("Y-m-d");
-				$name_file = "Estadistica_e_indicadores_generales_".$hoy.'.xlsx';
+				$hoy = date("Y-m-d_H-i-s");
+				$name_file = "Estadistica_e_indicadores_generales_".$hoy.'.xls';
 				$this->downloand_file($obj_excel,$name_file);
+
 	}// est_generales_xmuni()
 
 	public function escuelas(){
@@ -492,8 +511,8 @@ class Reportes extends CI_Controller {
 					$aux++;
 				}
 				date_default_timezone_set('America/Mexico_City');
-				$hoy = date("Y-m-d");
-				$name_file = "Reporte_escuelas_".$hoy.'.xlsx';
+				$hoy = date("Y-m-d_H-i-s");
+				$name_file = "Reporte_escuelas_".$hoy.'.xls';
 				$this->downloand_file($obj_excel,$name_file);
 
 	}//escuelas

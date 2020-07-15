@@ -40,7 +40,7 @@
                 <th colspan="19" class="text-center">Alumnos</th>
               </tr>
               <tr>
-                <th><center><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></center></th>
+                <th><center>Total</center></th>
                 <th><center>1°</center></th>
                 <th><center>2°</center></th>
                 <th><center>3°</center></th>
@@ -108,7 +108,7 @@
                 <th colspan="1" class="text-center align-middle">Docentes</th>
               </tr>
               <tr>
-                <th><center><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></center></th>
+                <th><center>Total</center></th>
               </tr>
             </thead>
             <tbody>
@@ -326,12 +326,12 @@
                   <td style="text-align: center;"><?= ($row['nii_lyc']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['niii_lyc']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['niv_lyc']) . '%' ?></td>
-                  <td style="text-align: center;"><?= (intval($row['nii_lyc']) + intval($row['niii_lyc']) + intval($row['niv_lyc'])) . '%' ?></td>
+                  <td style="text-align: center;"><?= (($row['nii_lyc']) + ($row['niii_lyc']) + ($row['niv_lyc'])) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['ni_mat']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['nii_mat']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['niii_mat']) . '%' ?></td>
                   <td style="text-align: center;"><?= ($row['niv_mat']) . '%' ?></td>
-                  <td style="text-align: center;"><?= (intval($row['nii_mat']) + intval($row['niii_mat']) + intval($row['niv_mat'])) . '%' ?></td>
+                  <td style="text-align: center;"><?= (($row['nii_mat']) + ($row['niii_mat']) + ($row['niv_mat'])) . '%' ?></td>
                 </tr>
               <?php } ?>
             </tbody>

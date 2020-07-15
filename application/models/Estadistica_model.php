@@ -2,7 +2,7 @@
 class Estadistica_model extends CI_Model
 {
  	function obtener_alumnos_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($id_municipio,$id_nivel,$id_sostenimiento,$id_modalidad,$id_ciclo){
- 		$where=" WHERE est.idciclo={$id_ciclo}";
+ 		$where=" WHERE est.idciclo={$id_ciclo} ";
  		$tabla = " estadistica_x_estado ";
  		if($id_municipio!=0){
  			$where.=" AND est.idmunicipio={$id_municipio}";
@@ -23,7 +23,7 @@ class Estadistica_model extends CI_Model
 			SUM(est.alumnos6) AS alumnos6
 			FROM {$tabla} est
 			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
-			{$where}
+			{$where} AND est.idmodalidad!=15
 			GROUP BY est.idnivel)
 			UNION
 			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento,
@@ -41,7 +41,7 @@ class Estadistica_model extends CI_Model
 			FROM {$tabla} est
 			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 			INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
-			{$where}
+			{$where} AND est.idmodalidad!=15
 			GROUP BY est.idnivel,s.idsostenimiento)
 			UNION
 			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento,
@@ -60,10 +60,10 @@ class Estadistica_model extends CI_Model
 			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 			INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
 			INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
-			{$where}
+			{$where} AND m.idmodalidad != 15
 			GROUP BY est.idnivel,s.idsostenimiento, m.idmodalidad
 			ORDER BY  est.idnivel,s.idsostenimiento,m.idmodalidad)) as xxxx
-ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalidad
+ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),FIELD(xxxx.idmodalidad,1,4,7,6,8,9,10,12,13,16,2,17,3,5,11)
 			";
 
   		return $this->db->query($query1)->result_array();
@@ -92,7 +92,7 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
 				est.t_direc_singrupo AS directivo_t_singrup
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
-				{$where}
+				{$where} AND est.idmodalidad!=15
 				GROUP BY est.idnivel)
 				UNION(
 				SELECT n.idnivel,n.descr AS nivel,s.idsostenimiento,
@@ -110,7 +110,7 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
-				{$where}
+				{$where} AND est.idmodalidad!=15
 				GROUP BY est.idnivel, s.idsostenimiento
 				)
 				UNION(
@@ -130,11 +130,11 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
 				INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
-				{$where}
+				{$where} AND m.idmodalidad != 15
 				GROUP BY est.idnivel, s.idsostenimiento, m.idmodalidad
 				ORDER BY  est.idnivel,est.idsostenimiento,est.idmodalidad
 				)) as xxxx
-  ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalidad
+  ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),FIELD(xxxx.idmodalidad,1,4,7,6,8,9,10,12,13,16,2,17,3,5,11)
 				";
   		return $this->db->query($query1)->result_array();
   	}
@@ -161,7 +161,7 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
 				SUM(t_grupos) AS grupos_t
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
-				{$where}
+				{$where} AND est.idmodalidad!=15
 				GROUP BY est.idnivel)
 				UNION(
 				SELECT n.idnivel,n.descr AS nivel,s.idsostenimiento,
@@ -179,7 +179,7 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
-				{$where}
+				{$where} AND est.idmodalidad!=15
 				GROUP BY est.idnivel, s.idsostenimiento
 				)
 				UNION(
@@ -199,10 +199,10 @@ ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalid
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
 				INNER JOIN c_modalidad m ON m.idmodalidad = est.idmodalidad
-				{$where}
+				{$where} AND m.idmodalidad != 15
 				GROUP BY est.idnivel, s.idsostenimiento, m.idmodalidad
 				)) as xxxx
-  ORDER BY FIELD(xxxx.idnivel,6,8,1,2,3,4,5,7),xxxx.idsostenimiento,xxxx.idmodalidad";
+  ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),FIELD(xxxx.idmodalidad,1,4,7,6,8,9,10,12,13,16,2,17,3,5,11)";
   		return $this->db->query($query1)->result_array();
   	}
 

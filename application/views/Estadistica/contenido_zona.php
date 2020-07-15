@@ -11,7 +11,7 @@
                             <th colspan="19" class="text-center ">Alumnos</th>
                         </tr>
                         <tr>
-                            <th class="text-center"><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></th>
+                            <th class="text-center">Total</th>
                             <th class="text-center">1°</th>
                             <th class="text-center">2°</th>
                             <th class="text-center">3°</th>

@@ -19,7 +19,7 @@ class Generico_model extends CI_Model
           $from = "estadistica_x_muni";
         }
         else{
-          $where = ' ';
+          $where = '';
           $from = "estadistica_x_estado";
         }
         $str_query = "SELECT
