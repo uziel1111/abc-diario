@@ -9,9 +9,9 @@ $("input[name=busqueda_estadistica]").click(function () {
 		$("#filtros_municipio_estado").show();
 		$("#filtros_zona_escolar").hide();
 		$("#div_estadistica").empty();
-		$('#filtro_nivel').prop('disabled', true);
-		$('#filtro_sostenimiento').prop('disabled', true);
-		$('#filtro_modalidad').prop('disabled', true);
+		// $('#filtro_nivel').prop('disabled', true);
+		// $('#filtro_sostenimiento').prop('disabled', true);
+		// $('#filtro_modalidad').prop('disabled', true);
 		$("#filtro_municipio option[value='0'").attr("selected",true);
 		$("#filtro_nivel option[value='0'").attr("selected",true);
 		$("#filtro_sostenimiento option[value='0'").attr("selected",true);

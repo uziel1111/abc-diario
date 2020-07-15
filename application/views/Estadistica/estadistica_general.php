@@ -45,20 +45,27 @@
 								<label>Nivel:</label>
 								<select name="filtro_nivel" id="filtro_nivel" class="form-control">
 									<option value="0">Todos</option>
-
+									<?php foreach ($niveles as $key => $value) { ?>
+										<option value="<?= $value['idnivel'] ?>"> <?= $value['nombre'] ?></option>
+									<?php } ?>
 								</select>
 							</div>
 							<div class="col-12 col-md-4 col-lg-2">
 								<label>Sostenimiento:</label>
 								<select name="filtro_sostenimiento" id="filtro_sostenimiento" class="form-control" >
 									<option>Todos</option>
+									<?php foreach ($sostenimientos as $key => $value) { ?>
+										<option value="<?= $value['idsostenimiento'] ?>"> <?= $value['nombre'] ?></option>
+									<?php } ?>
 								</select>
 							</div>
 							<div class="col-12 col-md-4 col-lg-2">
 								<label>Modalidad:</label>
 								<select name="filtro_modalidad" id="filtro_modalidad" class="form-control" >
 									<option>Todos</option>
-
+									<?php foreach ($modalidades as $key => $value) { ?>
+										<option value="<?= $value['idmodalidad'] ?>"> <?= $value['nombre'] ?></option>
+									<?php } ?>
 								</select>
 							</div>
 							<div class="col-12 col-md-4 col-lg-2">
