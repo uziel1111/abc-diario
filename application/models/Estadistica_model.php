@@ -23,7 +23,7 @@ class Estadistica_model extends CI_Model
 			SUM(est.alumnos6) AS alumnos6
 			FROM {$tabla} est
 			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
-			{$where}
+			{$where} AND est.idmodalidad!=15
 			GROUP BY est.idnivel)
 			UNION
 			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento,
@@ -41,7 +41,7 @@ class Estadistica_model extends CI_Model
 			FROM {$tabla} est
 			INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 			INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
-			{$where}
+			{$where} AND est.idmodalidad!=15
 			GROUP BY est.idnivel,s.idsostenimiento)
 			UNION
 			(SELECT est.idnivel, n.descr AS nivel, est.idsostenimiento, s.descr AS sostenimiento,
@@ -92,7 +92,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 				est.t_direc_singrupo AS directivo_t_singrup
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
-				{$where}
+				{$where} AND est.idmodalidad!=15
 				GROUP BY est.idnivel)
 				UNION(
 				SELECT n.idnivel,n.descr AS nivel,s.idsostenimiento,
@@ -110,7 +110,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
-				{$where}
+				{$where} AND est.idmodalidad!=15
 				GROUP BY est.idnivel, s.idsostenimiento
 				)
 				UNION(
@@ -161,7 +161,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 				SUM(t_grupos) AS grupos_t
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
-				{$where}
+				{$where} AND est.idmodalidad!=15
 				GROUP BY est.idnivel)
 				UNION(
 				SELECT n.idnivel,n.descr AS nivel,s.idsostenimiento,
@@ -179,7 +179,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 				FROM {$tabla} est
 				INNER JOIN niveleducativo n ON n.idnivel = est.idnivel
 				INNER JOIN c_sostenimiento s ON s.idsostenimiento = est.idsostenimiento
-				{$where}
+				{$where} AND est.idmodalidad!=15
 				GROUP BY est.idnivel, s.idsostenimiento
 				)
 				UNION(

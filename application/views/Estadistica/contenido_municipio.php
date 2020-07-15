@@ -40,7 +40,7 @@
                 <th colspan="19" class="text-center">Alumnos</th>
               </tr>
               <tr>
-                <th><center><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></center></th>
+                <th><center>Total</center></th>
                 <th><center>1°</center></th>
                 <th><center>2°</center></th>
                 <th><center>3°</center></th>
@@ -108,7 +108,7 @@
                 <th colspan="1" class="text-center align-middle">Docentes</th>
               </tr>
               <tr>
-                <th><center><i class="fa fa-female text-secondary"></i><i class="fa fa-male text-primary"></i></center></th>
+                <th><center>Total</center></th>
               </tr>
             </thead>
             <tbody>

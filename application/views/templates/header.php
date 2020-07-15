@@ -96,7 +96,7 @@
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa-layers fa-fw">
                       <i class="fas fa-circle text-info"></i>
-                      <i class="fa-inverse fa fa-window-maximize fa-xs" data-fa-transform="shrink-6"></i>
+                      <i class="fa-inverse fa fa-link fa-xs" data-fa-transform="shrink-6"></i>
                     </span>
                     <p>Enlaces</p>
                   </a>
