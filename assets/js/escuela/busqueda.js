@@ -12,12 +12,16 @@ $("input[name=busqueda_escuela]").click(function () {
 });
 
 $("#btn_limpiar_busqueda_general").click(function () {
-	$("#filtro_municipio_busqueda option[value='0'").attr("selected",true);
-	$("#filtro_nivel_busqueda option[value='0'").attr("selected",true);
-	$("#filtro_sostenimiento_busqueda option[value='0'").attr("selected",true);
+	// $("#filtro_municipio_busqueda option[value='0']").attr("selected",true);
+	$("#filtro_municipio_busqueda").val("0");
+	// $("#filtro_nivel_busqueda option[value='0']").attr("selected",true);
+	$("#filtro_nivel_busqueda").val("0");
+	// $("#filtro_sostenimiento_busqueda option[value='0']").attr("selected",true);
+	$("#filtro_sostenimiento_busqueda").val("0");
+	$("#nombre_cct").val("");
 	$("#div_lista_escuelas").empty();
-	$("nombre_cct").val("");
 });
+
 $("#btn_limpiar_busqueda_xcct").click(function () {
 	$("#busquedaxcct").val("");
 });
@@ -29,7 +33,7 @@ $("#busquedaxcct").keyup(function() {
       	if(valid){
         	Busqueda_escuela.busqueda_xmunicipioxnivelxsostenimiento('','','','','25'+$("#busquedaxcct").val());
       	}else{
-      		Mensaje.alerta("warning","","La CCT es incorrecta,ingrese una CCT valida");
+      		Mensaje.alerta("warning","","La CCT es incorrecta,ingrese una CCT válida");
       	}
   	}else if ($("#busquedaxcct").val().length>8) {
     	Mensaje.alerta("warning","","La longitud de la cct es incorrecta");
@@ -46,7 +50,7 @@ $("#btn_buscar_escuelas_xcct").click(function () {
       	if(valid){
         	Busqueda_escuela.busqueda_xmunicipioxnivelxsostenimiento('','','','','25'+$("#busquedaxcct").val());
       	}else{
-      		Mensaje.alerta("warning","","La CCT es incorrecta,ingrese una CCT valida");
+      		Mensaje.alerta("warning","","La CCT es incorrecta,ingrese una CCT válida");
       	}
 
 });

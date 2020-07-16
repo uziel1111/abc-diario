@@ -9,13 +9,11 @@ $("input[name=busqueda_estadistica]").click(function () {
 		$("#filtros_municipio_estado").show();
 		$("#filtros_zona_escolar").hide();
 		$("#div_estadistica").empty();
-		// $('#filtro_nivel').prop('disabled', true);
-		// $('#filtro_sostenimiento').prop('disabled', true);
-		// $('#filtro_modalidad').prop('disabled', true);
 		$("#filtro_municipio option[value='0'").attr("selected",true);
-		$("#filtro_nivel option[value='0'").attr("selected",true);
-		$("#filtro_sostenimiento option[value='0'").attr("selected",true);
-		$("#filtro_modalidad option[value='0'").attr("selected",true);
+		$("#filtro_municipio").val("0");
+		$("#filtro_nivel").val("0");
+		$("#filtro_sostenimiento").val("0");
+		$("#filtro_modalidad").val("0");
 	}else{
 		$("#filtros_zona_escolar").show();
 		$("#filtros_municipio_estado").hide();
@@ -25,13 +23,10 @@ $("input[name=busqueda_estadistica]").click(function () {
 
 
 $("#btn_limpiar_municipio_estado").click(function () {
-	$('#filtro_nivel').prop('disabled', true);
-	$('#filtro_sostenimiento').prop('disabled', true);
-	$('#filtro_modalidad').prop('disabled', true);
-	$("#filtro_municipio option[value='0'").attr("selected",true);
-	$("#filtro_nivel option[value='0'").attr("selected",true);
-	$("#filtro_sostenimiento option[value='0'").attr("selected",true);
-	$("#filtro_modalidad option[value='0'").attr("selected",true);
+	$("#filtro_municipio").val("0");
+	$("#filtro_nivel").val("0");
+	$("#filtro_sostenimiento").val("0");
+	$("#filtro_modalidad").val("0");
 	$("#div_estadistica").empty();
 });
 
@@ -42,32 +37,24 @@ $("#btn_buscar_municipio_estado").click(function () {
 	});
 });
 $("#filtro_municipio").change(function () {
-	$("#filtro_nivel option[value='0'").attr("selected",true);
-	$("#filtro_sostenimiento option[value='0'").attr("selected",true);
-	$("#filtro_modalidad option[value='0'").attr("selected",true);
-	// if($("#filtro_municipio").val()!=0){
-	// 	Estadistica_general.niveles($("#filtro_municipio").val());
-	// }else{
+	$("#filtro_nivel").val("0");
+	$("#filtro_sostenimiento").val("0");
+	$("#filtro_modalidad").val("0");
 		Estadistica_general.niveles($("#filtro_municipio").val());
 		Estadistica_general.sostenimientos($("#filtro_municipio").val(),$("#filtro_nivel").val());
 		Estadistica_general.modalidades($("#filtro_sostenimiento").val(),$("#filtro_municipio").val(),$("#filtro_nivel").val());
-	// }
 });
 
 $("#filtro_nivel").change(function () {
-	$("#filtro_sostenimiento option[value='0'").attr("selected",true);
-	$("#filtro_modalidad option[value='0'").attr("selected",true);
-	// if($("#filtro_nivel").val()!=0){
+	$("#filtro_sostenimiento").val("0");
+	$("#filtro_modalidad").val("0");
 		Estadistica_general.sostenimientos($("#filtro_municipio").val(),$("#filtro_nivel").val());
 		Estadistica_general.modalidades($("#filtro_sostenimiento").val(),$("#filtro_municipio").val(),$("#filtro_nivel").val());
-	// }
 });
 
 $("#filtro_sostenimiento").change(function () {
-	$("#filtro_modalidad option[value='0'").attr("selected",true);
-	// if($("#filtro_sostenimiento").val()!=0){
+	$("#filtro_modalidad").val("0");
 		Estadistica_general.modalidades($("#filtro_sostenimiento").val(),$("#filtro_municipio").val(),$("#filtro_nivel").val());
-	// }
 });
 
 $("#filtro_modalidad").change(function () {
@@ -104,10 +91,8 @@ var Estadistica_general = {
 		      			$("#filtro_ciclo_escolar").append("<option value='"+data.ciclo[i]['idciclo']+"'>"+data.ciclo[i]['ciclo']+"</option>");
 		      		}
 						}
-	        	// $('#filtro_sostenimiento').prop('disabled', true);
-				// $('#filtro_modalidad').prop('disabled', true);
-				$("#filtro_sostenimiento option[value='0'").attr("selected",true);
-				$("#filtro_modalidad option[value='0'").attr("selected",true);
+				$("#filtro_sostenimiento").val("0");
+				$("#filtro_modalidad").val("0");
 	      	},
 	      	error: function (jqXHR, textStatus, errorThrown) {
 				Mensaje.cerrar();
@@ -143,8 +128,7 @@ var Estadistica_general = {
 		      			$("#filtro_ciclo_escolar").append("<option value='"+data.ciclo[i]['idciclo']+"'>"+data.ciclo[i]['ciclo']+"</option>");
 		      		}
 						}
-	      		// $('#filtro_modalidad').prop('disabled', true);
-				$("#filtro_modalidad option[value='0'").attr("selected",true);
+				$("#filtro_modalidad").val("0");
 	        },
 	        error: function (jqXHR, textStatus, errorThrown) {
 	        	Mensaje.cerrar();

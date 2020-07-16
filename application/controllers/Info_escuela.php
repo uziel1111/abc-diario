@@ -72,8 +72,8 @@ class Info_escuela extends CI_Controller {
       $idmunicipio = $this->input->post('municipio');
       $idsostenimiento = $this->input->post('sostenimiento');
       $idnivel = $this->input->post('nivel');
-      $nombre_cct =  $this->input->post('nombre_cct');
-      $cct =  $this->input->post('cct');
+      $nombre_cct =  trim($this->input->post('nombre_cct'));
+      $cct =  trim($this->input->post('cct'));
       $municipio="";
       $nivel="";
       $sostenimiento="";
