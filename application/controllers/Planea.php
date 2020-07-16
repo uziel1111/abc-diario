@@ -87,7 +87,7 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 			$data['municipio'] = $this->Planea_model->niveles_de_logro_entidad_estadomun($municipio, $nivel, $periodo, $campodisip);
 		}
 		$data['idmunicipio'] = $municipio;
-	    
+
 	    $data['estado'] = $this->Planea_model->niveles_de_logro_entidad_estadomun(0, $nivel, $periodo, $campodisip);
 	    $data['nacional'] = $this->Planea_model->niveles_de_logro_nacional_estadomun($nivel, $periodo, $campodisip);
 	    $data['ciclo'] = $periodoplanea;
@@ -160,7 +160,7 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 
       		$vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
 
-			
+
 			$respuesta = array('datos' => $datos, 'zona' => $zona, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => $data['zona']);
 			envia_datos_json($this, $respuesta);
 			exit();

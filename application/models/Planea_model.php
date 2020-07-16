@@ -227,7 +227,7 @@ class Planea_model extends CI_Model
                                       INNER JOIN planea_unidad_analisis t4 ON t3.id_unidad_analisis=t4.id_unidad_analisis
                                       INNER JOIN planea_camposdisciplinares t5 ON t4.id_campodisiplinario=t5.id_campodisiplinario
                                       INNER JOIN c_modalidad m ON m.idmodalidad = e.idmodalidad
-                                      WHERE cfg.nivel = ? AND pp.id_periodo = ? AND m.idmodalidad = ?
+                                      WHERE cfg.nivel = ? AND pp.id_periodo = ? AND m.idmodalidad = ? AND m.idmodalidad != 15
                                       AND t5.id_campodisiplinario = ? {$where}
                                       GROUP BY t3.id_contenido, cfg.idcentrocfg) AS datos
                               GROUP BY id_contenido
@@ -502,7 +502,7 @@ class Planea_model extends CI_Model
           INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
           INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
           INNER JOIN c_modalidad m ON ct.idmodalidad = m.idmodalidad
-          {$where}
+          {$where} AND m.idmodalidad != 15
           GROUP BY m.idmodalidad";
           // echo $str_query; die();
           return $this->db->query($str_query)->result_array();
@@ -545,7 +545,7 @@ class Planea_model extends CI_Model
                         INNER JOIN planeaxidcentrocfg_reactivo t1 ON cfg.idcentrocfg = t1.idcentrocfg
                         INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
                         INNER JOIN c_modalidad m ON ct.idmodalidad = m.idmodalidad
-                    {$where}
+                    {$where} AND m.idmodalidad != 15
                     GROUP BY z.zonaid, z.zona_escolar, z.cct_supervisor";
           return $this->db->query($str_query)->result_array();
         }//niveles_zona
@@ -595,7 +595,7 @@ class Planea_model extends CI_Model
                         INNER JOIN niveleducativo n ON cfg.nivel = n.idnivel
                         INNER JOIN c_modalidad m ON ct.idmodalidad = m.idmodalidad
                         INNER JOIN periodoplanea p ON t1.id_periodo =p.id_periodo
-                    {$where}
+                    {$where} AND m.idmodalidad != 15
                     GROUP BY p.id_periodo";
           return $this->db->query($str_query)->result_array();
         }//periodo_zona

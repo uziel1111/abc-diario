@@ -390,7 +390,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 		INNER JOIN c_zona z ON est.zonaid = z.zonaid
 		INNER JOIN cct ct ON ct.zonaid = z.zonaid
 		INNER JOIN c_modalidad m ON m.idmodalidad = ct.idmodalidad
-		WHERE ct.nivel = ?
+		WHERE ct.nivel = ? AND m.idmodalidad != 15
 		GROUP BY m.idmodalidad";
 		return $this->db->query($str_query,[$idnivel])->result_array();
     }
@@ -463,7 +463,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 			INNER JOIN c_zona z ON est.zonaid = z.zonaid
 			INNER JOIN cct ct ON ct.zonaid = z.zonaid
 			INNER JOIN c_modalidad m ON m.idmodalidad = ct.idmodalidad
-			WHERE ct.nivel = ? AND m.idmodalidad = ?
+			WHERE ct.nivel = ? AND m.idmodalidad = ? AND m.idmodalidad != 15
 			GROUP BY z.zonaid";
 		return $this->db->query($str_query,[$idnivel,$idmodalidad])->result_array();
       }
@@ -491,7 +491,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 				INNER JOIN cct ct ON ct.zonaid = z.zonaid
 				INNER JOIN c_modalidad m ON m.idmodalidad = ct.idmodalidad
 				INNER JOIN ciclo c ON est.idciclo = c.idciclo
-				WHERE ct.nivel = ?  AND m.idmodalidad = ? AND z.zonaid = ?
+				WHERE ct.nivel = ?  AND m.idmodalidad = ? AND z.zonaid = ? AND m.idmodalidad != 15
 				GROUP BY c.idciclo";
             return $this->db->query($str_query,[$idnivel,$idmodalidad,$numzona])->result_array();
         }// obtener_nzona_xidnivelxidsost_zona()
@@ -589,7 +589,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
               $join .= " INNER JOIN c_sostenimiento s ON est.idsostenimiento= s.idsostenimiento ";
             }
             if($idmodalidad>0){
-              $where .= " AND m.idmodalidad = {$idmodalidad}";
+              $where .= " AND m.idmodalidad = {$idmodalidad} AND m.idmodalidad != 15";
               $join .= " INNER JOIN c_modalidad m ON est.idmodalidad = m.idmodalidad ";
             }
         $query="SELECT

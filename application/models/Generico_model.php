@@ -89,7 +89,8 @@ class Generico_model extends CI_Model
 
   function modalidades(){
     $query="SELECT idmodalidad,descr as nombre
-            FROM c_modalidad";
+            FROM c_modalidad
+            WHERE idmodalidad != 15";
       return  $this->db->query($query)->result_array();
   }
 
@@ -116,7 +117,7 @@ class Generico_model extends CI_Model
                   			INNER JOIN niveleducativo n on est.idnivel = n.idnivel
                   			INNER JOIN c_sostenimiento s ON est.idsostenimiento= s.idsostenimiento
                   			INNER JOIN c_modalidad m ON est.idmodalidad = m.idmodalidad
-                  			{$where}
+                  			{$where} AND m.idmodalidad != 15
                   			GROUP BY m.idmodalidad";
 // echo "<pre>";print_r($str_query);die();
           return $this->db->query($str_query)->result_array();
@@ -200,7 +201,7 @@ WHERE
       return  $this->db->query($query,[$idsostenimiento,'A'])->result_array();
   }// obtener_nombre_municipio()
   function obtener_nombre_modalidad($idmodalidad){
-      $query="SELECT  descr as nombre FROM c_modalidad WHERE idmodalidad= ? AND estatus=?";
+      $query="SELECT  descr as nombre FROM c_modalidad WHERE idmodalidad= ? AND estatus=? AND idmodalidad != 15";
       return  $this->db->query($query,[$idmodalidad,'A'])->result_array();
   }// obtener_nombre_nivel()
   function obtener_ciclo($idciclo){
