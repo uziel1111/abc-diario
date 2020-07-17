@@ -118,7 +118,7 @@
         <!-- card-body -->
     </div>
 
-    <div class="card mb-3 card-style-1" id="dv_asistencia_zona">
+    <!-- <div class="card mb-3 card-style-1" id="dv_asistencia_zona">
         <div class="card-header card-1-header bg-success text-light">Indicadores de asistencia</div>
         <div class="card-body">
             <div class="table-responsive">
@@ -145,7 +145,7 @@
             </div>
         </div>
         <!-- card-body -->
-    </div>
+    </div> -->
 
     <div class="card mb-3 card-style-1" id="dv_permanencia_zona">
         <div class="card-header card-1-header bg-success text-light">Indicadores de permanencia</div>
