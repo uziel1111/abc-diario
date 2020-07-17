@@ -7,7 +7,12 @@
 						<i class="fas fa-search"></i> Estadística, indicadores y resultados educativos(<?= isset($subtitulo)? $subtitulo :""?>)
 					</div>
 					<div class="col-2 text-light text-right">
-						<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Titulo" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><i class="fa fa-info-circle"></i></a>
+						<?php if (isset($subtitulo) && $subtitulo=='Por estado / municipio'): ?>
+							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="La educación sinaloense" data-content="Información estadística y de indicadores, concentrada de forma estatal o desagregada por municipio. Se expone cantidad de escuelas, alumnos, docentes y grupos de cada nivel y modalidad educativa. También indicadores de asistencia, permanencia, aprendizaje, de rezago educativo y analfabetismo. La información puede consultarse en pantalla o descargarse en un archivo Excel."><i class="fa fa-info-circle"></i></a>
+						<?php endif; ?>
+						<?php if (isset($subtitulo) && $subtitulo=='Por zona escolar'): ?>
+							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Datos de tu zona escolar" data-content="Información principal de las escuelas que conforman cada zona escolar, para la toma de decisiones en los consejos técnicos de zona: alumnos, grupos, docentes, indicadores de permanencia y aprendizaje."><i class="fa fa-info-circle"></i></a>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

@@ -7,7 +7,10 @@
 						<i class="fas fa-search"></i><?=isset($seccion)? $seccion : ''?> (Riesgo de Abandono Municipal / Estatal)
 					</div>
 					<div class="col-1 text-light text-right">
-						<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Titulo" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><i class="fa fa-info-circle"></i></a>
+						<?php if (isset($seccion) && $seccion=='Estadística, indicadores y resultados educativos'): ?>
+							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Riesgo de abandono estatal y municipal" data-content="Datos acumulados en el estado y cada municipio de alumnos que están en riesgo de abandonar la escuela, por su incidencia en reprobar asignaturas, contar con inasistencias a las clases y tener algún rezago en la edad reglamentaria. La fuente de información es el sistema SIEE de la entidad."><i class="fa fa-info-circle"></i></a>
+						<?php endif; ?>
+
 					</div>
 				</div>
 

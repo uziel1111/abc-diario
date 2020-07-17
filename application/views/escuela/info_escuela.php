@@ -7,7 +7,7 @@
 						<i class="fas fa-search"></i> Datos generales de la escuela
 					</div>
 					<div class="col-2 text-light text-right">
-						<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Titulo" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><i class="fa fa-info-circle"></i></a>
+						<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Lo relevante de tu escuela" data-content="Principales elementos de diagnóstico de tu escuela con datos oficiales, como insumo para el Plan Escolar de Mejora Continua. En el apartado de Asistencia se muestra la matrícula, grupos y docentes; en lo referente a Permanencia puedes ver los indicadores de retención, aprobación y eficiencia terminal, además los alumnos que están en riesgo de abandono; en Aprendizaje encontrarás los resultados de PLANEA por nivel de logro y contenido temático."><i class="fa fa-info-circle"></i></a>
 					</div>
 				</div>
 			</div>
