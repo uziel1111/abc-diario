@@ -313,7 +313,7 @@ class Reportes extends CI_Controller {
 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':C'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_asistencia_nv as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
+					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel'] .'('.$row['ciclo'].')') );
 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, (($row['cobertura']=='')?'-':$row['cobertura'].'%') );
 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, (($row['absorcion']=='')?'-':$row['absorcion'].'%') );
 					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido);
@@ -336,7 +336,7 @@ class Reportes extends CI_Controller {
 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_permanencia_nv as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
+					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel'] .'('.$row['ciclo'].')') );
 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, (($row['retencion']=='')?'-':$row['retencion'].'%') );
 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') );
 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, (($row['et']=='')?'-':$row['et'].'%') );

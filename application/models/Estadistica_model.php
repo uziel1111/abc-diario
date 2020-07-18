@@ -207,7 +207,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
   	}
 
   	function indicadores_asistencia_xmunicipio($id_municipio,$idciclo){
-  		$where="WHERE i.idciclo = {$idciclo}";
+  		$where="WHERE 1=1"; //i.idciclo = {$idciclo}
   		$tabla = " indicadores_x_estado ";
   		$campos = " e.identidad,e.nombre as muninicipio ";
   		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
@@ -223,13 +223,14 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
   			INNER JOIN niveleducativo n ON n.idnivel=i.idnivel
   			INNER JOIN ciclo c ON c.idciclo=i.idciclo
   			{$where}
+        ORDER BY FIELD(n.descr,'PRIMARIA','SECUNDARIA ','MEDIA SUPERIOR','SUPERIOR'),c.descr DESC
   		";
       // echo "<pre>";print_r($query);die();
   		return $this->db->query($query)->result_array();
   	}
 
   	function indicadores_permanencia_xmunicipio($id_municipio,$idciclo){
-  		$where="WHERE i.idciclo = {$idciclo}";
+  		$where="WHERE 1=1"; // i.idciclo = {$idciclo}
   		$tabla = " indicadores_x_estado ";
   		$campos = " e.identidad,e.nombre as muninicipio ";
   		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
@@ -245,6 +246,8 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
   			INNER JOIN niveleducativo n ON n.idnivel=i.idnivel
   			INNER JOIN ciclo c ON c.idciclo=i.idciclo
   			{$where}
+        ORDER BY FIELD(n.descr,'PRIMARIA','SECUNDARIA ','MEDIA SUPERIOR','SUPERIOR'),c.descr DESC
+
   			";
   		return $this->db->query($query)->result_array();
   	}

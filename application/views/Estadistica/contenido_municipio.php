@@ -235,7 +235,7 @@
             <tbody>
               <?php foreach ($asistencia as $row) { ?>
                 <tr>
-                  <td><?= $row['nivel'] ?></td>
+                  <td><?= $row['nivel'] ?> (<?= $row['ciclo'] ?>)</td>
                   <td style="text-align: center;"><?= (($row['cobertura']=='')?'-':$row['cobertura'].'%') ?></td>
                   <td style="text-align: center;"><?= (($row['absorcion']=='')?'-':$row['absorcion'].'%') ?></td>
                 </tr>
@@ -244,6 +244,8 @@
           </table>
           <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911.</div>
+            <!-- <div id="">Último ciclo escolar disponible: <?=(isset($arr_datos_ind['ciclo']))? $arr_datos_ind['ciclo']: '' ?></div> -->
+
           </div>
           </tbody>
           </table>
@@ -270,7 +272,7 @@
             <tbody>
               <?php foreach ($permanencia as $row) { ?>
                 <tr>
-                  <td><?= $row['nivel'] ?></td>
+                  <td><?= $row['nivel'] ?>(<?= $row['ciclo'] ?>)</td>
                   <td style="text-align: center;"><?= (($row['retencion']=='')?'-':$row['retencion'].'%') ?></td>
                   <td style="text-align: center;"><?= (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') ?></td>
                   <td style="text-align: center;"><?= (($row['et']=='')?'-':$row['et'].'%') ?></td>
@@ -280,7 +282,7 @@
           </table>
           <div class="pie_tabla bg-info text-light font-weight-bold">
             <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911.</div>
-            <div id="">- : Dato no disponible</div>
+            <!-- <div id="">Último ciclo escolar disponible: <?=(isset($arr_datos_ind['ciclo']))? $arr_datos_ind['ciclo']: '' ?></div> -->
           </div>
         </div>
       </div>
