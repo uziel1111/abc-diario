@@ -438,7 +438,7 @@ class Planea_model extends CI_Model
             FROM planea_nlogro_x_zona pzona
             
             INNER JOIN c_zona zona ON zona.zonaid = pzona.zonaid
-            WHERE zona.cct_supervisor = '{$zona}' AND c.idciclo = {$periodo}";
+            WHERE zona.cct_supervisor = '{$zona}'";
           return $this->db->query($str_query)->result_array();
         }
 
