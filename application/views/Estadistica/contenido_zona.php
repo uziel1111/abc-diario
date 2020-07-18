@@ -144,40 +144,40 @@
                 </div>
             </div>
         </div>
-         card-body -->
-    </div>
+    </div> -->
+    <?php if ($arr_datos_a_g_d_e['nivel']!='PREESCOLAR'): ?>
+      <div class="card mb-3 card-style-1" id="dv_permanencia_zona">
+          <div class="card-header card-1-header bg-success text-light">Indicadores de permanencia</div>
+          <div class="card-body">
+              <div class="table-responsive">
+                  <table class="table table-sm table-striped table-hover">
+                      <thead class="bg-light">
+                          <tr>
+                              <th class="align-middle">Nivel</th>
+                              <th class="text-center align-middle">Retención</th>
+                              <th class="text-center align-middle">Aprobación</th>
+                              <th class="text-center align-middle">Eficiencia Terminal</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><?= ((isset($arr_datos_ind['nivel']))?$arr_datos_ind['nivel'] :'') ?></td>
+                              <td style="text-align: center;"><?= ((isset($arr_datos_ind['retencion']))?$arr_datos_ind['retencion'] :'') ?></td>
+                              <td style="text-align: center;"><?= ((isset($arr_datos_ind['aprobacion']))?$arr_datos_ind['aprobacion'] :'') ?></td>
+                              <td style="text-align: center;"><?= ((isset($arr_datos_ind['eficiencia_terminal']))?$arr_datos_ind['eficiencia_terminal'] :'') ?></td>
+                          </tr>
+                      </tbody>
+                  </table>
 
-    <div class="card mb-3 card-style-1" id="dv_permanencia_zona">
-        <div class="card-header card-1-header bg-success text-light">Indicadores de permanencia(<?=(isset($arr_datos_ind['ciclo']))? $arr_datos_ind['ciclo']: '' ?>)</div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover">
-                    <thead class="bg-light">
-                        <tr>
-                            <th class="align-middle">Nivel</th>
-                            <th class="text-center align-middle">Retención</th>
-                            <th class="text-center align-middle">Aprobación</th>
-                            <th class="text-center align-middle">Eficiencia Terminal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><?= ((isset($arr_datos_ind['nivel']))?$arr_datos_ind['nivel'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_ind['retencion']))?$arr_datos_ind['retencion'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_ind['aprobacion']))?$arr_datos_ind['aprobacion'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_ind['eficiencia_terminal']))?$arr_datos_ind['eficiencia_terminal'] :'') ?></td>
-                        </tr>
-                    </tbody>
-                </table>
+                  <div class="pie_tabla bg-info text-light font-weight-bold">
+                      <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911) - ciclo escolar <?=(isset($arr_datos_ind['ciclo_esc']))? $arr_datos_ind['ciclo_esc']: '' ?></div>
+                      <!-- <div id="">- : Dato no disponible</div> -->
+                  </div>
+              </div>
+          </div>
+      </div>
 
-                <div class="pie_tabla bg-info text-light font-weight-bold">
-                    <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911) - ciclo escolar 2016-2017</div>
-                    <div id="">- : Dato no disponible</div>
-                </div>
-            </div>
-        </div>
-        <!-- card-body -->
-    </div>
+
     <div class="card mb-3 card-style-1" id="dv_aprendizaje_zona">
         <div class="card-header card-1-header bg-success text-light">Indicadores de aprendizaje</div>
         <div class="card-body">
@@ -241,5 +241,6 @@
         </div>
         <!-- card-body -->
     </div>
+    <?php endif; ?>
     <!-- card -->
 </div>
