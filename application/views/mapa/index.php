@@ -9,7 +9,13 @@
             <i class="fas fa-search"></i> Ubica tu escuela(<?= isset($subtitulo)? $subtitulo :""?>)
           </div>
           <div class="col-1 text-light text-right">
-            <a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Titulo" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><i class="fa fa-info-circle"></i></a>
+            <?php if (isset($subtitulo) && $subtitulo=='Por clave de escuela'): ?>
+              <a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Tu escuela en el mapa con CCT" data-content="Con el uso de la clave de centro de trabajo, visualiza la ubicación de forma aproximada de tu escuela en un mapa. Así mismo, se identifican las cinco escuelas más cercanas del mismo nivel, del nivel siguiente y la información principal de la escuela que se está buscando."><i class="fa fa-info-circle"></i></a>
+            <?php endif; ?>
+            <?php if (isset($subtitulo) && $subtitulo=='Por municipio, nivel, sostenimiento y nombre'): ?>
+              <a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Tu escuela en el mapa" data-content="Con el apoyo de algunos datos de referencia que tengas a la mano (municipio, nivel, sostenimiento o nombre), visualiza la ubicación de forma aproximada de tu escuela en un mapa. Así mismo, se identifican las cinco escuelas más cercanas del mismo nivel, del nivel siguiente y la información principal de la escuela que se está buscando."><i class="fa fa-info-circle"></i></a>
+            <?php endif; ?>
+
           </div>
         </div>
 

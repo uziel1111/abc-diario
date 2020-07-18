@@ -7,7 +7,18 @@
 						<i class="fas fa-search"></i> <?=isset($seccion)? $seccion : 'Localiza tu escuela'?>(<?= isset($subseccion)? $subseccion: ''?>)
 					</div>
 					<div class="col-2 text-light text-right">
-						<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Titulo" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><i class="fa fa-info-circle"></i></a>
+						<?php if (isset($subseccion) && $subseccion=='Por escuela'): ?>
+							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Datos de tu escuela" data-content="Principales elementos de diagnóstico de tu escuela con datos oficiales, como insumo para el Plan Escolar de Mejora Continua. Se puede ingresar rápidamente con la clave de centro de trabajo o mediante algunos datos de referencia, como municipio, nivel, nombre de escuela, etc."><i class="fa fa-info-circle"></i></a>
+						<?php endif; ?>
+						<?php if (isset($subseccion) && $subseccion=='Riesgo de abandono por escuela'): ?>
+							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Riesgo de abandono escolar" data-content="Datos de los alumnos de tu escuela que están en riesgo de abandonar la escuela, por su incidencia en reprobar asignaturas, contar con inasistencias a las clases y tener algún rezago en la edad reglamentaria. La fuente de información es el sistema SIEE de la entidad."><i class="fa fa-info-circle"></i></a>
+						<?php endif; ?>
+						<?php if (isset($subseccion) && $subseccion=='Resultados PLANEA por escuela'): ?>
+							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="PLANEA de tu escuela" data-content="Resultados de las últimas dos pruebas PLANEA de tu escuela. Además de los niveles de logro, se exponen los resultados por contenidos temáticos, para orientar las acciones de reforzamiento académico en donde más se requiera."><i class="fa fa-info-circle"></i></a>
+						<?php endif; ?>
+						<!-- <?php if (isset($subseccion) && $subseccion=='En listado de escuelas'): ?>
+							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Titulo" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><i class="fa fa-info-circle"></i></a>
+						<?php endif; ?> -->
 					</div>
 				</div>
 

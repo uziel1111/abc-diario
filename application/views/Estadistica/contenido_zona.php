@@ -118,7 +118,7 @@
         <!-- card-body -->
     </div>
 
-    <div class="card mb-3 card-style-1" id="dv_asistencia_zona">
+    <!-- <div class="card mb-3 card-style-1" id="dv_asistencia_zona">
         <div class="card-header card-1-header bg-success text-light">Indicadores de asistencia</div>
         <div class="card-body">
             <div class="table-responsive">
@@ -145,7 +145,7 @@
             </div>
         </div>
         <!-- card-body -->
-    </div>
+    </div> -->
 
     <div class="card mb-3 card-style-1" id="dv_permanencia_zona">
         <div class="card-header card-1-header bg-success text-light">Indicadores de permanencia</div>
@@ -216,19 +216,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($arr_datos_indplanea as $key => $value): ?>
                         <tr>
-                            <td><?= ((isset($arr_datos_indplanea['nivel']))?$arr_datos_indplanea['nivel'] :'') ?> (<?= ((isset($arr_datos_indplanea['periodo_planea']))?$arr_datos_indplanea['periodo_planea'] :'') ?>)</td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['ni_lyc']))?$arr_datos_indplanea['ni_lyc'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['nii_lyc']))?$arr_datos_indplanea['nii_lyc'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['niii_lyc']))?$arr_datos_indplanea['niii_lyc'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['niv_lyc']))?$arr_datos_indplanea['niv_lyc'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['nii_lyc']))?$arr_datos_indplanea['nii_lyc'] :0) + ((isset($arr_datos_indplanea['niii_lyc']))?$arr_datos_indplanea['niii_lyc'] :0) + ((isset($arr_datos_indplanea['niv_lyc']))?$arr_datos_indplanea['niv_lyc'] :0) ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['ni_mat']))?$arr_datos_indplanea['ni_mat'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['nii_mat']))?$arr_datos_indplanea['nii_mat'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['niii_mat']))?$arr_datos_indplanea['niii_mat'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['niv_mat']))?$arr_datos_indplanea['niv_mat'] :'') ?></td>
-                            <td style="text-align: center;"><?= ((isset($arr_datos_indplanea['nii_mat']))?$arr_datos_indplanea['nii_mat'] :0) + ((isset($arr_datos_indplanea['niii_mat']))?$arr_datos_indplanea['niii_mat'] :0) + ((isset($arr_datos_indplanea['niv_mat']))?$arr_datos_indplanea['niv_mat'] :0) ?></td>
+                            <td><?= ((isset($value['nivel']))?$value['nivel'] :'') ?> (<?= ((isset($value['periodo_planea']))?$value['periodo_planea'] :'') ?>)</td>
+                            <td style="text-align: center;"><?= ((isset($value['ni_lyc']))?$value['ni_lyc'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($value['nii_lyc']))?$value['nii_lyc'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($value['niii_lyc']))?$value['niii_lyc'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($value['niv_lyc']))?$value['niv_lyc'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($value['nii_lyc']))?$value['nii_lyc'] :0) + ((isset($value['niii_lyc']))?$value['niii_lyc'] :0) + ((isset($value['niv_lyc']))?$value['niv_lyc'] :0) ?></td>
+                            <td style="text-align: center;"><?= ((isset($value['ni_mat']))?$value['ni_mat'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($value['nii_mat']))?$value['nii_mat'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($value['niii_mat']))?$value['niii_mat'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($value['niv_mat']))?$value['niv_mat'] :'') ?></td>
+                            <td style="text-align: center;"><?= ((isset($value['nii_mat']))?$value['nii_mat'] :0) + ((isset($value['niii_mat']))?$value['niii_mat'] :0) + ((isset($value['niv_mat']))?$value['niv_mat'] :0) ?></td>
                         </tr>
+                      <?php endforeach; ?>
                     </tbody>
                 </table>
 

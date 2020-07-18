@@ -98,7 +98,7 @@
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/cct'); ?>">Por clave de escuela</a>
-                    <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/paramentros'); ?>">Por municipio, nivel, sostenimiento y nombre</a>
+                    <a class="dropdown-item" href="<?= base_url('Mapa/busqueda_x_mapa/parametros'); ?>">Por municipio, nivel, sostenimiento y nombre</a>
                     <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/ubica/listado'); ?>">En listado de escuelas</a>
                   </div>
                 </li>
