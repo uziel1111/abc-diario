@@ -61,8 +61,8 @@
                             <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Mapa/busqueda_x_mapa/parametros'); ?>">
                                     Por municipio, nivel, sostenimiento y nombre</a></li>
 
-                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Info_escuela/busqueda_general/ubica/listado'); ?>">
-                                    En listado de escuelas</a></li>
+                            <!-- <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Info_escuela/busqueda_general/ubica/listado'); ?>">
+                                    En listado de escuelas</a></li> -->
 
                         </ul>
                     </div>
