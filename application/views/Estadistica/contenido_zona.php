@@ -170,7 +170,7 @@
                   </table>
 
                   <div class="pie_tabla bg-info text-light font-weight-bold">
-                      <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911) - ciclo escolar <?=(isset($arr_datos_ind['ciclo_esc']))? $arr_datos_ind['ciclo_esc']: '' ?></div>
+                      <div id="fuentes_pie" class="font-italic">Fuente: SEPyC (Formato 911) - Último ciclo escolar disponible: <?=(isset($arr_datos_ind['ciclo_esc']))? $arr_datos_ind['ciclo_esc']: '' ?></div>
                       <!-- <div id="">- : Dato no disponible</div> -->
                   </div>
               </div>
