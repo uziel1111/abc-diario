@@ -139,20 +139,12 @@ var Asistencia = {
         });
 
         $(".highcharts-background").css("fill", "#FFF");
-        if (screen.width<600){
            estadPrimaria.setSize(
-               ($(document).width()/10)*5,
-               400,
+               this.offsetWidth,
+               300,
               false
            );
-         }
-         else {
-           estadPrimaria.setSize(
-               ($(document).width()/10)*5,
-               400,
-              false
-           );
-         }
+
     },//grafica_grados
     grafica_grupos: (grupos) => {
         arreglo_grupos = [];
@@ -265,20 +257,11 @@ var Asistencia = {
         });
 
         $(".highcharts-background").css("fill", "#FFF");
-        if (screen.width<600){
-           estadPrimaria.setSize(
-               ($(document).width()/10)*5,
-               400,
-              false
-           );
-         }
-         else {
-           estadPrimaria.setSize(
-               ($(document).width()/10)*5,
-               400,
-              false
-           );
-         }
+        estadPrimaria.setSize(
+            this.offsetWidth,
+            300,
+           false
+        );
     },//grafica_grupos
     grafica_docentes: (docentes) => {
     // console.log(docentes);
@@ -392,19 +375,10 @@ var Asistencia = {
         });
 
         $(".highcharts-background").css("fill", "#FFF");
-        if (screen.width<600){
-           estadPrimaria.setSize(
-               ($(document).width()/10)*5,
-               400,
-              false
-           );
-         }
-         else {
-           estadPrimaria.setSize(
-               ($(document).width()/10)*5,
-               400,
-              false
-           );
-         }
+        estadPrimaria.setSize(
+            this.offsetWidth,
+            300,
+           false
+        );
     }
 }

@@ -65,7 +65,7 @@ var Info_escuela = {
 	      url: base_url+'Info_escuela/get_permanencia',
 	      type: 'POST',
 	      dataType: 'json',
-	      data: {'vista':'permanencia','cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val()
+	      data: {'vista':'permanencia','cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val(), 'idnivel':$("#idnivel").val()
 	      },
 	      beforeSend: function (xhr) {
 	        Mensaje.cargando('Cargando vista');
@@ -92,7 +92,7 @@ var Info_escuela = {
 	      url: base_url+'Info_escuela/get_aprendizaje',
 	      type: 'POST',
 	      dataType: 'json',
-	      data: {'vista':'aprendizaje'
+	      data: {'vista':'aprendizaje', 'idnivel':$("#idnivel").val()
 	      },
 	      beforeSend: function (xhr) {
 	        Mensaje.cargando('Cargando vista');

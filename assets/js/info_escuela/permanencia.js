@@ -31,22 +31,22 @@ var Permanencia = {
             Permanencia.grafica_aprobacion(data.indicadores['aprobacion']);
 	      		let tabla='<table width="100%" class="table table-bordered">';
 					tabla+=	'<tbody>';
-					tabla+= '<tr style="background-color:#D8D8D8;">';
+					tabla+= '<tr style="background-color:#f8f9fa;">';
 					tabla+=	'<td style="text-align:center;">Total</td>';
-					tabla+= '<td colspan="2" style="text-align:center;">Muy alto</td>';
-					tabla+= '<td colspan="2" style="text-align:center;">Alto</td>';
-					tabla+= '<td colspan="2" style="text-align:center;">Medio</td>';
-					tabla+= '<td colspan="2" style="text-align:center;">Bajo</td>';
+					tabla+= '<td colspan="1" style="text-align:center;"><i style="color: #cd1719;" class="fa fa-square" aria-hidden="true"></i>Muy alto</td>';
+					tabla+= '<td colspan="1" style="text-align:center;"><i style="color: #ee7521;" class="fa fa-square" aria-hidden="true"></i>Alto</td>';
+					tabla+= '<td colspan="1" style="text-align:center;"><i style="color: #ffed00;" class="fa fa-square" aria-hidden="true"></i>Medio</td>';
+					tabla+= '<td colspan="1" style="text-align:center;"><i style="color: #dadada;" class="fa fa-square" aria-hidden="true"></i>Bajo</td>';
 					tabla+= '</tr>';
 					tabla+= '<tr>';
 					tabla+= '<td style="text-align:center;">'+data.total_alumnos_riesgo+'</td>';
-					tabla+= '<td width="20px" style="background-color:#cd1719;"></td>';
+					// tabla+= '<td width="20px" style="background-color:#cd1719;"></td>';
 					tabla+= '<td style="text-align:center;">'+data.muy_alto+'</td>';
-					tabla+= '<td width="20px" style="background-color:#ee7521;"></td>';
+					// tabla+= '<td width="20px" style="background-color:#ee7521;"></td>';
 					tabla+= '<td style="text-align:center;">'+data.alto+'</td>';
-					tabla+= '<td width="20px" style="background-color:#ffed00;"></td>';
+					// tabla+= '<td width="20px" style="background-color:#ffed00;"></td>';
 					tabla+= '<td style="text-align:center;">'+data.medio+'</td>';
-					tabla+= '<td width="20px" style="background-color:#dadada;"></td>';
+					// tabla+= '<td width="20px" style="background-color:#dadada;"></td>';
 					tabla+= '<td style="text-align:center;">'+data.bajo+'</td>';
 					tabla+=	 '</tr>';
 					tabla+=	 '</tbody>';
@@ -55,7 +55,7 @@ var Permanencia = {
 	      		let tabla2='<table WIDTH="100%" class="table table-bordered">';
   					tabla2+='<tbody>';
     				tabla2+='<tr style="background-color:#E6E7E9;">';
-      				tabla2+='<td colspan="2 style="text-align:center;">Grados</td>';
+      				tabla2+='<td colspan="1" style="text-align:center;">Grados</td>';
       				tabla2+='<td style="text-align:center;">1<sup>o</sup></td>';
       				tabla2+='<td style="text-align:center;">2<sup>o</sup></td>';
       				tabla2+='<td style="text-align:center;">3<sup>o</sup></td>';
@@ -63,8 +63,8 @@ var Permanencia = {
       				tabla2+='<td style="text-align:center;">5<sup>o</sup></td>';
       				tabla2+='<td style="text-align:center;">6<sup>o</sup></td>';
     				tabla2+='</tr><tr>';
-      				tabla2+='<td width="20px" style="background-color:#F5842A;">&nbsp;</td>';
-      				tabla2+='<td style="text-align:center;">Alto</td>';
+      				// tabla2+='<td width="20px" style="background-color:#F5842A;">&nbsp;</td>';
+      				tabla2+='<td style="text-align:center;"><i style="color: #ee7521;" class="fa fa-square" aria-hidden="true"></i>Alto</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[0]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[1]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[2]+'</td>';
@@ -72,8 +72,8 @@ var Permanencia = {
       				tabla2+='<td style="text-align:center;">'+data.array_alto[4]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[5]+'</td>';
     				tabla2+='</tr><tr>';
-      				tabla2+='<td width="20px" style="background-color:#D1232A;">&nbsp;</td>';
-      				tabla2+='<td style="text-align:center;">Muy alto</td>';
+      				// tabla2+='<td width="20px" style="background-color:#D1232A;">&nbsp;</td>';
+      				tabla2+='<td style="text-align:center;"><i style="color: #cd1719;" class="fa fa-square" aria-hidden="true"></i>Muy alto</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[0]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[1]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[2]+'</td>';
@@ -183,21 +183,11 @@ var Permanencia = {
           }]
       });
 			$(".highcharts-background").css("fill", "#FFF");
-			if (screen.width<600){
 				 riesgo_abandono.setSize(
-						 ($(document).width()/10)*5,
-						 400,
-						false
+					 this.offsetWidth,
+					 300,
+					false
 				 );
-			 }
-			 else {
-				 riesgo_abandono.setSize(
-						 ($(document).width()/10)*5,
-						 400,
-						false
-				 );
-			 }
-
     },
     grafica_barras_riesgo: (array_muy_alto,array_alto,total_alumnos) => {
         Highcharts.theme = {
@@ -298,22 +288,12 @@ var Permanencia = {
 
         });
 				$(".highcharts-background").css("fill", "#FFF");
-				if (screen.width<600){
-					 distribucion_xgrado.setSize(
-							 ($(document).width()/10)*5,
-							 400,
-							false
-					 );
-				 }
-				 else {
-					 distribucion_xgrado.setSize(
-							 ($(document).width()/10)*5,
-							 400,
-							false
-					 );
-				 }
-
-
+				distribucion_xgrado.setSize(
+					this.offsetWidth,
+					300,
+				 false
+				);
+			
     },//grafica_riesgo_barras
     grafica_eficiencia_terminal: (valor_et) => {
         // Dibujamos el radial progress bar para Eficiencia Terminal

@@ -16,7 +16,7 @@ class Info_escuela extends CI_Controller {
     function busqueda_general($seccion = null, $subseccion = null) {
       $data=array();
       $municipios=$this->Generico_model->municipios();
-      
+
       $sostenimiento=$this->Listadoesc_model->sostenimientos();
       if($seccion == 'estadistica'){
         $secc = "Estadística, indicadores y resultados educativos";
@@ -166,6 +166,8 @@ class Info_escuela extends CI_Controller {
   public function get_permanencia(){
     $cct = $this->input->post('cct');
     $idturno = $this->input->post('turno');
+    $idnivel = $this->input->post('idnivel');
+
     $ciclo = trae_ciclo_actual();
     $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
     // echo "<pre>";print_r($ciclo);die();
@@ -178,6 +180,8 @@ class Info_escuela extends CI_Controller {
     $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:0;
     // $data['ciclos'] = $this->Generico_model->ciclo_escolar();
     $data['ciclos'] = array(['idciclo' => 1, 'ciclo' => '2019-2020']);
+    $data['idnivel'] = $idnivel;
+    // echo "<pre>";print_r($data);die();
     $vista = $this->load->view('escuela/info/permanencia',$data, TRUE);
     $respuesta = array('vista' => $vista, 'indicadores' => $indicadores);
 
@@ -186,7 +190,9 @@ class Info_escuela extends CI_Controller {
   }
 
   public function get_aprendizaje(){
-    $vista = $this->load->view('escuela/info/aprendizaje',array(), TRUE);
+    $idnivel = $this->input->post('idnivel');
+    $data['idnivel'] = $idnivel;
+    $vista = $this->load->view('escuela/info/aprendizaje',$data, TRUE);
     $respuesta = array('vista' => $vista);
 
     envia_datos_json($this, $respuesta);
@@ -208,7 +214,7 @@ class Info_escuela extends CI_Controller {
      }else{
       $arr_datos = $this->Listadoesc_model->niveles($idmunicipio);
      }
-     
+
      $str_select = "<option value='0'>Todos</option>";
      foreach ($arr_datos as $key => $row) {
        $str_select .= " <option value=".$row['idnivel'].">".$row['nombre']."</option>";

@@ -288,14 +288,14 @@ var Aprendisaje = {
     });
     $(".highcharts-background").css("fill","#FFF");
           chartlyc.setSize(
-              ($(document).width()/10)*5,
-              400,
-             false
+            this.offsetWidth,
+            300,
+           false
           );
           chartmat.setSize(
-              ($(document).width()/10)*5,
-              400,
-             false
+            this.offsetWidth,
+            300,
+           false
           );
 
   },

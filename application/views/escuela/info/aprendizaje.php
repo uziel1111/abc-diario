@@ -1,9 +1,11 @@
 <br>
+<?php if ($idnivel=='2' || $idnivel=='3'): ?>
 <p>
   <a id="btn_planea_info" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
     PLANEA por contenido temático Lenguaje y comunicación
   </a>
 </p>
+<?php endif; ?>
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
     <div class="row">
@@ -16,11 +18,13 @@
     </div>
   </div>
 </div>
+<?php if ($idnivel=='2' || $idnivel=='3'): ?>
 <p>
 	<a id="btn_planea_info_mate" class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
 	    PLANEA por contenido temático Matemáticas
 	</a>
 </p>
+<?php endif; ?>
 <div class="collapse" id="collapseExample2">
   <div class="card card-body">
     <div class="row">

@@ -15,6 +15,7 @@
 			<div class="card-body">
 				<input type="hidden" id="idturnoinfo" value="<?= $info[0]['idturno'] ?>">
 				<input type="hidden" id="cctinfo" value="<?= $info[0]['cct'] ?>">
+				<input type="hidden" id="idnivel" value="<?= $info[0]['idnivel'] ?>">
 				<div class="card shadow bg-light mb-3">
 					<div class="card-header"><?= $info[0]['nombre'] ?></div>
 					<div class="card-body">

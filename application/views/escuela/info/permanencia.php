@@ -13,11 +13,14 @@
 		</div>
 	</div>
 	<br>
-	<p>
-		<a id="btn_planea_info_mate" class="btn btn-primary" data-toggle="collapse" href="#collapseriesgo" role="button" aria-expanded="false" aria-controls="collapseExample">
-		    Riesgo de abandono escolar
-		</a>
-	</p>
+	<?php if ($idnivel=='2' || $idnivel=='3'): ?>
+		<p>
+			<a id="btn_planea_info_mate" class="btn btn-primary" data-toggle="collapse" href="#collapseriesgo" role="button" aria-expanded="false" aria-controls="collapseExample">
+			    Riesgo de abandono escolar
+			</a>
+		</p>
+	<?php endif; ?>
+
 	<div class="collapse" id="collapseriesgo">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-3">
