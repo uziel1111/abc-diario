@@ -408,8 +408,8 @@ class Planea_model extends CI_Model
             {$campos}
             'muni' AS origen
             FROM {$tabla} pmuni
-            INNER JOIN ciclo c ON SUBSTRING(c.descr, 1, 4) LIKE CONCAT('%', pmuni.periodo_planea, '%')
-            WHERE {$where} pmuni.idnivel = {$nivel} AND c.idciclo = {$periodo}";
+            
+            WHERE {$where} pmuni.idnivel = {$nivel}";
             // echo $str_query; die();
           return $this->db->query($str_query)->result_array();
         }
@@ -436,7 +436,7 @@ class Planea_model extends CI_Model
             {$campos}
             'muni' AS origen
             FROM planea_nlogro_x_zona pzona
-            INNER JOIN ciclo c ON SUBSTRING(c.descr, 1, 4) LIKE CONCAT('%', pzona.periodo_planea, '%')
+            
             INNER JOIN c_zona zona ON zona.zonaid = pzona.zonaid
             WHERE zona.cct_supervisor = '{$zona}' AND c.idciclo = {$periodo}";
           return $this->db->query($str_query)->result_array();
@@ -455,8 +455,8 @@ class Planea_model extends CI_Model
             pnac.niv_mat,
             'nacional' AS origen
             FROM planea_nlogro_x_nacional pnac
-            INNER JOIN ciclo c ON SUBSTRING(c.descr, 1, 4) LIKE CONCAT('%', pnac.periodo_planea, '%')
-            WHERE pnac.idnivel = {$nivel} AND c.idciclo = {$periodo}";
+
+            WHERE pnac.idnivel = {$nivel} ";
           return $this->db->query($str_query)->result_array();
         }
         function niveles_zona(){

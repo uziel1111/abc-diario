@@ -317,9 +317,11 @@ grafica_info_nlogro: (arr_datos, id_div_contenedor, campo_dis, periodo) => {
     if(campo_dis == 1){
     	var titulo = "Lenguaje y Comunicación";
     	var campos = [parseFloat(arr_datos[0]['ni_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['niv_lyc'])];
+      var campos2 = [parseFloat(arr_datos[1]['ni_lyc']), parseFloat(arr_datos[1]['nii_lyc']), parseFloat(arr_datos[1]['nii_lyc']), parseFloat(arr_datos[1]['niv_lyc'])];
     }else{
     	var titulo = "Matemáticas";
     	var campos = [parseFloat(arr_datos[0]['ni_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['niv_mat'])];
+      var campos2 = [parseFloat(arr_datos[1]['ni_mat']), parseFloat(arr_datos[1]['nii_mat']), parseFloat(arr_datos[1]['nii_mat']), parseFloat(arr_datos[1]['niv_mat'])];
     }
     $('#'+id_div_contenedor).empty();
     // alert(id_div_contenedor);
@@ -377,6 +379,9 @@ grafica_info_nlogro: (arr_datos, id_div_contenedor, campo_dis, periodo) => {
           series: [{
               name: titulo,
               data: campos
+          },{
+              name: titulo,
+              data: campos2
           }]
 
       });
