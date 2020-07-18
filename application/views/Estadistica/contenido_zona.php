@@ -144,11 +144,11 @@
                 </div>
             </div>
         </div>
-        <!-- card-body -->
-    </div> -->
+         card-body -->
+    </div>
 
     <div class="card mb-3 card-style-1" id="dv_permanencia_zona">
-        <div class="card-header card-1-header bg-success text-light">Indicadores de permanencia</div>
+        <div class="card-header card-1-header bg-success text-light">Indicadores de permanencia(<?=(isset($arr_datos_ind['ciclo']))? $arr_datos_ind['ciclo']: '' ?>)</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover">

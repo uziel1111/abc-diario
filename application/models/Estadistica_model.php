@@ -521,15 +521,16 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
           function obtener_indicadores_xzona($idnivel,$idmodalidad,$numzona,$idciclo){
                 $str_query = "SELECT
                               n.descr as nivel,cobertura,absorcion,retencion,
-                              aprobacion,eficiencia_terminal
+                              aprobacion,eficiencia_terminal, SUBSTRING(c.descr, 1, 4) AS ciclo
                               FROM indicadores_zona ez
                               INNER JOIN c_zona z ON ez.zonaid = z.zonaid
                               INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
                               INNER JOIN cct ct ON ct.zonaid = z.zonaid
-                              WHERE z.idnivel = ? AND ct.idmodalidad = ? AND ez.zonaid = ? AND ez.idciclo = ?
+                              INNER JOIN ciclo c ON c.idciclo = ez.idciclo
+                              WHERE z.idnivel = ? AND ct.idmodalidad = ? AND ez.zonaid = ? 
                               GROUP BY z.zonaid";
 
-                return $this->db->query($str_query,[$idnivel,$idmodalidad,$numzona,$idciclo])->result_array();
+                return $this->db->query($str_query,[$idnivel,$idmodalidad,$numzona])->result_array();
             }// obtener_indicadores_xzona()
 
             function obtener_indicadoresplanea_xzona($idnivel,$idmodalidad,$numzona,$idciclo){
