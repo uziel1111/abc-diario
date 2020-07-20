@@ -182,7 +182,7 @@ class Reportes extends CI_Controller {
 				$aux = 6;
 				foreach ($result_alumnos as $row) {
 					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, utf8_encode($row['sostenimiento']) );
+					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, utf8_encode($row['modalidad']) );
 					// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, $row['alumn_m_t'] );
 					// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, $row['alumn_h_t'] );
