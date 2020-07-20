@@ -16,6 +16,9 @@
             <div id="div_planea_lyc_info"></div>
         </div>
     </div>
+    <div class="pie_tabla bg-info text-light font-weight-bold">
+      <div id="fuentes_pie">Fuente: SEP Federal.</div>
+    </div>
   </div>
 </div>
 <?php if ($idnivel=='2' || $idnivel=='3'): ?>
@@ -35,7 +38,9 @@
             <div id="div_planea_mate_info"></div>
         </div>
     </div>
-
+    <div class="pie_tabla bg-info text-light font-weight-bold">
+      <div id="fuentes_pie">Fuente: SEP Federal.</div>
+    </div>
   </div>
 </div>
 <p>
@@ -48,6 +53,9 @@
     <div id="div_planea_info_nlogro_tabla"></div>
     <div id="div_planea_info_nlogro_lyc"></div>
     <div id="div_planea_info_nlogro_mate"></div>
+    <div class="pie_tabla bg-info text-light font-weight-bold">
+      <div id="fuentes_pie">Fuente: SEP Federal.</div>
+    </div>
   </div>
 </div>
 <p>
@@ -75,6 +83,9 @@
 			<h5 id="conten_planea_ciclo"></h5>
 		</div>
 	</div>
+  <!-- <div class="pie_tabla bg-info text-light font-weight-bold">
+    <div id="fuentes_pie">Fuente: SEP Federal.</div>
+  </div> -->
   </div>
 </div>
 

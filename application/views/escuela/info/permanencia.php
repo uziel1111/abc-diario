@@ -11,6 +11,9 @@
 			<div class="col-md-4"><div style="height: 50%; width: 50%;" id="dv_info_graf_Retencion_info"></div></div>
 			<div class="col-md-4"><div style="height: 50%; width: 50%;" id="dv_info_graf_aprobacion_info"></div></div>
 		</div>
+		<div class="pie_tabla bg-info text-light font-weight-bold">
+		  <div id="fuentes_pie">Fuente: SEPyC Sinaloa con base en el Formato 911.</div>
+		</div>
 	</div>
 	<br>
 	<?php if ($idnivel=='2' || $idnivel=='3'): ?>
@@ -54,6 +57,9 @@
 		<div id="div_tabla_riesgo_grafica_pie_info"></div>
 		<div id="div_riesgo_grafica_barras_info"></div>
 		<div id="div_tabla_riesgo_grafica_barras_info"></div>
+		<div class="pie_tabla bg-info text-light font-weight-bold">
+		  <div id="fuentes_pie">Fuente: El sistema SIEE de la entidad; por su incidencia en reprobar asignaturas, contar con inasistencias a las clases y tener algún rezago en la edad reglamentaria.</div>
+		</div>
 	</div>
 	</div>
 </div>
