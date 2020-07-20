@@ -1008,7 +1008,7 @@ class Reportes extends CI_Controller {
 					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, ($row['municipio']) );
 					// $obj_excel->getActiveSheet()->SetCellValue('F'.$aux, ($row['domicilio']) );
 					// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, ($row['domicilio']) );
-					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':E'.$aux)->applyFromArray($this->style_contenido);
+					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':E'.$aux)->applyFromArray($this->style_contenido_first_colum);
 					$aux++;
 				}
 				date_default_timezone_set('America/Mexico_City');
