@@ -198,15 +198,15 @@
                     <td class="pl-5"><?= $row['modalidad'] ?></td>
                 <?php }
 
-                  ($row['nescuelas'] == 0) ? print '<td>-</td>' : print '<td class="text-center align-middle">' . number_format($row['nescuelas']) . '</td>';
-                  ($row['grupos_1'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_1']) . '</td>';
-                  ($row['grupos_2'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_2']) . '</td>';
-                  ($row['grupos_3'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_3']) . '</td>';
-                  ($row['grupos_4'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_4']) . '</td>';
-                  ($row['grupos_5'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_5']) . '</td>';
-                  ($row['grupos_6'] == 0) ? print '<td>-</td>' : print '<td>' . number_format($row['grupos_6']) . '</td>';
-                  ($row['grupos_multi'] == 0) ? print '<td>-</td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_multi']) . '</td>';
-                  ($row['grupos_t'] == 0) ? print '<td>-</td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_t']) . '</td>';
+                  ($row['nescuelas'] == 0) ? print '<td><center>-</center></td>' : print '<td class="text-center align-middle">' . number_format($row['nescuelas']) . '</td>';
+                  ($row['grupos_1'] == 0) ? print '<td><center>-</center></center></td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_1']) . '</td>';
+                  ($row['grupos_2'] == 0) ? print '<td><center>-</center></td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_2']) . '</td>';
+                  ($row['grupos_3'] == 0) ? print '<td><center>-</center></td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_3']) . '</td>';
+                  ($row['grupos_4'] == 0) ? print '<td><center>-</center></td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_4']) . '</td>';
+                  ($row['grupos_5'] == 0) ? print '<td><center>-</center></td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_5']) . '</td>';
+                  ($row['grupos_6'] == 0) ? print '<td><center>-</center></td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_6']) . '</td>';
+                  ($row['grupos_multi'] == 0) ? print '<td><center>-</center></td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_multi']) . '</td>';
+                  ($row['grupos_t'] == 0) ? print '<td><center>-</center></td>' : print '<td class="text-center align-middle">' . number_format($row['grupos_t']) . '</td>';
                 } ?>
             </tbody>
           </table>

@@ -53,7 +53,6 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Nivel</th>
                         <th scope="col">Municipio</th>
-                        <th scope="col">Domicilio</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -66,7 +65,6 @@
                           <td><?= $escuela['nombre'] ?></td>
                           <td><?= $escuela['nivel'] ?></td>
                           <td><?= $escuela['municipio'] ?></td>
-                          <td><?= $escuela['domicilio'] ?></td>
                         </tr>
                       <?php } ?>
                     </tbody>
