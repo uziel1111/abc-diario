@@ -51,6 +51,29 @@ class Reportes extends CI_Controller {
 				)
 			);
 
+			$this->style_contenido_first_colum = array(
+				'borders' => array(
+					'allborders' => array(
+						'style' => PHPExcel_Style_Border::BORDER_THIN
+					)
+				),
+				'fill' => array(
+					'type'  => PHPExcel_Style_Fill::FILL_SOLID
+				),
+				'font' => array(
+					'name'  => 'Arial',
+					// 'bold'  => true,
+					'color' => array(
+						'rgb' => '000000'
+					)
+				),
+				'alignment' =>  array(
+					'horizontal'=> PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+					'vertical'  => PHPExcel_Style_Alignment::VERTICAL_CENTER
+					// 'wrap'      => TRUE
+				)
+			);
+
 			$this->style_titulo = array(
 				'borders' => array(
 					'allborders' => array(
@@ -108,7 +131,7 @@ class Reportes extends CI_Controller {
 	}// downloand_file()
 
 
-	public function est_generales_xmuni(){
+	public function est_generales_xmuni_pruebas(){
 				$idmunicipio = $this->input->post('idmunicipio');
 				$idnivel = $this->input->post('idnivel');
 				$idsostenimiento = $this->input->post('idsostenimiento');
@@ -181,9 +204,9 @@ class Reportes extends CI_Controller {
 
 				$aux = 6;
 				foreach ($result_alumnos as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
+					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, utf8_encode($row['modalidad']) );
+					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
 					// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, $row['alumn_m_t'] );
 					// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, $row['alumn_h_t'] );
 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['alumn_t_t']) );
@@ -227,9 +250,9 @@ class Reportes extends CI_Controller {
 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_docentes as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, utf8_encode($row['sostenimiento']) );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, utf8_encode($row['modalidad']) );
+					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
+					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
+					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
 					// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, $row['docentes_m'] );
 					// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, $row['docentes_h']);
 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['docentes_t_g']) );
@@ -270,9 +293,9 @@ class Reportes extends CI_Controller {
 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':L'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_infraest as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, utf8_encode($row['sostenimiento']) );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, utf8_encode($row['modalidad']) );
+					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
+					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
+					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['nescuelas']) );
 					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['grupos_1']) );
 					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['grupos_2']) );
@@ -314,7 +337,7 @@ class Reportes extends CI_Controller {
 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':C'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_asistencia_nv as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel'] .'('.$row['ciclo'].')') );
+					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, (($row['cobertura']=='')?'-':$row['cobertura'].'%') );
 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, (($row['absorcion']=='')?'-':$row['absorcion'].'%') );
 					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido);
@@ -337,7 +360,7 @@ class Reportes extends CI_Controller {
 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_permanencia_nv as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel'] .'('.$row['ciclo'].')') );
+					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, (($row['retencion']=='')?'-':$row['retencion'].'%') );
 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') );
 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, (($row['et']=='')?'-':$row['et'].'%') );
@@ -383,7 +406,7 @@ class Reportes extends CI_Controller {
 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-2).':K'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_planea as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
+					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['ni_lyc']).'%' );
 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['nii_lyc']).'%' );
 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, ($row['niii_lyc']).'%' );
@@ -467,7 +490,7 @@ class Reportes extends CI_Controller {
 
 	}// est_generales_xmuni()
 
-	public function est_generales_xmuni_editado(){
+	public function est_generales_xmuni(){
 		$idmunicipio = $this->input->post('idmunicipio');
 				$idnivel = $this->input->post('idnivel');
 				$idsostenimiento = $this->input->post('idsostenimiento');
@@ -543,9 +566,9 @@ class Reportes extends CI_Controller {
 
 				$aux = 6;
 				foreach ($result_alumnos as $row) {
-					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
-					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, utf8_encode($row['sostenimiento']) );
-					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, utf8_encode($row['modalidad']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
 					// $objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, $row['alumn_m_t'] );
 					// $objPHPExcel->getActiveSheet()->SetCellValue('E'.$aux, $row['alumn_h_t'] );
 					$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['alumn_t_t']) );
@@ -555,7 +578,9 @@ class Reportes extends CI_Controller {
 					$objPHPExcel->getActiveSheet()->SetCellValue('H'.$aux, number_format($row['alumnos4']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('I'.$aux, number_format($row['alumnos5']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('J'.$aux, number_format($row['alumnos6']) );
-					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':J'.$aux)->applyFromArray($this->style_contenido);
+					$objPHPExcel->getActiveSheet()->getStyle('D'.$aux.':J'.$aux)->applyFromArray($this->style_contenido);
+					
+					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido_first_colum);
 					$aux++;
 				}
 		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
@@ -600,12 +625,14 @@ class Reportes extends CI_Controller {
 				$objPHPExcel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_docentes as $row) {
-					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
-					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, utf8_encode($row['sostenimiento']) );
-					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, utf8_encode($row['modalidad']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
 
 					$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['docentes_t_g']) );
-					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
+					$objPHPExcel->getActiveSheet()->getStyle('D'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
+
+					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido_first_colum);
 					$aux++;
 				}
 		
@@ -651,9 +678,9 @@ class Reportes extends CI_Controller {
 				$objPHPExcel->getActiveSheet()->getStyle('A'.($aux-1).':L'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_infraest as $row) {
-					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
-					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, utf8_encode($row['sostenimiento']) );
-					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, utf8_encode($row['modalidad']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['nescuelas']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['grupos_1']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['grupos_2']) );
@@ -663,7 +690,9 @@ class Reportes extends CI_Controller {
 					$objPHPExcel->getActiveSheet()->SetCellValue('J'.$aux, number_format($row['grupos_6']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('K'.$aux, number_format($row['grupos_multi']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('L'.$aux, number_format($row['grupos_t']) );
-					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':L'.$aux)->applyFromArray($this->style_contenido);
+					$objPHPExcel->getActiveSheet()->getStyle('D'.$aux.':L'.$aux)->applyFromArray($this->style_contenido);
+
+					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido_first_colum);
 					$aux++;
 				}
 
@@ -705,12 +734,20 @@ class Reportes extends CI_Controller {
 				$objPHPExcel->getActiveSheet()->getStyle('A'.($aux-1).':C'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_asistencia_nv as $row) {
-					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel'] .'('.$row['ciclo'].')') );
+					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
 					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, (($row['cobertura']=='')?'-':$row['cobertura'].'%') );
 					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, (($row['absorcion']=='')?'-':$row['absorcion'].'%') );
-					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido);
+					$objPHPExcel->getActiveSheet()->getStyle('B'.$aux.':C'.$aux)->applyFromArray($this->style_contenido);
+
+					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':A'.$aux)->applyFromArray($this->style_contenido_first_colum);
+
+
 					$aux++;
 				}
+
+				$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+				$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+				$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 				// Rename 3nd sheet 
 				$objPHPExcel->getActiveSheet()->setTitle('Indicadores de Asistencia'); 
 
@@ -736,11 +773,13 @@ class Reportes extends CI_Controller {
 				$objPHPExcel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_permanencia_nv as $row) {
-					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel'] .'('.$row['ciclo'].')') );
+					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
 					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, (($row['retencion']=='')?'-':$row['retencion'].'%') );
 					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') );
 					$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, (($row['et']=='')?'-':$row['et'].'%') );
-					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
+					$objPHPExcel->getActiveSheet()->getStyle('B'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
+
+					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':A'.$aux)->applyFromArray($this->style_contenido_first_colum);
 					$aux++;
 				}
 
@@ -797,7 +836,7 @@ class Reportes extends CI_Controller {
 				$objPHPExcel->getActiveSheet()->getStyle('A'.($aux-2).':K'.$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				foreach ($result_planea as $row) {
-					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['nivel']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, ($row['ni_lyc']).'%' );
 					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, ($row['nii_lyc']).'%' );
 					$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, ($row['niii_lyc']).'%' );
@@ -808,7 +847,8 @@ class Reportes extends CI_Controller {
 					$objPHPExcel->getActiveSheet()->SetCellValue('I'.$aux, ($row['niii_mat']).'%' );
 					$objPHPExcel->getActiveSheet()->SetCellValue('J'.$aux, ($row['niv_mat']).'%' );
 					$objPHPExcel->getActiveSheet()->SetCellValue('K'.$aux, ($row['niii_mat']+$row['niv_mat']).'%' );
-					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':K'.$aux)->applyFromArray($this->style_contenido);
+					$objPHPExcel->getActiveSheet()->getStyle('B'.$aux.':K'.$aux)->applyFromArray($this->style_contenido);
+					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':A'.$aux)->applyFromArray($this->style_contenido_first_colum);
 					$aux++;
 				}
 			$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
@@ -886,6 +926,7 @@ class Reportes extends CI_Controller {
 			$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'Analfabetismo');
 				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
 				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
+
 				$aux++;
 				$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, 'Mujeres');
 				$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, 'Hombres');
@@ -900,7 +941,9 @@ class Reportes extends CI_Controller {
 					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, number_format($row['analfabetismo_mayor15_m']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['analfabetismo_mayor15_h']+$row['analfabetismo_mayor15_m']) );
 
-					$objPHPExcel->getActiveSheet()->getStyle('A'.$temp.':D'.$aux)->applyFromArray($this->style_contenido);
+					$objPHPExcel->getActiveSheet()->getStyle('B'.$temp.':D'.$aux)->applyFromArray($this->style_contenido);
+
+					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':A'.$aux)->applyFromArray($this->style_contenido_first_colum);
 					$aux++;
 				}
 			$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
@@ -914,11 +957,12 @@ class Reportes extends CI_Controller {
 		$hoy = date("Y-m-d_H-i-s");
 		$name_file = "Estadistica_e_indicadores_generales_".$hoy.'.xls';
 		// Redirect output to a client’s web browser (Excel5) 
-		header('Content-Type: application/vnd.ms-excel'); 
-		header('Content-Disposition: attachment;filename="'.$name_file.'"'); 
-		header('Cache-Control: max-age=0'); 
-		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5'); 
-		$objWriter->save('php://output');
+		// header('Content-Type: application/vnd.ms-excel'); 
+		// header('Content-Disposition: attachment;filename="'.$name_file.'"'); 
+		// header('Cache-Control: max-age=0'); 
+		// $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5'); 
+		// $objWriter->save('php://output');
+		$this->downloand_file($objPHPExcel,$name_file);
 	}
 
 
@@ -957,13 +1001,13 @@ class Reportes extends CI_Controller {
 
 				$aux = 3;
 				foreach ($array as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, utf8_encode($row['cct']) );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, utf8_encode($row['turno']) );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, utf8_encode($row['nombre']) );
-					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, utf8_encode($row['nivel']) );
-					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, utf8_encode($row['municipio']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('F'.$aux, utf8_encode($row['domicilio']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, utf8_encode($row['domicilio']) );
+					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['cct']) );
+					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['turno']) );
+					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['nombre']) );
+					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, ($row['nivel']) );
+					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, ($row['municipio']) );
+					// $obj_excel->getActiveSheet()->SetCellValue('F'.$aux, ($row['domicilio']) );
+					// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, ($row['domicilio']) );
 					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':E'.$aux)->applyFromArray($this->style_contenido);
 					$aux++;
 				}
