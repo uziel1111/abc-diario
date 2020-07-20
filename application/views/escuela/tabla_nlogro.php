@@ -182,15 +182,19 @@
 	</tbody>
 </table>
 </div>
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-		<div style="display:inline-block; width:20px; height:20px; background-color:#ECC462; border: 1px solid black;"></div>
-		<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?= ((isset($ciclos[0]))?$ciclos[0]:'')?></p>
+<?php if (isset($centrocfg[0]['periodo'] ) ): ?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div style="display:inline-block; width:20px; height:20px; background-color:#ECC462; border: 1px solid black;"></div>
+			<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?= ((isset($ciclos[0]))?$ciclos[0]:'')?></p>
+		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-		<div style="display:inline-block; width:20px; height:20px; background-color:#D5831C; border: 1px solid black;"></div>
-		<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?=((isset($ciclos[1]))?$ciclos[1]:'')?></p>
+<?php endif; ?>
+<?php if (isset($centrocfg[1]['periodo'] ) ): ?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div style="display:inline-block; width:20px; height:20px; background-color:#D5831C; border: 1px solid black;"></div>
+			<p style="display:inline-block; font-size:1.5em; margin-left:10px;"><?=((isset($ciclos[1]))?$ciclos[1]:'')?></p>
+		</div>
 	</div>
-</div>
+<?php endif; ?>
