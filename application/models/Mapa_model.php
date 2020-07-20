@@ -41,7 +41,7 @@ class Mapa_model extends CI_Model
                   INNER JOIN turno t on cfg.turno = t.idturno
                   LEFT JOIN municipio m ON ct.idmunicipio = m.idmunicipio
                   INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
-                  WHERE 1=1
+                  WHERE ct.`status`='A'
                   {$where} ";
         return $this->db->query($str_query, $filtros)->result_array();
     }// obtener_xparams()
@@ -115,7 +115,7 @@ class Mapa_model extends CI_Model
       INNER JOIN turno t on cfg.turno = t.idturno
       LEFT JOIN municipio m ON ct.idmunicipio = m.idmunicipio
       INNER JOIN c_sostenimiento s ON ct.sostenimiento = s.idsostenimiento
-      WHERE
+      WHERE ct.`status`='A' AND
       n.idnivel = ?
       HAVING distance < 1000
       ORDER BY distance

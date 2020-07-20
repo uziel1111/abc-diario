@@ -75,7 +75,7 @@ obtener_marcadores_filtro: () => {
 				Mensaje.alerta("error","No se encontraron escuelas","");
 			}
 			else {
-				if (marcadores.length<5) {
+				if (marcadores.length<=6) {
 					Mapa.pinta_en_mapa(marcadores, marcadores[0][1], marcadores[0][2]);
 				}
 				else {
@@ -139,8 +139,14 @@ cct_mismo_nivel: (idcfg) => {
     success: function (dato) {
       Mensaje.cerrar();
 			var marcadores = dato.response;
-
-			Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
+			// console.log(marcadores.length);
+			if (marcadores.length<=6) {
+				Mapa.pinta_en_mapa(marcadores, marcadores[0][1], marcadores[0][2]);
+			}
+			else {
+				Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
+			}
+			// Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
     },
     error: function (jqXHR, textStatus, errorThrown) {
 			Mensaje.cerrar();
@@ -161,7 +167,13 @@ cct_siguiente_nivel: (idcfg) => {
     success: function (dato) {
       Mensaje.cerrar();
 			var marcadores = dato.response;
-			Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
+			if (marcadores.length<=6) {
+				Mapa.pinta_en_mapa(marcadores, marcadores[0][1], marcadores[0][2]);
+			}
+			else {
+				Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
+			}
+			// Mapa.pinta_en_mapa(marcadores, dato.coordenadas['lat'], dato.coordenadas['lon']);
     },
     error: function (jqXHR, textStatus, errorThrown) {
 			Mensaje.cerrar();
