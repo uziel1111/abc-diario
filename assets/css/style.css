@@ -303,7 +303,52 @@ nav.navbar>.nav-box {
 
 /*** NAV SMALL VIEWPORTS ***/
 
-@media (max-width: 991px) {
+@media (max-width: 520px) {
+    nav.navbar {
+        z-index: 9;
+    }
+    nav.navbar .navbar-toggler {
+        padding: 0.4rem 0.2rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: rgba(0, 0, 0, 0.0);
+        border: 1px solid transparent;
+        border-radius: 1rem;
+        position: absolute;
+        right: 0;
+        margin-right: 38px;
+        transition: all 0.3s ease;
+        top: 54px;
+    }
+    nav.navbar .navbar-toggler .navbar-toggler-icon {
+        color: black;
+        font-size: 20px;
+        height: auto;
+    }
+    nav.navbar .navbar-toggler:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        transform: scale(1);
+        animation: scale 0.5s;
+    }
+    nav.navbar .navbar-text {
+        background-color: rgba(0, 0, 0, 0.7);
+        display: contents;
+    }
+    nav.navbar .navbar-text .nav-link {
+        display: inline-flex;
+    }
+    nav.navbar .navbar-text .navbar-nav {
+        margin-bottom: 21px;
+        margin-top: 20px;
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
+    }
+    nav.navbar .navbar-brand img {
+        max-width: 40%;
+        height: auto;
+    }
+}
+
+@media (min-width: 520px) and (max-width: 991px) {
     nav.navbar {
         z-index: 9;
     }
