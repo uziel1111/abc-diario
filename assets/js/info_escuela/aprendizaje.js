@@ -123,7 +123,6 @@ var Aprendisaje = {
 
   grafica_info_nlogro: (arr_datos, id_dv_mat, id_dv_lyc) => {
 
-    if (arr_datos.length<1) {
       Highcharts.theme = {
           colors: ['#ECC462','#D5831C','#935116','#CCCC00','#FF9900','#3C5AA2'],
           chart: {
@@ -298,7 +297,6 @@ var Aprendisaje = {
               300,
              false
             );
-    }
   },
 
   grafica_ete: (varix) => {
