@@ -113,6 +113,7 @@
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="https://mieducacion.sepyc.gob.mx/" target="_blank">SEPYC</a>
                     <a class="dropdown-item" href="https://www.gob.mx/sep" target="_blank">SEP Federal</a>
+                    <a class="dropdown-item" href="https://www.iseasinaloa.gob.mx" target="_blank">Instituto Sinaloense para la Educación de los Adultos</a>
                   </div>
                 </li>
               </ul>
