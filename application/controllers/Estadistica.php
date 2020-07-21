@@ -89,8 +89,13 @@ class Estadistica extends CI_Controller {
     	$alumnos = $this->Estadistica_model->obtener_alumnos_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
     	$docentes = $this->Estadistica_model->obtener_docentes_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
     	$infraestructura = $this->Estadistica_model->obtener_infraestructura_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
-    	$asistencia =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio,$idciclo);
-    	$permanencia =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio,$idciclo);
+    	$arr_ciclos_asistencia =  $this->Estadistica_model->ciclos_indicadores_asistencia_xmunicipio($idmunicipio);
+			$arr_niveles_asistencia =  $this->Estadistica_model->niveles_indicadores_asistencia_xmunicipio($idmunicipio);
+			$arr_ind_asistencia =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio,$idciclo);
+
+			$arr_ciclos_permanencia =  $this->Estadistica_model->ciclos_indicadores_permanencia_xmunicipio($idmunicipio);
+			$arr_niveles_permanencia =  $this->Estadistica_model->niveles_indicadores_permanencia_xmunicipio($idmunicipio);
+    	$arr_ind_permanencia =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio,$idciclo);
 			// echo "<pre>";print_r($asistencia);die();
     	$aprendizaje =  $this->Estadistica_model->indicadores_aprendizaje_xmunicipio($idmunicipio);
     	$analfabetismo =  $this->Estadistica_model->analfabetismo_xmuni($idmunicipio);
@@ -132,8 +137,12 @@ class Estadistica extends CI_Controller {
     	$data["alumnos"] = $alumnos;
     	$data["docentes"] = $docentes;
     	$data["infraestructura"] = $infraestructura;
-    	$data["asistencia"] = $asistencia;
-    	$data["permanencia"] = $permanencia;
+			$data["arr_ciclos_asistencia"] = $arr_ciclos_asistencia;
+			$data["arr_niveles_asistencia"] = $arr_niveles_asistencia;
+    	$data["arr_ind_asistencia"] = $arr_ind_asistencia;
+			$data["arr_ciclos_permanencia"] = $arr_ciclos_permanencia;
+			$data["arr_niveles_permanencia"] = $arr_niveles_permanencia;
+    	$data["arr_ind_permanencia"] = $arr_ind_permanencia;
     	$data["aprendizaje"] = $aprendizaje;
     	$data["rezago"] = $rezago;
     	$data["analfabetismo"] = $analfabetismo;

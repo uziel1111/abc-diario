@@ -688,4 +688,90 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
           return  $this->db->query($query)->result_array();
 			}//trae_nivel_zona
 
+      function ciclos_indicadores_asistencia_xmunicipio($id_municipio){
+    		$where="WHERE 1=1"; //i.idciclo = {$idciclo}
+    		$tabla = " indicadores_x_estado ";
+    		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
+   		if($id_municipio!=0){
+   			$where.=" AND m.idmunicipio={$id_municipio}";
+   			$tabla = " indicadores_x_muni ";
+    			$inner = " INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio ";
+   		}
+    		$query="SELECT c.idciclo,c.descr as ciclo
+    			FROM {$tabla} as i
+    			{$inner}
+    			INNER JOIN niveleducativo n ON n.idnivel=i.idnivel
+    			INNER JOIN ciclo c ON c.idciclo=i.idciclo
+    			{$where}
+          GROUP BY c.descr
+          ORDER BY c.descr DESC
+    		";
+        // echo "<pre>";print_r($query);die();
+    		return $this->db->query($query)->result_array();
+    	}
+
+      function niveles_indicadores_asistencia_xmunicipio($id_municipio){
+    		$where="WHERE 1=1"; //i.idciclo = {$idciclo}
+    		$tabla = " indicadores_x_estado ";
+    		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
+   		if($id_municipio!=0){
+   			$where.=" AND m.idmunicipio={$id_municipio}";
+   			$tabla = " indicadores_x_muni ";
+    			$inner = " INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio ";
+   		}
+    		$query="SELECT n.idnivel,n.descr as nivel
+    			FROM {$tabla} as i
+    			{$inner}
+    			INNER JOIN niveleducativo n ON n.idnivel=i.idnivel
+    			INNER JOIN ciclo c ON c.idciclo=i.idciclo
+    			{$where}
+          GROUP BY n.descr
+          ORDER BY FIELD(n.descr,'PRIMARIA','SECUNDARIA ','MEDIA SUPERIOR','SUPERIOR')
+    		";
+        // echo "<pre>";print_r($query);die();
+    		return $this->db->query($query)->result_array();
+    	}
+
+      function ciclos_indicadores_permanencia_xmunicipio($id_municipio){
+    		$where="WHERE 1=1"; // i.idciclo = {$idciclo}
+    		$tabla = " indicadores_x_estado ";
+    		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
+   		if($id_municipio!=0){
+   			$where.=" AND m.idmunicipio={$id_municipio}";
+   			$tabla = " indicadores_x_muni ";
+    			$inner = " INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio ";
+   		}
+    		$query="SELECT c.idciclo,c.descr as ciclo
+    			FROM {$tabla} as i
+    			{$inner}
+    			INNER JOIN niveleducativo n ON n.idnivel=i.idnivel
+    			INNER JOIN ciclo c ON c.idciclo=i.idciclo
+    			{$where}
+          GROUP BY c.descr
+          ORDER BY c.descr DESC
+    			";
+    		return $this->db->query($query)->result_array();
+    	}
+
+function niveles_indicadores_permanencia_xmunicipio($id_municipio){
+  $where="WHERE 1=1"; // i.idciclo = {$idciclo}
+  $tabla = " indicadores_x_estado ";
+  $inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
+if($id_municipio!=0){
+  $where.=" AND m.idmunicipio={$id_municipio}";
+  $tabla = " indicadores_x_muni ";
+    $inner = " INNER JOIN municipio m ON m.idmunicipio=i.idmunicipio ";
+}
+  $query="SELECT n.idnivel,n.descr as nivel
+    FROM {$tabla} as i
+    {$inner}
+    INNER JOIN niveleducativo n ON n.idnivel=i.idnivel
+    INNER JOIN ciclo c ON c.idciclo=i.idciclo
+    {$where}
+    GROUP BY n.descr
+    ORDER BY FIELD(n.descr,'PRIMARIA','SECUNDARIA ','MEDIA SUPERIOR','SUPERIOR')
+    ";
+  return $this->db->query($query)->result_array();
+}
+
 }//

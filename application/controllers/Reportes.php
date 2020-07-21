@@ -131,364 +131,375 @@ class Reportes extends CI_Controller {
 	}// downloand_file()
 
 
-	public function est_generales_xmuni_pruebas(){
-				$idmunicipio = $this->input->post('idmunicipio');
-				$idnivel = $this->input->post('idnivel');
-				$idsostenimiento = $this->input->post('idsostenimiento');
-				$idmodalidad = $this->input->post('idmodalidad');
-				$idciclo = $this->input->post('idciclo');
-				$nivel_result = $this->Generico_model->obtener_nombre_nivel($idnivel);
-				// echo "<pre>";print_r($nivel_result);die();
-				$nivel=((count($nivel_result)>0)?$nivel_result[0]['nombre']:'');
-				$result_alumnos = $this->Estadistica_model->obtener_alumnos_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
-		    	$result_docentes = $this->Estadistica_model->obtener_docentes_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
-		    	$result_infraest = $this->Estadistica_model->obtener_infraestructura_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
-		    	$result_asistencia_nv =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio,$idciclo);
-		    	$result_permanencia_nv =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio,$idciclo);
-		    	//falta ajustar query
-		    	$result_planea =  $this->Estadistica_model->indicadores_aprendizaje_xmunicipio($idmunicipio);
-					// echo "<pre>";print_r($result_planea);die();
-		    	// $result_planea=[];
-		    	$result_analfinegi =  $this->Estadistica_model->analfabetismo_xmuni($idmunicipio);
-		    	$municipio= $this->Generico_model->obtener_nombre_municipio($idmunicipio);
-		    	$nivel = $this->Generico_model->obtener_nombre_nivel($idnivel);
-		    	$sostenimiento = $this->Generico_model->obtener_nombre_sostenimiento($idsostenimiento);
-		    	$modalidad = $this->Generico_model->obtener_nombre_modalidad($idmodalidad);
-		    	$ciclo = $this->Generico_model->obtener_ciclo($idciclo);
-		    	$municipio = ((count($municipio)>0)?$municipio[0]['nombre']:'');
-		    	$nivel = ((count($nivel)>0)?$nivel[0]['nombre']:'');
-		    	$sostenimiento = ((count($sostenimiento)>0)?$sostenimiento[0]['nombre']:'');
-		    	$modalidad = ((count($modalidad)>0)?$modalidad[0]['nombre']:'');
-		    	$ciclo = ((count($ciclo)>0)?$ciclo[0]['nombre']:'');
-				$result_rezinegi =  $this->Estadistica_model->rezago_educativo_xmuni($idmunicipio);
-
-
-				$obj_excel = new PHPExcel();
-				$obj_excel->getActiveSheet()->SetCellValue('A1', 'Estadística e indicadores educativos generales');
-				$obj_excel->getActiveSheet()->SetCellValue('A2', 'Municipio: '.(($municipio=='')?'Todos':$municipio).', Nivel: '.(($nivel=='')?'Todos':$nivel).', Sostenimiento: '.(($sostenimiento=='')?'Todos':$sostenimiento).', Modalidad: '.(($modalidad=='')?'Todos':$modalidad).', Ciclo escolar: '.$ciclo.'');
-				$obj_excel->getActiveSheet()->SetCellValue('A3', 'Alumnos');
-				$obj_excel->getActiveSheet()->SetCellValue('A4', 'Nivel educativo');
-				$obj_excel->getActiveSheet()->SetCellValue('B4', 'Sostenimiento');
-				$obj_excel->getActiveSheet()->SetCellValue('C4', 'Modalidad');
-				$obj_excel->getActiveSheet()->SetCellValue('D4', 'Total');
-				// $obj_excel->getActiveSheet()->SetCellValue('D5', 'M');
-				// $obj_excel->getActiveSheet()->SetCellValue('E5', 'H');
-				// $obj_excel->getActiveSheet()->SetCellValue('D5', '');
-				$obj_excel->getActiveSheet()->SetCellValue('E4', '1°');
-				$obj_excel->getActiveSheet()->SetCellValue('F4', '2°');
-				$obj_excel->getActiveSheet()->SetCellValue('G4', '3°');
-				$obj_excel->getActiveSheet()->SetCellValue('H4', '4°');
-				$obj_excel->getActiveSheet()->SetCellValue('I4', '5°');
-				$obj_excel->getActiveSheet()->SetCellValue('J4', '6°');
-
-				$obj_excel->getActiveSheet()->mergeCells('A1:J1');
-				$obj_excel->getActiveSheet()->mergeCells('A2:J2');
-				$obj_excel->getActiveSheet()->mergeCells('A3:J3');
-				$obj_excel->getActiveSheet()->mergeCells('A4:A5');
-				$obj_excel->getActiveSheet()->mergeCells('B4:B5');
-				$obj_excel->getActiveSheet()->mergeCells('C4:C5');
-				$obj_excel->getActiveSheet()->mergeCells('D4:D5');
-				$obj_excel->getActiveSheet()->mergeCells('E4:E5');
-				$obj_excel->getActiveSheet()->mergeCells('F4:F5');
-				$obj_excel->getActiveSheet()->mergeCells('G4:G5');
-				$obj_excel->getActiveSheet()->mergeCells('H4:H5');
-				$obj_excel->getActiveSheet()->mergeCells('I4:I5');
-				$obj_excel->getActiveSheet()->mergeCells('J4:J5');
-				// $obj_excel->getActiveSheet()->mergeCells('K4:K5');
-				// $obj_excel->getActiveSheet()->mergeCells('L4:L5');
-				$obj_excel->getActiveSheet()->getStyle('A1:J1')->applyFromArray($this->style_titulo);
-				$obj_excel->getActiveSheet()->getStyle('A2:J2')->applyFromArray($this->style_titulo);
-				$obj_excel->getActiveSheet()->getStyle('A3:J3')->applyFromArray($this->style_titulo);
-
-				$obj_excel->getActiveSheet()->getStyle('A4:J5')->applyFromArray($this->style_encabezado);
-
-				$aux = 6;
-				foreach ($result_alumnos as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, $row['alumn_m_t'] );
-					// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, $row['alumn_h_t'] );
-					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['alumn_t_t']) );
-					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['alumnos1']) );
-					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['alumnos2']) );
-					$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['alumnos3']) );
-					$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, number_format($row['alumnos4']) );
-					$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, number_format($row['alumnos5']) );
-					$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, number_format($row['alumnos6']) );
-					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':J'.$aux)->applyFromArray($this->style_contenido);
-					$aux++;
-				}
-				$aux++;
-
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Personal docente');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Nivel educativo');
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Sostenimiento');
-				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'Modalidad');
-				// $obj_excel->getActiveSheet()->mergeCells('A'.$aux.':A'.($aux+1));
-				// $obj_excel->getActiveSheet()->mergeCells('B'.$aux.':B'.($aux+1));
-				// $obj_excel->getActiveSheet()->mergeCells('C'.$aux.':C'.($aux+1));
-				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Docentes');
-				// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Directivo con grupo');
-				// $obj_excel->getActiveSheet()->SetCellValue('J'.$aux, 'Directivo sin grupo');
-				$obj_excel->getActiveSheet()->mergeCells('D'.$aux.':D'.$aux);
-				// $obj_excel->getActiveSheet()->mergeCells('G'.$aux.':I'.$aux);
-				// $obj_excel->getActiveSheet()->mergeCells('J'.$aux.':L'.$aux);
-				$aux++;
-				// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Mujeres');
-				// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'Hombres');
-				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Total');
-				// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Mujeres');
-				// $obj_excel->getActiveSheet()->SetCellValue('H'.$aux, 'Hombres');
-				// $obj_excel->getActiveSheet()->SetCellValue('I'.$aux, 'Total');
-				// $obj_excel->getActiveSheet()->SetCellValue('J'.$aux, 'Mujeres');
-				// $obj_excel->getActiveSheet()->SetCellValue('K'.$aux, 'Hombres');
-				// $obj_excel->getActiveSheet()->SetCellValue('L'.$aux, 'Total');
-				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
-				$aux++;
-				foreach ($result_docentes as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, $row['docentes_m'] );
-					// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, $row['docentes_h']);
-					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['docentes_t_g']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, $row['directivo_m_congrup'] );
-					// $obj_excel->getActiveSheet()->SetCellValue('H'.$aux, $row['directivo_h_congrup'] );
-					// $obj_excel->getActiveSheet()->SetCellValue('I'.$aux, $row['directivo_t_congrup'] );
-					// $obj_excel->getActiveSheet()->SetCellValue('J'.$aux, $row['directivo_m_singrup'] );
-					// $obj_excel->getActiveSheet()->SetCellValue('K'.$aux, $row['directivo_h_singrup'] );
-					// $obj_excel->getActiveSheet()->SetCellValue('L'.$aux, $row['directivo_t_singrup'] );
-					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
-					$aux++;
-				}
-				$aux++;
-
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Infraestructura');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':L'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':L'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Nivel educativo');
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Sostenimiento');
-				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'Modalidad');
-				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Escuelas');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':A'.($aux+1));
-				$obj_excel->getActiveSheet()->mergeCells('B'.$aux.':B'.($aux+1));
-				$obj_excel->getActiveSheet()->mergeCells('C'.$aux.':C'.($aux+1));
-				$obj_excel->getActiveSheet()->mergeCells('D'.$aux.':D'.($aux+1));
-				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'Grupos');
-				$obj_excel->getActiveSheet()->mergeCells('E'.$aux.':L'.$aux);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, '1°');
-				$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, '2°');
-				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, '3°');
-				$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, '4°');
-				$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, '5°');
-				$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, '6°');
-				$obj_excel->getActiveSheet()->SetCellValue('K'.$aux, 'Multigrado');
-				$obj_excel->getActiveSheet()->SetCellValue('L'.$aux, 'Total');
-				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':L'.$aux)->applyFromArray($this->style_encabezado);
-				$aux++;
-				foreach ($result_infraest as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
-					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['nescuelas']) );
-					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['grupos_1']) );
-					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['grupos_2']) );
-					$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['grupos_3']) );
-					$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, number_format($row['grupos_4']) );
-					$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, number_format($row['grupos_5']) );
-					$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, number_format($row['grupos_6']) );
-					$obj_excel->getActiveSheet()->SetCellValue('K'.$aux, number_format($row['grupos_multi']) );
-					$obj_excel->getActiveSheet()->SetCellValue('L'.$aux, number_format($row['grupos_t']) );
-					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':L'.$aux)->applyFromArray($this->style_contenido);
-					$aux++;
-				}
-
-				$obj_excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
-				$obj_excel->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
-// AQUI VOY<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Indicadores de Asistencia');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':C'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'ciclo escolar '.$ciclo);
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':C'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux.'', 'Nivel');
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux.'', 'Cobertura');
-				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux.'', 'Absorción');
-				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':C'.$aux)->applyFromArray($this->style_encabezado);
-				$aux++;
-				foreach ($result_asistencia_nv as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, (($row['cobertura']=='')?'-':$row['cobertura'].'%') );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, (($row['absorcion']=='')?'-':$row['absorcion'].'%') );
-					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido);
-					$aux++;
-				}
-
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Indicadores de Permanencia');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'ciclo escolar '.$ciclo);
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux.'', 'Nivel');
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux.'', 'Retención');
-				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux.'', 'Aprobación');
-				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux.'', 'Eficiencia Terminal');
-				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
-				$aux++;
-				foreach ($result_permanencia_nv as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, (($row['retencion']=='')?'-':$row['retencion'].'%') );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') );
-					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, (($row['et']=='')?'-':$row['et'].'%') );
-					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
-					$aux++;
-				}
-
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Indicadores de aprendizaje');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':K'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':K'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Resultados de prueba PLANEA 2016');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':K'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':K'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Nivel educativo');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':A'.($aux+2));
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Lenguaje y Comunicación');
-				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Matemáticas');
-				$obj_excel->getActiveSheet()->mergeCells('B'.$aux.':F'.$aux);
-				$obj_excel->getActiveSheet()->mergeCells('G'.$aux.':K'.$aux);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Nivel de dominio');
-				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Nivel de dominio');
-				$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, 'Porcentaje de alumnos con nivel bueno y excelente');
-				$obj_excel->getActiveSheet()->SetCellValue('K'.$aux, 'Porcentaje de alumnos con nivel bueno y excelente');
-				$obj_excel->getActiveSheet()->mergeCells('B'.$aux.':E'.$aux);
-				$obj_excel->getActiveSheet()->mergeCells('G'.$aux.':J'.$aux);
-				$obj_excel->getActiveSheet()->mergeCells('F'.$aux.':F'.($aux+1));
-				$obj_excel->getActiveSheet()->mergeCells('K'.$aux.':K'.($aux+1));
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'I Insuficiente');
-				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'II Elemental');
-				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'III Bueno');
-				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'IV Excelente');
-
-				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'I Insuficiente');
-				$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, 'II Elemental');
-				$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, 'III Bueno');
-				$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, 'IV Excelente');
-
-				$obj_excel->getActiveSheet()->getStyle('A'.($aux-2).':K'.$aux)->applyFromArray($this->style_encabezado);
-				$aux++;
-				foreach ($result_planea as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['ni_lyc']).'%' );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['nii_lyc']).'%' );
-					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, ($row['niii_lyc']).'%' );
-					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, ($row['niv_lyc']).'%' );
-					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, ($row['niii_lyc']+$row['niv_lyc']).'%' );
-					$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, ($row['ni_mat']).'%' );
-					$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, ($row['nii_mat']).'%' );
-					$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, ($row['niii_mat']).'%' );
-					$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, ($row['niv_mat']).'%' );
-					$obj_excel->getActiveSheet()->SetCellValue('K'.$aux, ($row['niii_mat']+$row['niv_mat']).'%' );
-					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':K'.$aux)->applyFromArray($this->style_contenido);
-					$aux++;
-				}
-				$aux++;
-
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Rezago educativo');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':G'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':G'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Población por grupo de edad que no asiste a la escuela');
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Población total');
-				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'Población que no asiste a la escuela');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':A'.($aux+1));
-				$obj_excel->getActiveSheet()->mergeCells('B'.$aux.':D'.($aux));
-				$obj_excel->getActiveSheet()->mergeCells('E'.$aux.':G'.($aux));
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Mujeres');
-				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'Hombres');
-				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Total');
-				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'Mujeres');
-				$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, 'Hombres');
-				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Total');
-				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':G'.$aux)->applyFromArray($this->style_encabezado);
-				$aux++;
-				$temp=$aux;
-				foreach ($result_rezinegi as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ('3 a 14 años') );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, number_format($row['p3A14_ptotal_h']) );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, number_format($row['p3A14_ptotal_m']) );
-					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['p3A14_ptotal_h']+$row['p3A14_ptotal_m']) );
-					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['p3A14_noa_h']) );
-					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['p3A14_noa_m']) );
-					$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['p3A14_noa_h']+$row['p3A14_noa_m']) );
-					$obj_excel->getActiveSheet()->getStyle('A'.$temp.':G'.$aux)->applyFromArray($this->style_contenido);
-					$aux++;
-					// $obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ('12 a 14 años') );
-					// $obj_excel->getActiveSheet()->SetCellValue('B'.$aux, number_format($row['p12A14ptotal_h']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('C'.$aux, number_format($row['p12A14ptotal_m']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['p12A14ptotal_h']+$row['p12A14ptotal_m']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['p12A14noa_h']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['p12A14noa_m']) );
-					// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['p12A14noa_h']+$row['p12A14noa_m']) );
-					// $aux++;
-				}
-
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Analfabetismo');
-				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
-				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
-				$aux++;
-				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Mujeres');
-				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'Hombres');
-				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Total');
-				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
-				$aux++;
-				$temp=$aux;
-
-				foreach ($result_analfinegi as $row) {
-					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ('Población mayor de 15 años que no saben leer ni escribir') );
-					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, number_format($row['analfabetismo_mayor15_h']) );
-					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, number_format($row['analfabetismo_mayor15_m']) );
-					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['analfabetismo_mayor15_h']+$row['analfabetismo_mayor15_m']) );
-
-					$obj_excel->getActiveSheet()->getStyle('A'.$temp.':D'.$aux)->applyFromArray($this->style_contenido);
-					$aux++;
-				}
-				date_default_timezone_set('America/Mexico_City');
-				$hoy = date("Y-m-d_H-i-s");
-				$name_file = "Estadistica_e_indicadores_generales_".$hoy.'.xls';
-				$this->downloand_file($obj_excel,$name_file);
-
-	}// est_generales_xmuni()
+// 	public function est_generales_xmuni_pruebas(){
+// 				$idmunicipio = $this->input->post('idmunicipio');
+// 				$idnivel = $this->input->post('idnivel');
+// 				$idsostenimiento = $this->input->post('idsostenimiento');
+// 				$idmodalidad = $this->input->post('idmodalidad');
+// 				$idciclo = $this->input->post('idciclo');
+// 				$nivel_result = $this->Generico_model->obtener_nombre_nivel($idnivel);
+// 				// echo "<pre>";print_r($nivel_result);die();
+// 				$nivel=((count($nivel_result)>0)?$nivel_result[0]['nombre']:'');
+// 				$result_alumnos = $this->Estadistica_model->obtener_alumnos_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
+// 		    	$result_docentes = $this->Estadistica_model->obtener_docentes_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
+// 		    	$result_infraest = $this->Estadistica_model->obtener_infraestructura_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
+// 					$arr_ciclos_asistencia =  $this->Estadistica_model->ciclos_indicadores_asistencia_xmunicipio($idmunicipio);
+// 					$arr_niveles_asistencia =  $this->Estadistica_model->niveles_indicadores_asistencia_xmunicipio($idmunicipio);
+// 					$result_asistencia_nv =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio,$idciclo);
+// 					$arr_ciclos_permanencia =  $this->Estadistica_model->ciclos_indicadores_permanencia_xmunicipio($idmunicipio);
+// 					$arr_niveles_permanencia =  $this->Estadistica_model->niveles_indicadores_permanencia_xmunicipio($idmunicipio);
+// 		    	$result_permanencia_nv =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio,$idciclo);
+// 		    	//falta ajustar query
+// 		    	$result_planea =  $this->Estadistica_model->indicadores_aprendizaje_xmunicipio($idmunicipio);
+// 					// echo "<pre>";print_r($result_planea);die();
+// 		    	// $result_planea=[];
+// 		    	$result_analfinegi =  $this->Estadistica_model->analfabetismo_xmuni($idmunicipio);
+// 		    	$municipio= $this->Generico_model->obtener_nombre_municipio($idmunicipio);
+// 		    	$nivel = $this->Generico_model->obtener_nombre_nivel($idnivel);
+// 		    	$sostenimiento = $this->Generico_model->obtener_nombre_sostenimiento($idsostenimiento);
+// 		    	$modalidad = $this->Generico_model->obtener_nombre_modalidad($idmodalidad);
+// 		    	$ciclo = $this->Generico_model->obtener_ciclo($idciclo);
+// 		    	$municipio = ((count($municipio)>0)?$municipio[0]['nombre']:'');
+// 		    	$nivel = ((count($nivel)>0)?$nivel[0]['nombre']:'');
+// 		    	$sostenimiento = ((count($sostenimiento)>0)?$sostenimiento[0]['nombre']:'');
+// 		    	$modalidad = ((count($modalidad)>0)?$modalidad[0]['nombre']:'');
+// 		    	$ciclo = ((count($ciclo)>0)?$ciclo[0]['nombre']:'');
+// 				$result_rezinegi =  $this->Estadistica_model->rezago_educativo_xmuni($idmunicipio);
+//
+//
+// 				$obj_excel = new PHPExcel();
+// 				$obj_excel->getActiveSheet()->SetCellValue('A1', 'Estadística e indicadores educativos generales');
+// 				$obj_excel->getActiveSheet()->SetCellValue('A2', 'Municipio: '.(($municipio=='')?'Todos':$municipio).', Nivel: '.(($nivel=='')?'Todos':$nivel).', Sostenimiento: '.(($sostenimiento=='')?'Todos':$sostenimiento).', Modalidad: '.(($modalidad=='')?'Todos':$modalidad).', Ciclo escolar: '.$ciclo.'');
+// 				$obj_excel->getActiveSheet()->SetCellValue('A3', 'Alumnos');
+// 				$obj_excel->getActiveSheet()->SetCellValue('A4', 'Nivel educativo');
+// 				$obj_excel->getActiveSheet()->SetCellValue('B4', 'Sostenimiento');
+// 				$obj_excel->getActiveSheet()->SetCellValue('C4', 'Modalidad');
+// 				$obj_excel->getActiveSheet()->SetCellValue('D4', 'Total');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('D5', 'M');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('E5', 'H');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('D5', '');
+// 				$obj_excel->getActiveSheet()->SetCellValue('E4', '1°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('F4', '2°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('G4', '3°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('H4', '4°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('I4', '5°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('J4', '6°');
+//
+// 				$obj_excel->getActiveSheet()->mergeCells('A1:J1');
+// 				$obj_excel->getActiveSheet()->mergeCells('A2:J2');
+// 				$obj_excel->getActiveSheet()->mergeCells('A3:J3');
+// 				$obj_excel->getActiveSheet()->mergeCells('A4:A5');
+// 				$obj_excel->getActiveSheet()->mergeCells('B4:B5');
+// 				$obj_excel->getActiveSheet()->mergeCells('C4:C5');
+// 				$obj_excel->getActiveSheet()->mergeCells('D4:D5');
+// 				$obj_excel->getActiveSheet()->mergeCells('E4:E5');
+// 				$obj_excel->getActiveSheet()->mergeCells('F4:F5');
+// 				$obj_excel->getActiveSheet()->mergeCells('G4:G5');
+// 				$obj_excel->getActiveSheet()->mergeCells('H4:H5');
+// 				$obj_excel->getActiveSheet()->mergeCells('I4:I5');
+// 				$obj_excel->getActiveSheet()->mergeCells('J4:J5');
+// 				// $obj_excel->getActiveSheet()->mergeCells('K4:K5');
+// 				// $obj_excel->getActiveSheet()->mergeCells('L4:L5');
+// 				$obj_excel->getActiveSheet()->getStyle('A1:J1')->applyFromArray($this->style_titulo);
+// 				$obj_excel->getActiveSheet()->getStyle('A2:J2')->applyFromArray($this->style_titulo);
+// 				$obj_excel->getActiveSheet()->getStyle('A3:J3')->applyFromArray($this->style_titulo);
+//
+// 				$obj_excel->getActiveSheet()->getStyle('A4:J5')->applyFromArray($this->style_encabezado);
+//
+// 				$aux = 6;
+// 				foreach ($result_alumnos as $row) {
+// 					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, $row['alumn_m_t'] );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, $row['alumn_h_t'] );
+// 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['alumn_t_t']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['alumnos1']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['alumnos2']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['alumnos3']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, number_format($row['alumnos4']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, number_format($row['alumnos5']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, number_format($row['alumnos6']) );
+// 					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':J'.$aux)->applyFromArray($this->style_contenido);
+// 					$aux++;
+// 				}
+// 				$aux++;
+//
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Personal docente');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Nivel educativo');
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Sostenimiento');
+// 				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'Modalidad');
+// 				// $obj_excel->getActiveSheet()->mergeCells('A'.$aux.':A'.($aux+1));
+// 				// $obj_excel->getActiveSheet()->mergeCells('B'.$aux.':B'.($aux+1));
+// 				// $obj_excel->getActiveSheet()->mergeCells('C'.$aux.':C'.($aux+1));
+// 				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Docentes');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Directivo con grupo');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('J'.$aux, 'Directivo sin grupo');
+// 				$obj_excel->getActiveSheet()->mergeCells('D'.$aux.':D'.$aux);
+// 				// $obj_excel->getActiveSheet()->mergeCells('G'.$aux.':I'.$aux);
+// 				// $obj_excel->getActiveSheet()->mergeCells('J'.$aux.':L'.$aux);
+// 				$aux++;
+// 				// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Mujeres');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'Hombres');
+// 				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Total');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Mujeres');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('H'.$aux, 'Hombres');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('I'.$aux, 'Total');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('J'.$aux, 'Mujeres');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('K'.$aux, 'Hombres');
+// 				// $obj_excel->getActiveSheet()->SetCellValue('L'.$aux, 'Total');
+// 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
+// 				$aux++;
+// 				foreach ($result_docentes as $row) {
+// 					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, $row['docentes_m'] );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, $row['docentes_h']);
+// 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['docentes_t_g']) );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, $row['directivo_m_congrup'] );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('H'.$aux, $row['directivo_h_congrup'] );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('I'.$aux, $row['directivo_t_congrup'] );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('J'.$aux, $row['directivo_m_singrup'] );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('K'.$aux, $row['directivo_h_singrup'] );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('L'.$aux, $row['directivo_t_singrup'] );
+// 					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
+// 					$aux++;
+// 				}
+// 				$aux++;
+//
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Infraestructura');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':L'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':L'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Nivel educativo');
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Sostenimiento');
+// 				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'Modalidad');
+// 				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Escuelas');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':A'.($aux+1));
+// 				$obj_excel->getActiveSheet()->mergeCells('B'.$aux.':B'.($aux+1));
+// 				$obj_excel->getActiveSheet()->mergeCells('C'.$aux.':C'.($aux+1));
+// 				$obj_excel->getActiveSheet()->mergeCells('D'.$aux.':D'.($aux+1));
+// 				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'Grupos');
+// 				$obj_excel->getActiveSheet()->mergeCells('E'.$aux.':L'.$aux);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, '1°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, '2°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, '3°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, '4°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, '5°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, '6°');
+// 				$obj_excel->getActiveSheet()->SetCellValue('K'.$aux, 'Multigrado');
+// 				$obj_excel->getActiveSheet()->SetCellValue('L'.$aux, 'Total');
+// 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':L'.$aux)->applyFromArray($this->style_encabezado);
+// 				$aux++;
+// 				foreach ($result_infraest as $row) {
+// 					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['sostenimiento']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['modalidad']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['nescuelas']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['grupos_1']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['grupos_2']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['grupos_3']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, number_format($row['grupos_4']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, number_format($row['grupos_5']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, number_format($row['grupos_6']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('K'.$aux, number_format($row['grupos_multi']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('L'.$aux, number_format($row['grupos_t']) );
+// 					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':L'.$aux)->applyFromArray($this->style_contenido);
+// 					$aux++;
+// 				}
+//
+// 				$obj_excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
+// 				$obj_excel->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
+// // AQUI VOY<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Indicadores de Asistencia');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':C'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				// $obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'ciclo escolar '.$ciclo);
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':C'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux.'', '');
+// 				foreach ($variable as $key => $value) {
+// 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux.'', 'Cobertura');
+// 				}
+//
+// 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':C'.$aux)->applyFromArray($this->style_encabezado);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux.'', 'Nivel');
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux.'', 'Cobertura');
+// 				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux.'', 'Absorción');
+// 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':C'.$aux)->applyFromArray($this->style_encabezado);
+// 				$aux++;
+// 				foreach ($result_asistencia_nv as $row) {
+// 					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
+// 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, (($row['cobertura']=='')?'-':$row['cobertura'].'%') );
+// 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, (($row['absorcion']=='')?'-':$row['absorcion'].'%') );
+// 					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido);
+// 					$aux++;
+// 				}
+//
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Indicadores de Permanencia');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'ciclo escolar '.$ciclo);
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux.'', 'Nivel');
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux.'', 'Retención');
+// 				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux.'', 'Aprobación');
+// 				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux.'', 'Eficiencia Terminal');
+// 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
+// 				$aux++;
+// 				foreach ($result_permanencia_nv as $row) {
+// 					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
+// 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, (($row['retencion']=='')?'-':$row['retencion'].'%') );
+// 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') );
+// 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, (($row['et']=='')?'-':$row['et'].'%') );
+// 					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
+// 					$aux++;
+// 				}
+//
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Indicadores de aprendizaje');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':K'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':K'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Resultados de prueba PLANEA 2016');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':K'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':K'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Nivel educativo');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':A'.($aux+2));
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Lenguaje y Comunicación');
+// 				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Matemáticas');
+// 				$obj_excel->getActiveSheet()->mergeCells('B'.$aux.':F'.$aux);
+// 				$obj_excel->getActiveSheet()->mergeCells('G'.$aux.':K'.$aux);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Nivel de dominio');
+// 				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Nivel de dominio');
+// 				$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, 'Porcentaje de alumnos con nivel bueno y excelente');
+// 				$obj_excel->getActiveSheet()->SetCellValue('K'.$aux, 'Porcentaje de alumnos con nivel bueno y excelente');
+// 				$obj_excel->getActiveSheet()->mergeCells('B'.$aux.':E'.$aux);
+// 				$obj_excel->getActiveSheet()->mergeCells('G'.$aux.':J'.$aux);
+// 				$obj_excel->getActiveSheet()->mergeCells('F'.$aux.':F'.($aux+1));
+// 				$obj_excel->getActiveSheet()->mergeCells('K'.$aux.':K'.($aux+1));
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'I Insuficiente');
+// 				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'II Elemental');
+// 				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'III Bueno');
+// 				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'IV Excelente');
+//
+// 				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'I Insuficiente');
+// 				$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, 'II Elemental');
+// 				$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, 'III Bueno');
+// 				$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, 'IV Excelente');
+//
+// 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-2).':K'.$aux)->applyFromArray($this->style_encabezado);
+// 				$aux++;
+// 				foreach ($result_planea as $row) {
+// 					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, ($row['ni_lyc']).'%' );
+// 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, ($row['nii_lyc']).'%' );
+// 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, ($row['niii_lyc']).'%' );
+// 					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, ($row['niv_lyc']).'%' );
+// 					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, ($row['niii_lyc']+$row['niv_lyc']).'%' );
+// 					$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, ($row['ni_mat']).'%' );
+// 					$obj_excel->getActiveSheet()->SetCellValue('H'.$aux, ($row['nii_mat']).'%' );
+// 					$obj_excel->getActiveSheet()->SetCellValue('I'.$aux, ($row['niii_mat']).'%' );
+// 					$obj_excel->getActiveSheet()->SetCellValue('J'.$aux, ($row['niv_mat']).'%' );
+// 					$obj_excel->getActiveSheet()->SetCellValue('K'.$aux, ($row['niii_mat']+$row['niv_mat']).'%' );
+// 					$obj_excel->getActiveSheet()->getStyle('A'.$aux.':K'.$aux)->applyFromArray($this->style_contenido);
+// 					$aux++;
+// 				}
+// 				$aux++;
+//
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Rezago educativo');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':G'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':G'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Población por grupo de edad que no asiste a la escuela');
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Población total');
+// 				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'Población que no asiste a la escuela');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':A'.($aux+1));
+// 				$obj_excel->getActiveSheet()->mergeCells('B'.$aux.':D'.($aux));
+// 				$obj_excel->getActiveSheet()->mergeCells('E'.$aux.':G'.($aux));
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Mujeres');
+// 				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'Hombres');
+// 				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Total');
+// 				$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, 'Mujeres');
+// 				$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, 'Hombres');
+// 				$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, 'Total');
+// 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':G'.$aux)->applyFromArray($this->style_encabezado);
+// 				$aux++;
+// 				$temp=$aux;
+// 				foreach ($result_rezinegi as $row) {
+// 					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ('3 a 14 años') );
+// 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, number_format($row['p3A14_ptotal_h']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, number_format($row['p3A14_ptotal_m']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['p3A14_ptotal_h']+$row['p3A14_ptotal_m']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['p3A14_noa_h']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['p3A14_noa_m']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['p3A14_noa_h']+$row['p3A14_noa_m']) );
+// 					$obj_excel->getActiveSheet()->getStyle('A'.$temp.':G'.$aux)->applyFromArray($this->style_contenido);
+// 					$aux++;
+// 					// $obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ('12 a 14 años') );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('B'.$aux, number_format($row['p12A14ptotal_h']) );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('C'.$aux, number_format($row['p12A14ptotal_m']) );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['p12A14ptotal_h']+$row['p12A14ptotal_m']) );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['p12A14noa_h']) );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['p12A14noa_m']) );
+// 					// $obj_excel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['p12A14noa_h']+$row['p12A14noa_m']) );
+// 					// $aux++;
+// 				}
+//
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, 'Analfabetismo');
+// 				$obj_excel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
+// 				$obj_excel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
+// 				$aux++;
+// 				$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, 'Mujeres');
+// 				$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, 'Hombres');
+// 				$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, 'Total');
+// 				$obj_excel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
+// 				$aux++;
+// 				$temp=$aux;
+//
+// 				foreach ($result_analfinegi as $row) {
+// 					$obj_excel->getActiveSheet()->SetCellValue('A'.$aux, ('Población mayor de 15 años que no saben leer ni escribir') );
+// 					$obj_excel->getActiveSheet()->SetCellValue('B'.$aux, number_format($row['analfabetismo_mayor15_h']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('C'.$aux, number_format($row['analfabetismo_mayor15_m']) );
+// 					$obj_excel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['analfabetismo_mayor15_h']+$row['analfabetismo_mayor15_m']) );
+//
+// 					$obj_excel->getActiveSheet()->getStyle('A'.$temp.':D'.$aux)->applyFromArray($this->style_contenido);
+// 					$aux++;
+// 				}
+// 				date_default_timezone_set('America/Mexico_City');
+// 				$hoy = date("Y-m-d_H-i-s");
+// 				$name_file = "Estadistica_e_indicadores_generales_".$hoy.'.xls';
+// 				$this->downloand_file($obj_excel,$name_file);
+//
+// 	}// est_generales_xmuni()
 
 	public function est_generales_xmuni(){
 		$idmunicipio = $this->input->post('idmunicipio');
@@ -502,7 +513,11 @@ class Reportes extends CI_Controller {
 				$result_alumnos = $this->Estadistica_model->obtener_alumnos_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
 		    	$result_docentes = $this->Estadistica_model->obtener_docentes_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
 		    	$result_infraest = $this->Estadistica_model->obtener_infraestructura_xmunicipioxnivelxsosteniminientoxmodalidadxciclo($idmunicipio,$idnivel,$idsostenimiento,$idmodalidad,$idciclo);
-		    	$result_asistencia_nv =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio,$idciclo);
+					$arr_ciclos_asistencia =  $this->Estadistica_model->ciclos_indicadores_asistencia_xmunicipio($idmunicipio);
+					$arr_niveles_asistencia =  $this->Estadistica_model->niveles_indicadores_asistencia_xmunicipio($idmunicipio);
+					$result_asistencia_nv =  $this->Estadistica_model->indicadores_asistencia_xmunicipio($idmunicipio,$idciclo);
+					$arr_ciclos_permanencia =  $this->Estadistica_model->ciclos_indicadores_permanencia_xmunicipio($idmunicipio);
+					$arr_niveles_permanencia =  $this->Estadistica_model->niveles_indicadores_permanencia_xmunicipio($idmunicipio);
 		    	$result_permanencia_nv =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio,$idciclo);
 		    	//falta ajustar query
 		    	$result_planea =  $this->Estadistica_model->indicadores_aprendizaje_xmunicipio($idmunicipio);
@@ -520,12 +535,12 @@ class Reportes extends CI_Controller {
 		    	$modalidad = ((count($modalidad)>0)?$modalidad[0]['nombre']:'');
 		    	$ciclo = ((count($ciclo)>0)?$ciclo[0]['nombre']:'');
 				$result_rezinegi =  $this->Estadistica_model->rezago_educativo_xmuni($idmunicipio);
-		// Create new PHPExcel object 
-		$objPHPExcel = new PHPExcel(); 
+		// Create new PHPExcel object
+		$objPHPExcel = new PHPExcel();
 
-		// Create a first sheet, representing sales data 
-		$objPHPExcel->setActiveSheetIndex(0); 
-		// $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Something'); 
+		// Create a first sheet, representing sales data
+		$objPHPExcel->setActiveSheetIndex(0);
+		// $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Something');
 		$objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Estadística e indicadores educativos generales');
 				$objPHPExcel->getActiveSheet()->SetCellValue('A2', 'Municipio: '.(($municipio=='')?'Todos':$municipio).', Nivel: '.(($nivel=='')?'Todos':$nivel).', Sostenimiento: '.(($sostenimiento=='')?'Todos':$sostenimiento).', Modalidad: '.(($modalidad=='')?'Todos':$modalidad).', Ciclo escolar: '.$ciclo.'');
 				$objPHPExcel->getActiveSheet()->SetCellValue('A3', 'Alumnos');
@@ -579,7 +594,7 @@ class Reportes extends CI_Controller {
 					$objPHPExcel->getActiveSheet()->SetCellValue('I'.$aux, number_format($row['alumnos5']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('J'.$aux, number_format($row['alumnos6']) );
 					$objPHPExcel->getActiveSheet()->getStyle('D'.$aux.':J'.$aux)->applyFromArray($this->style_contenido);
-					
+
 					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido_first_colum);
 					$aux++;
 				}
@@ -594,17 +609,17 @@ class Reportes extends CI_Controller {
 		$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
 
-		// Rename sheet 
-		$objPHPExcel->getActiveSheet()->setTitle('Estadística e indicadores'); 
+		// Rename sheet
+		$objPHPExcel->getActiveSheet()->setTitle('Estadística e indicadores');
 
-		// Create a new worksheet, after the default sheet 
-		$objPHPExcel->createSheet(); 
+		// Create a new worksheet, after the default sheet
+		$objPHPExcel->createSheet();
 
 
 
-		// Add some data to the second sheet, resembling some different data types 
-		$objPHPExcel->setActiveSheetIndex(1); 
-		// $objPHPExcel->getActiveSheet()->setCellValue('A1', 'More data'); 
+		// Add some data to the second sheet, resembling some different data types
+		$objPHPExcel->setActiveSheetIndex(1);
+		// $objPHPExcel->getActiveSheet()->setCellValue('A1', 'More data');
 		$aux= 1;
 
 				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'Personal docente');
@@ -635,23 +650,23 @@ class Reportes extends CI_Controller {
 					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_contenido_first_colum);
 					$aux++;
 				}
-		
+
 		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
 
 
-		// Rename 2nd sheet 
-		$objPHPExcel->getActiveSheet()->setTitle('Personal docente'); 
+		// Rename 2nd sheet
+		$objPHPExcel->getActiveSheet()->setTitle('Personal docente');
 
-		// Create a new worksheet, after the default sheet 
-		$objPHPExcel->createSheet(); 
+		// Create a new worksheet, after the default sheet
+		$objPHPExcel->createSheet();
 
-		// Add some data to the tercer sheet, resembling some different data types 
-		$objPHPExcel->setActiveSheetIndex(2); 
+		// Add some data to the tercer sheet, resembling some different data types
+		$objPHPExcel->setActiveSheetIndex(2);
 		$aux=1;
-		// $objPHPExcel->getActiveSheet()->setCellValue('A1', 'More data 3'); 
+		// $objPHPExcel->getActiveSheet()->setCellValue('A1', 'More data 3');
 		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'Infraestructura');
 				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':L'.$aux);
 				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':L'.$aux)->applyFromArray($this->style_titulo);
@@ -709,93 +724,178 @@ class Reportes extends CI_Controller {
 				$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
 				$objPHPExcel->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
 
-		// Rename 3nd sheet 
-		$objPHPExcel->getActiveSheet()->setTitle('Infraestructura'); 
+		// Rename 3nd sheet
+		$objPHPExcel->getActiveSheet()->setTitle('Infraestructura');
 
-		// Create a new worksheet, after the default sheet 
-		$objPHPExcel->createSheet(); 
+		// Create a new worksheet, after the default sheet
+		$objPHPExcel->createSheet();
 
-		// Add some data to the tercer sheet, resembling some different data types 
-		$objPHPExcel->setActiveSheetIndex(3); 
+		// Add some data to the tercer sheet, resembling some different data types
+		$objPHPExcel->setActiveSheetIndex(3);
 		$aux=1;
 
 		// $aux++;
 				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'Indicadores de Asistencia');
-				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':C'.$aux);
-				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_titulo);
+				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':G'.$aux);
+				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':G'.$aux)->applyFromArray($this->style_titulo);
 				$aux++;
-				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'ciclo escolar '.$ciclo);
-				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':C'.$aux);
-				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':C'.$aux)->applyFromArray($this->style_titulo);
+				// $objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'ciclo escolar '.$ciclo);
+				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':G'.$aux);
+				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':G'.$aux)->applyFromArray($this->style_titulo);
+				$aux++;
+
+				// $arr_niveles_asistencia
+				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux.'', '');
+				$aux_letra='B';
+				$aux_letra1='';
+				foreach ($arr_ciclos_asistencia as $key => $value) {
+					$aux_letra1 = $aux_letra;
+					$objPHPExcel->getActiveSheet()->SetCellValue($aux_letra.$aux.'', $value['ciclo']);
+					$objPHPExcel->getActiveSheet()->mergeCells($aux_letra.$aux.':'.++$aux_letra.$aux);
+					++$aux_letra;
+				}
+				$objPHPExcel->getActiveSheet()->getStyle('A'.($aux).':'.(++$aux_letra1).$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux.'', 'Nivel');
-				$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux.'', 'Cobertura');
-				$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux.'', 'Absorción');
-				$objPHPExcel->getActiveSheet()->getStyle('A'.($aux-1).':C'.$aux)->applyFromArray($this->style_encabezado);
-				$aux++;
-				foreach ($result_asistencia_nv as $row) {
-					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
-					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, (($row['cobertura']=='')?'-':$row['cobertura'].'%') );
-					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, (($row['absorcion']=='')?'-':$row['absorcion'].'%') );
-					$objPHPExcel->getActiveSheet()->getStyle('B'.$aux.':C'.$aux)->applyFromArray($this->style_contenido);
+				$aux_letra='B';
+				$aux_letra1='';
+				foreach ($arr_ciclos_asistencia as $key => $value) {
+					$aux_letra1 = $aux_letra;
+				$objPHPExcel->getActiveSheet()->SetCellValue($aux_letra.$aux.'', 'Cobertura');
+				$objPHPExcel->getActiveSheet()->SetCellValue(++$aux_letra.$aux.'', 'Absorción');
+				++$aux_letra;
+			}
+			$objPHPExcel->getActiveSheet()->getStyle('A'.($aux).':'.(++$aux_letra1).$aux)->applyFromArray($this->style_encabezado);
+			$aux++;
 
-					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':A'.$aux)->applyFromArray($this->style_contenido_first_colum);
+			foreach ($arr_niveles_asistencia as $row) {
+				$aux_letra='B';
+				$aux_letra1='';
+			$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux.'', $row['nivel']);
+			foreach ($arr_ciclos_asistencia as $key => $value) {
+				$aux_letra1 = $aux_letra;
+				foreach ($result_asistencia_nv as $k => $v) {
 
-
-					$aux++;
+					if ($row['nivel'] == $v['nivel'] && $value['ciclo'] == $v['ciclo']) {
+						$objPHPExcel->getActiveSheet()->SetCellValue($aux_letra.$aux, (($v['cobertura']=='')?'-':$v['cobertura'].'%') );
+						$objPHPExcel->getActiveSheet()->SetCellValue(++$aux_letra.$aux, (($v['absorcion']=='')?'-':$v['absorcion'].'%') );
+						++$aux_letra;
+					}
 				}
+			}
+
+			$aux++;
+		}
 
 				$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
 				$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 				$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-				// Rename 3nd sheet 
-				$objPHPExcel->getActiveSheet()->setTitle('Indicadores de Asistencia'); 
+				$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+				$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+				$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+				$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+				// Rename 3nd sheet
+				$objPHPExcel->getActiveSheet()->setTitle('Indicadores de Asistencia');
 
-				// Create a new worksheet, after the default sheet 
-				$objPHPExcel->createSheet(); 
+				// Create a new worksheet, after the default sheet
+				$objPHPExcel->createSheet();
 
-				// Add some data to the tercer sheet, resembling some different data types 
+				// Add some data to the tercer sheet, resembling some different data types
 				$objPHPExcel->setActiveSheetIndex(4);
 				$aux=1;
 
 				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'Indicadores de Permanencia');
-				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
-				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
+				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':J'.$aux);
+				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':J'.$aux)->applyFromArray($this->style_titulo);
 				$aux++;
-				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'ciclo escolar '.$ciclo);
-				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':D'.$aux);
-				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':D'.$aux)->applyFromArray($this->style_titulo);
+				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, '');
+				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':J'.$aux);
+				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':J'.$aux)->applyFromArray($this->style_titulo);
+				$aux++;
+
+
+				$aux_letra='B';
+				$aux_letra1='';
+				foreach ($arr_ciclos_permanencia as $key => $value) {
+					$aux_letra1 = $aux_letra;
+					$objPHPExcel->getActiveSheet()->SetCellValue($aux_letra.$aux.'', $value['ciclo']);
+					++$aux_letra;
+					$objPHPExcel->getActiveSheet()->mergeCells($aux_letra1.$aux.':'.(++$aux_letra).$aux);
+					++$aux_letra;
+				}
+				++$aux_letra1;
+				$objPHPExcel->getActiveSheet()->getStyle('A'.($aux).':'.(++$aux_letra1).$aux)->applyFromArray($this->style_encabezado);
 				$aux++;
 				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux.'', 'Nivel');
-				$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux.'', 'Retención');
-				$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux.'', 'Aprobación');
-				$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux.'', 'Eficiencia Terminal');
-				$objPHPExcel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
-				$aux++;
-				foreach ($result_permanencia_nv as $row) {
-					$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
-					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, (($row['retencion']=='')?'-':$row['retencion'].'%') );
-					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') );
-					$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, (($row['et']=='')?'-':$row['et'].'%') );
-					$objPHPExcel->getActiveSheet()->getStyle('B'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
+				$aux_letra='B';
+				$aux_letra1='';
+				foreach ($arr_ciclos_permanencia as $key => $value) {
+					$aux_letra1 = $aux_letra;
+				$objPHPExcel->getActiveSheet()->SetCellValue($aux_letra.$aux.'', 'Retención');
+				$objPHPExcel->getActiveSheet()->SetCellValue(++$aux_letra.$aux.'', 'Aprobación');
+				$objPHPExcel->getActiveSheet()->SetCellValue(++$aux_letra.$aux.'', 'Eficiencia Terminal');
+				++$aux_letra;
+			}
+			++$aux_letra1;
+			$objPHPExcel->getActiveSheet()->getStyle('A'.($aux).':'.(++$aux_letra1).$aux)->applyFromArray($this->style_encabezado);
+			$aux++;
 
-					$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':A'.$aux)->applyFromArray($this->style_contenido_first_colum);
-					$aux++;
+			foreach ($arr_niveles_permanencia as $row) {
+				$aux_letra='B';
+				$aux_letra1='';
+			$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux.'', $row['nivel']);
+			foreach ($arr_ciclos_permanencia as $key => $value) {
+				$aux_letra1 = $aux_letra;
+				foreach ($result_permanencia_nv as $k => $v) {
+
+					if ($row['nivel'] == $v['nivel'] && $value['ciclo'] == $v['ciclo']) {
+						$objPHPExcel->getActiveSheet()->SetCellValue($aux_letra.$aux, (($v['retencion']=='')?'-':$v['retencion'].'%') );
+							$objPHPExcel->getActiveSheet()->SetCellValue(++$aux_letra.$aux, (($v['aprobacion']=='')?'-':$v['aprobacion'].'%') );
+							$objPHPExcel->getActiveSheet()->SetCellValue(++$aux_letra.$aux, (($v['et']=='')?'-':$v['et'].'%') );
+						++$aux_letra;
+					}
 				}
+			}
+
+			$aux++;
+		}
+
+				// $objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux.'', 'Nivel');
+				// $objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux.'', 'Retención');
+				// $objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux.'', 'Aprobación');
+				// $objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux.'', 'Eficiencia Terminal');
+				// $objPHPExcel->getActiveSheet()->getStyle('A'.($aux-1).':D'.$aux)->applyFromArray($this->style_encabezado);
+				// $aux++;
+				// foreach ($result_permanencia_nv as $row) {
+				// 	$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, ($row['nivel'] .'('.$row['ciclo'].')') );
+				// 	$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, (($row['retencion']=='')?'-':$row['retencion'].'%') );
+				// 	$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') );
+				// 	$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, (($row['et']=='')?'-':$row['et'].'%') );
+				// 	$objPHPExcel->getActiveSheet()->getStyle('B'.$aux.':D'.$aux)->applyFromArray($this->style_contenido);
+				//
+				// 	$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':A'.$aux)->applyFromArray($this->style_contenido_first_colum);
+				// 	$aux++;
+				// }
 
 			$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+			$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+			$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+			$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+			$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+			$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+			$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
 
 
-			// Rename 3nd sheet 
+			// Rename 3nd sheet
 			$objPHPExcel->getActiveSheet()->setTitle('Indicadores de Permanencia');
 
-			// Create a new worksheet, after the default sheet 
-			$objPHPExcel->createSheet(); 
+			// Create a new worksheet, after the default sheet
+			$objPHPExcel->createSheet();
 
-			// Add some data to the tercer sheet, resembling some different data types 
+			// Add some data to the tercer sheet, resembling some different data types
 			$objPHPExcel->setActiveSheetIndex(5);
 			$aux=1;
 
@@ -863,13 +963,13 @@ class Reportes extends CI_Controller {
 			$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
 
-			// Rename 3nd sheet 
+			// Rename 3nd sheet
 			$objPHPExcel->getActiveSheet()->setTitle('Indicadores de Aprendisaje');
 
-			// Create a new worksheet, after the default sheet 
-			$objPHPExcel->createSheet(); 
+			// Create a new worksheet, after the default sheet
+			$objPHPExcel->createSheet();
 
-			// Add some data to the tercer sheet, resembling some different data types 
+			// Add some data to the tercer sheet, resembling some different data types
 			$objPHPExcel->setActiveSheetIndex(6);
 			$aux=1;
 
@@ -913,13 +1013,13 @@ class Reportes extends CI_Controller {
 			$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
 
-			// Rename 3nd sheet 
+			// Rename 3nd sheet
 			$objPHPExcel->getActiveSheet()->setTitle('Rezago Educativo');
 
-			// Create a new worksheet, after the default sheet 
-			$objPHPExcel->createSheet(); 
+			// Create a new worksheet, after the default sheet
+			$objPHPExcel->createSheet();
 
-			// Add some data to the tercer sheet, resembling some different data types 
+			// Add some data to the tercer sheet, resembling some different data types
 			$objPHPExcel->setActiveSheetIndex(7);
 			$aux=1;
 
@@ -950,17 +1050,17 @@ class Reportes extends CI_Controller {
 			$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-		// Rename 3nd sheet 
+		// Rename 3nd sheet
 			$objPHPExcel->getActiveSheet()->setTitle('Analfabetismo');
-
+			$objPHPExcel->setActiveSheetIndexByName('Estadística e indicadores');
 		date_default_timezone_set('America/Mexico_City');
 		$hoy = date("Y-m-d_H-i-s");
 		$name_file = "Estadistica_e_indicadores_generales_".$hoy.'.xls';
-		// Redirect output to a client’s web browser (Excel5) 
-		// header('Content-Type: application/vnd.ms-excel'); 
-		// header('Content-Disposition: attachment;filename="'.$name_file.'"'); 
-		// header('Cache-Control: max-age=0'); 
-		// $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5'); 
+		// Redirect output to a client’s web browser (Excel5)
+		// header('Content-Type: application/vnd.ms-excel');
+		// header('Content-Disposition: attachment;filename="'.$name_file.'"');
+		// header('Cache-Control: max-age=0');
+		// $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 		// $objWriter->save('php://output');
 		$this->downloand_file($objPHPExcel,$name_file);
 	}

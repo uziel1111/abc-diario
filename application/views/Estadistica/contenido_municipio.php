@@ -227,17 +227,32 @@
           <table class="table table-sm table-striped table-hover">
             <thead class="bg-light">
               <tr>
+                <th class="text-left align-middle"></th>
+                <?php foreach ($arr_ciclos_asistencia as $key => $value): ?>
+                  <th colspan="2" class="text-center align-middle"><?=$value['ciclo'] ?></th>
+                <?php endforeach; ?>
+
+              </tr>
+              <tr>
                 <th class="text-left align-middle">Nivel</th>
+                <?php foreach ($arr_ciclos_asistencia as $key => $value): ?>
                 <th class="text-center align-middle">Cobertura</th>
                 <th class="text-center align-middle">Absorción</th>
+                <?php endforeach; ?>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($asistencia as $row) { ?>
+              <?php foreach ($arr_niveles_asistencia as $row) { ?>
                 <tr>
-                  <td><?= $row['nivel'] ?> (<?= $row['ciclo'] ?>)</td>
-                  <td style="text-align: center;"><?= (($row['cobertura']=='')?'-':$row['cobertura'].'%') ?></td>
-                  <td style="text-align: center;"><?= (($row['absorcion']=='')?'-':$row['absorcion'].'%') ?></td>
+                  <td><?= $row['nivel'] ?> </td>
+                  <?php foreach ($arr_ciclos_asistencia as $key => $value): ?>
+                    <?php foreach ($arr_ind_asistencia as $k => $v): ?>
+                      <?php if ($row['nivel'] == $v['nivel'] && $value['ciclo'] == $v['ciclo']): ?>
+                        <td style="text-align: center;"><?= (($v['cobertura']=='')?'-':$v['cobertura'].'%') ?></td>
+                        <td style="text-align: center;"><?= (($v['absorcion']=='')?'-':$v['absorcion'].'%') ?></td>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
+                  <?php endforeach; ?>
                 </tr>
               <?php } ?>
             </tbody>
@@ -263,19 +278,33 @@
           <table class="table table-sm table-striped table-hover">
             <thead class="bg-light">
               <tr>
+                <th class="text-center align-middle"></th>
+                <?php foreach ($arr_ciclos_permanencia as $key => $value): ?>
+                  <th colspan="3" class="text-center align-middle"><?=$value['ciclo'] ?></th>
+                <?php endforeach; ?>
+              </tr>
+              <tr>
                 <th class="text-center align-middle">Nivel</th>
+                <?php foreach ($arr_ciclos_permanencia as $key => $value): ?>
                 <th class="text-center align-middle">Retención</th>
                 <th class="text-center align-middle">Aprobación</th>
                 <th class="text-center align-middle">Eficiencia Terminal</th>
+                <?php endforeach; ?>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($permanencia as $row) { ?>
+              <?php foreach ($arr_niveles_permanencia as $row) { ?>
                 <tr>
-                  <td><?= $row['nivel'] ?>(<?= $row['ciclo'] ?>)</td>
-                  <td style="text-align: center;"><?= (($row['retencion']=='')?'-':$row['retencion'].'%') ?></td>
-                  <td style="text-align: center;"><?= (($row['aprobacion']=='')?'-':$row['aprobacion'].'%') ?></td>
-                  <td style="text-align: center;"><?= (($row['et']=='')?'-':$row['et'].'%') ?></td>
+                  <td><?= $row['nivel'] ?> </td>
+                  <?php foreach ($arr_ciclos_permanencia as $key => $value): ?>
+                    <?php foreach ($arr_ind_permanencia as $k => $v): ?>
+                      <?php if ($row['nivel'] == $v['nivel'] && $value['ciclo'] == $v['ciclo']): ?>
+                        <td style="text-align: center;"><?= (($v['retencion']=='')?'-':$v['retencion'].'%') ?></td>
+                        <td style="text-align: center;"><?= (($v['aprobacion']=='')?'-':$v['aprobacion'].'%') ?></td>
+                        <td style="text-align: center;"><?= (($v['et']=='')?'-':$v['et'].'%') ?></td>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
+                  <?php endforeach; ?>
                 </tr>
               <?php } ?>
             </tbody>
