@@ -667,7 +667,7 @@ class Reportes extends CI_Controller {
 		$objPHPExcel->setActiveSheetIndex(2);
 		$aux=1;
 		// $objPHPExcel->getActiveSheet()->setCellValue('A1', 'More data 3');
-		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'Infraestructura');
+		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$aux, 'Escuelas y grupos');
 				$objPHPExcel->getActiveSheet()->mergeCells('A'.$aux.':L'.$aux);
 				$objPHPExcel->getActiveSheet()->getStyle('A'.$aux.':L'.$aux)->applyFromArray($this->style_titulo);
 				$aux++;
@@ -725,7 +725,7 @@ class Reportes extends CI_Controller {
 				$objPHPExcel->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
 
 		// Rename 3nd sheet
-		$objPHPExcel->getActiveSheet()->setTitle('Infraestructura');
+		$objPHPExcel->getActiveSheet()->setTitle('Escuelas y grupos');
 
 		// Create a new worksheet, after the default sheet
 		$objPHPExcel->createSheet();

@@ -72,7 +72,7 @@
     <!-- card -->
 
     <div class="card mb-3 card-style-1" id="dv_infraestructura_zona">
-        <div class="card-header card-1-header bg-success text-light">Infraestructura</div>
+        <div class="card-header card-1-header bg-success text-light">Escuelas y grupos</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm table-striped table-hover">

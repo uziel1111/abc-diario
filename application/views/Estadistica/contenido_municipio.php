@@ -151,7 +151,7 @@
 <div class="row" id="dv_infraestructura_emunicipio">
   <div class="dv_tablas_estmuni col-md-12">
     <div class="card mb-3">
-      <div class="card-header rounded bg-success text-light ">Infraestructura</div>
+      <div class="card-header rounded bg-success text-light ">Escuelas y grupos</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-hover">
