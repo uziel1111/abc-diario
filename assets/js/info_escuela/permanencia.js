@@ -1,7 +1,16 @@
 
 $("#btn_buscar_permanencia").click(function(e){
 	e.preventDefault();
-	Permanencia.get_datos_permanencia();
+	if($("#itxt_ciclo_info").val()!=''){
+		if($("#itxt_periodo_info").val()!=''){
+			Permanencia.get_datos_permanencia();
+		}else{
+				Mensaje.alerta("warning","Riesgo de Abandono Escolar","Seleccione un periodo");
+			}
+	}else{
+			Mensaje.alerta("warning","Riesgo de Abandono Escolar","Seleccione un ciclo");
+		}
+
 });
 
 var Permanencia = {
@@ -12,7 +21,7 @@ var Permanencia = {
             type: 'POST',
             dataType: 'json',
             data: {'cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val(),
-            'ciclo': $("#itxt_ciclo_info").val(), 'periodo': $("#itxt_periodo_info").val()},
+            'ciclo': $("#itxt_ciclo_info").val(), 'periodo': $("#itxt_periodo_info").val(), 'idnivel': $("#idnivel").val()},
             beforeSend: function (xhr) {
                 Mensaje.cargando('Cargando datos');
             },
@@ -22,7 +31,7 @@ var Permanencia = {
 	      		$("#div_tabla_riesgo_grafica_pie_info").empty();
 	      		$("#div_tabla_riesgo_grafica_barras_info").empty();
 	      		Permanencia.grafica(data.muy_alto,data.alto,data.medio,data.bajo);
-	      		Permanencia.grafica_barras_riesgo(data.array_muy_alto,data.array_alto,data.total_alumnos);
+	      		Permanencia.grafica_barras_riesgo(data.array_muy_alto,data.array_alto,data.total_alumnos,$("#idnivel").val());
             $("#containerRPB03ete_info").empty();
             $("#dv_info_graf_Retencion_info").empty();
             $("#dv_info_graf_aprobacion_info").empty();
@@ -59,27 +68,33 @@ var Permanencia = {
       				tabla2+='<td style="text-align:center;">1<sup>o</sup></td>';
       				tabla2+='<td style="text-align:center;">2<sup>o</sup></td>';
       				tabla2+='<td style="text-align:center;">3<sup>o</sup></td>';
-      				tabla2+='<td style="text-align:center;">4<sup>o</sup></td>';
-      				tabla2+='<td style="text-align:center;">5<sup>o</sup></td>';
-      				tabla2+='<td style="text-align:center;">6<sup>o</sup></td>';
+							if ($("#idnivel").val()==2) {
+	      				tabla2+='<td style="text-align:center;">4<sup>o</sup></td>';
+	      				tabla2+='<td style="text-align:center;">5<sup>o</sup></td>';
+	      				tabla2+='<td style="text-align:center;">6<sup>o</sup></td>';
+							}
     				tabla2+='</tr><tr>';
       				// tabla2+='<td width="20px" style="background-color:#F5842A;">&nbsp;</td>';
       				tabla2+='<td style="text-align:center;"><i style="color: #ee7521;" class="fa fa-square" aria-hidden="true"></i>Alto</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[0]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[1]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[2]+'</td>';
-      				tabla2+='<td style="text-align:center;">'+data.array_alto[3]+'</td>';
-      				tabla2+='<td style="text-align:center;">'+data.array_alto[4]+'</td>';
-      				tabla2+='<td style="text-align:center;">'+data.array_alto[5]+'</td>';
+							if ($("#idnivel").val()==2) {
+	      				tabla2+='<td style="text-align:center;">'+data.array_alto[3]+'</td>';
+	      				tabla2+='<td style="text-align:center;">'+data.array_alto[4]+'</td>';
+	      				tabla2+='<td style="text-align:center;">'+data.array_alto[5]+'</td>';
+							}
     				tabla2+='</tr><tr>';
       				// tabla2+='<td width="20px" style="background-color:#D1232A;">&nbsp;</td>';
       				tabla2+='<td style="text-align:center;"><i style="color: #cd1719;" class="fa fa-square" aria-hidden="true"></i>Muy alto</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[0]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[1]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[2]+'</td>';
-      				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[3]+'</td>';
-      				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[4]+'</td>';
-      				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[5]+'</td>';
+							if ($("#idnivel").val()==2) {
+	      				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[3]+'</td>';
+	      				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[4]+'</td>';
+	      				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[5]+'</td>';
+							}
     				tabla2+='</tr>';
   					tabla2+='</tbody>';
 					tabla2+='</table>';
@@ -189,7 +204,11 @@ var Permanencia = {
 					false
 				 );
     },
-    grafica_barras_riesgo: (array_muy_alto,array_alto,total_alumnos) => {
+    grafica_barras_riesgo: (array_muy_alto,array_alto,total_alumnos,nivel) => {
+			if (nivel==3) {
+				array_muy_alto.splice(3,3);
+				array_alto.splice(3,3);
+			}
         Highcharts.theme = {
             chart: {
                 backgroundColor: {
@@ -249,7 +268,7 @@ var Permanencia = {
             },
             xAxis: {
                 type: 'category',
-                categories: ['1°', '2°', '3°','4°','5°','6°'],
+                categories: ((nivel==3)?['1°', '2°', '3°']:['1°', '2°', '3°', '4°', '5°', '6°']),
                 title: {
                     text: 'Alumnos'
                 }
@@ -293,7 +312,7 @@ var Permanencia = {
 					300,
 				 false
 				);
-			
+
     },//grafica_riesgo_barras
     grafica_eficiencia_terminal: (valor_et) => {
         // Dibujamos el radial progress bar para Eficiencia Terminal

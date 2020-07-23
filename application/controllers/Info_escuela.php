@@ -252,6 +252,8 @@ function obtener_idsost_xidnivel_xmuni(){
     $idturno = $this->input->post('turno');
     $periodo = $this->input->post('periodo');
     $ciclo = $this->input->post('ciclo');
+    $idnivel = $this->input->post('idnivel');
+
     $ciclo_corto = trae_ciclo_corto($ciclo);
     $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
 
@@ -290,7 +292,13 @@ function obtener_idsost_xidnivel_xmuni(){
           $alto5=$riesgo[0]['alto5'];
           $alto6=$riesgo[0]['alto6'];
           $total_alumnos_riesgo=intval($riesgo[0]['total']);
-          $total_alumnos=intval($muy_alto1)+intval($muy_alto2)+intval($muy_alto3)+intval($muy_alto4)+intval($muy_alto5)+intval($muy_alto6)+intval($alto1)+intval($alto2)+intval($alto3)+intval($alto4)+intval($alto5)+intval($alto6);
+          if ($idnivel==2) {
+						$total_alumnos=intval($muy_alto1)+intval($muy_alto2)+intval($muy_alto3)+intval($muy_alto4)+intval($muy_alto5)+intval($muy_alto6)+intval($alto1)+intval($alto2)+intval($alto3)+intval($alto4)+intval($alto5)+intval($alto6);
+					}
+					else {
+						$total_alumnos=intval($muy_alto1)+intval($muy_alto2)+intval($muy_alto3)+intval($alto1)+intval($alto2)+intval($alto3);
+					}
+          // $total_alumnos=intval($muy_alto1)+intval($muy_alto2)+intval($muy_alto3)+intval($muy_alto4)+intval($muy_alto5)+intval($muy_alto6)+intval($alto1)+intval($alto2)+intval($alto3)+intval($alto4)+intval($alto5)+intval($alto6);
         }
         array_push($array_muy_alto,intval($muy_alto1));
         array_push($array_muy_alto,intval($muy_alto2));

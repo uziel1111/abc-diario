@@ -37,7 +37,7 @@ var Riesgo = {
 	      		$("#div_tabla_riesgo_grafica_pie").empty();
 	      		$("#div_tabla_riesgo_grafica_barras").empty();
 	      		Riesgo.grafica(data.muy_alto,data.alto,data.medio,data.bajo);
-	      		Riesgo.grafica_barras_riesgo(data.array_muy_alto,data.array_alto,data.total_alumnos);
+	      		Riesgo.grafica_barras_riesgo(data.array_muy_alto,data.array_alto,data.total_alumnos,nivel);
 	      		let tabla='<table width="100%" class="table table-bordered">';
 					tabla+=	'<tbody>';
 					tabla+= '<tr style="background-color:##f8f9fa;">';
@@ -68,27 +68,34 @@ var Riesgo = {
       				tabla2+='<td style="text-align:center;">1<sup>o</sup></td>';
       				tabla2+='<td style="text-align:center;">2<sup>o</sup></td>';
       				tabla2+='<td style="text-align:center;">3<sup>o</sup></td>';
-      				tabla2+='<td style="text-align:center;">4<sup>o</sup></td>';
-      				tabla2+='<td style="text-align:center;">5<sup>o</sup></td>';
-      				tabla2+='<td style="text-align:center;">6<sup>o</sup></td>';
+							if (nivel==2) {
+								tabla2+='<td style="text-align:center;">4<sup>o</sup></td>';
+	      				tabla2+='<td style="text-align:center;">5<sup>o</sup></td>';
+	      				tabla2+='<td style="text-align:center;">6<sup>o</sup></td>';
+							}
+
     				tabla2+='</tr><tr>';
       				// tabla2+='<td width="20px" style="background-color:#F5842A;">&nbsp;</td>';
       				tabla2+='<td style="text-align:center;"><i style="color: #ee7521;" class="fa fa-square" aria-hidden="true"></i>Alto</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[0]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[1]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[2]+'</td>';
+							if (nivel==2) {
       				tabla2+='<td style="text-align:center;">'+data.array_alto[3]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[4]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_alto[5]+'</td>';
+						}
     				tabla2+='</tr><tr>';
       				// tabla2+='<td width="20px" style="background-color:#D1232A;">&nbsp;</td>';
 							tabla2+='<td style="text-align:center;"><i style="color: #cd1719;" class="fa fa-square" aria-hidden="true"></i>Muy alto</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[0]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[1]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[2]+'</td>';
+							if (nivel==2) {
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[3]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[4]+'</td>';
       				tabla2+='<td style="text-align:center;">'+data.array_muy_alto[5]+'</td>';
+						}
     				tabla2+='</tr>';
   					tabla2+='</tbody>';
 					tabla2+='</table>';
@@ -195,7 +202,13 @@ var Riesgo = {
       });
 
     },
-    grafica_barras_riesgo: (array_muy_alto,array_alto,total_alumnos) => {
+    grafica_barras_riesgo: (array_muy_alto,array_alto,total_alumnos,nivel) => {
+			// console.log(array_muy_alto);
+			if (nivel==3) {
+				array_muy_alto.splice(3,3);
+				array_alto.splice(3,3);
+			}
+			// console.log(array_muy_alto);
         Highcharts.theme = {
             chart: {
                 backgroundColor: {
@@ -255,7 +268,7 @@ var Riesgo = {
             },
             xAxis: {
                 type: 'category',
-                categories: ['1°', '2°', '3°','4°','5°','6°'],
+                categories: ((nivel==3)?['1°', '2°', '3°']:['1°', '2°', '3°', '4°', '5°', '6°']),
                 title: {
                     text: 'Alumnos'
                 }
