@@ -235,12 +235,34 @@ obtener_grafica_xestadomunicipio: () => {
     },
     success: function (dato) {
       Mensaje.cerrar();
-		jQuery("#div_contenedor_planea").show();
-		Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip, div);
+		$("#div_contenedor_planea").show();
 		$("#div_planea_tabla").empty();
 		$("#div_planea_tabla").append(dato.vista);
-		Planea.grafica_info_nlogro(dato.datosgraf, 'div_planea_nlogro_generico', dato.campodisip, dato.periodoplanea);
-    },
+		$("#div_diagnostico_tabla").empty();
+		$("#div_diagnostico_tabla").append(dato.vista_tabla_diagnostico);
+		if ((dato.datos).length>0) {
+			Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip, div);
+			$("#cont_cont_tematico").show();
+		}
+		else {
+			$("#cont_cont_tematico").hide();
+		}
+		if ((dato.datosgraf).length>0) {
+			Planea.grafica_info_nlogro(dato.datosgraf, 'div_planea_nlogro_generico', dato.campodisip, dato.periodoplanea);
+			$("#cont_planea_nlogro").show();
+		}
+		else {
+			$("#cont_planea_nlogro").hide();
+		}
+		console.log((dato.diagnostico).length);
+		if ((dato.diagnostico).length>0) {
+			$("#cont_diagn").show();
+		}
+		else {
+			$("#cont_diagn").hide();
+		}
+
+		},
     error: function (jqXHR, textStatus, errorThrown) {
 			Mensaje.cerrar();
 			Mensaje.error_ajax(jqXHR,textStatus, errorThrown);

@@ -5,39 +5,35 @@ class Planea_model extends CI_Model
 
   function obtener_nivel_xidmunicipio($id_municipio){
     if($id_municipio>0){
-          $where = "AND ct.idmunicipio = {$id_municipio}";
+          $where = "WHERE pr.idmunicipio = {$id_municipio}";
         }
         else{
           $where = ' ';
         }
         $str_query = "SELECT
-                      n.idnivel, n.descr as nombre, n.subfijo
-                      FROM cct ct
-                      INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
-                      INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg =pr.idcentrocfg
-                      INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
-                      WHERE ct.`status`='A' AND cfg.`status`='A'
-                      {$where}
+                    	n.idnivel,
+                    	n.descr AS nombre,
+                    	n.subfijo
+                    FROM planea_nlogro_x_muni pr
+                    INNER JOIN niveleducativo n ON pr.idnivel = n.idnivel
+                    {$where}
                       GROUP BY n.idnivel";
-
+ // planeaxidcentrocfg_reactivo
         return $this->db->query($str_query)->result_array();
     }// obtener_nivel_xidmunicipio()
     function obtener_perido_xidmunicipio_xidnivel($id_municipio,$idnivel){
       $where = ' ';
       if($id_municipio>0){
-            $where .= " AND ct.idmunicipio = {$id_municipio}";
+            $where .= " AND pr.idmunicipio = {$id_municipio}";
           }
       if($idnivel>0){
             $where .= " AND n.idnivel = {$idnivel}";
           }
           $str_query = "SELECT
                         pp.id_periodo, pp.periodo
-                        FROM cct ct
-                        INNER JOIN centrocfg  cfg ON ct.idct= cfg.idct
-                        INNER JOIN niveleducativo n on cfg.nivel = n.idnivel
-                        INNER JOIN planeaxidcentrocfg_reactivo pr ON cfg.idcentrocfg = pr.idcentrocfg
-												INNER JOIN periodoplanea pp ON pr.id_periodo = pp.id_periodo
-                        WHERE ct.`status`='A' AND cfg.`status`='A'
+                        FROM planea_nlogro_x_muni pr
+                        INNER JOIN niveleducativo n ON pr.idnivel = n.idnivel
+												INNER JOIN periodoplanea pp ON pr.periodo_planea = pp.periodo
                         {$where}
                         GROUP BY pp.id_periodo";
         // echo $str_query; die();
@@ -408,7 +404,7 @@ class Planea_model extends CI_Model
             {$campos}
             'muni' AS origen
             FROM {$tabla} pmuni
-            
+
             WHERE {$where} pmuni.idnivel = {$nivel}";
             // echo $str_query; die();
           return $this->db->query($str_query)->result_array();
@@ -436,7 +432,7 @@ class Planea_model extends CI_Model
             {$campos}
             'muni' AS origen
             FROM planea_nlogro_x_zona pzona
-            
+
             INNER JOIN c_zona zona ON zona.zonaid = pzona.zonaid
             WHERE zona.cct_supervisor = '{$zona}'";
           return $this->db->query($str_query)->result_array();
@@ -599,6 +595,39 @@ class Planea_model extends CI_Model
                     GROUP BY p.id_periodo";
           return $this->db->query($str_query)->result_array();
         }//periodo_zona
+
+        function diagnostico_x_estadomunicipio($municipio, $nivel, $periodo, $campodisip){
+          $tabla = 'diagnostico_nlogro_x_entidad';
+          $where = "";
+          if($municipio != 0){
+            $tabla = 'diagnostico_nlogro_x_muni';
+            $where = "pmuni.idmunicipio = {$municipio} AND";
+          }
+          if($campodisip == 1){
+            $campos = "
+            pmuni.ni_lyc,
+            pmuni.nii_lyc,
+            pmuni.niii_lyc,
+            pmuni.niv_lyc,
+            ";
+          }else{
+            $campos = "
+            pmuni.ni_mat,
+            pmuni.nii_mat,
+            pmuni.niii_mat,
+            pmuni.niv_mat,
+            ";
+          }
+          $str_query = "SELECT
+            pmuni.periodo_planea AS periodo,
+            {$campos}
+            'muni' AS origen
+            FROM {$tabla} pmuni
+
+            WHERE {$where} pmuni.idnivel = {$nivel} AND pmuni.periodo_planea={$periodo}";
+            // echo $str_query; die();
+          return $this->db->query($str_query)->result_array();
+        }
 
 
 }// Planea_model

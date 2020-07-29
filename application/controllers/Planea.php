@@ -24,6 +24,7 @@ class Planea extends CI_Controller {
 					$arr_niveles['0'] = 'SELECCIONE';
 					$arr_niveles['2'] = 'PRIMARIA';
 					$arr_niveles['3'] = 'SECUNDARIA';
+					$arr_niveles['4'] = 'MEDIA SUPERIOR';
 
 					//CAMPOS DICIPLINARIOS
 					$arr_campod['0'] = 'SELECCIONE';
@@ -64,9 +65,13 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 	$idnivel = $this->input->post('idnivel');
 	$niveles = $this->Planea_model->obtener_perido_xidmunicipio_xidnivel($idmunicipio, $idnivel);
 	$str_select = '<option value=0>SELECCIONE</option>';
+	if ($idnivel==4) {
+		$str_select .= "<option value=2020> 2020 </option>";
+	}
 	foreach ($niveles as $key => $value) {
 		$str_select .= "<option value={$value['id_periodo']}> {$value['periodo']} </option>";
 	}
+
 	$respuesta = array('options' => $str_select);
 	envia_datos_json($this, $respuesta);
 	exit();
@@ -94,7 +99,14 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 	    $data['campodisip'] = $campodisip;
 
 	    $vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
-		$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => ($municipio != 0)? $data['municipio']: $data['estado']);
+			$diagnostico = $this->Planea_model->diagnostico_x_estadomunicipio($municipio, $nivel, $periodo, $campodisip);
+			$data['diagnostico'] = $diagnostico;
+			$data['periodo'] = $periodo;
+			// echo "<pre>";print_r($diagnostico);die();
+			$vista_tabla_diagnostico = $this->load->view('escuela/tabla_nlogro_diagnostico',$data, TRUE);
+			// echo "<pre>";print_r($diagnostico);die();
+
+		$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => ($municipio != 0)? $data['municipio']: $data['estado'], 'vista_tabla_diagnostico' => $vista_tabla_diagnostico, 'diagnostico' => $diagnostico);
 
 		envia_datos_json($this, $respuesta);
 		exit();
