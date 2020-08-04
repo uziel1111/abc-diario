@@ -29,17 +29,17 @@
                             <i class="fas fa-circle rounded-circle"></i>
                             <i class="fa-inverse fas fa-check fa-xs" data-fa-transform="shrink-6"></i>
                         </span>
-                        <h5 class="card-title">Aprendizaje</h5>
+                        <h5 class="card-title">Aprendizaje (Resultados)</h5>
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Planea/index/estado_mun'); ?>">Resultados PLANEA por estado / municipio</a></li>
+                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Planea/index/estado_mun'); ?>">PLANEA por estado / municipio</a></li>
 
-                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Planea/index/zona'); ?>">Resultados PLANEA por zona escolar</a></li>
+                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Planea/index/zona'); ?>">PLANEA por zona escolar</a></li>
 
-                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Info_escuela/busqueda_general/aprendizaje/escuela'); ?>">Resultados PLANEA por escuela</a></li>
+                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Info_escuela/busqueda_general/aprendizaje/escuela'); ?>">PLANEA por escuela</a></li>
 
-                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Aprendamos/index/estado_mun'); ?>">Resultados Aprendamos Juntos Media Superior por estado / municipio</a></li>
+                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Aprendamos/index/estado_mun'); ?>">Aprendamos Juntos Media Superior por estado / municipio</a></li>
                         </ul>
                     </div>
                 </div>
