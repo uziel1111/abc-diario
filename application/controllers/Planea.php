@@ -65,9 +65,9 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 	$idnivel = $this->input->post('idnivel');
 	$niveles = $this->Planea_model->obtener_perido_xidmunicipio_xidnivel($idmunicipio, $idnivel);
 	$str_select = '<option value=0>SELECCIONE</option>';
-	if ($idnivel==4) {
-		$str_select .= "<option value=2020> 2020 </option>";
-	}
+	// if ($idnivel==4) {
+	// 	$str_select .= "<option value=2020> 2020 </option>";
+	// }
 	foreach ($niveles as $key => $value) {
 		$str_select .= "<option value={$value['id_periodo']}> {$value['periodo']} </option>";
 	}
@@ -103,10 +103,10 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 			$data['diagnostico'] = $diagnostico;
 			$data['periodo'] = $periodo;
 			// echo "<pre>";print_r($diagnostico);die();
-			$vista_tabla_diagnostico = $this->load->view('escuela/tabla_nlogro_diagnostico',$data, TRUE);
+			// $vista_tabla_diagnostico = $this->load->view('escuela/tabla_nlogro_diagnostico',$data, TRUE);
 			// echo "<pre>";print_r($diagnostico);die();
 
-		$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => ($municipio != 0)? $data['municipio']: $data['estado'], 'vista_tabla_diagnostico' => $vista_tabla_diagnostico, 'diagnostico' => $diagnostico);
+		$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => ($municipio != 0)? $data['municipio']: $data['estado']);
 
 		envia_datos_json($this, $respuesta);
 		exit();

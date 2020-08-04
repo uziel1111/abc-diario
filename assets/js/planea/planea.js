@@ -238,8 +238,8 @@ obtener_grafica_xestadomunicipio: () => {
 		$("#div_contenedor_planea").show();
 		$("#div_planea_tabla").empty();
 		$("#div_planea_tabla").append(dato.vista);
-		$("#div_diagnostico_tabla").empty();
-		$("#div_diagnostico_tabla").append(dato.vista_tabla_diagnostico);
+		// $("#div_diagnostico_tabla").empty();
+		// $("#div_diagnostico_tabla").append(dato.vista_tabla_diagnostico);
 		if ((dato.datos).length>0) {
 			Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip, div);
 			$("#cont_cont_tematico").show();
@@ -254,13 +254,13 @@ obtener_grafica_xestadomunicipio: () => {
 		else {
 			$("#cont_planea_nlogro").hide();
 		}
-		console.log((dato.diagnostico).length);
-		if ((dato.diagnostico).length>0) {
-			$("#cont_diagn").show();
-		}
-		else {
-			$("#cont_diagn").hide();
-		}
+		// console.log((dato.diagnostico).length);sss
+		// if ((dato.diagnostico).length>0) {
+		// 	$("#cont_diagn").show();
+		// }
+		// else {
+		// 	$("#cont_diagn").hide();
+		// }
 
 		},
     error: function (jqXHR, textStatus, errorThrown) {

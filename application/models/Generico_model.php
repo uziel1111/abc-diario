@@ -214,4 +214,19 @@ WHERE
       return  $this->db->query($query,[$ciclo])->row();
   }
 
+  function municipio_x_escuela($cct, $idturno){
+    $query="SELECT
+m.idmunicipio, m.nombre
+FROM cct ct
+INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+INNER JOIN municipio m ON ct.idmunicipio = m.idmunicipio
+WHERE ct.cct = ? AND cfg.turno=?";
+      return  $this->db->query($query,[$cct, $idturno])->result_array()[0];
+  }
+
+  function periodos_aprendizaje(){
+    $query="SELECT periodo_planea FROM diagnostico_nlogro_x_muni GROUP BY periodo_planea";
+      return  $this->db->query($query)->result_array();
+  }//periodos_planea
+
 }// Generico_model

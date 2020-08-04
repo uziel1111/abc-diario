@@ -88,7 +88,7 @@
                             </div>
                           </div>
                         </div>
-                        <div id="cont_diagn">
+                        <!-- <div id="cont_diagn">
                           <p>
                               <a id="btn_planea_info_mate" class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
                                   Resultados de aprendamos juntos por nivel de logro
@@ -105,8 +105,8 @@
                               </div>
                             </div>
                           </div>
-                        </div>
-                        
+                        </div> -->
+
                       </div>
                     </div><!-- card-body -->
                 </div>

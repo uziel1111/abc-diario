@@ -88,5 +88,23 @@
   </div> -->
   </div>
 </div>
+<?php if ($idnivel=='4'): ?>
+  <p>
+  	<a id="btn_diagnostico_info_nlogro"  class="btn btn-primary" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">
+      	Resultados Aprendamos Juntos Media Superior
+    	</a>
+  </p>
+  <div class="collapse" id="collapseExample5">
+    <div class="card card-body">
+      <div id="div_diagnostico_info_nlogro_tabla"></div>
+      <div id="div_diagnostico_info_nlogro_lyc"></div>
+      <div id="div_diagnostico_info_nlogro_mate"></div>
+      <div class="pie_tabla bg-info text-light font-weight-bold">
+        <div id="fuentes_pie">Fuente: SEPyC Sinaloa.</div>
+      </div>
+    </div>
+  </div>
+<?php endif; ?>
+
 
 <script src="<?= base_url('assets/js/info_escuela/aprendizaje.js') ?>"></script>

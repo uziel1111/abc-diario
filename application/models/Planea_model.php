@@ -629,5 +629,33 @@ class Planea_model extends CI_Model
           return $this->db->query($str_query)->result_array();
         }
 
+        function diagnosticoall_x_estadomunicipio($municipio){
+          $tabla = 'diagnostico_nlogro_x_entidad';
+          $where = "1=1";
+          if($municipio != 0){
+            $tabla = 'diagnostico_nlogro_x_muni';
+            $where = "pmuni.idmunicipio = {$municipio} ";
+          }
+          $str_query = "SELECT
+            pmuni.periodo_planea ,  pmuni.ni_lyc, pmuni.nii_lyc, pmuni.niii_lyc, pmuni.niv_lyc, pmuni.ni_mat, pmuni.nii_mat, pmuni.niii_mat, pmuni.niv_mat
+            FROM {$tabla} pmuni
+
+            WHERE {$where}";
+            // echo $str_query; die();
+          return $this->db->query($str_query)->result_array()[0];
+        }
+
+        function diagnostico_x_escuela($cct, $idturno){
+
+          $str_query = "SELECT
+                  d.periodo_planea, d.ni_lyc, d.nii_lyc, d.niii_lyc, d.niv_lyc, d.ni_mat, d.nii_mat, d.niii_mat, d.niv_mat
+                  FROM cct ct
+                  INNER JOIN centrocfg cfg ON ct.idct = cfg.idct
+                  INNER JOIN diagnostico_nlogro_x_idcentrocfg d ON cfg.idcentrocfg = d.idcentrocfg
+                  WHERE ct.cct = '{$cct}' AND cfg.turno='{$idturno}'";
+            // echo $str_query; die();
+          return ((COUNT($this->db->query($str_query)->result_array())>0)?$this->db->query($str_query)->result_array()[0]:array());
+        }
+
 
 }// Planea_model

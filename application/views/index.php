@@ -39,6 +39,7 @@
 
                             <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Info_escuela/busqueda_general/aprendizaje/escuela'); ?>">Resultados PLANEA por escuela</a></li>
 
+                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Aprendamos/index/estado_mun'); ?>">Resultados Aprendamos Juntos Media Superior por estado / municipio</a></li>
                         </ul>
                     </div>
                 </div>

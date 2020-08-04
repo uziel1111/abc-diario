@@ -86,6 +86,7 @@
                     <a class="dropdown-item text-wrap" href="<?= base_url('Planea/index/estado_mun'); ?>">Resultados PLANEA por estado / municipio</a>
                     <a class="dropdown-item text-wrap" href="<?= base_url('Planea/index/zona'); ?>">Resultados PLANEA por zona escolar</a>
                     <a class="dropdown-item text-wrap" href="<?= base_url('Info_escuela/busqueda_general/aprendizaje/escuela'); ?>">Resultados PLANEA por escuela</a>
+                    <a class="dropdown-item text-wrap" href="<?= base_url('Aprendamos/index/estado_mun'); ?>">Resultados Aprendamos Juntos Media Superior por estado / municipio</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown nav-third">

@@ -1,5 +1,13 @@
 
 var visible_collaps = false;
+var visible_collapsd = false;
+$("#btn_diagnostico_info_nlogro").click(function(){
+  if(visible_collapsd == false){
+    visible_collapsd = true;
+    Aprendisaje.obtener_diagnostico_info_nlogro();
+  }
+
+});
 $("#btn_planea_info_mate").click(function(){
   if(visible_collaps == false){
     visible_collaps = true;
@@ -66,6 +74,32 @@ var Aprendisaje = {
         Mensaje.cerrar();
         // console.log(dato.datos);
         Graficasm.graficoplanea_contenido(dato.datos, dato.periodoplanea, dato.campodisip, div);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        Mensaje.cerrar();
+        Mensaje.error_ajax(jqXHR,textStatus, errorThrown);
+      }
+    });
+  },
+
+  obtener_diagnostico_info_nlogro: () => {
+    ruta = base_url+'Info_escuela/obtener_diagnostico_info_nlogro';
+
+    $.ajax({
+      url: ruta,
+      type: 'POST',
+      dataType: 'json',
+      data: {'cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val()
+      },
+      beforeSend: function (xhr) {
+        Mensaje.cargando('Cargando niveles');
+      },
+      success: function (dato) {
+        Mensaje.cerrar();
+
+        $("#div_diagnostico_info_nlogro_tabla").empty();
+    		$("#div_diagnostico_info_nlogro_tabla").append(dato.vista_tabla_diagnostico);
+
       },
       error: function (jqXHR, textStatus, errorThrown) {
         Mensaje.cerrar();
