@@ -13,7 +13,7 @@
 						<?php if (isset($subseccion) && $subseccion=='Riesgo de abandono por escuela'): ?>
 							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Riesgo de abandono escolar" data-content="Datos de los alumnos de tu escuela que están en riesgo de abandonar la escuela, por su incidencia en reprobar asignaturas, contar con inasistencias a las clases y tener algún rezago en la edad reglamentaria. La fuente de información es el sistema SIEE de la entidad."><i class="fa fa-info-circle"></i></a>
 						<?php endif; ?>
-						<?php if (isset($subseccion) && $subseccion=='Resultados PLANEA por escuela'): ?>
+						<?php if (isset($subseccion) && $subseccion=='Resultados PLANEA y Aprendamos Juntos por escuela'): ?>
 							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="PLANEA de tu escuela" data-content="Resultados de las últimas dos pruebas PLANEA de tu escuela. Además de los niveles de logro, se exponen los resultados por contenidos temáticos, para orientar las acciones de reforzamiento académico en donde más se requiera."><i class="fa fa-info-circle"></i></a>
 						<?php endif; ?>
 						<!-- <?php if (isset($subseccion) && $subseccion=='En listado de escuelas'): ?>

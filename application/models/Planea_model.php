@@ -658,4 +658,14 @@ class Planea_model extends CI_Model
         }
 
 
+        function diagnosticoall_x_subsistema($subsistema){
+          $str_query = "SELECT
+            subsistema, periodo_planea, ni_lyc, nii_lyc, niii_lyc, niv_lyc, ni_mat, nii_mat, niii_mat, niv_mat
+            from diagnostico_nlogro_x_subsistema
+            WHERE subsistema='{$subsistema}'";
+            // echo $str_query; die();
+          return ((count($this->db->query($str_query)->result_array())>0)?$this->db->query($str_query)->result_array()[0]:array());
+        }
+
+
 }// Planea_model

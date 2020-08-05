@@ -37,9 +37,9 @@
 
                             <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Planea/index/zona'); ?>">PLANEA por zona escolar</a></li>
 
-                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Info_escuela/busqueda_general/aprendizaje/escuela'); ?>">PLANEA por escuela</a></li>
+                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Info_escuela/busqueda_general/aprendizaje/escuela'); ?>">PLANEA y Aprendamos Juntos por escuela</a></li>
 
-                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Aprendamos/index/estado_mun'); ?>">Aprendamos Juntos Media Superior por estado / municipio</a></li>
+                            <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Aprendamos/index/estado_mun'); ?>">Aprendamos Juntos Media Superior por estado / municipio / subsistema</a></li>
                         </ul>
                     </div>
                 </div>

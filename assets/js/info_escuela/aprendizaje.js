@@ -89,7 +89,7 @@ var Aprendisaje = {
       url: ruta,
       type: 'POST',
       dataType: 'json',
-      data: {'cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val()
+      data: {'cct':$("#cctinfo").val(), 'turno':$("#idturnoinfo").val(), 'subsistema':$("#subsistema").val()
       },
       beforeSend: function (xhr) {
         Mensaje.cargando('Cargando niveles');

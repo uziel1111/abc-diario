@@ -28,7 +28,7 @@ class Info_escuela extends CI_Controller {
       }else if($seccion == "aprendizaje"){
         $secc = "Aprendizaje";
         if($subseccion == 'escuela'){
-          $sub = "Resultados PLANEA por escuela";
+          $sub = "Resultados PLANEA y Aprendamos Juntos por escuela";
         }
       }else if($seccion == "ubica"){
         $secc = "Ubica tu escuela";
@@ -395,12 +395,14 @@ function obtener_idsost_xidnivel_xmuni(){
     public function obtener_diagnostico_info_nlogro(){
       $cct = $this->input->post('cct');
       $idturno = $this->input->post('turno');
+      $subsistema = $this->input->post('subsistema');
       $municipio = $this->Generico_model->municipio_x_escuela($cct, $idturno);
 
       $diagnostico_esc = $this->Planea_model->diagnostico_x_escuela($cct, $idturno);
       $diagnostico_muni = $this->Planea_model->diagnosticoall_x_estadomunicipio($municipio['idmunicipio']);
       $diagnostico_estado = $this->Planea_model->diagnosticoall_x_estadomunicipio(0);
-      $data = array('diagnostico_esc' => $diagnostico_esc, 'diagnostico_muni' => $diagnostico_muni, 'municipio' => $municipio, 'diagnostico_estado' => $diagnostico_estado);
+      $diagnostico_subs = $this->Planea_model->diagnosticoall_x_subsistema($subsistema);
+      $data = array('diagnostico_esc' => $diagnostico_esc, 'diagnostico_muni' => $diagnostico_muni, 'municipio' => $municipio, 'diagnostico_estado' => $diagnostico_estado, 'diagnostico_subs' => $diagnostico_subs);
       // echo "<pre>";print_r($data);die();
       $vista_tabla_diagnostico = $this->load->view('escuela/tabla_nlogro_diagnostico_info',$data, TRUE);
       $respuesta = array('vista_tabla_diagnostico' => $vista_tabla_diagnostico);

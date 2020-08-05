@@ -168,7 +168,8 @@ class Generico_model extends CI_Model
     c.localidad,
     mun.nombre AS municipio,
     c.nombre_direct_encargado,
-    IF(c.status = 'A', 'ACTIVO', '') AS estatus
+    IF(c.status = 'A', 'ACTIVO', '') AS estatus,
+    c.subsistema
 FROM
     cct c
         LEFT JOIN
@@ -226,6 +227,11 @@ WHERE ct.cct = ? AND cfg.turno=?";
 
   function periodos_aprendizaje(){
     $query="SELECT periodo_planea FROM diagnostico_nlogro_x_muni GROUP BY periodo_planea";
+      return  $this->db->query($query)->result_array();
+  }//periodos_planea
+
+  function subsistemas_aprendizaje(){
+    $query="SELECT subsistema from diagnostico_nlogro_x_subsistema GROUP BY subsistema";
       return  $this->db->query($query)->result_array();
   }//periodos_planea
 

@@ -36,7 +36,23 @@
 	</thead>
 	<tbody>
 
-			<?php if (count($diagnostico_muni)>0): ?>
+<?php if (isset($diagnostico_subs) && count($diagnostico_subs)>0): ?>
+	<tr>
+		<td colspan="9" style="background-color:silver;">DIAGNÓSTICO <?=$diagnostico_subs['periodo_planea'] ?></td>
+	</tr>
+	<tr>
+		<th class="text-center"> <?=$diagnostico_subs['subsistema'] ?></th>
+		<th class="text-center"><?=$diagnostico_subs['ni_lyc'] ?>%</th>
+		<th class="text-center"><?=$diagnostico_subs['nii_lyc'] ?>%</th>
+		<th class="text-center"><?=$diagnostico_subs['niii_lyc'] ?>%</th>
+		<th class="text-center"><?=$diagnostico_subs['niv_lyc'] ?>%</th>
+		<th class="text-center"><?=$diagnostico_subs['ni_mat'] ?>%</th>
+		<th class="text-center"><?=$diagnostico_subs['nii_mat'] ?>%</th>
+		<th class="text-center"><?=$diagnostico_subs['niii_mat'] ?>%</th>
+		<th class="text-center"><?=$diagnostico_subs['niv_mat'] ?>%</th>
+	</tr>
+<?php endif; ?>
+			<?php if (isset($diagnostico_muni) && count($diagnostico_muni)>0): ?>
 				<tr>
 					<td colspan="9" style="background-color:silver;">DIAGNÓSTICO <?=$diagnostico_muni['periodo_planea'] ?></td>
 				</tr>
