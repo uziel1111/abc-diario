@@ -159,7 +159,6 @@ class Estadistica extends CI_Controller {
 
     public function estadistica_especifica() {
 
-            // $ciclo = $this->Generico_model->ciclo_escolar();
 						$ciclo = $this->Estadistica_model->ciclo_escolar_estadist_xesc();
 						$turnos = $this->Estadistica_model->turno_escolar_estadist_xesc();
 						$data['turnos'] = $turnos;
@@ -194,7 +193,7 @@ class Estadistica extends CI_Controller {
 				$data['grupos']  = (isset($datos_grupos[0]))?$datos_grupos[0]:0;
 				$data['docentes']  = $datos_docentes;
 				$data['indicadores']  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:0;
-				// echo "<pre>";print_r($data);die();
+
         envia_datos_json($this, $data);
         exit();
     }//busqueda_especifica
@@ -250,14 +249,13 @@ class Estadistica extends CI_Controller {
 			$numzona = $this->input->post('numzona');
 			$idciclo = $this->input->post('idciclo');
 			$arr_datos = $this->Estadistica_model->obtener_estadistica_xzona($idnivel,$idmodalidad,$numzona,$idciclo);
-			// echo"<pre>";
-			// print_r($arr_datos);die();
+
 			$arr_zona['arr_datos_a_g_d_e'] = ((count($arr_datos)>0)?$arr_datos[0]:array());
 			$arr_datos = $this->Estadistica_model->obtener_indicadores_xzona($idnivel,$idmodalidad,$numzona,$idciclo);
 			$arr_zona['arr_datos_ind'] = ((count($arr_datos)>0)?$arr_datos[0]:array());
 			$arr_datos = $this->Estadistica_model->obtener_indicadoresplanea_xzona($idnivel,$idmodalidad,$numzona,$idciclo);
 			$arr_zona['arr_datos_indplanea'] = ((count($arr_datos)>0)?$arr_datos:array());
-			// echo "<pre>";print_r($arr_datos);die();
+
 			$vista = $this->load->view('estadistica/contenido_zona', $arr_zona, TRUE);
 			$respuesta = array("vista" => $vista);
 			envia_datos_json($this, $respuesta);
