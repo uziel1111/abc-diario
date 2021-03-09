@@ -1,14 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
+// envia de php a javascript datos en formato json para que javascript los puede leer correctamente
 if(!function_exists('envia_datos_json')){
     function envia_datos_json($contexto, $data) {
       return $contexto->output
-      ->set_status_header(http_response_code())
-      ->set_content_type('application/json', 'utf-8')
-      ->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+      ->set_status_header(http_response_code())//Obtener u establecer el código de estado de la respuesta HTTP.
+      ->set_content_type('application/json', 'utf-8') //tipo de contenido
+      ->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) //datos de envio con jsonencode con sumascarar de bist en constantes
       ->_display();
         }// envia_datos_json()
+        //JSON_UNESCAPED_SLASHES (integer)o escapar /. Disponible desde PHP 5.4.0.
+        //JSON_UNESCAPED_UNICODE (integer) Codificar caracteres Unicode multibyte literalmente (por defecto es escapado como \uXXXX). Disponible desde PHP 5.4.0.
+        //JSON_PRETTY_PRINT (integer)Utiliza espacios en blanco para formatear los datos devueltos. Disponible desde PHP 5.4.0.
     }
 
     if(!function_exists('carga_pagina_basica')){
