@@ -195,7 +195,7 @@ class Mapa extends CI_Controller {
 					$idmunicipio = $this->input->post('idmunicipio');
 					$coordenadas = $this->Mapa_model->obtener_coordenadas_muni($idmunicipio);
 					$respuesta = array('coordenadas' => $coordenadas[0]);
-					// echo "<pre>";print_r($respuesta);die();
+					
 					envia_datos_json($this, $respuesta);
 					exit();
 				}

@@ -445,20 +445,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
     	return $this->db->query($query,$datos)->result_array();
     }
 
-    // function obtener_nzona_xidnivelxidsost_zona($idnivel,$idsostenimieto){
-
-    //       $str_query = "SELECT
-    //                   z.zonaid, z.zona_escolar as nombre, z.cct_supervisor
-    //                   FROM estadistica_x_zona est
-    //                   INNER JOIN c_zona z ON est.zonaid = z.zonaid
-    //                   INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
-    //                   INNER JOIN c_sostenimiento s ON z.idsostenimiento = s.idsostenimiento
-    //                   WHERE n.idnivel = ? AND s.idsostenimiento = ?
-    //                   GROUP BY z.zonaid";
-
-    //       return $this->db->query($str_query,[$idnivel,$idsostenimieto])->result_array();
-    //   }// obtener_nzona_xidnivelxidsost_zona()
-
+  
       function obtener_nzona_xidnivelxidmodalidad_zona($idnivel,$idmodalidad){
       	$str_query = "SELECT
 			z.zonaid, z.zona_escolar AS nombre, z.cct_supervisor
@@ -471,20 +458,6 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 		return $this->db->query($str_query,[$idnivel,$idmodalidad])->result_array();
       }
 
-      // function obtener_ciclo_xidnivelxidsostxnzona_zona($idnivel,$idsostenimieto,$numzona){
-
-      //       $str_query = "SELECT
-      //                     c.idciclo, c.descr as nombre, c.`status`
-      //                     FROM estadistica_x_zona est
-      //                     INNER JOIN c_zona z ON est.zonaid = z.zonaid
-      //                     INNER JOIN niveleducativo n ON z.idnivel = n.idnivel
-      //                     INNER JOIN c_sostenimiento s ON z.idsostenimiento = s.idsostenimiento
-      //                     INNER JOIN ciclo c ON est.idciclo = c.idciclo
-      //                     WHERE n.idnivel = ? AND s.idsostenimiento = ? AND z.zonaid = ?
-      //                     GROUP BY z.zonaid";
-
-      //       return $this->db->query($str_query,[$idnivel,$idsostenimieto,$numzona])->result_array();
-      //   }// obtener_nzona_xidnivelxidsost_zona()
 
         function obtener_ciclo_xidnivelxidmodalidadxnzona_zona($idnivel,$idmodalidad,$numzona){
             $str_query = "SELECT

@@ -5,7 +5,7 @@ class Mapa_model extends CI_Model
   function obtener_xparams($idmunicipio,$idnivel,$id_sostenimiento,$nombre_centro){
     $filtros = [];
     $where = '';
-    // echo "<pre>";print_r($idmunicipio);die();
+    
     if ($idmunicipio > 0 ) {
       $where .= "AND m.idmunicipio = ?";
       array_push($filtros, $idmunicipio);
@@ -120,7 +120,7 @@ class Mapa_model extends CI_Model
       HAVING distance < 1000
       ORDER BY distance
       LIMIT 6";
-// echo "<pre>";print_r($str_query);die();
+
       return $this->db->query($str_query,[$id_nivel])->result_array();
 
     }// obtener_mismo_nivel()
