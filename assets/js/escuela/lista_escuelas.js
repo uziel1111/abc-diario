@@ -17,7 +17,7 @@ $("#busquedalista_nombreescuela").keyup(function() {
       element2.type = "hidden";
       element2.name="seccion";
       element2.value = seccion;
-      
+
 
       form.name = "form_escuelas_getinfo";
       form.id = "form_escuelas_getinfo";
@@ -29,5 +29,5 @@ $("#busquedalista_nombreescuela").keyup(function() {
       form.appendChild(element1);
       form.appendChild(element2);
       form.submit();
-    
+
 });

@@ -20,7 +20,7 @@
                           <a class="nav-link active p-2 h5 font-weight-bold" id="xest_muni-tab" data-toggle="tab" href="#xest_muni" role="tab" aria-controls="xest_muni" aria-selected="true">Por estado / municipio</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link p-2 h5 font-weight-bold" id="xzona-tab" data-toggle="tab" href="#xzona" role="tab" aria-controls="xzona" aria-selected="false">Por zona escolar</a>
+                          <a class="nav-link p-2 h5 font-weight-bold" id="xzona-tab" data-toggle="tab" href="#xzona" role="tab" aria-controls="xzona" aria-selected="false">Por Subsistema</a>
                       </li>
                   </ul>
                     <div class="tab-content bg-light rounded" id="myTabContent_busqg">

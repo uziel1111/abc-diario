@@ -1,70 +1,10 @@
-$(function() {
-jQuery("#div_contenedor_planea").hide();
-});
-$("#slt_municipio_planea").change(function(){
-	Planea.obtener_niveles_xidmunicipio();
-	$("#div_graficas_masivo").empty();
-	$(".div_grafiaca_txt").attr("hidden",true);
-});
-$("#slt_nivel_planeaxm").change(function(){
-	Planea.obtener_perido_xidmunicipio_xidnivel();
-	$("#div_graficas_masivo").empty();
-	$(".div_grafiaca_txt").attr("hidden",true);
+
+
+$("#btn_ejemplo").click(function(){
+	alert("hola");
 });
 
-$("#btn_busqueda_xestadomun").click(function(){
-	$("#div_graficas_masivo").empty();
-	$(".div_grafiaca_txt").attr("hidden",true);
-	if($("#slt_nivel_planeaxm").val() == 0){
-		Mensaje.alerta("error","Seleccione nivel","");
-	}else{
-		if($("#slt_periodo_planeaxm").val() == 0){
-			Mensaje.alerta("error","Seleccione periodo","");
-		}else{
-			if($("#slt_campod_planeaxm").val() == 0){
-				Mensaje.alerta("error","Seleccione campo disciplinario","");
-			}else{
-				$("#div_graficas_masivo").empty();
-				$('.div_grafiaca_txt').removeAttr('hidden');
-				Planea.obtener_grafica_xestadomunicipio();
-			}
-		}
-	}
-});
 
-$("#btn_busqueda_xestadozona").click(function(){
-  $("#div_graficas_masivo").empty();
-	$(".div_grafiaca_txt").attr("hidden",true);
-  if($("#slt_nivel_planeazn").val() == null){
-    Mensaje.alerta("error","Seleccione nivel","");
-  }else{
-		if ($("#slt_modalidad_planeazn").val() == null) {
-			  Mensaje.alerta("error","Seleccione sostenimiento","");
-		}
-		else {
-			if ($("#slt_zona_planeazn").val() == null) {
-				  Mensaje.alerta("error","Seleccione zona","");
-			}
-			else {
-				if($("#slt_periodo_planeazn").val() == null){
-		      Mensaje.alerta("error","Seleccione periodo","");
-		    }else{
-		      if($("#slt_campod_planeazn").val() == null){
-		        Mensaje.alerta("error","Seleccione campo disciplinario","");
-		      }else{
-						$("#div_graficas_masivo").empty();
-						$('.div_grafiaca_txt').removeAttr('hidden');
-		        Planea.obtener_grafica_xestadozona();
-		      }
-		    }
-			}
-		}
-  }
-});
-
-$("#xest_muni-tab").click(function(e){
-	$("#div_contenedor_planea").hide();
-});
 
 
 
@@ -254,6 +194,13 @@ obtener_grafica_xestadomunicipio: () => {
 		else {
 			$("#cont_planea_nlogro").hide();
 		}
+		// console.log((dato.diagnostico).length);sss
+		// if ((dato.diagnostico).length>0) {
+		// 	$("#cont_diagn").show();
+		// }
+		// else {
+		// 	$("#cont_diagn").hide();
+		// }
 
 		},
     error: function (jqXHR, textStatus, errorThrown) {
