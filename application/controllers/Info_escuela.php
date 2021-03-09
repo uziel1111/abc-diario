@@ -172,14 +172,16 @@ class Info_escuela extends CI_Controller {
     $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
     // echo "<pre>";print_r($ciclo);die();
     // $ciclo_corto = trae_ciclo_corto($ciclo);
-    $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
+    // $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
 
-    $vista = $this->load->view('escuela/info/asistencia',array(), TRUE);
+    // $vista = $this->load->view('escuela/info/asistencia',array(), TRUE);
     $idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
     $datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
-    $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:0;
+    // echo "<pre>"; print_r($datos_indicadores); die(); 
+    $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:['eficiencia_terminal'=>0,'retencion'=>0,'aprobacion'=>0];
     // $data['ciclos'] = $this->Generico_model->ciclo_escolar();
-    $data['ciclos'] = array(['idciclo' => 1, 'ciclo' => '2019-2020']);
+    // $data['ciclos'] = array(['idciclo' => 1, 'ciclo' => '2019-2020']);
+    $data['ciclos'] = $this->Riesgo_abandono_model->ciclo_escolar(); 
     $data['idnivel'] = $idnivel;
     // echo "<pre>";print_r($data);die();
     $vista = $this->load->view('escuela/info/permanencia',$data, TRUE);
@@ -316,7 +318,7 @@ function obtener_idsost_xidnivel_xmuni(){
         $idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
 
         $datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
-        $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:0;
+        $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:['eficiencia_terminal'=>0,'retencion'=>0,'aprobacion'=>0];
 
         $respuesta = array("muy_alto" => intval($muy_alto),"alto" => intval($alto),"medio" => intval($medio),"bajo" => intval($bajo),"array_muy_alto" => $array_muy_alto,"array_alto" => $array_alto,"total_alumnos" => intval($total_alumnos),"total_alumnos_riesgo"=>$total_alumnos_riesgo, 'indicadores' => $indicadores);
         envia_datos_json($this, $respuesta);

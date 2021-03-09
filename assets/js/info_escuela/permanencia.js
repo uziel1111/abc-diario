@@ -348,7 +348,7 @@ var Permanencia = {
                         circle.setText('<center> '+valor_et + '%<br>Eficiencia terminal<center>');
                     }
                     else {
-                        circle.setText(value + '%');
+                        circle.setText(value + '%<br>Eficiencia terminal<center>');
                     }
                 }
 
@@ -395,7 +395,7 @@ var Permanencia = {
                         circle.setText(varix + '% <br><center>Retención</center>');
                     }
                     else {
-                        circle.setText(value + '%');
+                        circle.setText(value + '% <br><center>Retención</center>');
                     }
                 }
 
