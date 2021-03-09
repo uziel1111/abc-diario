@@ -67,21 +67,6 @@ class Riesgo_abandono_model extends CI_Model
 	}
 
       function obtener_riesgo_xcct($cct, $turno, $ciclo, $idperiodo){
-            // $datos=['A'];
-            // $where="";
-
-            // if($idperiodo){
-            //       $where.=" AND c.periodo=?";
-            //       array_push($datos, $idperiodo);
-            // }
-            // if($idnivel>0){
-            //       $where.=" AND cfg.nivel= ?";
-            //       array_push($datos, $idnivel);
-            // }
-            // if($ciclo!=""){
-            //       $where.= " AND c.ciclo=?";
-            //       array_push($datos, $ciclo);
-            // }
 
             $query="SELECT
             SUM(c.per_riesgo_al_t) AS total,
@@ -105,7 +90,7 @@ class Riesgo_abandono_model extends CI_Model
             INNER JOIN centrocfg cfg ON cfg.idcentrocfg=c.idcentrocfg
             INNER JOIN cct ct ON ct.idct=cfg.idct
             WHERE ct.cct = '{$cct}' AND cfg.turno ='{$turno}' AND c.ciclo = {$ciclo} AND c.periodo = {$idperiodo}";
-            // echo $query; die();
+
         return $this->db->query($query)->result_array();
       }
 }

@@ -119,7 +119,6 @@ class Generico_model extends CI_Model
                   			INNER JOIN c_modalidad m ON est.idmodalidad = m.idmodalidad
                   			{$where} AND m.idmodalidad != 15
                   			GROUP BY m.idmodalidad";
-// echo "<pre>";print_r($str_query);die();
           return $this->db->query($str_query)->result_array();
     }// obtener_sostenimiento_xidmunicipioxidnivel()
 

@@ -65,9 +65,7 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 	$idnivel = $this->input->post('idnivel');
 	$niveles = $this->Planea_model->obtener_perido_xidmunicipio_xidnivel($idmunicipio, $idnivel);
 	$str_select = '<option value=0>SELECCIONE</option>';
-	// if ($idnivel==4) {
-	// 	$str_select .= "<option value=2020> 2020 </option>";
-	// }
+
 	foreach ($niveles as $key => $value) {
 		$str_select .= "<option value={$value['id_periodo']}> {$value['periodo']} </option>";
 	}
@@ -102,9 +100,7 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 			$diagnostico = $this->Planea_model->diagnostico_x_estadomunicipio($municipio, $nivel, $periodo, $campodisip);
 			$data['diagnostico'] = $diagnostico;
 			$data['periodo'] = $periodo;
-			// echo "<pre>";print_r($diagnostico);die();
-			// $vista_tabla_diagnostico = $this->load->view('escuela/tabla_nlogro_diagnostico',$data, TRUE);
-			// echo "<pre>";print_r($diagnostico);die();
+
 
 		$respuesta = array('datos' => $datos, 'id_municipio' => $municipio, 'nivel' => $nivel, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip, 'vista' => $vista_tabla, 'datosgraf' => ($municipio != 0)? $data['municipio']: $data['estado']);
 
@@ -126,9 +122,7 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 			$arr_niveles = $this->Planea_model->niveles_zona();
 			//SOSTENIMIENTOS
 			$arr_modalidad = $this->Planea_model->modalidad_zona();
-			// echo"<pre>";
-			// print_r($arr_modalidad);
-			// die();
+
 			$arr_zonas = $this->Planea_model->zonas_zona();
 
 					//CAMPOS DICIPLINARIOS
@@ -142,7 +136,6 @@ public function obtener_perido_xidmunicipio_xidnivel(){
 					$data2['zona'] = $arr_zonas;
 					$data2['camposd'] = $arr_campod;
 					$data2['periodos'] = $arr_periodos;
-					// echo "<pre>";print_r($data2);die();
 					$filtros = $this->load->view('planea/buscador_zona', $data2, TRUE);
 
 
@@ -166,9 +159,6 @@ public function obtener_perido_xidmunicipio_xidnivel(){
     		$data['ciclo'] = $periodoplanea;
     		$data['campodisip'] = $campodisip;
 
-    		// echo"<pre>";
-    		// print_r($data);
-    		// die();
 
       		$vista_tabla = $this->load->view('escuela/tabla_nlogro_planea',$data, TRUE);
 

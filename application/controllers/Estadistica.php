@@ -96,7 +96,7 @@ class Estadistica extends CI_Controller {
 			$arr_ciclos_permanencia =  $this->Estadistica_model->ciclos_indicadores_permanencia_xmunicipio($idmunicipio);
 			$arr_niveles_permanencia =  $this->Estadistica_model->niveles_indicadores_permanencia_xmunicipio($idmunicipio);
     	$arr_ind_permanencia =  $this->Estadistica_model->indicadores_permanencia_xmunicipio($idmunicipio,$idciclo);
-			// echo "<pre>";print_r($asistencia);die();
+
     	$aprendizaje =  $this->Estadistica_model->indicadores_aprendizaje_xmunicipio($idmunicipio);
     	$analfabetismo =  $this->Estadistica_model->analfabetismo_xmuni($idmunicipio);
     	$rezago =  $this->Estadistica_model->rezago_educativo_xmuni($idmunicipio);
@@ -146,9 +146,7 @@ class Estadistica extends CI_Controller {
     	$data["aprendizaje"] = $aprendizaje;
     	$data["rezago"] = $rezago;
     	$data["analfabetismo"] = $analfabetismo;
-    	// echo"<pre>";
-    	// print_r($data);
-    	// die();
+
 		$vista = $this->load->view("estadistica/contenido_municipio",$data,TRUE);
 		$respuesta = array("vista" => $vista);
 		envia_datos_json($this, $respuesta);
@@ -175,7 +173,7 @@ class Estadistica extends CI_Controller {
 				$datos_grupos = $this->Estadistica_model->datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo);
 				$datos_docentes = $this->Estadistica_model->datos_estadistica_docentes_xescuela($cct,$idturno,$idciclo);
 				$idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
-				// echo "<pre>";print_r($datos_docentes);die();
+
 				if ($idciclo_ant=='') {
 					$datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo);
 				}

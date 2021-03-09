@@ -18,7 +18,6 @@ class Aprendamos extends CI_Controller {
 
 					$periodos = $this->Generico_model->periodos_aprendizaje();
 
-					// $arr_periodos['0'] = 'SELECCIONE';
 					foreach ($periodos as $periodo){
 						 $arr_periodos[$periodo['periodo_planea']] = $periodo['periodo_planea'];
 					}
@@ -44,7 +43,7 @@ class Aprendamos extends CI_Controller {
 		$diagnostico_muni = $this->Planea_model->diagnosticoall_x_estadomunicipio($municipio);
 		$diagnostico_estado = $this->Planea_model->diagnosticoall_x_estadomunicipio(0);
 		$data = array('diagnostico_muni' => $diagnostico_muni, 'diagnostico_estado' => $diagnostico_estado);
-		// echo "<pre>";print_r($data);die();
+
 	  $str_vista = $this->load->view('aprendizaje/tabla_nlogro_diagnostico',$data, TRUE);
 		$respuesta = array('str_vista' => $str_vista);
 
@@ -57,7 +56,7 @@ class Aprendamos extends CI_Controller {
 		$diagnostico_subs = $this->Planea_model->diagnosticoall_x_subsistema($subsistema);
 		$diagnostico_estado = $this->Planea_model->diagnosticoall_x_estadomunicipio(0);
 		$data = array('diagnostico_subs' => $diagnostico_subs, 'diagnostico_estado' => $diagnostico_estado);
-		// echo "<pre>";print_r($data);die();
+
 	  $str_vista = $this->load->view('aprendizaje/tabla_nlogro_diagnostico',$data, TRUE);
 		$respuesta = array('str_vista' => $str_vista);
 

@@ -66,9 +66,7 @@ class Info_escuela extends CI_Controller {
     }//busqueda_general
 
     function lista_escuelas() {
-      // echo"<pre>";
-      // print_r($_POST);
-      // die();
+
       $idmunicipio = $this->input->post('municipio');
       $idsostenimiento = $this->input->post('sostenimiento');
       $idnivel = $this->input->post('nivel');
@@ -115,17 +113,13 @@ class Info_escuela extends CI_Controller {
       $idturno = $this->input->post('turno');
       $ciclo = trae_ciclo_actual();
       $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
-      // echo"<pre>";
-      // print_r($idciclo);
-      // die();
+
 
         $datos_alumnos = $this->Estadistica_model->datos_estadistica_alumnosxgrado_xescuela($cct,$idturno,$idciclo);
-        // echo"<pre>";
-        // print_r($datos_alumnos);
-        // die();
+
         $datos_grupos = $this->Estadistica_model->datos_estadistica_gruposxgrado_xescuela($cct,$idturno,$idciclo);
         $datos_docentes = $this->Estadistica_model->datos_estadistica_docentes_xescuela($cct,$idturno,$idciclo);
-        // echo "<pre>";print_r($datos_docentes);die();
+
         $respuesta = array("alumnos" => ((isset($datos_alumnos[0]))?$datos_alumnos[0]:0), 'grupos' => ((isset($datos_grupos[0]))?$datos_grupos[0]:0), 'docentes' => ((isset($datos_docentes))?$datos_docentes:0));
         envia_datos_json($this, $respuesta);
         exit();
@@ -135,23 +129,18 @@ class Info_escuela extends CI_Controller {
    	if(isset($_POST['idcfg'])){
       $idcfg = $this->input->post('idcfg');
       $seccion = $this->input->post('seccion');
-      // echo "<pre>";
-      // print_r($seccion);
-      // die();
+
       $info_escuela = $this->Generico_model->info_escuela_post($idcfg);
 
       $turno = $info_escuela[0]['idturno'];
       $info_escuela[0]['idcentrocfg']=$idcfg;
     }else{
-   		// $cct = $this->input->get('cct');
-   		// $turno = $this->input->get('turno');
-      // $info_escuela = $this->Generico_model->info_escuela_get($cct,$turno);
+
       redirect('Info_escuela/busqueda_general/ubica/listado');
     }
 
    		$data['info'] = $info_escuela;
       $data['seccion'] = $seccion;
-      // echo "<pre>";print_r($data);die();
    		carga_pagina_basica($this,$data,'escuela/info_escuela');
    }//info_escuela
 
@@ -170,20 +159,13 @@ class Info_escuela extends CI_Controller {
 
     $ciclo = trae_ciclo_actual();
     $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
-    // echo "<pre>";print_r($ciclo);die();
-    // $ciclo_corto = trae_ciclo_corto($ciclo);
-    // $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
 
-    // $vista = $this->load->view('escuela/info/asistencia',array(), TRUE);
     $idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
     $datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
-    // echo "<pre>"; print_r($datos_indicadores); die(); 
     $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:['eficiencia_terminal'=>0,'retencion'=>0,'aprobacion'=>0];
-    // $data['ciclos'] = $this->Generico_model->ciclo_escolar();
-    // $data['ciclos'] = array(['idciclo' => 1, 'ciclo' => '2019-2020']);
+
     $data['ciclos'] = $this->Riesgo_abandono_model->ciclo_escolar(); 
     $data['idnivel'] = $idnivel;
-    // echo "<pre>";print_r($data);die();
     $vista = $this->load->view('escuela/info/permanencia',$data, TRUE);
     $respuesta = array('vista' => $vista, 'indicadores' => $indicadores);
 
@@ -202,9 +184,7 @@ class Info_escuela extends CI_Controller {
   }
 
    function obtener_idnivel_xmuni(){
-    // echo"<pre>";
-    // print_r($_POST);
-    // die();
+
      $tipo_busqueda = $this->input->post('tipo_busqueda');
      $idmunicipio = $this->input->post('idmunicipio');
      if($tipo_busqueda == 'aprendizaje'){
@@ -300,7 +280,7 @@ function obtener_idsost_xidnivel_xmuni(){
 					else {
 						$total_alumnos=intval($muy_alto1)+intval($muy_alto2)+intval($muy_alto3)+intval($alto1)+intval($alto2)+intval($alto3);
 					}
-          // $total_alumnos=intval($muy_alto1)+intval($muy_alto2)+intval($muy_alto3)+intval($muy_alto4)+intval($muy_alto5)+intval($muy_alto6)+intval($alto1)+intval($alto2)+intval($alto3)+intval($alto4)+intval($alto5)+intval($alto6);
+          
         }
         array_push($array_muy_alto,intval($muy_alto1));
         array_push($array_muy_alto,intval($muy_alto2));
@@ -333,8 +313,8 @@ function obtener_idsost_xidnivel_xmuni(){
     $datos = $this->Planea_model->estadisticas_x_cct_info($cct, $idturno, $campodisip);
     $periodoplanea = $this->Planea_model->obtener_periodoplane_xidperiodo_info($cct, $idturno);
     $periodoplanea = ((isset($periodoplanea[0]['periodo']))?$periodoplanea[0]['periodo']:'');
-    // echo "<pre>";print_r($periodoplanea);die();
-      $respuesta = array('datos' => $datos, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
+
+    $respuesta = array('datos' => $datos, 'periodoplanea' => $periodoplanea, 'campodisip' => $campodisip);
 
       envia_datos_json($this, $respuesta);
       exit();
@@ -348,7 +328,7 @@ function obtener_idsost_xidnivel_xmuni(){
       $data['entidad'] = $this->Planea_model->niveles_de_logro_entidad($cct, $idturno);
       $data['nacional'] = $this->Planea_model->niveles_de_logro_nacional($cct, $idturno);
       $data['ciclos'] = $this->obtener_ciclos($data['centrocfg'], $data['entidad'], $data['nacional']);
-      // echo "<pre>";print_r($data);die();
+
       $vista_tabla = $this->load->view('escuela/tabla_nlogro',$data, TRUE);
 
 
@@ -405,7 +385,7 @@ function obtener_idsost_xidnivel_xmuni(){
       $diagnostico_estado = $this->Planea_model->diagnosticoall_x_estadomunicipio(0);
       $diagnostico_subs = $this->Planea_model->diagnosticoall_x_subsistema($subsistema);
       $data = array('diagnostico_esc' => $diagnostico_esc, 'diagnostico_muni' => $diagnostico_muni, 'municipio' => $municipio, 'diagnostico_estado' => $diagnostico_estado, 'diagnostico_subs' => $diagnostico_subs);
-      // echo "<pre>";print_r($data);die();
+
       $vista_tabla_diagnostico = $this->load->view('escuela/tabla_nlogro_diagnostico_info',$data, TRUE);
       $respuesta = array('vista_tabla_diagnostico' => $vista_tabla_diagnostico);
       envia_datos_json($this, $respuesta);
