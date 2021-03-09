@@ -59,7 +59,7 @@ var Graficasm = {
       for (var i = 0; i < arr_datos.length; i++){
          arr_datos_aux.push({'id_cont': arr_datos[i]['id_contenido'],'name': arr_datos[i]['contenidos'],'y': parseFloat(arr_datos[i]['porcen_alum_respok']),'drilldown': arr_datos[i]['total_reac_xct']});
       }
-
+  
       // Apply the theme
       Highcharts.setOptions(Highcharts.theme);
       // Codigo para graficar la seccion estadistica de la escuela
@@ -77,7 +77,7 @@ var Graficasm = {
               text: '<b style="font-size: 18px;">PLANEA '+periodoplanea+' '+((campodisip==1)?'Lenguaje y comunicación':'Matemáticas')+'</b>'
           },
           subtitle: {
-              text: '<b style="font-size: 14px;"> Total de alumnos evaluados: '+new Intl.NumberFormat("en-IN").format(parseInt(arr_datos[0]['alumnos_evaluados']))+'</b>'
+              text: '<b style="font-size: 14px;"> Total de alumnos evaluados: '+new Intl.NumberFormat("en-IN").format(parseInt((arr_datos.length==0)?0:arr_datos[0]['alumnos_evaluados']))+'</b>'
           },
           xAxis: {
               type: 'category'

@@ -194,6 +194,7 @@ var Aprendisaje = {
       Highcharts.setOptions(Highcharts.theme);
       // Dibujamos un grafico tipo pie-drilldown planea 2015
       // Creamos la gráfica
+      console.log(arr_datos.length);
       var defaultTitle="Resultados PLANEA "+arr_datos[0]['periodo'] ;
       var defaultSubtitle="Haz clic para ver los porcentajes por área.";
       $('#'+id_dv_lyc).empty();
@@ -250,15 +251,15 @@ var Aprendisaje = {
             },
             series: [{
                 name: 'Leng. y comunicación',
-                data: [parseFloat(arr_datos[0]['ni_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['niv_lyc'])]
+                data: (arr_datos.length>0)?[parseFloat(arr_datos[0]['ni_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['nii_lyc']), parseFloat(arr_datos[0]['niv_lyc'])]: [0,0,0,0]
             }, {
                 name: 'Leng. y comunicación',
-                data: [parseFloat(arr_datos[1]['ni_lyc']), parseFloat(arr_datos[1]['nii_lyc']), parseFloat(arr_datos[1]['nii_lyc']), parseFloat(arr_datos[1]['niv_lyc'])]
+                data: (arr_datos.length>1)?[parseFloat(arr_datos[1]['ni_lyc']), parseFloat(arr_datos[1]['nii_lyc']), parseFloat(arr_datos[1]['nii_lyc']), parseFloat(arr_datos[1]['niv_lyc'])]: [0,0,0,0]
             },]
         });
       // Dibujamos un grafico tipo pie-drilldown planea 2016
       // Create the chart
-      var defaultTitle="Resultados PLANEA "+arr_datos[1]['periodo'];
+      var defaultTitle="Resultados PLANEA "+ ((arr_datos.length>1)?arr_datos[1]['periodo']:'-');
       var defaultSubtitle="Haz clic para ver los porcentajes por área.";
       $('#'+id_dv_mat).empty();
       var chartmat = new Highcharts.chart(id_dv_mat, {
@@ -314,10 +315,10 @@ var Aprendisaje = {
           },
           series: [{
               name: 'Matemáticas',
-              data: [parseFloat(arr_datos[0]['ni_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['niv_mat'])]
+              data: (arr_datos.length>0)?[parseFloat(arr_datos[0]['ni_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['nii_mat']), parseFloat(arr_datos[0]['niv_mat'])]: [0,0,0,0]
           }, {
               name: 'Matemáticas',
-              data: [parseFloat(arr_datos[1]['ni_mat']), parseFloat(arr_datos[1]['nii_mat']), parseFloat(arr_datos[1]['nii_mat']), parseFloat(arr_datos[1]['niv_mat'])]
+              data: (arr_datos.length>1)?[parseFloat(arr_datos[1]['ni_mat']), parseFloat(arr_datos[1]['nii_mat']), parseFloat(arr_datos[1]['nii_mat']), parseFloat(arr_datos[1]['niv_mat'])]: [0,0,0,0]
           }]
       });
       $(".highcharts-background").css("fill","#FFF");

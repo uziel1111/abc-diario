@@ -111,7 +111,7 @@
 			<td colspan="9" style="background-color:silver;">PLANEA <?=((isset($ciclos[1]))?$ciclos[1]:'')?></td>
 		</tr>
 		<tr>
-			<?php if (isset($centrocfg[1]['periodo']) && count($centrocfg)>0 && $centrocfg[1]['periodo'] == $ciclos[1]): ?>
+			<?php if (isset($centrocfg[1]['periodo']) && count($centrocfg)>0 && $centrocfg[1]['periodo'] == ((isset($ciclos[1]))?$ciclos[1]:'')): ?>
 			<th class="text-center">Tu escuela</th>
 			<th class="text-center"><?= (isset($centrocfg[1]['ni_lyc']))?$centrocfg[1]['ni_lyc']:'-'?>%</th>
 			<th class="text-center"><?= $centrocfg[1]['nii_lyc']?>%</th>
@@ -134,7 +134,7 @@
 			<?php endif ?>
 		</tr>
 		<tr>
-			<?php if (isset($entidad[1]['periodo']) && count($entidad)>0 && $entidad[1]['periodo'] == $ciclos[1]): ?>
+			<?php if (isset($entidad[1]['periodo']) && count($entidad)>0 && $entidad[1]['periodo'] == ((isset($ciclos[1]))?$ciclos[1]:'')): ?>
 			<th class="text-center">Estado de Sinaloa</th>
 			<th class="text-center"><?= $entidad[1]['ni_lyc']?>%</th>
 			<th class="text-center"><?= $entidad[1]['nii_lyc']?>%</th>
@@ -157,7 +157,7 @@
 			<?php endif ?>
 		</tr>
 		<tr>
-			<?php if (isset($nacional[1]['periodo']) && count($nacional)>0 && $nacional[1]['periodo'] == $ciclos[1]): ?>
+			<?php if (isset($nacional[1]['periodo']) && count($nacional)>0 && $nacional[1]['periodo'] == ((isset($ciclos[1]))?$ciclos[1]:'')): ?>
 			<th class="text-center">Nacional</th>
 			<th class="text-center"><?= $nacional[1]['ni_lyc']?>%</th>
 			<th class="text-center"><?= $nacional[1]['nii_lyc']?>%</th>
