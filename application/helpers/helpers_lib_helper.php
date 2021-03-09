@@ -14,6 +14,7 @@ if(!function_exists('envia_datos_json')){
         //JSON_PRETTY_PRINT (integer)Utiliza espacios en blanco para formatear los datos devueltos. Disponible desde PHP 5.4.0.
     }
 
+
     if(!function_exists('carga_pagina_basica')){
         function carga_pagina_basica($contexto, $data, $vista, $header = 'header', $footer = 'footer') {
           $contexto->load->view('templates/'.$header, $data);
