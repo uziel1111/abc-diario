@@ -41,45 +41,6 @@ let Mensaje = {
 
   	},//error_ajax
 
-	respuesta: (icono, mensaje) => {
-		const Toast = Swal.mixin({
-			toast: true,
-			position: 'top-end',
-			showConfirmButton: false,
-			timer: 3000,
-			timerProgressBar: true,
-			allowOutsideClick: false,
-			onOpen: (toast) => {
-				toast.addEventListener('mouseenter', Swal.stopTimer)
-				toast.addEventListener('mouseleave', Swal.resumeTimer)
-			}
-		})
-
-		Toast.fire({
-			icon: icono,
-			title: mensaje,
-		})
-	},//respuesta
-
-	opciones: (icono, titulo, mensaje, btn_ok, funcion) => {
-		msj = Swal.fire({
-			title: titulo,
-			text: mensaje,
-			icon: icono,
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: btn_ok,
-			cancelButtonText: 'Cancelar',
-			allowOutsideClick: false,
-		}).then((result) => {
-			if (result.value) {
-				eval(funcion);
-			}
-		});
-	},//opciones
-
-
 	cerrar: () => {
 		swal.close();
 	},//cerrar
