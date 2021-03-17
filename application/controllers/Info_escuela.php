@@ -111,9 +111,12 @@ class Info_escuela extends CI_Controller {
     function busqueda_especifica() {
       $cct = $this->input->post('cct');
       $idturno = $this->input->post('turno');
-      $ciclo = trae_ciclo_actual();
-      $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
-
+    
+      $idciclo = 0;
+      $idciclo_max = $this->Generico_model->max_idciclo_estadistica_xescuela($cct,$idturno);
+      if($idciclo_max!=NULL){
+        $idciclo =  trim($idciclo_max->idciclo);
+      }
 
         $datos_alumnos = $this->Estadistica_model->datos_estadistica_alumnosxgrado_xescuela($cct,$idturno,$idciclo);
 
@@ -157,10 +160,12 @@ class Info_escuela extends CI_Controller {
     $idturno = $this->input->post('turno');
     $idnivel = $this->input->post('idnivel');
 
-    $ciclo = trae_ciclo_actual();
-    $idciclo = $this->Generico_model->get_idciclo_x_desc(trim($ciclo))->idciclo;
+    $idciclo_ant = 0;
+    $idciclo_max = $this->Generico_model->max_idciclo_indicadores_xescuela($cct,$idturno);
+    if($idciclo_max != NULL){
+      $idciclo_ant = $idciclo_max->idciclo;
+    }
 
-    $idciclo_ant = $this->Estadistica_model->ciclo_ant_indicadores_xescuela($idciclo);
     $datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
     $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:['eficiencia_terminal'=>0,'retencion'=>0,'aprobacion'=>0];
 

@@ -16,9 +16,6 @@
 						<?php if (isset($subseccion) && $subseccion=='Resultados PLANEA y Aprendamos Juntos por escuela'): ?>
 							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="PLANEA de tu escuela" data-content="Resultados de las últimas dos pruebas PLANEA de tu escuela. Además de los niveles de logro, se exponen los resultados por contenidos temáticos, para orientar las acciones de reforzamiento académico en donde más se requiera."><i class="fa fa-info-circle"></i></a>
 						<?php endif; ?>
-						<!-- <?php if (isset($subseccion) && $subseccion=='En listado de escuelas'): ?>
-							<a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus" title="Titulo" data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><i class="fa fa-info-circle"></i></a>
-						<?php endif; ?> -->
 					</div>
 				</div>
 
@@ -110,14 +107,8 @@
 									</div>
 	              </div>
 	            </div>
-							<!-- <label>CCT:</label>
-							<input name="busquedaxcct" id="busquedaxcct" class="form-control"> -->
 						</div>
 					</div>
-
-					<!-- <div class="row justify-content-end mt-3">
-
-					</div> -->
 
 				</div>
 				<br>
