@@ -6,7 +6,7 @@ if(!function_exists('envia_datos_json')){
       return $contexto->output
       ->set_status_header(http_response_code())//Obtener u establecer el código de estado de la respuesta HTTP.
       ->set_content_type('application/json', 'utf-8') //tipo de contenido
-      ->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) //datos de envio con jsonencode con sumascarar de bist en constantes
+      ->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) //datos de envio con json encode con submascara de bist en constantes
       ->_display();
         }// envia_datos_json()
         //JSON_UNESCAPED_SLASHES (integer)o escapar /. Disponible desde PHP 5.4.0.
