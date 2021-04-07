@@ -113,6 +113,7 @@ class Info_escuela extends CI_Controller {
       $idturno = $this->input->post('turno');
     
       $idciclo = 0;
+
       $idciclo_max = $this->Generico_model->max_idciclo_estadistica_xescuela($cct,$idturno);
       if($idciclo_max!=NULL){
         $idciclo =  trim($idciclo_max->idciclo);

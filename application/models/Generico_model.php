@@ -235,15 +235,27 @@ WHERE ct.cct = ? AND cfg.turno=?";
   }//periodos_planea
 
   function max_idciclo_estadistica_xescuela($cct,$idturno) {
-    $query="SELECT
-                MAX(SUBSTRING(c.descr, 6, 4)) AS ciclo,est.idciclo AS idciclo
+    // $query="SELECT
+    //             MAX(SUBSTRING(c.descr, 6, 4)) AS ciclo,est.idciclo AS idciclo
+    //             FROM estadistica_x_idcentrocfg est
+    //             INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
+    //             INNER JOIN turno t ON cfg.turno = t.idturno
+    //             INNER JOIN cct ct ON cfg.idct = ct.idct
+    //             INNER JOIN ciclo c ON c.idciclo = est.idciclo 
+    //             WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' ";
+    $query = "SELECT
+                MAX(SUBSTRING(c.descr, 6, 4)) AS ciclo
                 FROM estadistica_x_idcentrocfg est
                 INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
-                INNER JOIN turno t ON cfg.turno = t.idturno
                 INNER JOIN cct ct ON cfg.idct = ct.idct
-                INNER JOIN ciclo c ON c.idciclo = est.idciclo 
+                INNER JOIN ciclo c ON c.idciclo = est.idciclo
                 WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' ";
-          return  $this->db->query($query)->row();
+    $ciclo = $this->db->query($query)->row()->ciclo;
+      // echo $ciclo; die();
+    $ciclo_aux = ($ciclo-1)."-".$ciclo;
+    $query = "SELECT SUBSTRING(descr, 6, 4) AS ciclo,idciclo FROM ciclo WHERE descr = '{$ciclo_aux}'";
+
+    return  $this->db->query($query)->row();
   }//max_idciclo_estadistica_xescuela
 
   function max_idciclo_indicadores_xescuela($cct,$idturno) {
