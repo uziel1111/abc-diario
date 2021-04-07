@@ -116,7 +116,9 @@ class Info_escuela extends CI_Controller {
 
       $idciclo_max = $this->Generico_model->max_idciclo_estadistica_xescuela($cct,$idturno);
       if($idciclo_max!=NULL){
-        $idciclo =  trim($idciclo_max->idciclo);
+        if(trim($idciclo_max->idciclo)!='' && $idciclo_max->idciclo !=NULL){
+          $idciclo =  trim($idciclo_max->idciclo);
+        }
       }
 
         $datos_alumnos = $this->Estadistica_model->datos_estadistica_alumnosxgrado_xescuela($cct,$idturno,$idciclo);
@@ -164,9 +166,11 @@ class Info_escuela extends CI_Controller {
     $idciclo_ant = 0;
     $idciclo_max = $this->Generico_model->max_idciclo_indicadores_xescuela($cct,$idturno);
     if($idciclo_max != NULL){
-      $idciclo_ant = $idciclo_max->idciclo;
+      if($idciclo_max->idciclo!=NULL && $idciclo_max->idciclo!=''){
+        $idciclo_ant = $idciclo_max->idciclo;
+      }
     }
-
+// echo $idciclo_ant; die();
     $datos_indicadores = $this->Estadistica_model->datos_indicadores_xescuela($cct,$idturno,$idciclo_ant);
     $indicadores  = (isset($datos_indicadores[0]))?$datos_indicadores[0]:['eficiencia_terminal'=>0,'retencion'=>0,'aprobacion'=>0];
 
@@ -366,15 +370,18 @@ function obtener_idsost_xidnivel_xmuni(){
 
       $eft = $this->Eficienciat_model->eficiencia_terminal($cct, $turno);
       $contenido_may = $this->Eficienciat_model->indicadores_sum($cct, $turno);
-      if ($eft!='') {
+      // print_r($contenido_may);die();
+      if ($eft!='' && $contenido_may!='') {
         $ete = round((($eft->eficiencia_terminal* $contenido_may->mayor)/100),2);
+        $periodo = $contenido_may->periodo;
       }
       else {
         $ete = 0;
+        $periodo = '';
       }
 
 
-      $respuesta = array('ete' => $ete, 'periodo' => $contenido_may->periodo);
+      $respuesta = array('ete' => $ete, 'periodo' => $periodo);
 
       envia_datos_json($this, $respuesta);
       exit();

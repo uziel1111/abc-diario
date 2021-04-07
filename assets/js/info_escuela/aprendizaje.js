@@ -144,8 +144,10 @@ var Aprendisaje = {
       success: function (dato) {
         Mensaje.cerrar();
         $("#conten_planea_ciclo").empty();
-        var texto = "PLANEA "+ dato.periodo;
-        $("#conten_planea_ciclo").append(texto);
+        if(dato.periodo!=''){
+          var texto = "PLANEA "+ dato.periodo;
+          $("#conten_planea_ciclo").append(texto);
+        }
         Aprendisaje.grafica_ete(dato.ete);
       },
       error: function (jqXHR, textStatus, errorThrown) {
@@ -194,8 +196,12 @@ var Aprendisaje = {
       Highcharts.setOptions(Highcharts.theme);
       // Dibujamos un grafico tipo pie-drilldown planea 2015
       // Creamos la gráfica
-      console.log(arr_datos.length);
-      var defaultTitle="Resultados PLANEA "+arr_datos[0]['periodo'] ;
+      // console.log(arr_datos.length);
+      var periodo = "";
+      if(arr_datos.length>0){
+        periodo = arr_datos[0]['periodo']
+      }
+      var defaultTitle="Resultados PLANEA "+ periodo ;
       var defaultSubtitle="Haz clic para ver los porcentajes por área.";
       $('#'+id_dv_lyc).empty();
         var chartlyc = new Highcharts.chart(id_dv_lyc, {

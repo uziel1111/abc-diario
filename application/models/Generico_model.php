@@ -266,14 +266,25 @@ WHERE ct.cct = ? AND cfg.turno=?";
 
   function max_idciclo_indicadores_xescuela($cct,$idturno) {
         $query="SELECT
-                 MAX(SUBSTRING(c.descr, 6, 4)) AS ciclo,est.idciclo AS idciclo
+                 MAX(SUBSTRING(c.descr, 6, 4)) AS ciclo
                 FROM indicadores_x_idcentrocfg est
                 INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
-                INNER JOIN turno t ON cfg.turno = t.idturno
                 INNER JOIN cct ct ON cfg.idct = ct.idct
                 INNER JOIN ciclo c ON c.idciclo = est.idciclo 
                 WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}'";
+        $ciclo = $this->db->query($query)->row()->ciclo;
+        $ciclo_aux = '';
+        if($ciclo!=NULL){
+          $ciclo_aux = ($ciclo-1)."-".$ciclo;
+        }
+        if($ciclo_aux!=''){
+          $query = "SELECT SUBSTRING(descr, 6, 4) AS ciclo,idciclo FROM ciclo WHERE descr = '{$ciclo_aux}'";
           return  $this->db->query($query)->row();
+        }else{
+          return NULL;
+        }
+
+          // return  $this->db->query($query)->row();
   }//datos_indicadores_xescuela
 
 }// Generico_model
