@@ -252,10 +252,16 @@ WHERE ct.cct = ? AND cfg.turno=?";
                 WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' ";
     $ciclo = $this->db->query($query)->row()->ciclo;
       // echo $ciclo; die();
-    $ciclo_aux = ($ciclo-1)."-".$ciclo;
-    $query = "SELECT SUBSTRING(descr, 6, 4) AS ciclo,idciclo FROM ciclo WHERE descr = '{$ciclo_aux}'";
-
-    return  $this->db->query($query)->row();
+    $ciclo_aux = '';
+    if($ciclo!=NULL){
+      $ciclo_aux = ($ciclo-1)."-".$ciclo;
+    }
+    if($ciclo_aux!=''){
+      $query = "SELECT SUBSTRING(descr, 6, 4) AS ciclo,idciclo FROM ciclo WHERE descr = '{$ciclo_aux}'";
+      return  $this->db->query($query)->row();
+    }else{
+      return NULL;
+    }
   }//max_idciclo_estadistica_xescuela
 
   function max_idciclo_indicadores_xescuela($cct,$idturno) {
