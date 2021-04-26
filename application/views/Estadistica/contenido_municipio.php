@@ -400,22 +400,22 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($rezago as $row) { ?>
+              <?php if (isset($rezago['p3A14_ptotal_h'])) { ?>
                 <tr>
                   <td>3 a 14 años</td>
-                  <td><center><?= number_format($row['p3A14_ptotal_h']) ?></center></td>
-                  <td><center><?= number_format($row['p3A14_ptotal_m']) ?></center></td>
-                  <td><center><?= number_format($row['p3A14_ptotal_h'] + $row['p3A14_ptotal_m']) ?></center></td>
-                  <td><center><?= number_format($row['p3A14_noa_h']) ?></center></td>
-                  <td><center><?= number_format($row['p3A14_noa_m']) ?></center></td>
-                  <td><center><?= number_format($row['p3A14_noa_m'] + $row['p3A14_noa_h']) ?></center></td>
+                  <td><center><?= number_format($rezago['p3A14_ptotal_h']) ?></center></td>
+                  <td><center><?= number_format($rezago['p3A14_ptotal_m']) ?></center></td>
+                  <td><center><?= number_format($rezago['p3A14_ptotal_h'] + $rezago['p3A14_ptotal_m']) ?></center></td>
+                  <td><center><?= number_format($rezago['p3A14_noa_h']) ?></center></td>
+                  <td><center><?= number_format($rezago['p3A14_noa_m']) ?></center></td>
+                  <td><center><?= number_format($rezago['p3A14_noa_m'] + $rezago['p3A14_noa_h']) ?></center></td>
                 </tr>
 
               <?php } ?>
             </tbody>
           </table>
           <div class="pie_tabla bg-info text-light font-weight-bold">
-            <div id="fuentes_pie">Fuente: INEGI 2015</div>
+            <div id="fuentes_pie">Fuente: INEGI <?= $rezago['anio'] ?></div>
           </div>
         </div>
       </div>
@@ -438,18 +438,18 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($analfabetismo as $row) { ?>
+              <?php if (isset($analfabetismo['analfabetismo_mayor15_h'])) { ?>
                 <tr>
                   <td>Mayor de 15 años que no saben leer y escribir</td>
-                  <td class="text-center"><?= number_format($row['analfabetismo_mayor15_h']) ?></td>
-                  <td class="text-center"><?= number_format($row['analfabetismo_mayor15_m']) ?></td>
-                  <td class="text-center"><?= number_format($row['analfabetismo_mayor15_m'] + $row['analfabetismo_mayor15_h']) ?></td>
+                  <td class="text-center"><?= number_format($analfabetismo['analfabetismo_mayor15_h']) ?></td>
+                  <td class="text-center"><?= number_format($analfabetismo['analfabetismo_mayor15_m']) ?></td>
+                  <td class="text-center"><?= number_format($analfabetismo['analfabetismo_mayor15_m'] + $analfabetismo['analfabetismo_mayor15_h']) ?></td>
                 </tr>
               <?php  } ?>
             </tbody>
           </table>
           <div class="pie_tabla bg-info text-light font-weight-bold">
-            <div id="fuentes_pie">Fuente: INEGI 2015</div>
+            <div id="fuentes_pie">Fuente: INEGI <?=$analfabetismo['anio']?></div>
           </div>
         </div>
       </div>

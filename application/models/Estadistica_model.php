@@ -277,9 +277,10 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
   	function analfabetismo_xmuni($idmunicipio){
   		$where="";
   		if($idmunicipio>0){
-  			$where="WHERE idmunicipio={$idmunicipio}";
+  			$where=" WHERE idmunicipio={$idmunicipio} ";
         $query="SELECT * FROM analfabetismo_xmuni
-    			{$where}";
+    			{$where}
+          ORDER BY anio DESC";
   		}
       else {
         $query="SELECT
@@ -287,7 +288,8 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
             sum(analfabetismo_mayor15_m) as analfabetismo_mayor15_m,
             sum(analfabetismo_mayor15_h) as analfabetismo_mayor15_h
             FROM analfabetismo_xmuni
-            GROUP BY anio";
+            GROUP BY anio
+            ORDER BY anio DESC";
       }
   		return $this->db->query($query)->result_array();
   	}
@@ -309,11 +311,12 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
   				FROM
   				  rezago_edu_xmuni
   				{$where}
+          ORDER BY anio DESC
   				";
   		}
       else {
-        $query="SELECT max(idmunicipio),
-  				  max(anio),
+        $query="SELECT max(idmunicipio) as idmunicipio,
+  				  max(anio) as anio,
   				  SUM(p3A14_ptotal_m) as p3A14_ptotal_m,
   				  SUM(p3A14_ptotal_h) as p3A14_ptotal_h,
   				  SUM(p3A14_noa_m) as p3A14_noa_m,
@@ -325,6 +328,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
             				FROM
             				  rezago_edu_xmuni
           GROUP BY anio
+          ORDER BY anio DESC
   				";
       }
 
@@ -403,13 +407,13 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
     	}
     	if($nombre_cct!=""){
     		$where.= " AND ct.nombre LIKE '%{$nombre_cct}%' ";
-    		
+
     	}
     	if($cct!=""){
     		$where.= " AND ct.cct= ?";
     		array_push($datos, $cct);
     	}
-    	
+
     	//falta agregar localidad
     	$query="SELECT ct.cct,
     			IF(cfg.turno='M','Matutino',
@@ -427,11 +431,11 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
     			WHERE ct.status = ?
     			{$where}
     			";
-          
+
     	return $this->db->query($query,$datos)->result_array();
     }
 
-  
+
       function obtener_nzona_xidnivelxidmodalidad_zona($idnivel,$idmodalidad){
       	$str_query = "SELECT
 			z.zonaid, z.zona_escolar AS nombre, z.cct_supervisor
@@ -454,7 +458,8 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 				INNER JOIN c_modalidad m ON m.idmodalidad = ct.idmodalidad
 				INNER JOIN ciclo c ON est.idciclo = c.idciclo
 				WHERE ct.nivel = ?  AND m.idmodalidad = ? AND z.zonaid = ? AND m.idmodalidad != 15
-				GROUP BY c.idciclo";
+				GROUP BY c.idciclo
+        ORDER BY c.`status`";
             return $this->db->query($str_query,[$idnivel,$idmodalidad,$numzona])->result_array();
         }// obtener_nzona_xidnivelxidsost_zona()
 
@@ -531,7 +536,8 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
                 c.idciclo,c.descr as ciclo
                 FROM estadistica_x_estado est
                 INNER JOIN ciclo c ON est.idciclo = c.idciclo
-                GROUP BY c.idciclo";
+                GROUP BY c.idciclo
+                ORDER BY c.`status`";
           return  $this->db->query($query)->result_array();
 			}//trae_ciclos_est_muni
 
@@ -563,7 +569,8 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
                 INNER JOIN ciclo c ON est.idciclo = c.idciclo
                 {$join}
                 {$where}
-                GROUP BY c.idciclo";
+                GROUP BY c.idciclo
+                ORDER BY c.`status`";
           return  $this->db->query($query)->result_array();
 			}//trae_ciclos_est_muni
 
@@ -650,7 +657,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 			}//trae_nivel_zona
 
       function ciclos_indicadores_asistencia_xmunicipio($id_municipio){
-    		$where="WHERE 1=1"; 
+    		$where="WHERE 1=1";
     		$tabla = " indicadores_x_estado ";
     		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
    		if($id_municipio!=0){
@@ -667,12 +674,12 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
           GROUP BY c.descr
           ORDER BY c.descr DESC
     		";
-        
+
     		return $this->db->query($query)->result_array();
     	}
 
       function niveles_indicadores_asistencia_xmunicipio($id_municipio){
-    		$where="WHERE 1=1"; 
+    		$where="WHERE 1=1";
     		$tabla = " indicadores_x_estado ";
     		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
    		if($id_municipio!=0){
@@ -689,12 +696,12 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
           GROUP BY n.descr
           ORDER BY FIELD(n.descr,'PRIMARIA','SECUNDARIA ','MEDIA SUPERIOR','SUPERIOR')
     		";
-        
+
     		return $this->db->query($query)->result_array();
     	}
 
       function ciclos_indicadores_permanencia_xmunicipio($id_municipio){
-    		$where="WHERE 1=1"; 
+    		$where="WHERE 1=1";
     		$tabla = " indicadores_x_estado ";
     		$inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
    		if($id_municipio!=0){
@@ -715,7 +722,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
     	}
 
 function niveles_indicadores_permanencia_xmunicipio($id_municipio){
-  $where="WHERE 1=1"; 
+  $where="WHERE 1=1";
   $tabla = " indicadores_x_estado ";
   $inner = "INNER JOIN entidad e ON e.identidad=i.idestado";
 if($id_municipio!=0){

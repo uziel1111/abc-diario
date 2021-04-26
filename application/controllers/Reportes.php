@@ -578,6 +578,7 @@ class Reportes extends CI_Controller {
 					$objPHPExcel->getActiveSheet()->SetCellValue('E'.$aux, number_format($row['p3A14_noa_h']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('F'.$aux, number_format($row['p3A14_noa_m']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('G'.$aux, number_format($row['p3A14_noa_h']+$row['p3A14_noa_m']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('H'.$aux, "INEGI ".($row['anio']) );
 					$objPHPExcel->getActiveSheet()->getStyle('A'.$temp.':G'.$aux)->applyFromArray($this->style_contenido);
 					$aux++;
 				}
@@ -617,6 +618,7 @@ class Reportes extends CI_Controller {
 					$objPHPExcel->getActiveSheet()->SetCellValue('B'.$aux, number_format($row['analfabetismo_mayor15_h']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('C'.$aux, number_format($row['analfabetismo_mayor15_m']) );
 					$objPHPExcel->getActiveSheet()->SetCellValue('D'.$aux, number_format($row['analfabetismo_mayor15_h']+$row['analfabetismo_mayor15_m']) );
+					$objPHPExcel->getActiveSheet()->SetCellValue('E'.$aux, "INEGI ".($row['anio']) );
 
 					$objPHPExcel->getActiveSheet()->getStyle('B'.$temp.':D'.$aux)->applyFromArray($this->style_contenido);
 

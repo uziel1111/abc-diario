@@ -99,6 +99,7 @@ class Estadistica extends CI_Controller {
 
     	$aprendizaje =  $this->Estadistica_model->indicadores_aprendizaje_xmunicipio($idmunicipio);
     	$analfabetismo =  $this->Estadistica_model->analfabetismo_xmuni($idmunicipio);
+
     	$rezago =  $this->Estadistica_model->rezago_educativo_xmuni($idmunicipio);
     	$municipio="";
       	$nivel="";
@@ -144,9 +145,9 @@ class Estadistica extends CI_Controller {
 			$data["arr_niveles_permanencia"] = $arr_niveles_permanencia;
     	$data["arr_ind_permanencia"] = $arr_ind_permanencia;
     	$data["aprendizaje"] = $aprendizaje;
-    	$data["rezago"] = $rezago;
-    	$data["analfabetismo"] = $analfabetismo;
-
+    	$data["rezago"] = (isset($rezago[0]))?$rezago[0]:[];
+    	$data["analfabetismo"] = (isset($analfabetismo[0]))?$analfabetismo[0]:[];
+// echo "<pre>";print_r($rezago[0]);die();
 		$vista = $this->load->view("estadistica/contenido_municipio",$data,TRUE);
 		$respuesta = array("vista" => $vista);
 		envia_datos_json($this, $respuesta);

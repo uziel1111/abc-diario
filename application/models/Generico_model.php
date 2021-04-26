@@ -83,7 +83,7 @@ class Generico_model extends CI_Model
 
   function ciclo_escolar(){
     $query="SELECT idciclo,descr as ciclo
-            FROM ciclo ORDER BY status";
+            FROM ciclo ORDER BY `status`";
       return  $this->db->query($query)->result_array();
   }//ciclo escolar
 
@@ -241,7 +241,7 @@ WHERE ct.cct = ? AND cfg.turno=?";
     //             INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
     //             INNER JOIN turno t ON cfg.turno = t.idturno
     //             INNER JOIN cct ct ON cfg.idct = ct.idct
-    //             INNER JOIN ciclo c ON c.idciclo = est.idciclo 
+    //             INNER JOIN ciclo c ON c.idciclo = est.idciclo
     //             WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}' ";
     $query = "SELECT
                 MAX(SUBSTRING(c.descr, 6, 4)) AS ciclo
@@ -270,7 +270,7 @@ WHERE ct.cct = ? AND cfg.turno=?";
                 FROM indicadores_x_idcentrocfg est
                 INNER JOIN centrocfg cfg ON est.idcentrocfg = cfg.idcentrocfg
                 INNER JOIN cct ct ON cfg.idct = ct.idct
-                INNER JOIN ciclo c ON c.idciclo = est.idciclo 
+                INNER JOIN ciclo c ON c.idciclo = est.idciclo
                 WHERE ct.cct = '{$cct}' AND cfg.turno ='{$idturno}'";
         $ciclo = $this->db->query($query)->row()->ciclo;
         $ciclo_aux = '';
@@ -288,5 +288,3 @@ WHERE ct.cct = ? AND cfg.turno=?";
   }//datos_indicadores_xescuela
 
 }// Generico_model
-
-
