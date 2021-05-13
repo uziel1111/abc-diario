@@ -23,8 +23,8 @@
   <script type="text/javascript">
     var base_url = "<?= base_url() ?>";
     $(function() {
-      $('[data-toggle="popover"]').popover()
-    });
+      $('[data-toggle="tooltip"]').tooltip()
+    })
   </script>
 
 </head>
@@ -48,13 +48,13 @@
           <a class="navbar-brand" href="https://mieducacion.sepyc.gob.mx/" target="_blank">
             <img src="<?= base_url('assets/img/template/horizontal_sepyc.png'); ?>" class="img-fluid border-right pr-4" alt="">
           </a>
-          <a class="navbar-brand" href="<?= base_url(); ?>">
+          <a class="navbar-brand text-right" href="<?= base_url(); ?>">
             <img src="<?= base_url('assets/img/template/main-logo.png'); ?>" class="img-fluid pl-2" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
           </button>
-          <span class="navbar-text">
+          <span class="navbar-text pt-0 pb-0">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown nav-primary">
