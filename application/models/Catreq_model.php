@@ -22,46 +22,67 @@ class Catreq_model extends CI_Model
       $nivel = str_replace("%C3%B3", "ó", $nivel);
       $nivel = str_replace("%C3%AD", "í", $nivel);
       // echo "<pre>";print_r($nivel);die();
-    	$str_query = "SELECT
-                  a.idaplicar as folio,
-                  a1.respuesta as nombre_requierimiento,
-                  a11.complemento as niveles,
-                  a12.complemento as sostenimiento,
-                  a16.complemento as periodicidad,
-                  a19.complemento as fechas_entrega,
-                  a28.complemento as tipo,
-                  a29.complemento as modalidad
-                  FROM aplicar a
-                  INNER JOIN (SELECT idaplicar, respuesta FROM respuesta WHERE idpregunta=4) as a1 ON a.idaplicar = a1.idaplicar
-                  INNER JOIN (SELECT
-                   r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
-                   FROM respuesta r
-                   WHERE r.idpregunta=11 AND r.complemento = ?
-                   GROUP BY r.idaplicar) as a11 ON a.idaplicar = a11.idaplicar
-                  LEFT JOIN (SELECT
-                   r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
-                   FROM respuesta r
-                   WHERE r.idpregunta=12
-                   GROUP BY r.idaplicar) as a12 ON a.idaplicar = a12.idaplicar
-                  LEFT JOIN (SELECT
-                   r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
-                   FROM respuesta r
-                   WHERE r.idpregunta=16
-                   GROUP BY r.idaplicar) as a16 ON a.idaplicar = a16.idaplicar
-                  LEFT JOIN (SELECT
-                   r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
-                   FROM respuesta r
-                   WHERE r.idpregunta=19
-                   GROUP BY r.idaplicar) as a19 ON a.idaplicar = a19.idaplicar
-                  LEFT JOIN (SELECT idaplicar, complemento FROM respuesta WHERE idpregunta=28) as a28 ON a.idaplicar = a28.idaplicar
-                  LEFT JOIN (SELECT
-                   r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
-                   FROM respuesta r
-                   WHERE r.idpregunta=29
-                   GROUP BY r.idaplicar) as a29 ON a.idaplicar = a29.idaplicar
-                  WHERE a.estatus=1
-                   GROUP BY a.idaplicar
-                  ORDER BY a28.complemento;";
+    	$str_query1 = "SET lc_time_names = 'es_ES'";
+
+		$str_query = "SELECT
+		a.idaplicar as folio,
+		a1.respuesta as nombre_requierimiento,
+		a11.complemento as niveles,
+		a12.complemento as sostenimiento,
+		a16.complemento as periodicidad,
+		a19.complemento as fechas_entrega,
+		a28.complemento as tipo,
+		a29.complemento as modalidad
+		FROM aplicar a
+		INNER JOIN (SELECT idaplicar, respuesta FROM respuesta WHERE idpregunta=4) as a1 ON a.idaplicar = a1.idaplicar
+		INNER JOIN (SELECT
+		 r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
+		 FROM respuesta r
+		 WHERE r.idpregunta=11 AND r.complemento = ?
+		 GROUP BY r.idaplicar) as a11 ON a.idaplicar = a11.idaplicar
+		LEFT JOIN (SELECT
+		 r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
+		 FROM respuesta r
+		 WHERE r.idpregunta=12
+		 GROUP BY r.idaplicar) as a12 ON a.idaplicar = a12.idaplicar
+		LEFT JOIN (SELECT
+		 r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
+		 FROM respuesta r
+		 WHERE r.idpregunta=16
+		 GROUP BY r.idaplicar) as a16 ON a.idaplicar = a16.idaplicar
+		LEFT JOIN (SELECT
+		 r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
+		 FROM respuesta r
+		 WHERE r.idpregunta=19
+		 GROUP BY r.idaplicar) as a19 ON a.idaplicar = a19.idaplicar
+		LEFT JOIN (SELECT idaplicar, complemento FROM respuesta WHERE idpregunta=28) as a28 ON a.idaplicar = a28.idaplicar
+		LEFT JOIN (SELECT
+		 r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
+		 FROM respuesta r
+		 WHERE r.idpregunta=29
+		 GROUP BY r.idaplicar) as a29 ON a.idaplicar = a29.idaplicar
+		WHERE a.estatus=1
+		 GROUP BY a.idaplicar
+		ORDER BY a28.complemento ASC , FIELD(a16.complemento, 'Permanente') DESC,
+(
+	case
+			when a19.complemento LIKE CONCAT('%',MONTHNAME(NOW()),'%') then 1
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 1 MONTH),'%')  then 2
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 2 MONTH),'%')  then 3
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 3 MONTH),'%')  then 4
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 4 MONTH),'%')  then 5
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 5 MONTH),'%')  then 6
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 6 MONTH),'%')  then 7
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 7 MONTH),'%')  then 8
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 8 MONTH),'%')  then 9
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 9 MONTH),'%')  then 10
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 10 MONTH),'%')  then 11
+			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 11 MONTH),'%')  then 12
+			else 13
+	 end
+), a1.respuesta
+";
+$this->levreq_db->query($str_query1);
 		return $this->levreq_db->query($str_query,[$nivel])->result_array();
     }
 
