@@ -24,7 +24,7 @@
                                         <div class="table-responsive">
                                             <table class="table table-striped">
                                                 <thead>
-                                                    <tr class="d-flex">
+                                                    <tr>
                                                         <th class="align-middle" scope="col" width="4%">#</th>
                                                         <th class="align-middle" scope="col" width="27%">Nombre del documento</th>
                                                         <th class="align-middle" scope="col" width="10%">Sostenimiento</th>
@@ -38,22 +38,22 @@
 
                                                   <?php $aux_num=1; foreach ($arr_requerimeintos as $key => $value): ?>
                                                     <?php if ($value['tipo']=='Calendarizable'): ?>
-                                                      <tr class="d-flex">
+                                                      <tr>
                                                           <th class="align-middle" scope="row" width="4%"><?=$aux_num?></th>
                                                           <td class="align-middle font-weight-bold" width="27%"><?=$value['nombre_requierimiento']?></td>
-                                                          <td class="align-middle" width="10%"><?=$value['sostenimiento']?></span></td>
+                                                          <td class="align-middle" width="10%"><?= str_replace(",", ", ", $value['sostenimiento'])?></span></td>
                                                           <td class="align-middle" width="8%"><?=$value['modalidad']?></td>
                                                           <td class="align-middle" width="9%"><?=$value['periodicidad']?></td>
-                                                          <td class="align-middle" width="10%"><?=$value['fechas_entrega']?></td>
+                                                          <td class="align-middle" width="10%"><?= str_replace(",", ", ", $value['fechas_entrega'])?></td>
                                                           <td class="align-middle text-center text-nowrap" width="10%">
                                                               <span data-toggle="tooltip" data-placement="top" title="Ver documento">
-                                                                  <a class="btn btn-link btn-sm" role="button" onclick="ver_documento(<?=$value['folio']?>)"><i class="fas fa-file-alt"></i></a>
+                                                                  <a class="btn btn-link btn-sm" role="button" onclick="ver_documento(<?=$value['folio']?>)"><i class="fas fa-file-alt fa-lg"></i></a>
                                                               </span>
                                                               <span data-toggle="tooltip" data-placement="top" title="Ver detalle">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_detalle(<?=$value['folio']?>)"><i class="fas fa-glasses"></i></a>
+                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_detalle(<?=$value['folio']?>)"><i class="fas fa-glasses fa-lg"></i></a>
                                                               </span>
                                                               <span data-toggle="tooltip" data-placement="top" title="Ver contacto">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_contacto(<?=$value['folio']?>)"><i class="fas fa-address-card"></i></a>
+                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_contacto(<?=$value['folio']?>)"><i class="fas fa-address-card fa-lg"></i></a>
                                                               </span>
                                                           </td>
                                                       </tr>
@@ -73,12 +73,12 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-striped">
                                                 <thead>
-                                                    <tr class="d-flex">
+                                                    <tr>
                                                         <th class="align-middle" scope="col" width="4%">#</th>
                                                         <th class="align-middle" scope="col" width="55%">Nombre del documento</th>
                                                         <th class="align-middle" scope="col" width="15%">Sostenimiento</th>
@@ -89,20 +89,20 @@
                                                 <tbody>
                                                   <?php $aux_num=1; foreach ($arr_requerimeintos as $key => $value): ?>
                                                     <?php if ($value['tipo']=='Circunstancial'): ?>
-                                                      <tr class="d-flex">
-                                                          <th class="align-middle" scope="row" width="4%"><?=$aux_num?></th>
+                                                      <tr>
+                                                          <th class="align-middle" scope="row" width="4%"><?= $aux_num?></th>
                                                           <td class="align-middle font-weight-bold" width="55%"><?=$value['nombre_requierimiento']?></td>
-                                                          <td class="align-middle" width="15%"><?=$value['sostenimiento']?></span></td>
+                                                          <td class="align-middle" width="15%"><?= str_replace(",", ", ", $value['sostenimiento'])?></span></td>
                                                           <td class="align-middle" width="10%"><?=$value['modalidad']?></td>
                                                           <td class="align-middle text-center text-nowrap" width="10%">
                                                               <span data-toggle="tooltip" data-placement="top" title="Ver documento">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_documento(<?=$value['folio']?>)"><i class="fas fa-file-alt"></i></a>
+                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_documento(<?=$value['folio']?>)"><i class="fas fa-file-alt fa-lg"></i></a>
                                                               </span>
                                                               <span data-toggle="tooltip" data-placement="top" title="Ver detalle">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_detalle(<?=$value['folio']?>)"><i class="fas fa-glasses"></i></a>
+                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_detalle(<?=$value['folio']?>)"><i class="fas fa-glasses fa-lg"></i></a>
                                                               </span>
                                                               <span data-toggle="tooltip" data-placement="top" title="Ver contacto">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_contacto(<?=$value['folio']?>)"><i class="fas fa-address-card"></i></a>
+                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_contacto(<?=$value['folio']?>)"><i class="fas fa-address-card fa-lg"></i></a>
                                                               </span>
                                                           </td>
                                                       </tr>

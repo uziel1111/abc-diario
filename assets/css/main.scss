@@ -38,4 +38,17 @@ $card-border-radius: 0.5rem;
 
 /* Bootstrap include */
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+/* Modal */
+
+.modal-header {
+    padding: .5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.modal-header {
+    .modal-title {
+        font-weight: bold;
+    }
+}

@@ -100,7 +100,18 @@
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item text-wrap" href="<?= base_url('Mapa/busqueda_x_mapa/cct'); ?>">Por clave de escuela</a>
                     <a class="dropdown-item text-wrap" href="<?= base_url('Mapa/busqueda_x_mapa/parametros'); ?>">Por municipio, nivel, sostenimiento y nombre</a>
-                    <a class="dropdown-item text-wrap" href="<?= base_url('Cat_req/index'); ?>">Catálogo Simplificado de Requerimientos Autorizados</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown nav-third">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa-layers fa-fw">
+                      <i class="fas fa-circle text-warning"></i>
+                      <i class="fa-inverse fas fa-briefcase fa-xs" data-fa-transform="shrink-6"></i>
+                    </span>
+                    <p>Descarga...</p>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item text-wrap" href="<?= base_url('Cat_req/index'); ?>">Catálogo simplificado de requerimientos autorizados</a>
                     <!-- <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/ubica/listado'); ?>">En listado de escuelas</a> -->
                   </div>
                 </li>

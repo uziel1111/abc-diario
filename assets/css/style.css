@@ -17,6 +17,11 @@ body {
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#f7f7f7", endColorstr="#ececec", GradientType=1);
 }
 
+#header-bg-1 .navbar .navbar-nav .nav-item .dropdown-menu {
+    min-width: 27rem;
+    font-size: 0.9rem;
+}
+
 .div_grafiaca_txt {
     height: 80px;
     white-space: nowrap;
@@ -402,7 +407,7 @@ main {
 }
 
 #main-index {
-    margin-top: 54px;
+    margin-top: 95px;
 }
 
 
@@ -418,7 +423,7 @@ main {
 
 @media (max-width: 991px) {
     #header-bg-1 {
-        height: 310px;
+        height: 180px;
     }
 }
 
@@ -512,24 +517,20 @@ main {
 /*** Index Cards ***/
 
 .card-index {
-    border-top: 8px solid rgba(0, 0, 0, 0.09);
-    border-radius: 20px 20px 20px 20px;
-    -moz-border-radius: 20px 20px 20px 20px;
-    -webkit-border-radius: 20px 20px 20px 20px;
+    border-top: 4px solid rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
     margin-top: 0px;
     transition: all 0.2s ease;
 }
 
-.card-index:hover {
-    margin-top: -3px;
-}
-
 .card-index>.card-header {
     background-color: rgba(0, 0, 0, 0.07);
-    margin: 15px 18px;
-    border-radius: 13px 13px 13px 13px;
-    -moz-border-radius: 13px 13px 13px 13px;
-    -webkit-border-radius: 13px 13px 13px 13px;
+    margin: 7px 9px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
     border: 0px solid #000000;
     background: rgba(226, 226, 226, 1);
     background: -moz-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(254, 254, 254, 1) 100%);
@@ -542,27 +543,27 @@ main {
     transition: all 0.2s ease;
 }
 
+.card-index>.card-header {
+    padding-top: 18px;
+}
+
 .card-index>.card-header>h5 {
-    margin-top: 36px;
-    margin-bottom: 0px;
-    text-align: center;
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
 }
 
 .card-index:hover>.card-header>h5 {
     color: #ffffff;
 }
 
-.card-index>.card-header>span {
-    position: absolute;
-    padding-left: 79%;
-    top: -58px;
+.card-index>.card-header>h5>i.fa {
+    left: -8px;
+    top: -9px;
 }
 
 .card-index>.card-header>span>:first-child {
     border-style: solid;
-    border-width: 8px;
+    border-width: 5px;
     -webkit-box-shadow: 0px 4px 0px 1px rgba(0, 0, 0, 0.18);
     -moz-box-shadow: 0px 4px 0px 1px rgba(0, 0, 0, 0.18);
     box-shadow: 0px 4px 0px 1px rgba(0, 0, 0, 0.18);
@@ -575,6 +576,11 @@ main {
 
 .card-index:hover>.card-header>span>:first-child {
     color: rgba(255, 255, 255, 0.9);
+}
+
+.card-index .card-body .list-group span.new-sign {
+    position: absolute;
+    left: 0;
 }
 
 
