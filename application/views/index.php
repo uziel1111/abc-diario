@@ -95,7 +95,7 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Cat_req/index'); ?>">
                                 <span class="new-sign text-muted"><i class="fas fa-star fa-xs"></i></span>
-                                Catálogo simplificado de Requerimientos Autorizados</a></li>
+                                Catálogo Simplificado de Requerimientos Autorizados</a></li>
                     </ul>
                 </div>
             </div>

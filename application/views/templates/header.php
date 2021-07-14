@@ -111,7 +111,7 @@
                     <p>Descarga...</p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item text-wrap" href="<?= base_url('Cat_req/index'); ?>">Catálogo simplificado de requerimientos autorizados</a>
+                    <a class="dropdown-item text-wrap" href="<?= base_url('Cat_req/index'); ?>">Catálogo Simplificado de Requerimientos Autorizados</a>
                     <!-- <a class="dropdown-item" href="<?= base_url('Info_escuela/busqueda_general/ubica/listado'); ?>">En listado de escuelas</a> -->
                   </div>
                 </li>

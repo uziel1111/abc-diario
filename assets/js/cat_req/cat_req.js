@@ -10,9 +10,9 @@ function ver_documento(folio) {
         Mensaje.cargando('Cargando.');
       },
       success: function (dato) {
-        Mensaje.cerrar();
-				$("#urldoc").attr("src",dato.source);
-				$("#modal-documento").modal('show');
+				$("#urldoc").attr("src",dato.source);//
+				Mensaje.cerrar();
+				setTimeout(function(){ $("#modal-documento").modal('show'); }, 500);
       },
       error: function (jqXHR, textStatus, errorThrown) {
 				Mensaje.cerrar();

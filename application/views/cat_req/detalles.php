@@ -1,3 +1,4 @@
+<div style="font-size: 18px;">
 <div class="row">
     <div class="col-sm">
         <div class="alert alert-success my-1 py-1" role="alert">
@@ -101,6 +102,15 @@
         </div>
     </div>
 </div>
+<?php if ($arr_detalles->con_anexos == 'Sí'): ?>
+  <div class="row">
+      <div class="col-sm">
+          <div class="alert alert-success my-1 py-1" role="alert">
+              <span class=" text-muted">Anexos</span><br> <?=$arr_detalles->especifica_anexo?>
+          </div>
+      </div>
+  </div>
+<?php endif; ?>
 <div class="row">
     <div class="col-sm">
         <div class="alert alert-success my-1 py-1" role="alert">
@@ -109,3 +119,19 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm">
+        <div class="alert alert-success my-1 py-1" role="alert">
+
+            <span class=" text-muted">Descripción de la mejora</span><br> <?=$arr_detalles->acc_mejora_implementada?>
+        </div>
+    </div>
+</div>
+</div>
+<form action="<?=base_url('Cat_req/dom_pdf')?>" method="POST" name="formulario">
+  <input type="hidden" name="folio" value="<?=$folio?>">
+  <center>
+    <button type="submit" class="btn btn-light btn-sm">Descargar PDF</button>
+  </center>
+  <!-- <input type="submit" value="PDF"> -->
+</form>

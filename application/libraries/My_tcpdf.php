@@ -10,8 +10,8 @@ class My_tcpdf extends TCPDF
     }
 
     public function Header() {
-            $this->setJPEGQuality(90);
-            $this->Image('logo.png', 120, 10, 75, 0, 'PNG', 'assets/img/logoGEP.png');
+            // $this->setJPEGQuality(90);
+            // $this->Image('logo.png', 120, 10, 75, 0, 'PNG', 'assets/img/logoGEP.png');
 
     }
     public function Footer() {

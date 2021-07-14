@@ -6,6 +6,13 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                  <div class="alert alert-success text-center" role="alert">
+                    <div class="row">
+                      <div class="col-12 col-sm-12 text-center">
+                        <span class="font-weight-bold">Con el propósito de reducir de forma sustantiva la carga administrativa de las escuelas de educación básica en Sinaloa, se revisaron 158 requerimientos de información, de los cuales se acordó de forma colegiada eliminar 90 de ellos, por lo que a continuación se presenta los 68 requerimientos simplificados (entre formatos y sistemas automatizados) que son indispensables y obligatorios para el ciclo escolar 2021-2022</span>
+                      </div>
+                    </div>
+                  </div>
                   <?php foreach ($num_xnivel as $key => $value): ?>
                     <?php
                     switch ($value['nivel']) {

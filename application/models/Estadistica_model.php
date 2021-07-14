@@ -459,7 +459,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
 				INNER JOIN ciclo c ON est.idciclo = c.idciclo
 				WHERE ct.nivel = ?  AND m.idmodalidad = ? AND z.zonaid = ? AND m.idmodalidad != 15
 				GROUP BY c.idciclo
-        ORDER BY c.`status`";
+        ORDER BY FIELD(c.descr,'2020-2021','2019-2020','2018-2019','2017-2018')";
             return $this->db->query($str_query,[$idnivel,$idmodalidad,$numzona])->result_array();
         }// obtener_nzona_xidnivelxidsost_zona()
 
@@ -537,7 +537,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
                 FROM estadistica_x_estado est
                 INNER JOIN ciclo c ON est.idciclo = c.idciclo
                 GROUP BY c.idciclo
-                ORDER BY c.`status`";
+                ORDER BY FIELD(c.descr,'2020-2021','2019-2020','2018-2019','2017-2018')";
           return  $this->db->query($query)->result_array();
 			}//trae_ciclos_est_muni
 
@@ -570,7 +570,7 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
                 {$join}
                 {$where}
                 GROUP BY c.idciclo
-                ORDER BY c.`status`";
+                ORDER BY FIELD(c.descr,'2020-2021','2019-2020','2018-2019','2017-2018')";
           return  $this->db->query($query)->result_array();
 			}//trae_ciclos_est_muni
 
@@ -579,7 +579,8 @@ ORDER BY FIELD(xxxx.idnivel,1,2,3,4,5,7,6,8),FIELD(xxxx.idsostenimiento,1,2,3),F
                 	c.idciclo,c.descr as ciclo
                 	FROM estadistica_x_idcentrocfg est
                 	INNER JOIN ciclo c ON est.idciclo = c.idciclo
-                	GROUP BY c.idciclo";
+                	GROUP BY c.idciclo
+                  ORDER BY FIELD(c.descr,'2020-2021','2019-2020','2018-2019','2017-2018')";
           return  $this->db->query($query)->result_array();
 			}//ciclo_escolar_estadist_xesc
 

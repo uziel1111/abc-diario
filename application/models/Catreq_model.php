@@ -66,18 +66,18 @@ class Catreq_model extends CI_Model
 		ORDER BY a28.complemento ASC , FIELD(a16.complemento, 'Permanente') DESC,
 (
 	case
-			when a19.complemento LIKE CONCAT('%',MONTHNAME(NOW()),'%') then 1
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 1 MONTH),'%')  then 2
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 2 MONTH),'%')  then 3
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 3 MONTH),'%')  then 4
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 4 MONTH),'%')  then 5
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 5 MONTH),'%')  then 6
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 6 MONTH),'%')  then 7
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 7 MONTH),'%')  then 8
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 8 MONTH),'%')  then 9
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 9 MONTH),'%')  then 10
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 10 MONTH),'%')  then 11
-			when a19.complemento LIKE CONCAT('%',MONTHNAME (NOW()+INTERVAL 11 MONTH),'%')  then 12
+			when a19.complemento LIKE CONCAT('%Agosto%') then 1
+			when a19.complemento LIKE CONCAT('%Septiembre%')  then 2
+			when a19.complemento LIKE CONCAT('%Octubre%')  then 3
+			when a19.complemento LIKE CONCAT('%Noviembre%')  then 4
+			when a19.complemento LIKE CONCAT('%Diciembre%')  then 5
+			when a19.complemento LIKE CONCAT('%Enero%')  then 6
+			when a19.complemento LIKE CONCAT('%Febrero%')  then 7
+			when a19.complemento LIKE CONCAT('%Marzo%')  then 8
+			when a19.complemento LIKE CONCAT('%Abril%')  then 9
+			when a19.complemento LIKE CONCAT('%Mayo%')  then 10
+			when a19.complemento LIKE CONCAT('%Junio%')  then 11
+			when a19.complemento LIKE CONCAT('%Julio%')  then 12
 			else 13
 	 end
 ), a1.respuesta
@@ -106,7 +106,9 @@ a19.complemento as fechas_entrega,
 a20.respuesta as utilidad,
 a21.respuesta as fudamento_legal,
 a22.complemento as con_anexos,
-a12.complemento as sostenimiento
+a12.complemento as sostenimiento,
+a23.respuesta as especifica_anexo,
+a27.respuesta as acc_mejora_implementada
 FROM aplicar a
 INNER JOIN (SELECT idaplicar, respuesta FROM respuesta WHERE idpregunta=4 AND idaplicar={$folio}) as a1 ON a.idaplicar = a1.idaplicar
 INNER JOIN (SELECT idaplicar, respuesta FROM respuesta WHERE idpregunta=5 AND idaplicar={$folio}) as a5 ON a.idaplicar = a5.idaplicar
@@ -153,6 +155,8 @@ INNER JOIN (SELECT
  FROM respuesta r
  WHERE r.idpregunta=12 AND r.idaplicar={$folio}
  GROUP BY r.idaplicar) as a12 ON a.idaplicar = a12.idaplicar
+LEFT JOIN (SELECT idaplicar, respuesta FROM respuesta WHERE idpregunta=23) as a23 ON a.idaplicar = a23.idaplicar
+LEFT JOIN (SELECT idaplicar, respuesta FROM respuesta WHERE idpregunta=27) as a27 ON a.idaplicar = a27.idaplicar
 WHERE a.idaplicar= ? ;";
 		return $this->levreq_db->query($str_query,[$folio])->row();
     }
