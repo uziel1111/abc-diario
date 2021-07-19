@@ -4,10 +4,22 @@
             <div class="card-header bg-primary text-light">
                 Catálogo Simplificado de Requerimientos Autorizados
                 <span class="float-right"><a href="<?= base_url('Cat_req/index'); ?>"><i class="fas fa-arrow-left text-light"></i></a></span>
-                <br>
-                <center>Nivel: <?=$nivel?></center>
             </div>
             <div class="card-body p-0">
+                <div class="row pt-2 px-3 align-items-center">
+                    <div class="col">
+                        <h5><span class="text-muted">Nivel: </span><strong><?= $nivel ?></strong></h5>
+                    </div>
+                    <div class="col">
+                        <div class="alert alert-info" role="alert">
+                            <div class="row">
+                                <div class="col-auto"><i class="fas fa-file-alt fa-sm"></i> Ver documento</div>
+                                <div class="col-auto"><i class="fas fa-glasses fa-sm"></i> Ver detalle</div>
+                                <div class="col-auto"><i class="fas fa-address-card fa-sm"></i> Ver contacto</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
 
                     <div class="col">
@@ -32,37 +44,35 @@
                                                         <th class="align-middle" scope="col" width="10%">Sostenimiento</th>
                                                         <th class="align-middle" scope="col" width="9%">Periodicidad</th>
                                                         <th class="align-middle" scope="col" width="10%">Fecha</th>
-                                                        <th class="align-middle text-center" scope="col" width="10%">
-                                                          <i class="fas fa-file-alt fa-sm  "></i>Ver documento<br>
-                                                          <i class="fas fa-glasses fa-sm  "></i>Ver detalle<br>
-                                                          <i class="fas fa-address-card fa-sm  "></i>Ver contacto
-                                                        </th>
+                                                        <th class="align-middle text-center" scope="col" width="10%">Opciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                  <?php $aux_num=1; foreach ($arr_requerimeintos as $key => $value): ?>
-                                                    <?php if ($value['tipo']=='Calendarizable'): ?>
-                                                      <tr>
-                                                          <th class="align-middle" scope="row" width="4%"><?=$aux_num?></th>
-                                                          <td class="align-middle font-weight-bold" width="27%"><?=$value['nombre_requierimiento']?></td>
-                                                          <td class="align-middle" width="10%"><?= str_replace(",", ", ", $value['sostenimiento'])?></span></td>
-                                                          <td class="align-middle" width="9%"><?=$value['periodicidad']?></td>
-                                                          <td class="align-middle" width="10%"><?= str_replace(",", ", ", $value['fechas_entrega'])?></td>
-                                                          <td class="align-middle text-center text-nowrap" width="10%">
-                                                              <span data-toggle="tooltip" data-placement="top" title="Ver documento">
-                                                                  <a class="btn btn-link btn-sm" role="button" onclick="ver_documento(<?=$value['folio']?>)"><i class="fas fa-file-alt fa-2x  "></i></a>
-                                                              </span>
-                                                              <span data-toggle="tooltip" data-placement="top" title="Ver detalle">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_detalle(<?=$value['folio']?>)"><i class="fas fa-glasses fa-2x  "></i></a>
-                                                              </span>
-                                                              <span data-toggle="tooltip" data-placement="top" title="Ver contacto">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_contacto(<?=$value['folio']?>)"><i class="fas fa-address-card fa-2x  "></i></a>
-                                                              </span>
-                                                          </td>
-                                                      </tr>
-                                                    <?php $aux_num++; endif; ?>
-                                                  <?php endforeach; ?>
+                                                    <?php $aux_num = 1;
+                                                    foreach ($arr_requerimeintos as $key => $value) : ?>
+                                                        <?php if ($value['tipo'] == 'Calendarizable') : ?>
+                                                            <tr>
+                                                                <th class="align-middle" scope="row" width="4%"><?= $aux_num ?></th>
+                                                                <td class="align-middle font-weight-bold" width="27%"><?= $value['nombre_requierimiento'] ?></td>
+                                                                <td class="align-middle" width="10%"><?= str_replace(",", ", ", $value['sostenimiento']) ?></span></td>
+                                                                <td class="align-middle" width="9%"><?= $value['periodicidad'] ?></td>
+                                                                <td class="align-middle" width="10%"><?= str_replace(",", ", ", $value['fechas_entrega']) ?></td>
+                                                                <td class="align-middle text-center text-nowrap" width="10%">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Ver documento">
+                                                                        <a class="btn btn-link btn-sm" role="button" onclick="ver_documento(<?= $value['folio'] ?>)"><i class="fas fa-file-alt fa-2x  "></i></a>
+                                                                    </span>
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Ver detalle">
+                                                                        <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_detalle(<?= $value['folio'] ?>)"><i class="fas fa-glasses fa-2x  "></i></a>
+                                                                    </span>
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Ver contacto">
+                                                                        <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_contacto(<?= $value['folio'] ?>)"><i class="fas fa-address-card fa-2x  "></i></a>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        <?php $aux_num++;
+                                                        endif; ?>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -86,35 +96,33 @@
                                                         <th class="align-middle" scope="col" width="4%">#</th>
                                                         <th class="align-middle" scope="col" width="55%">Nombre del documento</th>
                                                         <th class="align-middle" scope="col" width="15%">Sostenimiento</th>
-                                                        <th class="align-middle text-center" scope="col" width="10%">
-                                                          <i class="fas fa-file-alt fa-sm  "></i>Ver documento<br>
-                                                          <i class="fas fa-glasses fa-sm  "></i>Ver detalle<br>
-                                                          <i class="fas fa-address-card fa-sm  "></i>Ver contacto
-                                                        </th>
+                                                        <th class="align-middle text-center" scope="col" width="10%">Opciones</th>
                                                         <!-- <th class="align-middle text-center" scope="col" width="20%">Opciones</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                  <?php $aux_num=1; foreach ($arr_requerimeintos as $key => $value): ?>
-                                                    <?php if ($value['tipo']=='Circunstancial'): ?>
-                                                      <tr>
-                                                          <th class="align-middle" scope="row" width="4%"><?= $aux_num?></th>
-                                                          <td class="align-middle font-weight-bold" width="55%"><?=$value['nombre_requierimiento']?></td>
-                                                          <td class="align-middle" width="15%"><?= str_replace(",", ", ", $value['sostenimiento'])?></span></td>
-                                                          <td class="align-middle text-center text-nowrap" width="10%">
-                                                              <span data-toggle="tooltip" data-placement="top" title="Ver documento">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_documento(<?=$value['folio']?>)"><i class="fas fa-file-alt fa-2x"></i></a>
-                                                              </span>
-                                                              <span data-toggle="tooltip" data-placement="top" title="Ver detalle">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_detalle(<?=$value['folio']?>)"><i class="fas fa-glasses fa-2x"></i></a>
-                                                              </span>
-                                                              <span data-toggle="tooltip" data-placement="top" title="Ver contacto">
-                                                                  <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_contacto(<?=$value['folio']?>)"><i class="fas fa-address-card fa-2x"></i></a>
-                                                              </span>
-                                                          </td>
-                                                      </tr>
-                                                    <?php $aux_num++; endif; ?>
-                                                  <?php endforeach; ?>
+                                                    <?php $aux_num = 1;
+                                                    foreach ($arr_requerimeintos as $key => $value) : ?>
+                                                        <?php if ($value['tipo'] == 'Circunstancial') : ?>
+                                                            <tr>
+                                                                <th class="align-middle" scope="row" width="4%"><?= $aux_num ?></th>
+                                                                <td class="align-middle font-weight-bold" width="55%"><?= $value['nombre_requierimiento'] ?></td>
+                                                                <td class="align-middle" width="15%"><?= str_replace(",", ", ", $value['sostenimiento']) ?></span></td>
+                                                                <td class="align-middle text-center text-nowrap" width="10%">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Ver documento">
+                                                                        <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_documento(<?= $value['folio'] ?>)"><i class="fas fa-file-alt fa-2x"></i></a>
+                                                                    </span>
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Ver detalle">
+                                                                        <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_detalle(<?= $value['folio'] ?>)"><i class="fas fa-glasses fa-2x"></i></a>
+                                                                    </span>
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Ver contacto">
+                                                                        <a class="btn btn-link btn-sm" href="#" role="button" onclick="ver_contacto(<?= $value['folio'] ?>)"><i class="fas fa-address-card fa-2x"></i></a>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        <?php $aux_num++;
+                                                        endif; ?>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                             </table>
                                         </div>
