@@ -51,7 +51,7 @@ class Catreq_model extends CI_Model
 		 WHERE r.idpregunta=16
 		 GROUP BY r.idaplicar) as a16 ON a.idaplicar = a16.idaplicar
 		LEFT JOIN (SELECT
-		 r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento) as complemento
+		 r.idaplicar, GROUP_CONCAT( DISTINCT r.complemento ORDER BY FIELD(r.complemento, 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto' ,'Septiembre', 'Octubre', 'Noviembre', 'Diciembre')) as complemento
 		 FROM respuesta r
 		 WHERE r.idpregunta=19
 		 GROUP BY r.idaplicar) as a19 ON a.idaplicar = a19.idaplicar
@@ -83,6 +83,7 @@ class Catreq_model extends CI_Model
 ), a1.respuesta
 ";
 $this->levreq_db->query($str_query1);
+    // echo "<pre>";print_r($str_query);die();
 		return $this->levreq_db->query($str_query,[$nivel])->result_array();
     }
 
