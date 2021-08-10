@@ -6,11 +6,14 @@
                 <span class="float-right"><a href="<?= base_url('Cat_req/index'); ?>"><i class="fas fa-arrow-left text-light"></i></a></span>
             </div>
             <div class="card-body p-0">
-                <div class="row pt-2 px-3 align-items-center">
-                    <div class="col">
+                <div class="row pt-2 px-3 mb-3 align-items-center text-center">
+                    <div class="col-12 col-md-2">
+                        <img src="<?= base_url('assets/img/professintantopapeleo-3.png'); ?>" width="60" alt="">
+                    </div>
+                    <div class="col-12 col-md-4 text-left">
                         <h5><span class="text-muted">Nivel: </span><strong><?= $nivel ?></strong></h5>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md-6">
                         <div class="alert alert-info" role="alert">
                             <div class="row">
                                 <div class="col-auto"><i class="fas fa-file-alt fa-sm"></i> Ver documento</div>

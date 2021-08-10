@@ -93,9 +93,11 @@
                 </div>
                 <div class="card-body pt-1">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action"><a class="text-dark text-decoration-none" href="<?= base_url('Cat_req/index'); ?>">
-                                <span class="new-sign text-muted"><i class="fas fa-star fa-xs"></i></span>
-                                Catálogo Simplificado de Requerimientos Autorizados</a></li>
+                        <li class="list-group-item list-group-item-action">
+                            <a class="text-dark text-decoration-none" href="<?= base_url('Cat_req/index'); ?>">
+                                <img src="<?= base_url('assets/img/professintantopapeleo-1.png'); ?>" class="img-fluid" alt="">
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

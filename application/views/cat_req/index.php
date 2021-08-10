@@ -2,12 +2,15 @@
     <div class="container">
         <div class="card shadow">
             <div class="card-header bg-primary text-light">
-                Catálogo Simplificado de Requerimientos Autorizados
+                Profes sin tanto papeleo
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div class="alert alert-success text-center" role="alert">
+                <div class="row align-items-center">
+                    <div class="col-12 mb-3 mb-md-0 col-md-3 col-lg-3 text-center">
+                        <img src="<?= base_url('assets/img/professintantopapeleo-3.png'); ?>" width="100" alt="">
+                    </div>
+                    <div class="col-12 col-md-9 col-lg-9">
+                        <div class="alert alert-info text-left role="alert">
                             <span class="font-weight-bold">Con el propósito de reducir de forma sustantiva la carga administrativa de las escuelas de educación básica en Sinaloa, se revisaron 158 requerimientos de información, de los cuales se acordó de forma colegiada eliminar 90 de ellos, por lo que a continuación se presenta los 68 requerimientos simplificados (entre formatos y sistemas automatizados) que son indispensables y obligatorios para el ciclo escolar 2021-2022</span>
                         </div>
                     </div>

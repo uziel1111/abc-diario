@@ -837,3 +837,13 @@ main {
 
 
 /* ---- search-item ---- */
+
+.dropdown-menu>a .profes-papeleo {
+    content: url("../../assets/img/professintantopapeleo-2.png");
+    max-height: 23px;
+    width: auto;
+}
+
+.dropdown-menu>a:hover .profes-papeleo {
+    content: url("../../assets/img/professintantopapeleo-2-hover.png");
+}
