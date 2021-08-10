@@ -106,12 +106,14 @@
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa-layers fa-fw">
                       <i class="fas fa-circle text-warning"></i>
-                      <i class="fa-inverse fas fa-briefcase fa-xs" data-fa-transform="shrink-6"></i>
+                      <i class="fa-inverse fas fa-star fa-xs" data-fa-transform="shrink-6"></i>
                     </span>
-                    <p>Descarga...</p>
+                    <p>
+                      <img src="<?= base_url('assets/img/professintantopapeleo-2.png'); ?>" class="img-fluid profes-papeleo" alt="">
+                    </p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item text-wrap" href="<?= base_url('Cat_req/index'); ?>"><img src="" class="img-fluid profes-papeleo" alt=""></a>
+                    <a class="dropdown-item text-wrap" href="<?= base_url('Cat_req/index'); ?>">Catálogo Simplificado de Requerimientos Autorizados</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown nav-fourth">

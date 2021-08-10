@@ -556,6 +556,10 @@ main {
     color: #ffffff;
 }
 
+.card-index:hover>.card-header img.profes-papeleo {
+    content: url("../../assets/img/professintantopapeleo-1-hover.png");
+}
+
 .card-index>.card-header>h5>i.fa {
     left: -8px;
     top: -9px;
@@ -838,12 +842,11 @@ main {
 
 /* ---- search-item ---- */
 
-.dropdown-menu>a .profes-papeleo {
-    content: url("../../assets/img/professintantopapeleo-2.png");
-    max-height: 23px;
+.nav-item>a.nav-link .profes-papeleo {
+    max-height: 16px;
     width: auto;
 }
 
-.dropdown-menu>a:hover .profes-papeleo {
+.nav-item:hover>a.nav-link .profes-papeleo {
     content: url("../../assets/img/professintantopapeleo-2-hover.png");
 }

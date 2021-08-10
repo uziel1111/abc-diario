@@ -82,11 +82,8 @@
                 <div class="card-header">
                     <h5 class="card-title">
                         <div class="row no-gutters">
-                            <div class="col-auto mr-2">
-                                <i class="fas fa-briefcase fa-lg"></i>
-                            </div>
-                            <div class="col">
-                                Descarga administrativa
+                            <div class="col mr-2">
+                                <img src="<?= base_url('assets/img/professintantopapeleo-1.png'); ?>" class="img-fluid profes-papeleo" alt="">
                             </div>
                         </div>
                     </h5>
@@ -95,7 +92,7 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-action">
                             <a class="text-dark text-decoration-none" href="<?= base_url('Cat_req/index'); ?>">
-                                <img src="<?= base_url('assets/img/professintantopapeleo-1.png'); ?>" class="img-fluid" alt="">
+                                Catálogo Simplificado de Requerimientos Autorizados
                             </a>
                         </li>
                     </ul>
