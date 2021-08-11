@@ -102,7 +102,7 @@
                     <a class="dropdown-item text-wrap" href="<?= base_url('Mapa/busqueda_x_mapa/parametros'); ?>">Por municipio, nivel, sostenimiento y nombre</a>
                   </div>
                 </li>
-                <li class="nav-item dropdown nav-third">
+                <li class="nav-item dropdown nav-fourth">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa-layers fa-fw">
                       <i class="fas fa-circle text-warning"></i>
@@ -116,10 +116,10 @@
                     <a class="dropdown-item text-wrap" href="<?= base_url('Cat_req/index'); ?>">Catálogo Simplificado de Requerimientos Autorizados</a>
                   </div>
                 </li>
-                <li class="nav-item dropdown nav-fourth">
+                <li class="nav-item dropdown nav-fifth">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa-layers fa-fw">
-                      <i class="fas fa-circle text-info"></i>
+                      <i class="fas fa-circle text-danger"></i>
                       <i class="fa-inverse fa fa-link fa-xs" data-fa-transform="shrink-6"></i>
                     </span>
                     <p>Enlaces</p>
